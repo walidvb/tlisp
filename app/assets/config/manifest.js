@@ -5,8 +5,8 @@
 //= link modal.js
 //
 // CSS bundles
-//= link application.css
-//= link modal.css
+//= link application.scss
+//= link modal.scss
 //
 // Pull in all app/assets/images/ since app/views may link to them
 //= link_tree ../images

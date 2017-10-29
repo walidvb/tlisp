@@ -1,26 +1,20 @@
-$(document).ready((() => {
+(() => {
 
-    let addScript = (path) => {
-        var s = document.createElement('script');
-        s.setAttribute('src', path);
-        document.body.appendChild(s);
-        console.log(path + " loaded");
-    };
-    let addStyleSheet = (path) => {
-        var s = document.createElement('link');
-        s.setAttribute('url', path);
-        document.body.appendChild(s);
-        console.log(path + " loaded");
-    };
-
+    let $this = $(document);
     let openModal = () => {
         $.ajax({
-            url: 'http://localhost:3000/links/new?modal=true',
+            url: '//localhost:3000/links/new?modal=true',
             success: (res) => {
-                console.log(res);
+                console.log('Fetched modal');
+                $(res).appendTo($('body'));
+                bindModal($(res));
             }
         });
     }
-    $('#action').click(openModal);
+    let bindModal = (res) =>{
+        let container = $(res);
+        $('.modal__close').on('click', container, () => $('#plis').removeClass('open'))
+    }
+    openModal();
     
-}));
+})();

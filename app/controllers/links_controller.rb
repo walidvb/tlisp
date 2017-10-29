@@ -16,6 +16,7 @@ class LinksController < ApplicationController
   def new
     @link = Link.new
     if params[:modal].present?
+      headers['Access-Control-Allow-Origin'] = '*'
       render partial: 'form', layout: false
     else
       render

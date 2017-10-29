@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   ]
 
   def home
+    @bookmarklet = "javascript:(function(){"+Rails.application.assets.find_asset('bookmarklet.js').to_s+"})();"
   end
 
   def inside

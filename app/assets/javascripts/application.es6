@@ -16,4 +16,3 @@
 //= require bootstrap 
 //= require analytics
 //= require common
-//= require modal

@@ -1,5 +1,6 @@
 #plis.modal.open
   .modal__inner
+    .modal__close
     = form_for @link do |f|
       - if @link.errors.any?
         #error_explanation
@@ -13,3 +14,4 @@
         = f.text_field :url
       .actions
         = f.submit 'Save'
+  = stylesheet_link_tag( stylesheet_url 'modal')

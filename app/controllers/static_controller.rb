@@ -4,6 +4,6 @@ class StaticController < ApplicationController
   def modaljs
     headers['Access-Control-Allow-Origin'] = '*'
     @script_url = "test"
-    render raw: Rails.application.assets.find_asset('bookmarklet.js').to_s, layout: false, :content_type => Mime::JS
+    render raw: Rails.application.assets.find_asset('modal.js').to_s, layout: false, :content_type => Mime::JS
   end
 end

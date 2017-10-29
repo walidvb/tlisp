@@ -1,4 +1,4 @@
-(() => {
+(function() {
     let addScript = (path) => {
         var s = document.createElement('script');
         s.setAttribute('src', path);
@@ -14,6 +14,5 @@
     if(!window.jQuery){
         addScript('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     }
-    //addScript('https://tsilp.herokuapp.com/static/modaljs');
-    addScript('//localhost:3000/static/modaljs');
+    addScript('//__TSILP_DOMAIN__/static/modaljs');
 })();

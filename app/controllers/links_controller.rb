@@ -15,6 +15,11 @@ class LinksController < ApplicationController
   # GET /links/new
   def new
     @link = Link.new
+    if params[:modal].present?
+      render partial: 'form', layout: false
+    else
+      render
+    end
   end
 
   # GET /links/1/edit

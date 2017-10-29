@@ -1,0 +1,7 @@
+%p#notice= notice
+
+%p
+  = @link.get_oembed.html_safe
+= link_to 'Edit', edit_link_path(@link)
+\|
+= link_to 'Back', links_path

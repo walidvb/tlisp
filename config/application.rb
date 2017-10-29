@@ -53,4 +53,6 @@ module Passsport
    config.assets.precompile += ['application.css, application.js']
    config.assets.precompile += ['application_night.css']
   end
+
+  
 end

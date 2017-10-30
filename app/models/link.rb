@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-    acts_as_taggable_on :tags
+    acts_as_taggable_on :tags, :genre
     serialize :oembed, Hash
     belongs_to :user
     before_save :add_oembed

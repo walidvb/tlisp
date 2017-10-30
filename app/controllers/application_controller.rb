@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-  def all_tags
-    ActsAsTaggableOn::Tagging.select(:tag_id).distinct.includes(:tag).map(&:tag)
+  def all_tags context = :tags
+    ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
   end
 
   # Devise

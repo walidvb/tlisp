@@ -10,6 +10,11 @@
       - @tags.each do |tag|
         %li
           = link_to tag.name, links_path(tag_names: tag.name)
+    %h4 Genres
+    %ul
+      - @genres.each do |tag|
+        %li
+          = link_to tag.name, links_path(tag_names: tag.name)
   .col-xs-12.col-sm-5#playlist
     - @links.each do |link|
       = render 'full_as_embed', link: link

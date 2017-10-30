@@ -7,6 +7,7 @@ class LinksController < ApplicationController
   def index
     @users = User.all
     @tags = all_tags
+    @genres = all_tags :genre
     @links = Link.includes(:user).all
     if user_id = params[:user_id].presence
       @links = @links.where(user_id: user_id)
@@ -24,6 +25,7 @@ class LinksController < ApplicationController
   # GET /links/new
   def new
     @tags = all_tags.map(&:name)
+    @genres = all_tags(:genre).map(&:name)
     @link = Link.new
     if params[:modal].present?
       headers['Access-Control-Allow-Origin'] = '*'
@@ -85,7 +87,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:url, tag_list: []).merge(
+      params.require(:link).permit(:url, tag_list: [], genre_list: []).merge(
         user: current_user,
       )
     end

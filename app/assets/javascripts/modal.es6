@@ -1,4 +1,3 @@
-//= require select2/dist/js/select2.min
 let $this = $(document);
 let openModal = () => {
     $.ajax({
@@ -27,7 +26,8 @@ let bindModal = (container) => {
         $this.select2({
             tags: true,
             tokenSeparators: [',', ' '],
-            data: tags
+            data: tags,
+            placeholder: $this.attr('placeholder'),
         });
     });
     $(document).on('submit', '#plis form', handleSubmit);
@@ -39,6 +39,7 @@ let handleSubmit = (evt) => {
     const $this = $(evt.target);
     const data = $this.serialize();
     const url = $this.attr('action');
+    $('#plist').remove();
     $.ajax({
         url, data,
         method: 'POST',
@@ -50,5 +51,6 @@ let handleSubmit = (evt) => {
     });
 };
 function closeModal() {
+    console.log("closing", $('#plis'));
     $('#plis').removeClass('open');
 };

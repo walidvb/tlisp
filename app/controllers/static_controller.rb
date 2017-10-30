@@ -3,6 +3,6 @@ class StaticController < ApplicationController
 
   def modaljs
     headers['Access-Control-Allow-Origin'] = '*'
-    render raw: Rails.application.assets.find_asset('remote.js').to_s, layout: false, :content_type => Mime::JS
+    render layout: false, :content_type => Mime::JS
   end
 end

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 
   def all_tags
-    ActsAsTaggableOn::Tagging.select(:tag_id).distinct.includes(:tag).map(&:tag).map(&:name)
+    ActsAsTaggableOn::Tagging.select(:tag_id).distinct.includes(:tag).map(&:tag)
   end
 
   # Devise

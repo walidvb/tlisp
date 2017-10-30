@@ -6,7 +6,14 @@ class LinksController < ApplicationController
   # GET /links.json
   def index
     @users = User.all
+    @tags = all_tags
     @links = Link.includes(:user).all
+    if user_id = params[:user_id].presence
+      @links = @links.where(user_id: user_id)
+    end
+    if tag_names = params[:tag_names].presence
+      @links = @links.tagged_with(tag_names)
+    end
   end
 
   # GET /links/1
@@ -16,7 +23,7 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
-    @tags = all_tags
+    @tags = all_tags.map(&:name)
     @link = Link.new
     if params[:modal].present?
       headers['Access-Control-Allow-Origin'] = '*'

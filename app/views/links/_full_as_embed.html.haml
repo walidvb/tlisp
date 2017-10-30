@@ -1,0 +1,6 @@
+- oembed = link.oembed
+%div{data: { provider: oembed['provider'], html: oembed['html'], play: true }}
+    %h2= oembed['title']
+    = image_tag oembed['thumbnail']
+    
+    = link_to "view original", link.url, target: "_blank"

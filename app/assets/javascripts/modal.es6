@@ -2,7 +2,7 @@ let $this = $(document);
 let openModal = () => {
     $.ajax({
         // __TSILP_DOMAIN__ is replaced inline in modaljs.html
-        url: '//__TSILP_DOMAIN__/links/new?modal=true',
+        url: '//'+__TSILP_DOMAIN__+'/links/new?modal=true',
         success: (res) => {
             console.log('Fetched modal');
             const container = $(res);

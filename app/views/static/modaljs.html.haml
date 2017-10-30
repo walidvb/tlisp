@@ -1,4 +1,3 @@
-
-(function(document, $){
-= raw Rails.application.assets.find_asset('remote.js').to_s.gsub('__TSILP_DOMAIN__', ENV['DOMAIN'])
-;})(document, jQuery);
+:javascript
+    window.__TSILP_DOMAIN__ = #{ENV['DOMAIN']};
+= javascript_include_tag 'remote'

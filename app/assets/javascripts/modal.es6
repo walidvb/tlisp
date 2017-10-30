@@ -3,7 +3,7 @@ console.log('opening modal');
 let $this = $(document);
 let openModal = () => {
     $.ajax({
-        // __TSILP_DOMAIN__ is replaced inline by modaljs.html
+        // __TSILP_DOMAIN__ is replaced inline in modaljs.html
         url: '//__TSILP_DOMAIN__/links/new?modal=true',
         success: (res) => {
             console.log('Fetched modal');
@@ -13,25 +13,24 @@ let openModal = () => {
             preFillForm(container);
         }
     });
-}
+};
 openModal();
 
 let preFillForm = (container) => {
     console.log(container)
     container.find('[name="link[url]"]').val(location.href);
-}
-let bindModal = (container) =>{
-    
+};
+let bindModal = (container) => {
     $('.modal__close').on('click', container, closeModal);
     $('form').on('submit', container, handleSubmit);
-}
+};
 
 
 let handleSubmit = (evt) => {
     //evt.preventDefault();
     //$(this).submit( () => closeModal);
-}
+};
 function closeModal() {
-    return $('#plis').removeClass('open');
-}
+    $('#plis').removeClass('open');
+};
 

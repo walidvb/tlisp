@@ -14,5 +14,5 @@
     if(!window.jQuery){
         addScript('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     }
-    addScript('//__TSILP_DOMAIN__/static/modaljs');
+    addScript('//__TSILP_DOMAIN__/static/modaljs?ref='+location.href);
 })();

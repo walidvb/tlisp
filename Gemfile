@@ -85,5 +85,6 @@ end
 # Rails 12factor for Heroku: https://github.com/heroku/rails_12factor
 group :production do
   gem 'rails_12factor'
-  gem 'unicorn'
+  gem 'dalli'
+  gem 'memcachier'
 end

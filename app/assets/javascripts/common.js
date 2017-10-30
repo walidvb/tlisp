@@ -1,4 +1,7 @@
+function ready(){
+    
+}
 
 
-$(document).ready();
-$(document).on('page:load', );
+$(document).ready(ready);
+$(document).on('page:load', ready);

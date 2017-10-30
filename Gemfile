@@ -3,14 +3,14 @@ ruby '2.2.5'
 
 # Standard Rails gems
 gem 'rails', '4.2.6'
-gem 'uglifier', '2.7.1'
+gem 'uglifier'
 gem 'jquery-rails', '4.0.4'
 gem 'turbolinks'
 gem 'jbuilder', '2.3.0'
 gem 'sass-rails'
 # gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: 'master'
 # gem 'sprockets', github: 'rails/sprockets', branch: 'master'
-gem 'sprockets', '~> 3.0.0'
+gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 # gem 'babel-transpiler'
 

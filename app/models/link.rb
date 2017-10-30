@@ -1,18 +1,18 @@
 class Link < ActiveRecord::Base
+    serialize :oembed, Hash
     belongs_to :user
     before_save :add_oembed
     
     def get_oembed
-        resource = PlisOEmbed.get(self.url)
-        resource.try(:html)
+        if resource = PlisOEmbed.get(self.url)
+            resource.fields.to_json
+        else
+            "{}"
+        end
     end
     private
     
     def add_oembed
-        begin
-            resource = get_oembed
-        rescue => e
-            resource = nil
-        end
+        self.oembed = get_oembed
     end
 end

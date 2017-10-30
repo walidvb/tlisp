@@ -15,18 +15,28 @@ let openModal = () => {
 openModal();
 
 let preFillForm = (container) => {
-    console.log(container)
     container.find('[name="link[url]"]').val(location.href);
 };
 let bindModal = (container) => {
-    $('.modal__close').on('click', container, closeModal);
-    $('form').on('submit', container, handleSubmit);
+    $(document).on('click', '#plis .modal__close', closeModal);
+    $(document).on('submit', '#plis form', handleSubmit);
 };
 
 
 let handleSubmit = (evt) => {
-    //evt.preventDefault();
-    //$(this).submit( () => closeModal);
+    evt.preventDefault();
+    const $this = $(evt.target);
+    const data = $this.serialize();
+    const url = $this.attr('action');
+    $.ajax({
+        url, data,
+        method: 'POST',
+        dataType: 'json',
+        success: (res, status) => {
+            console.log('submitted!', res);
+            closeModal();
+        }
+    });
 };
 function closeModal() {
     $('#plis').removeClass('open');

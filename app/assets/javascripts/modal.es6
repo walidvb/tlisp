@@ -1,3 +1,4 @@
+//= require select2/dist/js/select2.min
 let $this = $(document);
 let openModal = () => {
     $.ajax({
@@ -19,6 +20,16 @@ let preFillForm = (container) => {
 };
 let bindModal = (container) => {
     $(document).on('click', '#plis .modal__close', closeModal);
+
+    $(container).find('.select2').each(function(){
+        const $this =  $(this);
+        const tags = $this.data('tags').split(',');
+        $this.select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            data: tags
+        });
+    });
     $(document).on('submit', '#plis form', handleSubmit);
 };
 

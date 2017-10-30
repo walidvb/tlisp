@@ -1,14 +1,13 @@
 %h1 Listing links
 
-.container
-  .row
-    .col-xs-12.col-sm-2#filters
-      %ul
-        - @users.each do |user|
-          %li
-            %a{href:"#", data: {"filter-type": 'user', "filter-value": user.id}}= user.name
-    .col-xs-12.col-sm-5#playlist
-      - @links.each do |link|
-        = render 'full_as_embed', link: link
-    .col-xs-12.col-sm-5
-      #embed
+.row
+  .col-xs-12.col-sm-2#filters
+    %ul
+      - @users.each do |user|
+        %li
+          %a{href:"#", data: {"filter-type": 'user', "filter-value": user.id}}= user.name
+  .col-xs-12.col-sm-5#playlist
+    - @links.each do |link|
+      = render 'full_as_embed', link: link
+  .col-xs-12.col-sm-5
+    #embed

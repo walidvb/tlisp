@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+  def all_tags
+    ActsAsTaggableOn::Tagging.select(:tag_id).distinct.includes(:tag).map(&:tag).map(&:name)
+  end
+
   # Devise
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
@@ -14,13 +18,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
       :email,
       :password,
-      :password_confirmation)
+      :password_confirmation,
+      :name,
+      )
     }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
       :email,
       :password,
       :password_confirmation,
-      :current_password
+      :current_password,
+      :name,
       )
     }
   end

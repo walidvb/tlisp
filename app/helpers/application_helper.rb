@@ -4,4 +4,5 @@ module ApplicationHelper
       @title = "#{value} | Passsport"
     end
   end
+
 end

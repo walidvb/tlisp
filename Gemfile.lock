@@ -53,9 +53,10 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (4.0.0)
+      activerecord (>= 4.0)
     acts_as_list (0.9.9)
       activerecord (>= 3.0)
-    acts_as_taggable (2.0.2)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     annotate (2.6.10)
@@ -421,8 +422,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   acts_as_list
-  acts_as_taggable
   annotate (= 2.6.10)
   anticipate
   autoprefixer-rails

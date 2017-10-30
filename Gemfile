@@ -28,7 +28,7 @@ gem 'friendly_id', '5.1.0'
 gem 'devise', '~>4.1.0'
 # gem "paperclip", '~> 4.1'
 gem 'acts_as_list'
-gem 'acts_as_taggable'
+gem 'acts-as-taggable-on'
 gem 'ruby-oembed'
 
 #### I18n

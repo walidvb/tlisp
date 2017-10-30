@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-    acts_as_taggable
+    acts_as_taggable_on :tags
     serialize :oembed, Hash
     belongs_to :user
     before_save :add_oembed
@@ -9,7 +9,7 @@ class Link < ActiveRecord::Base
         if resource = PlisOEmbed.get(self.url)
             resource.fields
         else
-            "{}"
+            {}
         end
     end
     

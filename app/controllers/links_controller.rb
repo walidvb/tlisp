@@ -16,6 +16,7 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
+    @tags = all_tags
     @link = Link.new
     if params[:modal].present?
       headers['Access-Control-Allow-Origin'] = '*'
@@ -77,7 +78,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:url).merge(
+      params.require(:link).permit(:url, tag_list: []).merge(
         user: current_user,
       )
     end

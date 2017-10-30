@@ -12,6 +12,9 @@
       .field
         = f.label :url
         = f.text_field :url
+      .field
+        = f.label :tag_list
+        = f.select :tag_list, [1,2,3], {}, multiple: true, class: 'select2', "data-tags": @tags.join(',')
       .actions
         = f.submit 'Save'
   = stylesheet_link_tag( stylesheet_url 'modal')

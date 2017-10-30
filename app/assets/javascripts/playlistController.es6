@@ -12,14 +12,12 @@ $(document).ready(() => {
     // });
     // player.init(playlistElements);
 
-    const embedContainer = $('#embed');
     let setMedia = (oEmbed) => {
-        embedContainer.html(oEmbed.html)
+        $('#embed').html(oEmbed.html)
     };
 
     $(document).on('click', '.play', (evt) => {
         const infos = $(evt.target).parents('[data-url]').data();
-        console.log(infos);
         setMedia(infos);
     });
 });

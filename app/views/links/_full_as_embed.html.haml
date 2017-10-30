@@ -2,6 +2,7 @@
     %h3= link.oembed['title']
     %h4= link_to link.oembed['author_name'], link.oembed['author_url'], target: "_blank"
     = image_tag link.oembed['thumbnail_url']
-    = link.user.try(:name)
-    = link_to "view original", link.url, target: "_blank"
+    = "Submitted by #{link.user.try(:name)}"
+    %em= link.tag_list.join(', ')
+    %div= link_to "view original", link.url, target: "_blank"
     %div.play play

@@ -1,4 +1,15 @@
+/*
+ * Overwritten by RailsBricks
+ *
+ *= require select2/dist/css/select2.min.css 
+ */
+
 #plis{
+
+    select, input{
+        width: 100%;
+    }
+
     &.modal {
         display: inline-block;
         opacity: 0;

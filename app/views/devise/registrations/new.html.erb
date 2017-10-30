@@ -9,6 +9,15 @@
     <%= devise_error_messages! %>
 
     <div class="form-group">
+      <%= f.label :name %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
       <%= f.label :email %>
       <div class="row">
         <div class="col-sm-6">

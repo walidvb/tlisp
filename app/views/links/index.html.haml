@@ -1,21 +1,14 @@
 %h1 Listing links
 
-%table
-  %thead
-    %tr
-      %th Url
-      %th
-      %th
-      %th
-
-  %tbody
-    - @links.each do |link|
-      %tr
-        %td= render 'full_as_embed', link: link
-        %td= link_to 'Show', link
-        %td= link_to 'Edit', edit_link_path(link)
-        %td= link_to 'Destroy', link, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Link', new_link_path
+.container
+  .row
+    .col-xs-12.col-sm-2#filters
+      %ul
+        - @users.each do |user|
+          %li
+            %a{href:"#", data: {"filter-type": 'user', "filter-value": user.id}}= user.name
+    .col-xs-12.col-sm-5#playlist
+      - @links.each do |link|
+        = render 'full_as_embed', link: link
+    .col-xs-12.col-sm-5
+      #embed

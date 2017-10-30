@@ -1,6 +1,7 @@
-- oembed = link.oembed
-%div{data: { provider: oembed['provider'], html: oembed['html'], play: true }}
-    %h2= oembed['title']
-    = image_tag oembed['thumbnail']
-    
+%div{data: { url: link.url, provider: link.oembed['provider'], html: link.oembed['html'], play: true }}
+    %h3= link.oembed['title']
+    %h4= link_to link.oembed['author_name'], link.oembed['author_url'], target: "_blank"
+    = image_tag link.oembed['thumbnail_url']
+    = link.user.try(:name)
     = link_to "view original", link.url, target: "_blank"
+    %div.play play

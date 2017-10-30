@@ -49,9 +49,8 @@ module Passsport
    end
    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-
-   config.assets.precompile += ['application.css, application.js']
-   config.assets.precompile += ['application_night.css']
+   
+   config.assets.precompile += ['application.css, application.js', 'modal.js', 'modal.css']
   end
 
   

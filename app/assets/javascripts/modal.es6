@@ -1,5 +1,5 @@
 
-
+console.log('opening modal');
 let $this = $(document);
 let openModal = () => {
     $.ajax({

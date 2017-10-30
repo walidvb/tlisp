@@ -273,6 +273,7 @@ GEM
       rack (>= 1.1)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-zippy (3.0.1)
     railroady (1.5.3)
     rails (4.2.6)
       actionmailer (= 4.2.6)
@@ -459,6 +460,7 @@ DEPENDENCIES
   pry-rails
   puma
   quiet_assets
+  rack-zippy
   railroady
   rails (= 4.2.6)
   rails-erd
@@ -472,6 +474,7 @@ DEPENDENCIES
   rspec-html-matchers
   rspec-rails (= 2.14.0)
   ruby-oembed
+  rubyzip
   sass-rails
   selenium-webdriver
   show_me_the_cookies

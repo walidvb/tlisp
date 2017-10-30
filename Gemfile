@@ -84,4 +84,6 @@ group :production do
   gem 'rails_12factor'
   gem 'dalli'
   gem 'memcachier'
+  gem 'rubyzip'
+	gem 'rack-zippy'
 end

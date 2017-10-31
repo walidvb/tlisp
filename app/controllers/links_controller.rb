@@ -29,7 +29,7 @@ class LinksController < ApplicationController
     @link = Link.new
     if params[:modal].present?
       headers['Access-Control-Allow-Origin'] = '*'
-      response.headers['Access-Control-Allow-Origin']
+      response.headers['Access-Control-Allow-Origin'] = '*'
       render partial: 'form', layout: false
     else
       render

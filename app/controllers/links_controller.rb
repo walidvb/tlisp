@@ -46,6 +46,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
 
     respond_to do |format|
+      response.headers['Access-Control-Allow-Origin'] = '*'
       if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }

@@ -1,7 +1,7 @@
 module ApplicationHelper
   def title(value)
     unless value.nil?
-      @title = "#{value} | Passsport"
+      @title = "#{value} | Tsilp"
     end
   end
 

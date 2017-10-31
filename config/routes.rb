@@ -1,4 +1,4 @@
-Passsport::Application.routes.draw do
+Tsilp::Application.routes.draw do
   get 'static/modaljs'
 
   resources :links

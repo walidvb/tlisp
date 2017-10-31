@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Passsport::Application.load_tasks
+Tsilp::Application.load_tasks

@@ -23,6 +23,7 @@
 
 
     &.modal {
+        z-index: 50000;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -63,7 +64,6 @@
     }
     
     .modal__inner {
-        z-index: 50000;
         transition: top .25s ease;
         width: 50%;
         overflow: auto;

@@ -25,7 +25,7 @@ let bindModal = (container) => {
         const tags = $this.data('tags').split(',');
         $this.select2({
             tags: true,
-            tokenSeparators: [',', ' '],
+            tokenSeparators: [','],
             data: tags,
             placeholder: $this.attr('placeholder'),
             width: '100%',

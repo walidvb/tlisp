@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
-  #before_filter :authenticate_user!, except: [:index, :show, :new, :create]
+  before_filter :authenticate_user!, except: [:index, :show]
 
   # GET /links
   # GET /links.json
@@ -44,9 +44,9 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-
+    headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Origin'] = '*'
     respond_to do |format|
-      response.headers['Access-Control-Allow-Origin'] = '*'
       if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }

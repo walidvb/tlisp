@@ -14,10 +14,10 @@
         = f.text_field :url
       .field
         = f.label :tag_list
-        = f.select :tag_list, [], {}, multiple: true, class: 'select2', "data-tags": @tags.join(',')
+        = f.select :tag_list, [], {}, multiple: true, class: 'select2', "data-tags": @tags.join(','), placeholder: "playlist, artist, event, subgenre"
       .field
         = f.label :genre_list
-        = f.select :genre_list, [], {}, multiple: true, class: 'select2', "data-tags": @genres.join(','), placeholder: "This will be a predefined list in the future"
+        = f.select :genre_list, [], {}, multiple: true, class: 'select2', "data-tags": @genres.empty? ? "Ambient,Baile Funk,Classical,Electronica,Hip Hop,Techno/House,Reggae,Samba" : @genres.join(','), placeholder: "This will be a predefined list in the future"
       .field
         = f.label :description
         = f.text_area :description

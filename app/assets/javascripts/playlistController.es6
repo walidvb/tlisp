@@ -16,8 +16,12 @@ $(document).ready(() => {
         $('#embed').html(oEmbed.html)
     };
 
-    $(document).on('click', '.play', (evt) => {
-        const infos = $(evt.target).parents('[data-url]').data();
+    $(document).on('click', '.link', (evt) => {
+        if($(evt.target).is('a')){ return true; }
+        var row =  $(evt.target).parents('[data-url]');
+        $('.playing').removeClass('playing');
+        row.addClass('playing')
+        const infos = row.data();
         setMedia(infos);
     });
 });

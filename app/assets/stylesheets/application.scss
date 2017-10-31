@@ -3,5 +3,11 @@
  *
  *= require_self
  */
+
 @import "railsbricks_custom";
 @import "modal";
+@import "link";
+
+html, body{
+    font-size: 14px;
+}

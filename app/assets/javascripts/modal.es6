@@ -51,6 +51,5 @@ let handleSubmit = (evt) => {
     });
 };
 function closeModal() {
-    console.log("closing", $('#plis'));
-    $('#plis').removeClass('open');
+    $('#plis').removeClass('open').remove();
 };

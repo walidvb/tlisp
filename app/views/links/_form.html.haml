@@ -19,8 +19,8 @@
         = f.label :genre_list
         = f.select :genre_list, [], {}, multiple: true, class: 'select2', "data-tags": @genres.join(','), placeholder: "This will be a predefined list in the future"
         .field
-          = f.label :genre_list
-          = f.text_area :genre_list
+          = f.label :description
+          = f.text_area :description
       .actions
         = f.submit 'Save'
   = stylesheet_link_tag( stylesheet_url 'modal')

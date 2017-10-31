@@ -28,6 +28,7 @@ let bindModal = (container) => {
             tokenSeparators: [',', ' '],
             data: tags,
             placeholder: $this.attr('placeholder'),
+            width: '100%',
         });
     });
     $(document).on('submit', '#plis form', handleSubmit);

@@ -45,6 +45,7 @@ let handleSubmit = (evt) => {
         url, data,
         method: 'POST',
         dataType: 'json',
+        contentType: "text/javascript",        
         success: (res, status) => {
             console.log('submitted!', res);
             closeModal();

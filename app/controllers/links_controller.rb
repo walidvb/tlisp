@@ -1,7 +1,7 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user_from_token!, except: [:index, :show]
-  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
+  skip_before_action :verify_authenticity_token
   # GET /links
   # GET /links.json
   def index

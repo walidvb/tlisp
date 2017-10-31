@@ -1,6 +1,7 @@
 Tsilp::Application.routes.draw do
   get 'static/modaljs'
   resources :links
+  match "links" => "links#create", via: [:options]
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do
     root "pages#home"
     get "inside", to: "pages#inside"

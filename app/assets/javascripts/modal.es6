@@ -39,13 +39,13 @@ let handleSubmit = (evt) => {
     evt.preventDefault();
     const $this = $(evt.target);
     const data = $this.serialize() + "&auth_token="+__TSILP_USER_ID__;
-    const url = $this.attr('action');
+    const url = $this.attr('action')+'.json';
     $('#plist').remove();
     $.ajax({
         url, data,
         method: 'POST',
         dataType: 'json',
-        contentType: "text/javascript",        
+        // contentType: "text/json",       
         success: (res, status) => {
             console.log('submitted!', res);
             closeModal();

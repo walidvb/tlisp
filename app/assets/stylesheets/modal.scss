@@ -10,13 +10,21 @@
     color: #111;
     label{
         text-transform: uppercase;
+        color: #878787;
     }
     select, input, textarea{
         width: 100%;
     }
 
+    .field{
+        margin-bottom: 1em;
+    }
+
+
     &.modal {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         opacity: 0;
         visibility: hidden;
         position: fixed;
@@ -54,14 +62,9 @@
     }
     
     .modal__inner {
+        z-index: 50000;
         transition: top .25s ease;
-        position: absolute;
-        top: -20%;
-        right: 0;
-        bottom: 0;
-        left: 0;
         width: 50%;
-        margin: auto;
         overflow: auto;
         background: #fff;
         border-radius: 5px;

@@ -15,11 +15,14 @@ class PagesController < ApplicationController
         xmlHttp.send(null);
       }
       var url = '//__TSILP_DOMAIN__/static/modaljs?ref='+location.href;
+
       httpGet(url, function(res){
           var div = document.createElement('div');
           div.innerHTML = res;
           var scripts = div.children;
-          for (var i = 0; i < scripts.length; i++) {
+          var domain = scripts[0].innerHTML;
+          eval(domain);
+          for (var i = 1; i < scripts.length; i++) {
               var element = scripts[i];
               var script = document.createElement('script');
               script.src = element.src;

@@ -2,7 +2,7 @@ let $this = $(document);
 let openModal = () => {
     $.ajax({
         // __TSILP_DOMAIN__ is replaced inline in modaljs.html
-        url: '//'+__TSILP_DOMAIN__+'/links/new?modal=true',
+        url: '//'+__TSILP_DOMAIN__+'/links/new?modal=true&auth_token='+__TSILP_USER_ID__,
         success: (res) => {
             console.log('Fetched modal');
             const container = $(res);
@@ -38,7 +38,7 @@ let bindModal = (container) => {
 let handleSubmit = (evt) => {
     evt.preventDefault();
     const $this = $(evt.target);
-    const data = $this.serialize();
+    const data = $this.serialize() + "&auth_token="+__TSILP_USER_ID__;
     const url = $this.attr('action');
     $('#plist').remove();
     $.ajax({

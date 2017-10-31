@@ -3,9 +3,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def authenticate_user_from_token!
+    token = params[:auth_token].presence
 
-  def all_tags context = :tags
-    ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
+    if !user_signed_in?
+      if token && user = User.find_by_auth_token(token.to_s)
+        sign_in user, store: true
+      else
+        respond_to do |format|
+          format.json{ head :unauthorized }
+          format.html{ redirect_to(new_user_registration_path)}
+        end
+      end
+    end
   end
 
   # Devise
@@ -61,4 +71,12 @@ class ApplicationController < ActionController::Base
   helper_method :require_admin!
 
   # /Devise
+
+
+  # HELPERS
+
+  def all_tags context = :tags
+    ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
+  end
+
 end

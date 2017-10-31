@@ -1,7 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:index, :show]
-
+  before_filter :authenticate_user_from_token!, except: [:index, :show]
   # GET /links
   # GET /links.json
   def index
@@ -89,7 +88,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:url, tag_list: [], genre_list: []).merge(
+      params.require(:link).permit(:url, :description, tag_list: [], genre_list: []).merge(
         user: current_user,
       )
     end

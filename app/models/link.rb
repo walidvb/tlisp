@@ -4,6 +4,8 @@ class Link < ActiveRecord::Base
     belongs_to :user
     before_save :add_oembed
     
+    validates_presence_of :user
+
     private
     def get_oembed
         if resource = PlisOEmbed.get(self.url)

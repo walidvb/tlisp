@@ -4,37 +4,41 @@ class PagesController < ApplicationController
   ]
 
   def home
-    bookmarklet_js = %{
-      function httpGet(theUrl, callback){
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() { 
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                callback(xmlHttp.responseText);
-        }
-        xmlHttp.open("GET", theUrl, true); // true for asynchronous
-        xmlHttp.send(null);
-      }
-      var url = '//__TSILP_DOMAIN__/static/modaljs?ref='+location.href;
-
-      httpGet(url, function(res){
-          var div = document.createElement('div');
-          div.innerHTML = res;
-          var scripts = div.children;
-          var domain = scripts[0].innerHTML;
-          eval(domain);
-          for (var i = 1; i < scripts.length; i++) {
-              var element = scripts[i];
-              var script = document.createElement('script');
-              script.src = element.src;
-              document.body.appendChild(script);
-          }
-          console.log(div);
-      });
-    }
-    @bookmarklet = "javascript:(function(){"+bookmarklet_js.gsub("__TSILP_DOMAIN__", ENV['DOMAIN'])+"})();"
+    redirect_to inside_path if user_signed_in?
   end
 
   def inside
+    if user_signed_in?
+      bookmarklet_js = %{
+        window.__TSILP_USER_ID__ = "#{current_user.auth_token}";
+        function httpGet(theUrl, callback){
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.onreadystatechange = function() { 
+              if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                  callback(xmlHttp.responseText);
+          }
+          xmlHttp.open("GET", theUrl, true); // true for asynchronous
+          xmlHttp.send(null);
+        }
+        var url = '//#{ENV['DOMAIN']}/static/modaljs?ref='+location.href+'&auth_token=#{current_user.auth_token}';
+
+        httpGet(url, function(res){
+            var div = document.createElement('div');
+            div.innerHTML = res;
+            var scripts = div.children;
+            var domain = scripts[0].innerHTML;
+            eval(domain);
+            for (var i = 1; i < scripts.length; i++) {
+                var element = scripts[i];
+                var script = document.createElement('script');
+                script.src = element.src;
+                document.body.appendChild(script);
+            }
+            console.log(div);
+        });
+      }
+      @bookmarklet = "javascript:(function(){"+bookmarklet_js+"})();"
+    end
   end
   
   

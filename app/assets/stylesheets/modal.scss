@@ -4,6 +4,9 @@
  *= require select2/dist/css/select2.min.css 
  */
 
+.select2-container{
+    z-index: 50001;
+}
 #plis{
     font-size: 16px;
     font-family: Gill Sans Light, sans-serif;
@@ -16,9 +19,16 @@
     select, input, textarea{
         width: 100%;
     }
-
+    input[type="radio"], input[type="checkbox"]{
+        width: auto;
+    }
     .field{
         margin-bottom: 1em;
+        &.field--radio{
+            > *{
+                display: inline-block;
+            }
+        }
     }
 
 

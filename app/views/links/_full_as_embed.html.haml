@@ -1,12 +1,18 @@
 %div.link.item{data: { url: link.url, provider: link.oembed['provider'], html: link.oembed['html'], play: true }}
     .item__thumbnail= image_tag link.oembed['thumbnail_url'], class: "thumbnail"
     .item__infos
-        %h3.item__title= link.oembed['title']
-        .item__submitted
-            = fa_icon 'user'
-            = "#{link.user.try(:name)}"
-        %h4= link_to link.oembed['author_name'], link.oembed['author_url'], target: "_blank"
-        %em= link.tag_list.join(', ')
-        .item__controls
-            = link_to fa_icon(link.oembed['provider_name'].try(:downcase)), link.url, target: "_blank"
-            %a{href: "#"}= fa_icon 'play'
+        .item__top
+            %h3.item__title
+                = link.oembed['title']
+            .item__submitted
+                = fa_icon 'user', class: "nouse-icon"
+                = "#{link.user.try(:name)}"
+            %h4    
+                = link_to link.oembed['author_name'], link.oembed['author_url'], target: "_blank"
+        .item__bottom
+            %em
+                = fa_icon 'tags', class: "nouse-icon"
+                = link.tag_list.join(', ')
+            .item__controls
+                = link_to fa_icon(link.oembed['provider_name'].try(:downcase)), link.url, target: "_blank"
+                %a{href: "#"}= fa_icon 'play'

@@ -14,13 +14,21 @@
         = f.text_field :url
       .field
         = f.label :tag_list
-        = f.select :tag_list, [], {}, multiple: true, class: 'select2', "data-tags": "errorsmith", placeholder: "playlist, artist, event, subgenre"
+        = f.select :tag_list, @tags, {}, multiple: true, class: 'select2', "data-tags": @tags.join(','), placeholder: "playlist, artist, event, subgenre"
       .field
         = f.label :genre_list
-        = f.select :genre_list, [], {}, multiple: true, class: 'select2', "data-tags": @genres.empty? ? "Ambient,Baile Funk,Classical,Electronica,Hip Hop,Techno/House,Reggae,Samba" : @genres.join(','), placeholder: "This will be a predefined list in the future"
+        = f.select :genre_list, @genres, {}, multiple: true, class: 'select2', "data-tags": @genres.join(','), placeholder: "This will be a predefined list in the future"
       .field
         = f.label :description
         = f.text_area :description
+      .field.field--radio
+        = f.label :is_a_set_mix, 'Mix'
+        = f.radio_button :is_a_set, "Mix"
+        = f.radio_button :is_a_set, "Single Track",checked: true
+        = f.label :is_a_set_single_track, 'Single Track / Playlist'
+      .field
+        = f.check_box :published
+        = f.label :published, "Make this post visible to other users?"
       .actions
         = f.submit 'Save'
   = stylesheet_link_tag( stylesheet_url 'modal')

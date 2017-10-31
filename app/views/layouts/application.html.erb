@@ -15,7 +15,7 @@
       <%= render 'layouts/navigation' %>
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
 
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3 text-center">
@@ -34,14 +34,16 @@
 
   <%= render 'layouts/footer' %>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-27024782-30"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <% if Rails.env.production? %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-27024782-30"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'UA-27024782-30');
-</script>
+      gtag('config', 'UA-27024782-30');
+    </script>
+  <% end %>
 </body>
 </html>

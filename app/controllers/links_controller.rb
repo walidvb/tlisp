@@ -89,7 +89,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:url, :description, tag_list: [], genre_list: []).merge(
+      params.require(:link).permit(:url, :description, :published, :is_a_set, tag_list: [], genre_list: []).merge(
         user: current_user,
       )
     end

@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-sm-2#filters
+  .col-xs-12.col-sm-2.col-md-1#filters
     %h4 Users
     %ul
       - @users.each do |user|
@@ -15,8 +15,8 @@
       - @genres.each do |tag|
         %li
           = link_to tag.name, links_path(tag_names: tag.name)
-  .col-xs-12.col-sm-5#playlist
+  .col-xs-12.col-sm-5.col-md-4#playlist
     - @links.each do |link|
       = render 'full_as_embed', link: link
-  .col-xs-12.col-sm-5
+  .col-xs-12.col-sm-5.col-md-7
     #embed{"data-turbolinks-permanent": true}

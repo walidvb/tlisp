@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Tsilp::Application.load_tasks
+DiggersDelights::Application.load_tasks

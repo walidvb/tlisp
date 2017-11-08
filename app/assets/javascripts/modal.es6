@@ -18,7 +18,7 @@ let preFillForm = (container) => {
     container.find('[name="link[url]"]').val(location.href);
 };
 let bindModal = (container) => {
-    $(document).on('click', '#plis .modal__close', closeModal);
+    $(document).on('click', '#diggersdelights .modal__close', closeModal);
 
     $(container).find('.select2').each(function(){
         const $this =  $(this);
@@ -31,7 +31,7 @@ let bindModal = (container) => {
             width: '100%',
         });
     });
-    $(document).on('submit', '#plis form', handleSubmit);
+    $(document).on('submit', '#diggersdelights form', handleSubmit);
 };
 
 
@@ -40,7 +40,7 @@ let handleSubmit = (evt) => {
     const $this = $(evt.target);
     const data = $this.serialize() + "&auth_token="+__TSILP_USER_ID__;
     const url = $this.attr('action')+'.json';
-    $('#plist').remove();
+    $('#diggersdelightst').remove();
     $.ajax({
         url, data,
         method: 'POST',
@@ -53,5 +53,5 @@ let handleSubmit = (evt) => {
     });
 };
 function closeModal() {
-    $('#plis').removeClass('open').remove();
+    $('#diggersdelights').removeClass('open').remove();
 };

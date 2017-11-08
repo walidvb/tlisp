@@ -1,4 +1,4 @@
-Tsilp::Application.routes.draw do
+DiggersDelights::Application.routes.draw do
   get 'static/modaljs'
   resources :links
   match "links" => "links#create", via: [:options]

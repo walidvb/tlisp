@@ -8,7 +8,7 @@ class Link < ActiveRecord::Base
 
     private
     def get_oembed
-        if resource = PlisOEmbed.get(self.url)
+        if resource = DDOEmbed.get(self.url)
             resource.fields
         else
             {}

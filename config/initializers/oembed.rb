@@ -1,6 +1,6 @@
 require 'oembed'
 OEmbed::Providers.register_all
-class PlisOEmbed
+class DDOEmbed
     def self.get url
         begin
             OEmbed::Providers.get(url)

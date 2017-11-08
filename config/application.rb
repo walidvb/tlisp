@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module Tsilp
+module DiggersDelights
   class Application < Rails::Application
 
     config.before_configuration do

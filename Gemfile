@@ -46,19 +46,23 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '2.14.0'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'rspec-collection_matchers'
   gem 'capybara'
-    gem 'cucumber-rails', :require=>false
-    gem 'database_cleaner', '1.0.1'
-    gem 'email_spec'
-    gem 'launchy'
-    gem 'selenium-webdriver'
-    gem 'chronic'
-    gem 'timecop'
-    gem 'anticipate'
-    gem 'rspec-html-matchers'
-    gem 'show_me_the_cookies'
-  	gem 'fuubar'
+  gem 'cucumber-rails', :require=>false
+  gem 'database_cleaner', '1.0.1'
+  gem 'email_spec'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'poltergeist'
+  gem 'chronic'
+  gem 'timecop'
+  gem 'anticipate'
+  gem 'rspec-html-matchers'
+  gem 'show_me_the_cookies'
+  gem 'fuubar'
+  gem 'anticipate'
 end
 
 group :development do

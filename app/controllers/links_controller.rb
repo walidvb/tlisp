@@ -47,7 +47,10 @@ class LinksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Origin'] = '*'
     respond_to do |format|
-      if @link.save
+      if @link.is_duplicate_for_user?
+        format.html { redirect_to @link, notice: 'Link already existed.' }
+        format.json { render :show, status: :found, location: @link }
+      elsif @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else

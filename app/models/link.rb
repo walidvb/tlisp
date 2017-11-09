@@ -5,6 +5,11 @@ class Link < ActiveRecord::Base
     before_save :add_oembed
     
     validates_presence_of :user
+    validates :url, uniqueness: { scope: :user_id }
+
+    def is_duplicate_for_user?
+        user.links.select(:url).map(&:url).includes?(self.url)
+    end
 
     private
     def get_oembed
@@ -18,4 +23,5 @@ class Link < ActiveRecord::Base
     def add_oembed
         self.oembed = get_oembed
     end
+
 end

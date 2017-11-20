@@ -31,6 +31,8 @@ gem 'acts_as_list'
 gem 'acts-as-taggable-on'
 gem 'ruby-oembed'
 
+gem 'nokogiri'
+
 #### I18n
 gem 'rails-i18n', '~> 4.0.0'
 gem 'globalize'

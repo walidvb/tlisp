@@ -480,6 +480,7 @@ DEPENDENCIES
   letter_opener
   memcachier
   meta_request
+  nokogiri
   pg
   poltergeist
   pry-rails

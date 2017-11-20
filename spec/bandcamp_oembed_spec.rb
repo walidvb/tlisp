@@ -6,15 +6,15 @@ describe BandcampOembed do
     end
 
     it "gets the basic attributes" do 
-        expect(oembed[:title]).to eq("Sao Paulo")
-        expect(oembed[:author_name]).to eq("Mama Rosin")
+        expect(oembed["title"]).to eq("Sao Paulo")
+        expect(oembed["author_name"]).to eq("Mama Rosin")
     end
 
     it "gets the description" do
-        expect(oembed[:description]).to match("fantastic tropical session")
+        expect(oembed["description"]).to match("fantastic tropical session")
     end
 
     it "gets the iframe" do 
-        expect(oembed[:html]).to eq("<iframe style='border: 0; width: 100%; height: 42px;' src='http://bandcamp.com/EmbeddedPlayer/album=1387352813/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>")
+        expect(oembed["html"]).to eq("<iframe style='border: 0; width: 100%; height: 42px;' src='http://bandcamp.com/EmbeddedPlayer/album=1387352813/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>")
     end
 end

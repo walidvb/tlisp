@@ -8,16 +8,13 @@ class Link < ActiveRecord::Base
     validates :url, uniqueness: { scope: :user_id }
 
     def is_duplicate_for_user?
-        user.links.select(:url).map(&:url).includes?(self.url)
+        user.links.select(:url).map(&:url).include?(self.url)
     end
 
     private
     def get_oembed
-        if resource = DDOEmbed.get(self.url)
-            resource.fields
-        else
-            {}
-        end
+        des = DDOEmbed.get(self.url) || {}
+        p des
     end
     
     def add_oembed

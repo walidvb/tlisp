@@ -64,7 +64,6 @@ group :test do
   gem 'rspec-html-matchers'
   gem 'show_me_the_cookies'
   gem 'fuubar'
-  gem 'anticipate'
 end
 
 group :development do

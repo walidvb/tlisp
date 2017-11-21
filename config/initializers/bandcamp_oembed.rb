@@ -31,7 +31,7 @@ class BandcampOembed
     def build_iframe url
         if matches = /album=(\d+)\//.match(url)
             album_id = matches[1]
-            "<iframe style='border: 0; width: 100%; height: 42px;' src='http://bandcamp.com/EmbeddedPlayer/album=#{album_id}/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
+            "<iframe style='border: 0; width: 350px; height: 522px;' src='http://bandcamp.com/EmbeddedPlayer/album=#{album_id}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
         else
             p "Failed to get album_id for #{url}"
         end

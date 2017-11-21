@@ -1,6 +1,15 @@
 # PostgreSQL
 #   Ensure the PostgreSQL gem is defined in your Gemfile
 #   gem 'pg'
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: plis_development
+  username: gaston
+  host: localhost
+  pool: 5
+  port: 5432
+
 development:
   adapter: postgresql
   encoding: utf8

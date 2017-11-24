@@ -43,10 +43,10 @@ describe LinksController do
           Fabricate(:link, url: url, user: user, clique: clique)
           request.env['warden'].stub :authenticate! => user2
           controller.stub :current_user => user2
-          expect(clique.links.where(url: url)).not_to be_empty
         end
-
-        it "doesn't create it" do 
+        
+        it "doesn't duplicate it" do
+          expect(clique.links.where(url: url)).not_to be_empty
           expect { 
             post :create, { link: {url: url, clique_id: clique.id}}
           }.to change(Link, :count).by(0)

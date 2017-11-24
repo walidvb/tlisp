@@ -47,7 +47,7 @@ class LinksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Origin'] = '*'
     respond_to do |format|
-      if @link.is_duplicate_for_user?
+      if @link.is_duplicate?
         format.html { redirect_to @link, notice: 'Link already existed.' }
         format.json { render :show, status: :found, location: @link }
       elsif @link.save
@@ -97,10 +97,11 @@ class LinksController < ApplicationController
         :description, 
         :published, 
         :is_a_set,
-        clique_ids: [],
+        :clique_id,
         tag_list: [], 
-        genre_list: []).merge(
-        user: current_user,
+        genre_list: []
+      ).merge(
+          user: current_user,
       )
     end
 end

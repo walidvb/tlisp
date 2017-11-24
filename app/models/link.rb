@@ -9,8 +9,8 @@ class Link < ActiveRecord::Base
     validates_presence_of :user, :clique
     validates :url, uniqueness: { scope: :clique_id }
 
-    def is_duplicate_for_user?
-        user.links.select(:url).map(&:url).include?(self.url)
+    def is_duplicate?
+        self.clique.links.where(url: self.url).count > 0
     end
 
     [   "title",

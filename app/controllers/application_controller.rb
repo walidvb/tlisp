@@ -5,14 +5,13 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user_from_token!
     token = params[:auth_token].presence
-
     if !user_signed_in?
       if token && user = User.find_by_auth_token(token.to_s)
         sign_in user, store: true
       else
         respond_to do |format|
           format.json{ head :unauthorized }
-          format.html{ redirect_to(new_user_registration_path)}
+          format.html{ redirect_to(new_user_session_path, error: "You must be logged in to view this page")}
         end
       end
     end

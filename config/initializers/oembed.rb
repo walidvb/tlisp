@@ -5,14 +5,14 @@ class DDOEmbed
         begin
             OEmbed::Providers.get(url).fields
         rescue OEmbed::NotFound
+            # need to create a bandcamp to detect source
             oembed = BandcampOembed.new(url) 
             if oembed.is_bandcamp?
-                # need to create a bandcamp to detect source
                 return oembed.get_oembed
             end
         rescue => e
             puts e
-            raise e unless Rails.env.test?
+            raise e
         end
     end
 end

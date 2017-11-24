@@ -2,10 +2,12 @@ class Link < ActiveRecord::Base
     acts_as_taggable_on :tags, :genre
     serialize :oembed, Hash
     belongs_to :user
+
+    belongs_to :clique, inverse_of: :links
     before_save :add_oembed
     
-    validates_presence_of :user
-    validates :url, uniqueness: { scope: :user_id }
+    validates_presence_of :user, :clique
+    validates :url, uniqueness: { scope: :clique_id }
 
     def is_duplicate_for_user?
         user.links.select(:url).map(&:url).include?(self.url)

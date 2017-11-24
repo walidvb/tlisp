@@ -15,11 +15,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_presence_of :name
 
-
-  def clique= clique_id
-    self.cliques << Clique.find(clique_id)
-  end
-
   private
   def ensure_authentication_token!
     self.auth_token ||= Devise.friendly_token[0,40]

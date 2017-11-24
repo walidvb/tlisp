@@ -1,6 +1,6 @@
 class CliquesController < ApplicationController
   before_action :set_clique, only: [:join, :show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   def join
     session[:join_clique_id] = @clique.id
   end

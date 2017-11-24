@@ -22,20 +22,11 @@ Given(/^I log out$/)do
 end
 
 Given(/^I am logged in$/) do
-  create_user_and_sign_in(has_seen_welcome: true)
+  create_user_and_sign_in
 end
 
 Given(/^I(?: am)? log(?:ged)? in as an? (\w+)$/) do |role|
-  create_user_and_sign_in(has_seen_welcome: true, roles: role, publisher_list: [:pigeonhole])
-end
-
-Given(/^I am the publisher of a book$/) do
-  create_user_and_sign_in(has_seen_welcome: true, roles: :publisher, publisher_list: [:pigeonhole])
-    create_book(publisher: :pigeonhole)
-end
-
-Given(/^I am logged in without a card$/) do
-  create_user_and_sign_in(has_seen_welcome: true, without_card: true)
+  create_user_and_sign_in
 end
 
 Given(/^I exist as a user$/)do
@@ -254,10 +245,6 @@ When(/^I sign in with my new password$/)do
   click_button "Log in"
 end
 
-Then(/^my email should be updated$/) do
-  expect(@user.reload.email).to eq('new@email.com')
-end
-
 When(/^I log back in as (\S+)$/) do |name|
   Capybara.session_name = name
   user = User.find_by_name(name)
@@ -273,12 +260,4 @@ When(/^I log in as (\S+)$/) do |name|
   expect(user).not_to be_nil
   visit root_path
   sign_in_as user
-end
-
-When(/^I sign in from the reader$/) do
-  click_link('Log in', match: :first)
-  wait_for_ajax
-  fill_in_sign_in_form email: @user.email, password: 'changeme'
-  wait_for_ajax
-  expect(page).not_to have_content('Log in')
 end

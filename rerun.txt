@@ -1,1 +1,0 @@
-features/admin.feature:9:14:20 features/purchasing.feature:6 features/signing_up.feature:5

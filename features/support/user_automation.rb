@@ -1,13 +1,13 @@
 module UserAutomation
   include Warden::Test::Helpers
   Warden.test_mode!
+
   def create_visitor(opts = {})
     @visitor ||= {
       :name => "Testy McUserton",
       :email => "tester@789test.com",
       :password => "changeme",
       :password_confirmation => "changeme",
-      :roles => :reader
     }.merge(opts)
   end
 
@@ -17,10 +17,6 @@ module UserAutomation
 
   def update_visitor(options)
     @visitor = @visitor.merge(options)
-  end
-
-  def find_user
-    @user ||= User.where(email: @visitor[:email]).first
   end
 
   def create_user(opts = {})
@@ -33,32 +29,17 @@ module UserAutomation
     User.where(email: @visitor[:email]).destroy_all
   end
 
-  def sign_up with_discount: false, successful: true
+  def sign_up
     delete_user
     visit root_path
     click_on 'Sign up'
     wait_for_ajax
-    within('#the-form') do
-      expect(page).not_to have_content('free') unless with_discount
-      expect(page).to have_content('free') if with_discount
-    end
     ng do
       expect(page).to have_content('Sign up with Email')
     end
     click_on 'Sign up with Email'
     fill_in_sign_up_form
     wait_for_ajax
-    if successful
-      fill_in_demographics
-    end
-  end
-
-  def fill_in_demographics
-    find('.pill', text: "History").click
-    find('.pill', text: "Travel").click
-    click_on "Submit"
-    wait_for_ajax
-    expect(@user.reload.fav_genre_list).to match_array(['history', 'travel'])
   end
 
   def fill_in_sign_up_form
@@ -93,7 +74,7 @@ module UserAutomation
 
   def create_user_and_sign_in(opts={})
     create_user(opts)
-    login_as(@user, :scope => :user)
+    login_as(@user, :scope => :user, :run_callbacks => false)
     @current_user = @user
   end
 

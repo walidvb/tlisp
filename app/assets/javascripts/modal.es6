@@ -2,7 +2,7 @@ let $this = $(document);
 let openModal = () => {
     $.ajax({
         // __TSILP_DOMAIN__ is replaced inline in modaljs.html
-        url: '//'+__TSILP_DOMAIN__+'/links/new?modal=true&auth_token='+__TSILP_USER_ID__,
+        url: __TSILP_DOMAIN__+'/links/new?modal=true&auth_token='+__TSILP_USER_ID__,
         success: (res) => {
             console.log('Fetched modal');
             const container = $(res);
@@ -40,7 +40,6 @@ let handleSubmit = (evt) => {
     const $this = $(evt.target);
     const data = $this.serialize() + "&auth_token="+__TSILP_USER_ID__;
     const url = $this.attr('action')+'.json';
-    $('#diggersdelightst').remove();
     $.ajax({
         url, data,
         method: 'POST',

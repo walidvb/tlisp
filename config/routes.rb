@@ -4,7 +4,7 @@ DiggersDelights::Application.routes.draw do
   match "links" => "links#create", via: [:options]
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do
     root "pages#home"
-    get "inside", to: "pages#inside"
+    get "inside", to: "pages#inside", as: :inside
     get "home", to: "pages#home", as: "home"
     get "/contact", to: "pages#contact", as: "contact"
     post "/emailconfirmation", to: "pages#email", as: "email_confirmation"

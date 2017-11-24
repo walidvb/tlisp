@@ -9,6 +9,7 @@ class PagesController < ApplicationController
 
   def inside
     if user_signed_in?
+      @domain = Rails.env.test? ? "#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}" : ENV['DOMAIN']
       bookmarklet_js = %{
         window.__TSILP_USER_ID__ = "#{current_user.auth_token}";
         function httpGet(theUrl, callback){
@@ -20,7 +21,7 @@ class PagesController < ApplicationController
           xmlHttp.open("GET", theUrl, true); // true for asynchronous
           xmlHttp.send(null);
         }
-        var url = '//#{ENV['DOMAIN']}/static/modaljs?ref='+location.href+'&auth_token=#{current_user.auth_token}';
+        var url = '//#{@domain}/static/modaljs?ref='+location.href+'&auth_token=#{current_user.auth_token}';
 
         httpGet(url, function(res){
             var div = document.createElement('div');

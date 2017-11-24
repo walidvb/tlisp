@@ -11,10 +11,25 @@ class Link < ActiveRecord::Base
         user.links.select(:url).map(&:url).include?(self.url)
     end
 
+    [   "title",
+        "description",
+        "thumbnail_url",
+        "html",
+        "author_name",
+        "height",
+        "width",
+        "provider_name",
+        "provider_url"
+    ].each do |oembed_method|
+        define_method oembed_method do |*args|
+            self.oembed[oembed_method]
+        end
+
+    end
+
     private
     def get_oembed
-        des = DDOEmbed.get(self.url) || {}
-        p des
+        DDOEmbed.get(self.url) || {}
     end
     
     def add_oembed

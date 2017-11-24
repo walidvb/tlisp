@@ -1,5 +1,7 @@
 DiggersDelights::Application.routes.draw do
   get 'static/modaljs'
+  resources :cliques
+  get '/cliques/:id/join' => "cliques#join", as: :join_clique
   resources :links
   match "links" => "links#create", via: [:options]
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do
@@ -10,8 +12,9 @@ DiggersDelights::Application.routes.draw do
     post "/emailconfirmation", to: "pages#email", as: "email_confirmation"
 
 
-    devise_for :users
-
+    devise_for :users, controllers: {
+      registrations: 'users/registrations'
+    }
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

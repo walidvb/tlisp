@@ -35,7 +35,7 @@ module UserAutomation
     click_on 'Sign up'
     wait_for_ajax
     ng do
-      expect(page).to have_content('Sign up with Email')
+      expect(page).to have_content('Sign up')
     end
     click_on 'Sign up with Email'
     fill_in_sign_up_form
@@ -47,9 +47,9 @@ module UserAutomation
     fill_in "user_email", :with => @visitor[:email]
     fill_in "user_password", :with => @visitor[:password]
     fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]
-    click_button "Join the Pigeonhole"
+    click_button "Join Diggers Delights"
     wait_for_ajax
-    find_user
+    @user = User.last
   end
 
   def sign_in

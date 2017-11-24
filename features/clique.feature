@@ -1,7 +1,8 @@
-Feature: I post a line
+Feature: Cliques!
 
-    @javascript @wip
-    Scenario: I post a link
-        Given I am logged in
-        When I post a link
-        Then I can see the link
+    @wip
+    Scenario: I join a clique
+        Given there is 1 clique
+        When I visit the clique invitation page
+        And I choose to sign up
+        Then I belong to the clique

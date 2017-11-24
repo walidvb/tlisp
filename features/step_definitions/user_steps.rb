@@ -1,8 +1,7 @@
 When(/^I choose to sign up$/) do
   create_visitor
-  click_on 'Sign up with Email'
+  click_on 'Sign up', match: :first
   fill_in_sign_up_form
-  fill_in_demographics
 end
 
 When(/^I choose to sign in$/) do

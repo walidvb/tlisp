@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
       :password,
       :password_confirmation,
       :name,
+      clique_ids: []
       )
     }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(

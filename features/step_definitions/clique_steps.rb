@@ -1,23 +1,9 @@
-When("I post a link") do
-    visit inside_path
-    expect(page.current_path).to eq(inside_path)
-    click_on "Bookmarklet"
-    expect(page).to have_css('#diggersdelights')
-    page.execute_script(%{
-        $('#diggersdelights #link_url').val('http://shop.mentalgroove.ch/album/sao-paulo');
-    })
-    binding.pry
-    within '#diggersdelights' do 
-        click_on "Save"
-    end
-    wait_for_ajax
-    expect(page).not_to have_css('#diggersdelights')
-    expect(Link.count).not_to eq(0)
-    @link = Link.last
-    expect(@link).not_to be_nil
+When("I visit the clique invitation page") do
+  visit join_clique_path @clique
+  expect(page).to have_content(@clique.name)
+  click_on 'Sign up and join clique'
 end
 
-Then("I can see the link") do
-  visit links_path
-  expect(page).to have_content(@link.title)
+Then("I belong to the clique") do
+  expect(@user.cliques).to include(@clique)
 end

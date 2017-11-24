@@ -1,0 +1,10 @@
+= form_for @clique do |f|
+  - if @clique.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@clique.errors.count, "error")} prohibited this clique from being saved:"
+      %ul
+        - @clique.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

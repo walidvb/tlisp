@@ -1,0 +1,19 @@
+%h1 Listing cliques
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @cliques.each do |clique|
+      %tr
+        %td= link_to 'Show', clique
+        %td= link_to 'Edit', edit_clique_path(clique)
+        %td= link_to 'Destroy', clique, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Clique', new_clique_path

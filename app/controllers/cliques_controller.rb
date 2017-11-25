@@ -1,6 +1,7 @@
 class CliquesController < ApplicationController
   before_action :set_clique, only: [:join, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:join]
+
   def join
     session[:join_clique_id] = @clique.id
   end
@@ -25,22 +26,6 @@ class CliquesController < ApplicationController
   def edit
   end
 
-  # POST /cliques
-  # POST /cliques.json
-  def create
-    @clique = Clique.new(clique_params)
-
-    respond_to do |format|
-      if @clique.save
-        format.html { redirect_to @clique, notice: 'Clique was successfully created.' }
-        format.json { render :show, status: :created, location: @clique }
-      else
-        format.html { render :new }
-        format.json { render json: @clique.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /cliques/1
   # PATCH/PUT /cliques/1.json
   def update
@@ -52,16 +37,6 @@ class CliquesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @clique.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /cliques/1
-  # DELETE /cliques/1.json
-  def destroy
-    @clique.destroy
-    respond_to do |format|
-      format.html { redirect_to cliques_url, notice: 'Clique was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

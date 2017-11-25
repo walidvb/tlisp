@@ -1,0 +1,13 @@
+%h1 Please fill in some details before we continue:
+
+= form_for @user, url: user_registration_path(), method: :PUT do |f|
+    = hidden_field_tag :redirect_to, inside_path
+    = edit_user_registration_path()
+    .field
+        = f.label :name
+        = f.text_field :name
+    .field
+        = f.label :initials
+        = f.text_field :initials
+    .field
+        = f.submit "Let me in!"

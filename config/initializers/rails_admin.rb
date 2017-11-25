@@ -4,7 +4,7 @@ RailsAdmin.config do |config|
 
   ### Popular gems integration
   I18n.default_locale = :en
-  I18n.available_locales = [:en, :fr]
+  I18n.available_locales = [:en]
   ## == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user
@@ -19,12 +19,13 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  nested_only = %w{}
+  nested_only = %w{clique_membership}
   config.actions do
     dashboard do
       except nested_only
     end
     index do
+      except nested_only
     end
     new do
     end

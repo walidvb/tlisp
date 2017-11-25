@@ -1,12 +1,25 @@
-%b Step 2:
-%p
-    Drag this button to your bookmarks toolbar
-    %br
-    %a.btn.btn-large.btn-primary{href:URI.encode(@bookmarklet), title: "DiggersDelights me"} Bookmarklet
-%b Step 3:
-%p
-    On any page, click the bookmarklet. You may fill the tags in, the genre, and a description
+%h2 We're all set
+%h1 Welcome to Diggers'Delights!
 
-%b Step 4:
+%p 
+    You just joined 
+    %em #{current_user.cliques.first.try(:name)}
+
+%b To get started:
 %p
-    There is no step 5. That's the whole point actually...
+    Drag the following button to your bookmarks toolbar
+    %br
+    %a.btn.btn-large.btn-primary{href:URI.encode(@bookmarklet), title: "DiggersDelights me"} DD
+
+%p
+    On any page, click the bookmarklet. You may fill the tags in, the genre, and add a short description
+
+%p Currently supported services:
+%ul 
+    %li Soundcloud
+    %li Bandcamp
+    %li Youtube
+    %li Mixcloud
+    %li 
+        Any other listed
+        = link_to "here", "https://oembed.com/#section7.1", target: "_blank"

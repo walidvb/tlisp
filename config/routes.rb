@@ -1,4 +1,6 @@
 DiggersDelights::Application.routes.draw do
+  
+
   get 'static/modaljs'
   resources :cliques
   get '/cliques/:id/join' => "cliques#join", as: :join_clique
@@ -13,8 +15,12 @@ DiggersDelights::Application.routes.draw do
 
 
     devise_for :users, controllers: {
-      registrations: 'users/registrations'
-    }
+        registrations: 'users/registrations',
+        confirmations: 'users/confirmations',
+      } do 
+      end
+    get 'onboarding', to: 'user#onboarding', as: :onboarding
+
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

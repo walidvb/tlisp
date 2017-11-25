@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
-  #before_filter :authenticate_user_from_token!
+  before_filter :authenticate_user_from_token!
   
   skip_before_action :verify_authenticity_token
   # GET /links

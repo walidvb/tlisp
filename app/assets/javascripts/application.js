@@ -17,5 +17,3 @@
 //= require analytics
 //= require player
 //= require playlistController
-
-var __TSILP_DOMAIN__ = '//localhost:3000'

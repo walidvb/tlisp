@@ -8,7 +8,7 @@
           %ul
             - @link.errors.full_messages.each do |msg|
               %li= msg
-
+      = f.hidden_field :clique_id
       .field
         = f.label :url
         = f.text_field :url
@@ -23,8 +23,8 @@
         = f.text_area :description
       .field.field--radio
         = f.label :is_a_set_mix, 'Mix'
-        = f.radio_button :is_a_set, "Mix"
-        = f.radio_button :is_a_set, "Single Track",checked: true
+        = f.radio_button :is_a_set, "1"
+        = f.radio_button :is_a_set, "0", checked: true
         = f.label :is_a_set_single_track, 'Single Track / Playlist'
       .field
         = f.check_box :published

@@ -43,7 +43,7 @@ group :development, :test do
   gem 'spring', '1.3.6'
   gem 'annotate', '2.6.10'
   gem 'fabrication'
-  gem 'jazz_hands', github: 'jkrmr/jazz_hands'
+  gem 'jazz_hands2'
   gem 'figaro', '0.7.0'     # env variables
 end
 

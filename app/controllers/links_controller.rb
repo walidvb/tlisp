@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user_from_token!, except: [:index, :show]
+  #before_filter :authenticate_user_from_token!
+  
   skip_before_action :verify_authenticity_token
   # GET /links
   # GET /links.json
@@ -26,7 +27,7 @@ class LinksController < ApplicationController
   def new
     @tags = all_tags.map(&:name)
     @genres = all_tags(:genre).map(&:name)
-    @link = Link.new
+    @link = Link.new clique_id: current_user.clique_ids.first
     if params[:modal].present?
       headers['Access-Control-Allow-Origin'] = '*'
       response.headers['Access-Control-Allow-Origin'] = '*'

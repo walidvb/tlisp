@@ -1,6 +1,5 @@
 Given("I belong to a clique") do
   @clique = Fabricate(:clique)
-  create_user_and_sign_in
   @user.cliques << @clique
   @user.save!
 end

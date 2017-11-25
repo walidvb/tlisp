@@ -8,7 +8,7 @@ function httpGet(theUrl, callback){
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
 }
-var url = ''+__TSILP_DOMAIN__+'/static/modaljs?ref='+location.href;
+var url = __DIGGERS_DELIGHT_DOMAIN__+'/static/modaljs?ref='+location.href;
 httpGet(url, function(res){
     var div = document.createElement('div');
     div.innerHTML = res;

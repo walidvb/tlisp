@@ -9,9 +9,9 @@ class PagesController < ApplicationController
 
   def inside
     if user_signed_in?
-      @domain = Rails.env.test? ? "#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}" : ENV['DOMAIN']
+      @domain = ENV['DOMAIN']
       bookmarklet_js = %{
-        window.__TSILP_USER_ID__ = "#{current_user.auth_token}";
+        window.__DIGGERS_DELIGHTS_USER_ID__ = "#{current_user.auth_token}";
         function httpGet(theUrl, callback){
           var xmlHttp = new XMLHttpRequest();
           xmlHttp.onreadystatechange = function() { 
@@ -21,7 +21,7 @@ class PagesController < ApplicationController
           xmlHttp.open("GET", theUrl, true); // true for asynchronous
           xmlHttp.send(null);
         }
-        var url = '//#{@domain}/static/modaljs?ref='+location.href+'&auth_token=#{current_user.auth_token}';
+        var url =  '#{@domain}/static/modaljs?ref='+location.href+'&auth_token=#{current_user.auth_token}';
 
         httpGet(url, function(res){
             var div = document.createElement('div');
@@ -35,7 +35,6 @@ class PagesController < ApplicationController
                 script.src = element.src;
                 document.body.appendChild(script);
             }
-            console.log(div);
         });
       }
       @bookmarklet = "javascript:(function(){"+bookmarklet_js+"})();"

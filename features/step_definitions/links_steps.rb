@@ -3,10 +3,10 @@ When("I post a link") do
     expect(page.current_path).to eq(inside_path)
     click_on "Bookmarklet"
     expect(page).to have_css('#diggersdelights')
+    # pretend we're on another page
     page.execute_script(%{
         $('#diggersdelights #link_url').val('http://shop.mentalgroove.ch/album/sao-paulo');
     })
-    binding.pry
     within '#diggersdelights' do 
         click_on "Save"
     end

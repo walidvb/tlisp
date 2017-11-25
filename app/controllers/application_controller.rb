@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
         sign_in user, store: true
       else
         respond_to do |format|
-          format.json{ head :unauthorized }
+          format.json{ head :unauthorized, message: "couldn't authenticate" }
           format.html{ redirect_to(new_user_session_path, error: "You must be logged in to view this page")}
         end
       end

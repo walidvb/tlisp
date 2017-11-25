@@ -15,5 +15,11 @@
 //= require turbolinks
 //= require bootstrap 
 //= require analytics
+//= require select2/dist/js/select2.min
+
+
 //= require player
 //= require playlistController
+//= require select2
+
+$(document).on('click', '#diggersdelights .modal__close', window.parent.DDCloseIframe);

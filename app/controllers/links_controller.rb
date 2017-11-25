@@ -1,8 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user_from_token!
-  
-  skip_before_action :verify_authenticity_token
+
   # GET /links
   # GET /links.json
   def index
@@ -27,14 +25,9 @@ class LinksController < ApplicationController
   def new
     @tags = all_tags.map(&:name)
     @genres = all_tags(:genre).map(&:name)
-    @link = Link.new clique_id: current_user.clique_ids.first
-    if params[:modal].present?
-      headers['Access-Control-Allow-Origin'] = '*'
-      response.headers['Access-Control-Allow-Origin'] = '*'
-      render partial: 'form', layout: false
-    else
-      render
-    end
+    @link = Link.new clique_id: current_user.clique_ids.first, url: params[:href]
+    headers['X-Frame-Options'] = "*"
+    render layout: params[:modal].present? ? "iframe" : true
   end
 
   # GET /links/1/edit
@@ -45,8 +38,6 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-    headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Origin'] = '*'
     respond_to do |format|
       if @link.is_duplicate?
         format.html { redirect_to @link, notice: 'Link already existed.' }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><%= @title || "DIGGERS'DELIGHTS" %></title>
+  <script>
+    window.__DIGGERS_DELIGHT_DOMAIN__ = "<%= ENV['DOMAIN'] %>";
+  </script>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="wrap">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+  </div>
+
+  <% if Rails.env.production? %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-27024782-30"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-27024782-30');
+    </script>
+  <% end %>
+</body>
+</html>

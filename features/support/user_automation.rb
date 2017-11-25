@@ -4,7 +4,6 @@ module UserAutomation
 
   def create_visitor(opts = {})
     @visitor ||= {
-      :name => "Testy McUserton",
       :email => "tester@789test.com",
       :password => "changeme",
       :password_confirmation => "changeme",
@@ -43,7 +42,6 @@ module UserAutomation
   end
 
   def fill_in_sign_up_form
-    fill_in "user_name", :with => @visitor[:name]
     fill_in "user_email", :with => @visitor[:email]
     fill_in "user_password", :with => @visitor[:password]
     fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]

@@ -11,31 +11,24 @@ class PagesController < ApplicationController
     if user_signed_in?
       @domain = ENV['DOMAIN']
       bookmarklet_js = %{
-        window.__DIGGERS_DELIGHTS_USER_ID__ = "#{current_user.auth_token}";
-        function httpGet(theUrl, callback){
-          var xmlHttp = new XMLHttpRequest();
-          xmlHttp.onreadystatechange = function() { 
-              if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                  callback(xmlHttp.responseText);
-          }
-          xmlHttp.open("GET", theUrl, true); // true for asynchronous
-          xmlHttp.send(null);
-        }
-        var url =  '#{@domain}/static/modaljs?ref='+location.href+'&auth_token=#{current_user.auth_token}';
+        var div = document.createElement('div');
+        window.DDCloseIframe = function(){
+          div.remove();
+        };
+        div.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;"
+        var iframe = document.createElement('iframe');
+        var close = document.createElement('div');
+        close.innerText = "Close";
+        close.style.color = "white";
+        div.append(close);
+        close.addEventListener('click',DDCloseIframe);
+        iframe.frameBorder = 'none'
+        iframe.style.cssText = "min-width: 60vw; max-width: 90vw; height: 80vh; z-index: 10000";
+        iframe.src = "#{new_link_url}?modal=true&version=0.1&href="+encodeURIComponent(window.location)
+        div.append(iframe);
+        document.body.append(div);
 
-        httpGet(url, function(res){
-            var div = document.createElement('div');
-            div.innerHTML = res;
-            var scripts = div.children;
-            var domain = scripts[0].innerHTML;
-            eval(domain);
-            for (var i = 1; i < scripts.length; i++) {
-                var element = scripts[i];
-                var script = document.createElement('script');
-                script.src = element.src;
-                document.body.appendChild(script);
-            }
-        });
+
       }
       @bookmarklet = "javascript:(function(){"+bookmarklet_js+"})();"
     end

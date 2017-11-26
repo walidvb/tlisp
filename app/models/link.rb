@@ -1,4 +1,6 @@
 class Link < ActiveRecord::Base
+    default_scope {order("created_at DESC")}
+
     acts_as_taggable_on :tags, :genre
     serialize :oembed, Hash
     belongs_to :user

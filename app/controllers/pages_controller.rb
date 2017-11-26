@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
   def inside
     if user_signed_in?
-      @domain = ENV['DOMAIN']
+      domain = ENV['DOMAIN']
       bookmarklet_js = %{
         var div = document.createElement('div');
         window.DDCloseIframe = function(){
@@ -24,7 +24,7 @@ class PagesController < ApplicationController
         close.addEventListener('click',DDCloseIframe);
         iframe.frameBorder = 'none'
         iframe.style.cssText = "min-width: 60vw; max-width: 90vw; height: 80vh; z-index: 10000";
-        iframe.src = "#{new_link_url}?modal=true&version=0.1&href="+encodeURIComponent(window.location)
+        iframe.src = "#{domain}#{new_link_path}?modal=true&version=0.1&href="+encodeURIComponent(window.location)
         div.append(iframe);
         document.body.append(div);
 

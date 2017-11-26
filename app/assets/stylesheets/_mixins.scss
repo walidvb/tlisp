@@ -1,0 +1,11 @@
+@mixin square_(){
+    display: flex;
+    flex-wrap: wrap;
+    > div{
+        &:before {
+            content: "";
+            float: left;
+            padding-top: 100%;
+        }
+    }
+}

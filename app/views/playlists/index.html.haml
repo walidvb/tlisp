@@ -1,25 +1,12 @@
-%h1 Listing playlists
+%h1 My Crates
 
-%table
-  %thead
-    %tr
-      %th User
-      %th Name
-      %th Slug
-      %th
-      %th
-      %th
-
-  %tbody
-    - @playlists.each do |playlist|
-      %tr
-        %td= playlist.user
-        %td= playlist.name
-        %td= playlist.slug
-        %td= link_to 'Show', playlist
-        %td= link_to 'Edit', edit_playlist_path(playlist)
-        %td= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Playlist', new_playlist_path
+%ul.playlists-container
+  - @playlists.each do |playlist|
+    .playlist__item.thumbnail
+      = link_to playlist do 
+        .links-container
+          - playlist.links.each do |link|
+            .playlist__thumb= image_tag link.thumbnail_url
+        %h3.playlist__title= playlist.name
+  .playlist__item.playlist__item--add.thumbnail
+    = link_to "Add Playlist", new_playlist_path

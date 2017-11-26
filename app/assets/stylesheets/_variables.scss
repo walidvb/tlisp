@@ -1,0 +1,55 @@
+// Variables
+$brand-color            : #08233E;
+
+$mobile                 : "(max-width: 767px)";
+$portrait               : "(orientation: portrait)";
+$landscape              : "(orientation: landscape)";
+$xs                     : $mobile;
+$tablet                 : "(min-width: 767px)";
+$sm                     : $tablet;
+$md                     : "(min-width: 991px)";
+$lg                     : "(min-width: 1200px)";
+$ie                     : "all and (-ms-high-contrast: none), (-ms-high-contrast: active)";
+$serif                  : Georgia, serif;
+$sans-serif             : Muli, sans-serif;
+$title-font             : Montserrat, sans-serif;
+$reader-font            : $serif;
+
+
+
+$footer-height          :305px;
+$menu-height            : 70px;
+
+
+//overrides
+$grid-gutter            : 5px;
+$grid-float-breakpoint  : 767px;
+$border-radius-base     : 0px;
+$font-family-sans-serif : $sans-serif;
+$font-family-serif      : $serif;
+$sans-serif             : $font-family-sans-serif;
+$serif                  : $font-family-serif;
+$link-color             : #252525;
+$link-hover-color       : lighten($link-color, 10%);
+$grid-gutter-width      : 10px;
+$input-border-focus     : $brand-color;
+$nav-tabs-border-color  : transparent;
+
+
+
+//colors
+$success                : #00afec;
+$danger                 : #EF6552;
+$red                    : #EF4F2F;
+$blue                   : #0074D9;
+$orange                 : #EF6552;
+$facebook-blue          : #3B5998;
+//christmas
+$xmas-red               : #AF0C12;
+
+$header-z-index: 1000;
+
+
+//animations
+$easing-entrance: cubic-bezier(0.39, 0.575, 0.565, 1);
+$easing-exit: cubic-bezier(0.47, 0, 0.745, 0.715);;

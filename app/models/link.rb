@@ -8,7 +8,8 @@ class Link < ActiveRecord::Base
     belongs_to :clique, inverse_of: :links
     before_save :add_oembed
     
-    validates_presence_of :user, :clique
+    validates_presence_of :user
+    validates_presence_of :clique, if: ->{ playlist_assignment_ids.empty? }
     validates :url, uniqueness: { scope: :clique_id }
 
     def is_duplicate?

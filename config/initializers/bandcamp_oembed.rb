@@ -7,7 +7,12 @@ class BandcampOembed
     end
 
     def get_oembed
-        build_oembed
+        begin 
+            build_oembed
+        rescue e
+            puts "Failed getting #{url}"
+            raise e
+        end
     end
 
     def build_oembed
@@ -38,7 +43,9 @@ class BandcampOembed
     end
 
     def get_value property
-        @page.search("[property='#{property}']").attribute('content').value
+        if node = @page.search("[property='#{property}']").first
+            node.attribute('content').value
+        end
     end
 
     def get_page

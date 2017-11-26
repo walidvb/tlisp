@@ -1,8 +1,8 @@
-%div.link.item{data: { url: link.url, provider: link.provider_name, html: link.html, play: true }}
-    %h3.item__title
-        = link.title
-    .item__thumbnail= image_tag link.thumbnail_url
+%div.link.item.full-bg{style: "background-image: url(#{link.thumbnail_url})",data: { url: link.url, provider: link.provider_name, html: link.html, play: true }}
+    .item__thumbnail= image_tag link.thumbnail_url, width: link.width, height: link.height
     .item__infos
+        %h3.item__title
+            = link.title
         .item__top
             .item__submitted
                 = fa_icon 'user', class: "nouse-icon"

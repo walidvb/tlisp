@@ -12,6 +12,7 @@
 .link.item{
     display: inline-flex;
     flex: 1 1 15%;
+    max-width: 35%;
     padding: 5px 5px;
     position: relative;
     &:hover, &.playing{
@@ -25,6 +26,9 @@
     .thumbnail{
         margin-bottom: 0;
     }
+}
+.item__thumbnail{
+    visibility: hidden;
 }
 
 .item__infos{

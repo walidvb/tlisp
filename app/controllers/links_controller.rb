@@ -89,7 +89,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(
+      pps = params.require(:link).permit(
         :url, 
         :description, 
         :published, 
@@ -101,5 +101,14 @@ class LinksController < ApplicationController
       ).merge(
           user: current_user,
       )
+      pps[:playlist_ids] = pps[:playlist_ids].map do |pid|
+        if !pid.blank? && !Playlist.exists?(pid)
+          pl = Playlist.create!(name: pid, user: current_user)
+          pl.id
+        else
+          pid
+        end
+      end.compact
+      pps
     end
 end

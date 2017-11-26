@@ -28,7 +28,7 @@
       = f.check_box :published
       = f.label :published, "Make this post visible to other users?"
     .field
-      = f.label :playlist_id, "Playlist"
-      = f.select :playlist_id, @playlists_as_collection, {}, class: 'select2', "data-tags": @playlists.map(&:name).join(','), placeholder: "Add a playlist"
+      = f.label :playlist_ids, "Playlist"
+      = f.select :playlist_ids, @playlists_as_collection, {}, multiple: true, class: 'select2', "data-tags": @playlists.map(&:name).join(','), placeholder: "Add a playlist"
     .actions
       = f.submit 'Save'

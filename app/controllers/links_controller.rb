@@ -95,7 +95,7 @@ class LinksController < ApplicationController
         :published, 
         :is_a_set,
         :clique_id,
-        :playlist_id,
+        playlist_ids: [],
         tag_list: [], 
         genre_list: []
       ).merge(

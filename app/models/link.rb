@@ -2,7 +2,8 @@ class Link < ActiveRecord::Base
     acts_as_taggable_on :tags, :genre
     serialize :oembed, Hash
     belongs_to :user
-    belongs_to :playlist
+    has_many :playlist_assignments, inverse_of: :link
+    has_many :playlists, through: :playlist_assignments, inverse_of: :links
 
     belongs_to :clique, inverse_of: :links
     before_save :add_oembed

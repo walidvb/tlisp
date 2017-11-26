@@ -1,0 +1,6 @@
+%p#notice= notice
+%h1= @playlist.name
+
+%ul
+  - @links.each do |link|
+    = render 'links/full_as_embed', link: link

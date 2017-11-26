@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125215925) do
+ActiveRecord::Schema.define(version: 20171126194051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "beta_registrations", force: :cascade do |t|
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "clique_memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -58,9 +64,21 @@ ActiveRecord::Schema.define(version: 20171125215925) do
     t.boolean  "published",   default: true
     t.boolean  "is_a_set",    default: false
     t.integer  "clique_id"
+    t.integer  "playlist_id"
   end
 
   add_index "links", ["clique_id"], name: "index_links_on_clique_id", using: :btree
+  add_index "links", ["playlist_id"], name: "index_links_on_playlist_id", using: :btree
+
+  create_table "playlists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -117,4 +135,6 @@ ActiveRecord::Schema.define(version: 20171125215925) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "links", "playlists"
+  add_foreign_key "playlists", "users"
 end

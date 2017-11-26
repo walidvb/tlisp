@@ -1,7 +1,6 @@
 When("I post a link") do
     visit new_link_path(modal: "1", href: "https://www.youtube.com/watch?v=8QZ8-OCrB5s")
     click_on "Save"
-    expect(page).not_to have_content("Save")
     expect(Link.count).not_to eq(0)
     @link = Link.last
     expect(@link).not_to be_nil

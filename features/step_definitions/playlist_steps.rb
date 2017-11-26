@@ -17,3 +17,10 @@ end
 Then("I should see the link") do
   expect(page).to have_content(@link.title)
 end
+
+Then("I should see my playlists on my playlists page") do
+  visit playlists_path
+  @playlists.each do |pl|
+    expect(page).to have_content(pl.name)
+  end
+end

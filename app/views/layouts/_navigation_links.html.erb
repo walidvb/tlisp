@@ -5,9 +5,11 @@
 <li><%= link_to "Sign up", new_user_registration_path %></li>
 <% else %>
 <li><%= link_to "Edit your account", edit_user_registration_path %></li>
-<li>
-    <%= link_to "My clique", clique_path(current_user.cliques.first) %>
-</li>
+<% if !current_user.cliques.empty? %>
+    <li>
+        <%= link_to "My clique", clique_path(current_user.cliques.first) %>
+    </li>
+<% end %>
 
 <% if current_user.admin? %>
 <li><%= link_to "Admin", rails_admin.dashboard_path %></li>

@@ -16,6 +16,12 @@ Given /^there (?:is|are) (\d+) ([^"]*)$/ do |count, model_name|
   end
 end
 
+Given /^I have (\d+) ([^"]*)$/ do |count, model_name|
+  with_ivars Fabrication::Cucumber::StepFabricator.new(model_name) do |fab|
+    fab.n(count.to_i, user: @user)
+  end
+end
+
 Given /^(\d+) ([^"]*)$/ do |count, model_name|
   with_ivars Fabrication::Cucumber::StepFabricator.new(model_name) do |fab|
     fab.n(count.to_i)

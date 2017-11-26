@@ -3,6 +3,7 @@ class CliquesController < ApplicationController
   before_action :authenticate_user!, except: [:join]
 
   def join
+    @inviter = params[:by]
     session[:join_clique_id] = @clique.id
   end
 

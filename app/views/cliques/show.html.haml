@@ -1,5 +1,5 @@
 %p#notice= notice
 %h1 Invite your friends to join #{@clique.name}!
 %h4 To invite new friends to contribute to your clique, simply send them this email, the rest should be pretty straightforward.
-%b= join_clique_url @clique
+%b= join_clique_url @clique, by: current_user.name
 = link_to 'Edit', edit_clique_path(@clique)

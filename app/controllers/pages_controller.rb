@@ -15,7 +15,7 @@ class PagesController < ApplicationController
         window.DDCloseIframe = function(){
           div.remove();
         };
-        div.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;"
+        div.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;z-index:10000"
         var iframe = document.createElement('iframe');
         var close = document.createElement('div');
         close.innerText = "Close";

@@ -1,4 +1,4 @@
-$(document).on('page:load ready', () => {
+$(document).on('ready', () => {
     $('.select2').each(function(){
         const $this =  $(this);
         const tags = $this.data('tags').split(',');

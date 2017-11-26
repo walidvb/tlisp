@@ -22,4 +22,6 @@
 //= require playlistController
 //= require select2
 
-$(document).on('click', '#diggersdelights .modal__close', window.parent.DDCloseIframe);
+if(window.parent){
+    $(document).on('click', '#diggersdelights .modal__close', window.parent.DDCloseIframe);
+}

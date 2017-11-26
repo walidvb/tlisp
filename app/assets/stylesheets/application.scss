@@ -2,10 +2,11 @@
  * Overwritten by RailsBricks
  *
  *= require_self
+ *= require select2/dist/css/select2.min.css 
+
  */
 
 @import "railsbricks_custom";
-@import "modal";
 @import "link";
 
 html, body{

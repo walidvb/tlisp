@@ -19,6 +19,8 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
+    headers['X-Frame-Options'] = "*"
+    render layout: session[:modal] ? "iframe" : true
   end
 
   # GET /links/new
@@ -27,7 +29,8 @@ class LinksController < ApplicationController
     @genres = all_tags(:genre).map(&:name)
     @link = Link.new clique_id: current_user.clique_ids.first, url: params[:href]
     headers['X-Frame-Options'] = "*"
-    render layout: params[:modal].present? ? "iframe" : true
+    session[:modal] = params[:modal].present?
+    render layout: session[:modal] ? "iframe" : true
   end
 
   # GET /links/1/edit

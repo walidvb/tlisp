@@ -1,7 +1,14 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe UserController, type: :controller do
-
+describe UserController do
+  before do
+    request.env['warden'].stub :authenticate! => user
+    controller.stub :current_user => user
+  end
+  
+  let :user do 
+    Fabricate :user
+  end
   describe "GET #onboarding" do
     it "returns http success" do
       get :onboarding

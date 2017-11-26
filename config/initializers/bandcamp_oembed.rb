@@ -24,14 +24,14 @@ class BandcampOembed
             "width" => get_value('og:video:width'),
             # author_url: 
             "provider_name" => "Bandcamp",
-            "provider_url" => "htto://bandcamp.com",
+            "provider_url" => "http://bandcamp.com",
         }
     end
 
     def build_iframe url
         if matches = /album=(\d+)\//.match(url)
             album_id = matches[1]
-            "<iframe style='border: 0; width: 350px; height: 522px;' src='http://bandcamp.com/EmbeddedPlayer/album=#{album_id}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
+            "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/album=#{album_id}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
         else
             p "Failed to get album_id for #{url}"
         end

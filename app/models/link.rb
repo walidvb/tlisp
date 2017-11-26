@@ -18,6 +18,7 @@ class Link < ActiveRecord::Base
         "thumbnail_url",
         "html",
         "author_name",
+        "author_url",
         "height",
         "width",
         "provider_name",

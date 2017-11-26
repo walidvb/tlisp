@@ -15,8 +15,8 @@
       - @genres.each do |tag|
         %li
           = link_to tag.name, links_path(tag_names: tag.name)
-  .col-xs-12.col-sm-5.col-md-4#playlist
+  .col-xs-12.col-sm-5.col-md-11#playlist
     - @links.each do |link|
       = render 'full_as_embed', link: link
-  .col-xs-12.col-sm-5.col-md-7
-    #embed{"data-turbolinks-permanent": true}
+  -# .col-xs-12.col-sm-5.col-md-7
+  -#   #embed{"data-turbolinks-permanent": true}

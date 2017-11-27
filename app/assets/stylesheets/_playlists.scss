@@ -41,6 +41,7 @@
     .playlist__thumb, .thumb{
         border: white solid 1px;
         flex: 1 1 33.333%;
+        pointer-events: none;
     }
     &.large .thumb{
         flex: 1 1 10%;

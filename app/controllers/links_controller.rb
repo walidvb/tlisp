@@ -101,14 +101,16 @@ class LinksController < ApplicationController
       ).merge(
           user: current_user,
       )
-      pps[:playlist_ids] = pps[:playlist_ids].map do |pid|
-        if !pid.blank? && !Playlist.exists?(pid)
-          pl = Playlist.create!(name: pid, user: current_user)
-          pl.id
-        else
-          pid
-        end
-      end.compact
+      if playlist_ids = pps[:playlist_ids]
+        pps[:playlist_ids] = playlist_ids.map do |pid|
+          if !pid.blank? && !Playlist.exists?(pid)
+            pl = Playlist.create!(name: pid, user: current_user)
+            pl.id
+          else
+            pid
+          end
+        end.compact
+      end
       pps
     end
 end

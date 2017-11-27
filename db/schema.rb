@@ -48,3 +48,93 @@ ActiveRecord::Schema.define(version: 20171126224131) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "links", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "url"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.text     "oembed",      default: "{}"
+    t.text     "description"
+    t.boolean  "published",   default: true
+    t.boolean  "is_a_set",    default: false
+    t.integer  "clique_id"
+  end
+
+  add_index "links", ["clique_id"], name: "index_links_on_clique_id", using: :btree
+
+  create_table "playlist_assignments", force: :cascade do |t|
+    t.integer  "playlist_id"
+    t.integer  "link_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "playlist_assignments", ["playlist_id", "link_id"], name: "index_playlist_assignments_on_playlist_id_and_link_id", unique: true, using: :btree
+
+  create_table "playlists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["context"], name: "index_taggings_on_context", using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+  add_index "taggings", ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+  add_index "taggings", ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.boolean  "admin",                  default: false, null: false
+    t.boolean  "locked",                 default: false, null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "auth_token",             default: "asd", null: false
+    t.string   "initials"
+  end
+
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "playlists", "users"
+end

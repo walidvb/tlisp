@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.5'
 
 # Standard Rails gems
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.10'
 gem 'uglifier'
 gem 'jquery-rails', '4.0.4'
 gem 'turbolinks'
@@ -28,7 +28,7 @@ gem 'friendly_id', '5.1.0'
 gem 'devise', '~>4.1.0'
 # gem "paperclip", '~> 4.1'
 gem 'acts_as_list'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '~> 4.0.0' 
 gem 'ruby-oembed'
 
 gem 'nokogiri'

@@ -4,6 +4,7 @@ class CliquesController < ApplicationController
 
   def join
     @inviter = params[:by]
+    @links = @clique.links
     session[:join_clique_id] = @clique.id
   end
 

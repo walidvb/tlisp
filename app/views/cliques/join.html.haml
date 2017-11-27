@@ -1,3 +1,14 @@
-%h1 Welcome to DiggersDelights!
-%h3 #{@inviter} invited to join #{@clique.name}!
-= link_to "Sign up and join clique", new_user_registration_path 
+.links-container.large
+    - @links.each do |link|
+        .thumb= image_tag link.thumbnail_url
+.join-content
+    %h1 Welcome to digging 2.0
+    %h3 
+        - if @inviter.blank?
+            #{@inviter} invited you to join his clique at Diggers' Delights
+        - else
+            You've been invited you to join a clique at Diggers' Delights
+    = link_to  new_user_registration_path  do
+        Sign up and join 
+        %br
+        #{@clique.name}

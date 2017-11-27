@@ -22,6 +22,7 @@ $(document).ready(() => {
         $('.playing').removeClass('playing');
         row.addClass('playing')
         const infos = row.data();
-        setMedia(infos);
+        // $('#embed').html(oEmbed.html)
+        row.find('.item__infos').replaceWith($(infos.html));
     });
 });

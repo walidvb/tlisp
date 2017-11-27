@@ -1,3 +1,5 @@
+[ ![Codeship Status for walidvb/diggersdelights](https://app.codeship.com/projects/b5a8a970-b073-0135-e1c4-524e5d7cafd3/status?branch=master)](https://app.codeship.com/projects/257676)
+
 # README
 
 ## Start server

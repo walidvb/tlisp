@@ -1,9 +1,9 @@
 $(document).on('ready', () => {
     $('.select2').each(function(){
         const $this =  $(this);
-        const tags = $this.data('tags').split(',');
+        const tags = $this.data('tags').split(',') || ['as'];
         $this.select2({
-            tags: tags.length > 0,
+            tags: true,
             tokenSeparators: [','],
             data: tags,
             placeholder: $this.attr('placeholder'),

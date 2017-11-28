@@ -12,10 +12,10 @@
       = f.text_field :url
     .field
       = f.label :tag_list
-      = f.select :tag_list, @tags, {}, multiple: true, class: 'select2', "data-tags": @tags.join(','), placeholder: "playlist, artist, event, subgenre"
+      = f.select :tag_list, @tags, {}, multiple: true, class: 'select2', placeholder: "playlist, artist, event, subgenre"
     .field
       = f.label :genre_list
-      = f.select :genre_list, @genres, {}, multiple: true, class: 'select2', "data-tags": @genres.join(','), placeholder: "This will be a predefined list in the future"
+      = f.select :genre_list, @genres, {}, multiple: true, class: 'select2', placeholder: "This will be a predefined list in the future"
     .field
       = f.label :description
       = f.text_area :description
@@ -29,6 +29,6 @@
       = f.label :published, "Make this post visible to other users?"
     .field
       = f.label :playlist_ids, "Playlist"
-      = f.select :playlist_ids, @playlists_as_collection, {}, multiple: true, class: 'select2', "data-tags": @playlists.map(&:name).join(','), placeholder: "Add a playlist"
+      = f.select :playlist_ids, @playlists_as_collection, {}, multiple: true, class: 'select2', placeholder: "Add a playlist"
     .actions
       = f.submit 'Save'

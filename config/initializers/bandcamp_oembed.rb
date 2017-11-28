@@ -34,12 +34,16 @@ class BandcampOembed
     end
 
     def build_iframe url
+        id_er = ""
         if matches = /album=(\d+)\//.match(url)
-            album_id = matches[1]
-            "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/album=#{album_id}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
+            id_er = "album=#{matches[1]}"
+        elsif matches = /track=(\d+)\//.match(url)
+            id_er = "track=#{matches[1]}"
         else
             p "Failed to get album_id for #{url}"
+            return
         end
+        "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/v=2/#{id_er}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
     end
 
     def get_value property

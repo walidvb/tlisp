@@ -15,7 +15,7 @@ describe BandcampOembed do
     end
 
     it "gets the iframe" do 
-        expect(oembed["html"]).to match(/bandcamp.com\/EmbeddedPlayer\/album=1387352813/)
+        expect(oembed["html"]).to match(/bandcamp.com\/EmbeddedPlayer\/v=2\/album=1387352813/)
     end
 end
 

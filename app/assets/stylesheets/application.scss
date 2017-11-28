@@ -26,3 +26,9 @@ h1, h2, h3{
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.no-wrap{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+}

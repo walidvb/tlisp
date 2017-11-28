@@ -2,4 +2,9 @@
 %h1 Invite your friends to join #{@clique.name}!
 %h4 To invite new friends to contribute to your clique, simply send them this email, the rest should be pretty straightforward.
 %b= join_clique_url @clique, by: current_user.name
-= link_to 'Edit', edit_clique_path(@clique)
+
+- @users.each do |us|
+    %h3= us.name
+    %ul.playlists-container.no-wrap
+        - us.playlists.each do |pl|
+            = render 'playlists/item', playlist: pl

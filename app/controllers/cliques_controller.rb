@@ -17,6 +17,7 @@ class CliquesController < ApplicationController
   # GET /cliques/1
   # GET /cliques/1.json
   def show
+    @users = @clique.users.where.not(id: current_user.id).includes(:playlists)
   end
 
   # GET /cliques/new

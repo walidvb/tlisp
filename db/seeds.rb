@@ -11,16 +11,21 @@ User.delete_all
 u = User.first || Fabricate( :user,
     email: "you@me.com",
     initials: 'wvb',
-    name: 'walid',
+    name: 'Walid',
     password: "1234",
     password_confirmation: "1234",
     admin: true
 )
 u.skip_confirmation!
 
+u2 = Fabricate(:user, name: "Adyssa", initials: "dada")
+u3 = Fabricate(:user, name: "Gedeon", initials: "ged")
+
 p "Creating first clique"
 c1 = Fabricate(:clique, name: 'the dev')
 u.cliques << c1
+u2.cliques << c1
+u3.cliques << c1
 
 p "Adding links to clique"
 10.times do |i|
@@ -49,3 +54,13 @@ p "Adding Links to playlists"
 end
 
 u.save!
+
+
+p "Setting up user 2"
+p21 = Fabricate(:playlist, name: 'Dada\'s first playlist', user: u2)
+p21 = Fabricate(:playlist, name: 'Dada\'s Lullabies', user: u2)
+5.times do |i|
+    url = (i%2 == 0) ? "https://aotns.bandcamp.com/track/time-for-a-change?#{i}" : "https://soundcloud.com/dazedandconfused/dazed-mix-clark?in=dazedandconfused/sets/dazed-mixes#{i}"
+    Fabricate(:link, user: u2, clique: c1, url: url, playlists: [p21])
+end
+u2.save!

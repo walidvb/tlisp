@@ -33,11 +33,11 @@
     left: 0;
     bottom: 0;
     right: 0;
-    overflow: auto;
     filter: brightness(50%);
     background: white;
     display: flex;
     flex-flow: row wrap;
+    overflow: auto;
     .playlist__thumb, .thumb{
         border: white solid 1px;
         flex: 1 1 33.333%;
@@ -45,5 +45,11 @@
     }
     &.large .thumb{
         flex: 1 1 15%;
+    }
+}
+
+.clique-page{
+    .playlist__item{
+        margin-right: 5rem;
     }
 }

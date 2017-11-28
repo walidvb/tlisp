@@ -5,6 +5,18 @@
 ## Start server
 `$ rails server puma -b 'ssl://0.0.0.0:3000?key=.ssl/localhost.key&cert=.ssl/localhost.crt'`
 
+## Run tests
+`bundle exec rake`
+
+## Setup
+
+Create a DB called `plis_development`
+`bundle exec rake db:create db:migrate`
+
+### Populate database
+`bundle exec rake db:seed` will create a user `you@me.com` with password `1234`
+
+
 ## ROADMAP
  
  -[X] Allow public/private posts

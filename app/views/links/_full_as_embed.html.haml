@@ -6,7 +6,7 @@
         .item__top
             .item__submitted
                 = fa_icon 'user', class: "nouse-icon"
-                = "#{link.user.try(:name)}"
+                = "#{link.user.try(:initials)}"
             -# %h4    
             -#     = link_to link.author_name, link.author_url, target: "_blank"
         .item__bottom

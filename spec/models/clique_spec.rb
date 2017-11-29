@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Clique do 
+# describe Clique do 
   
-end
+# end

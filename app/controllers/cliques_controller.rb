@@ -1,6 +1,7 @@
 class CliquesController < ApplicationController
   before_action :set_clique, only: [:join, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:join]
+  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:join]
 
   def join
     @inviter = params[:by]

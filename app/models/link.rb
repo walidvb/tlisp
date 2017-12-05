@@ -22,7 +22,6 @@ class Link < ActiveRecord::Base
 
     [   "title",
         "description",
-        "thumbnail_url",
         "html",
         "author_name",
         "author_url",
@@ -34,7 +33,10 @@ class Link < ActiveRecord::Base
         define_method oembed_method do |*args|
             self.oembed[oembed_method]
         end
+    end
 
+    def thumbnail_url
+        self.oembed['thumbnail_url'] || self.oembed['image']
     end
 
     private

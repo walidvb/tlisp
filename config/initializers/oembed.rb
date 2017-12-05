@@ -3,8 +3,7 @@ OEmbed::Providers.register_all
 
 
 mixcloud_provider = OEmbed::Provider.new("https://www.mixcloud.com/oembed/.{format}")
-mixcloud_provider << "http://*.cool-service.com/image/*"
-mixcloud_provider << "http://*.cool-service.com/video/*"
+mixcloud_provider << "https://mixcloud.com/*"
 
 
 OEmbed::Providers.register_fallback(

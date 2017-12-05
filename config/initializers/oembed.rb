@@ -14,7 +14,7 @@ class DDOEmbed
     def self.get url
         begin
             OEmbed::Providers.get(url).fields
-        rescue OEmbed::NotFound
+        rescue OEmbed::NotFound => e
             # need to create a bandcamp to detect source
             oembed = BandcampOembed.new(url) 
             if oembed.is_bandcamp?

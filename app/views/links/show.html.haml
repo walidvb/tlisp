@@ -1,7 +1,8 @@
-%p#notice= notice
-
-%p
+%p 
+  Your link has been posted!
+- if @link.oembed.blank?
+  %p 
+    We were not able to find a media for your link. If you think we should have,
+    = link_to "Let us know!", contact_url, target: '_blank'
+- else
   = render 'full_as_embed', link: @link
-= link_to 'Edit', edit_link_path(@link)
-\|
-= link_to 'Back', links_path

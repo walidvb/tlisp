@@ -23,5 +23,5 @@
 //= require select2
 
 if(window.parent){
-    $(document).on('click', '#diggersdelights .modal__close', window.parent.DDCloseIframe);
+    $(document).on('click', '[data-close-iframe]', window.parent.DDCloseIframe);
 }

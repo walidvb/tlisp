@@ -41,11 +41,13 @@ class Link < ActiveRecord::Base
 
     private
     def get_oembed
-        DDOEmbed.get(self.url) || {}
+        DDOEmbed.get(self.url)
     end
     
     def add_oembed
-        self.oembed = get_oembed
+        if new_oembed = get_oembed
+            self.oembed = get_oembed
+        end
     end
 
 end

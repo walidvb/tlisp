@@ -5,10 +5,11 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @users = User.all
+    @cliques = current_user.cliques
+    @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
     @tags = all_tags
     @genres = all_tags :genre
-    @links = Link.includes(:user).all
+    @links = @users.map(&:links).flatten
     if user_id = params[:user_id].presence
       @links = @links.where(user_id: user_id)
     end

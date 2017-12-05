@@ -1,6 +1,6 @@
 When(/^I choose to sign up$/) do
   create_visitor
-  click_on 'Sign up', match: :first
+  click_on "Sign up and join #{@clique.name}"
   fill_in_sign_up_form
 end
 

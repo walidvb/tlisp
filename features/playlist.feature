@@ -13,6 +13,7 @@ Feature: I create and browse playlists
         And I have 2 playlists
         Then I should see my playlists on my playlists page
 
+    @wip
     Scenario: I see my friends' playlists
         Given I am logged in
         And I belong to a clique

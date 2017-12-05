@@ -90,5 +90,3 @@ driver = ENV['BROWSER'] ? ENV['BROWSER'].to_sym : :headless_chrome
 
 Capybara.javascript_driver = driver
 Capybara.current_driver = driver
-
-ENV['DOMAIN'] = "//#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}"

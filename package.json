@@ -1,11 +1,14 @@
 {
-  "proxy": "http://localhost:3001",
+  "name": "diggersdelight-app",
+  "engines": {
+    "node": "6.3.1"
+  },
   "dependencies": {
-    "react": "^16.2.0",
     "select2": "^4.0.6-rc.0"
   },
   "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "npm run deploy && echo 'Client built!'"
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   }
 }

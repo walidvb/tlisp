@@ -39,6 +39,7 @@ gem 'globalize'
 gem 'rails_admin_globalize_field'
 
 group :development, :test do
+  gem 'foreman'
   gem 'web-console', '2.1.3'
   gem 'spring', '1.3.6'
   gem 'annotate', '2.6.10'

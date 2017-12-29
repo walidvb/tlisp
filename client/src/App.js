@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import routes from './routes.js';
 
 class App extends Component {
   componentDidMount() {
-    window.fetch('http://localhost:3001/links.json')
+    window.fetch(routes.links.index, { accept: 'application/json', headers: { "Content-Type": "application/json"}})
       .then(response => response.json())
       .then(json => console.log(json))
       .catch(error => console.log(error))

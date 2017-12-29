@@ -6,8 +6,21 @@ DiggersDelights::Application.routes.draw do
   resources :cliques
   get '/cliques/:id/join' => "cliques#join", as: :join_clique
   resources :links
-  match "links" => "links#create", via: [:options]
-  
+
+  match "links" => "links#index", via: [:options]
+
+  scope :api do 
+    resources :playlists
+    resources :cliques
+    get '/cliques/:id/join' => "cliques#join"
+    resources :links
+
+    devise_for :users, controllers: {
+        registrations: 'users/registrations',
+        confirmations: 'users/confirmations',
+    }
+  end
+
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do
     root "pages#home"
     get "inside", to: "pages#inside", as: :inside
@@ -19,8 +32,7 @@ DiggersDelights::Application.routes.draw do
     devise_for :users, controllers: {
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
-      } do 
-      end
+    }
     get 'onboarding', to: 'user#onboarding', as: :onboarding
 
   end

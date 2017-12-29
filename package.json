@@ -1,7 +1,7 @@
 {
   "name": "diggersdelight-app",
   "engines": {
-    "node": "0.1.0"
+    "node": "6.3.1"
   },
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",

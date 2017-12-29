@@ -3,6 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3001"
+    },
+    "/users": {
+      "target": "http://localhost:3001"
+    },
+    "/admin": {
+      "target": "http://localhost:3001"
+    }
+  },
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

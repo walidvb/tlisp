@@ -9,7 +9,7 @@ class LinksController < ApplicationController
     @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
     @tags = all_tags
     @genres = all_tags :genre
-    @links = @users.map(&:links).flatten
+    @links = Link.where(user: @users)
     if user_id = params[:user_id].presence
       @links = @links.where(user_id: user_id)
     end

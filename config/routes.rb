@@ -15,10 +15,6 @@ DiggersDelights::Application.routes.draw do
     get '/cliques/:id/join' => "cliques#join"
     resources :links
 
-    devise_for :users, controllers: {
-        registrations: 'users/registrations',
-        confirmations: 'users/confirmations',
-    }
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do

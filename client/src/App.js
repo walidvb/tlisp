@@ -5,7 +5,8 @@ import routes from './routes.js';
 
 class App extends Component {
   componentDidMount() {
-    window.fetch(routes.links.index, { accept: 'application/json', headers: { "Content-Type": "application/json"}})
+    window.fetch(routes.links.index, {
+      credentials: 'same-origin',accept: 'application/json', headers: { "Content-Type": "application/json"}})
       .then(response => response.json())
       .then(json => console.log(json))
       .catch(error => console.log(error))

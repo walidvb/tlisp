@@ -3,10 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import routes from './routes.js';
 
+import request from './request.js';
+
 class App extends Component {
   componentDidMount() {
-    window.fetch(routes.links.index, {
-      credentials: 'same-origin',accept: 'application/json', headers: { "Content-Type": "application/json"}})
+    request(routes.links.index)
       .then(response => response.json())
       .then(json => console.log(json))
       .catch(error => console.log(error))

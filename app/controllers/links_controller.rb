@@ -3,9 +3,13 @@ class LinksController < ApplicationController
   before_action :authenticate_user!
   
   def filters
-    cliques = current_user.cliques
+    cliques = current_user.cliques.map do |clique| 
+      clique.serializable_hash.merge({
+          users: clique.users.select{|us| us != current_user} 
+      })
+    end
     render json: {      
-      users: cliques.map(&:users).flatten.select{|us| us != current_user},
+      cliques: cliques,
       tags: all_tags,
       genres: all_tags(:genre),
     }
@@ -16,8 +20,6 @@ class LinksController < ApplicationController
   def index
     @cliques = current_user.cliques
     @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
-    @tags = all_tags
-    @genres = all_tags :genre
     @links = Link.where(user: @users)
     if user_id = params[:user_id].presence
       @links = @links.where(user_id: user_id)

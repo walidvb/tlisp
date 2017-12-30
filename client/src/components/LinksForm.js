@@ -2,11 +2,12 @@ import React, { Component, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Form, NestedForm, Text, Radio, RadioGroup, Select, Checkbox } from 'react-form';
+import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Checkbox } from 'react-form';
 
 import routes from '../routes';
 import request from '../request';
 
+import styles from './LinksForm.scss'
 import { submitLink } from '../actions/linkActions';
 
 const qs = require('qs');
@@ -19,7 +20,7 @@ function LinkDetails(props) {
                     <div>
                         <Text field="url" type="hidden" />
                         <label htmlFor="description">Description</label>
-                        <Text field="description" id="description" />
+                        <TextArea field="description" id="description" />
                     </div>
                 )}
             </Form>
@@ -27,10 +28,27 @@ function LinkDetails(props) {
     )
 }
 
+function Cliques(props) {
+    return (
+        <div>
+            <h3> Cliques </h3>
+            {props.cliques.map((cl, i) =>
+                <div key={cl.id}>
+                    <label htmlFor={`clique-${i}`}>{cl.name}</label>
+                    <Select multiple="true" field={['clique_ids', cl.id]} id={`clique-${i}`}>
+                        <option value={cl.id}> c.name </option>
+                    </Select>
+                </div>
+            )}
+        </div>
+    )
+};
+
 function Playlists(props) {
     console.log(props)
     return (
         <div>
+            <h3> Playlists </h3>
             {props.playlists.map( (pl, i) => 
                 <div key={pl.id}>
                     <Checkbox field={['playlist_ids', pl.id]} id={`playlist-${i}`} />
@@ -79,19 +97,20 @@ class LinksForm extends Component {
         }).then(r => r.json()).then(c => console.log(c))
     }
     render() {
-        const { oembed, playlists, loaded } = this.state;
+        const { oembed, loaded, playlists, cliques } = this.state;
         if(!loaded){
             return <div>LOADING</div>
         }
         return (
             <div>
-                <img src={oembed.thumbnail_url || oembed.image} />
+                <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
                 { oembed.title }
                 <Form getApi={f => this.formApi = f} dontPreventDefault={false}  onSubmit={this.handleSubmit}>
                     { formApi => (
                         <form onSubmit={formApi.submitForm} id="form2">
                             <LinkDetails link={oembed} this={this} />
                             <Playlists playlists={playlists} />
+                            <Cliques cliques={cliques} />
                             <button type="submit" >Submit</button>
                         </form>
                     )}

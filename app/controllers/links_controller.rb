@@ -23,9 +23,11 @@ class LinksController < ApplicationController
     @genres = all_tags(:genre).map(&:name)
     @playlists = current_user.playlists
     @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
+    @cliques = current_user.cliques
     render json: {
       link: @link,
-      playlists: @playlists
+      playlists: @playlists,
+      cliques: @cliques,
     }
   end
 

@@ -5,12 +5,12 @@ import {bindActionCreators} from 'redux';
 import routes from '../routes.js';
 import request from '../request.js';
 
+
 import LinkUI from './LinkUI';
 import * as linkActions from '../actions/linkActions';
 import LinkList from './LinkList';
  
 import styles from './LinksContainer.scss';
-import stylesUI from './LinkUI.scss';
 
 class LinksContainer extends Component {
   constructor(props) {

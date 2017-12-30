@@ -1,8 +1,8 @@
-import people from './people-reducer.js';
+import links from './linkReducers.js';
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
-  people
+  links
 });
 
 export default rootReducer;

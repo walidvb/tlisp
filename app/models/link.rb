@@ -39,15 +39,17 @@ class Link < ActiveRecord::Base
         self.oembed['thumbnail_url'] || self.oembed['image']
     end
 
-    private
-    def get_oembed
-        DDOEmbed.get(self.url)
-    end
-    
     def add_oembed
         if new_oembed = get_oembed
             self.oembed = get_oembed
         end
     end
+
+    private
+    def get_oembed
+        DDOEmbed.get(self.url)
+    end
+    
+
 
 end

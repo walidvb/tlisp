@@ -15,6 +15,15 @@ class LinksController < ApplicationController
     }
   end
 
+  def oembed
+    url = params[:url]
+    @link = Link.new(url: url)
+    @link.add_oembed
+    render json: {
+      link: @link
+    }
+  end
+
   def search
     user_ids = params[:users]
     @links = Link.where(user_id: user_ids)

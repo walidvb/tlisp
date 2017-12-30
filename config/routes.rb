@@ -15,6 +15,7 @@ DiggersDelights::Application.routes.draw do
     get '/cliques/:id/join' => "cliques#join"
     resources :links
     get '/filters.json' => "links#filters"
+    get '/oembed.json' => 'links#oembed'
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do
@@ -33,7 +34,7 @@ DiggersDelights::Application.routes.draw do
 
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
+
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
     !request.xhr? && request.format.html?
   end

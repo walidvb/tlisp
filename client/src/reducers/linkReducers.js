@@ -23,6 +23,24 @@ export default (state = initialState, action) => {
       list: action.payload,
       loading: false
     }
+    case `${types.PLAY}`:
+      let newList = state.list.map(l => ({
+        ...l,
+        playing: l.id == action.payload.id,
+      }))
+      return {
+        ...state,
+        list: newList
+      }
+    case `${types.PAUSE}`:
+      let newList_ = state.list.map(l => ({
+        ...l,
+        playing: false,
+      }))
+      return {
+        ...state,
+        list: newList_
+      }
     default:
       return state;
   }

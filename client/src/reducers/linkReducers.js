@@ -1,9 +1,17 @@
 import * as types from '../actions/actionTypes';
 
-export default (state = [], action) => {
+const initialState = {
+  list: []
+}
+
+export default (state = initialState, action) => {
+  console.log(state);
   switch (action.type) {
     case types.GET_LINKS:
-      return [...state, Object.assign({}, action.person)];
+      return {
+        ...state,
+        links: action.links,
+      };
     default:
       return state;
   }

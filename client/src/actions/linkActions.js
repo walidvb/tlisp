@@ -1,8 +1,9 @@
 import * as types from './actionTypes';
 
-export const addPerson = (person) => {
+export const getLinks = (filters) => {
   return {
     type: types.GET_LINKS,
-    person
+    filters,
+    payload: 2,
   };
 }

@@ -25,6 +25,12 @@ class LinkUI extends Component {
       this.setState({ ...data, ready: true })
     })
   }
+  search(){
+    const activeUsers = this.state.cliques.reduce((a, b) => a.users.filter(u => u.active).concat(b.users.filter(u => u.active)));
+    this.props.getLinks({
+      users: activeUsers.map(u => u.id ),
+    })
+  }
   filterBy(user, clique){
     const cliques = this.state.cliques.map((c, index) => {
       if ( clique.name !== c.name ){
@@ -44,13 +50,14 @@ class LinkUI extends Component {
       }
     })
     this.setState({
-      cliques
-    })
+      cliques, 
+    }, this.search)
 
   }
   renderUser(user, clique) {
     return <div onClick={() => this.filterBy(user, clique)}> {user.initials} {user.active ? "1" : "0"}</div>
   }
+
   renderClique( clique ){
     return (
       <div>

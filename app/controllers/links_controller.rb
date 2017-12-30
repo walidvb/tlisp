@@ -15,17 +15,26 @@ class LinksController < ApplicationController
     }
   end
 
+  def search
+    user_ids = params[:users]
+    @links = Link.where(user_id: user_ids)
+  end
   # GET /links
   # GET /links.json
   def index
     @cliques = current_user.cliques
     @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
     @links = Link.where(user: @users)
-    if user_id = params[:user_id].presence
-      @links = @links.where(user_id: user_id)
-    end
-    if tag_names = params[:tag_names].presence
-      @links = @links.tagged_with(tag_names)
+
+    if params[:users] 
+      @links = search
+    else
+      if user_id = params[:user_id].presence
+        @links = @links.where(user_id: user_id)
+      end
+      if tag_names = params[:tag_names].presence
+        @links = @links.tagged_with(tag_names)
+      end
     end
   end
 

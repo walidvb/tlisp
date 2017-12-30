@@ -2,12 +2,12 @@ import * as types from './actionTypes';
 import request from '../request';
 import routes from '../routes';
 
-export const getLinks = (filters) => {
+export const getLinks = (filters = {}) => {
   return {
     type: types.GET_LINKS,
     filters,
     payload: new Promise(resolve => {
-      request(routes.links.index)
+      request(routes.links.index, { qs: filters })
         .then(response => resolve(response.json(), { filters }))
         .catch(error => console.log(error))
     }),

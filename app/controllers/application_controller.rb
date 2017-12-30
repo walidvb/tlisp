@@ -26,7 +26,11 @@ class ApplicationController < ActionController::Base
   before_filter :reject_locked!, if: :devise_controller?
 
   def fallback_index_html
-    render :file => 'public/index.html'
+    if /tracks\/new/.match(params[:path])
+      headers['X-Frame-Options'] = "ALLOWALL"
+    end
+    
+    render :file => 'public/index.html', layout: false
   end
 
   # Redirects on successful sign in

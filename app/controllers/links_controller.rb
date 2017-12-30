@@ -55,14 +55,13 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
-    headers['X-Frame-Options'] = "*"
+    headers['X-Frame-Options'] = "ALLOWALL"
     render layout: session[:modal] ? "iframe" : true
   end
 
   # GET /links/new
   def new
-    headers['X-Frame-Options'] = "*"
-    render :file => 'public/index.html'
+    render layout: session[:modal] ? "iframe" : true
   end
 
   # GET /links/1/edit

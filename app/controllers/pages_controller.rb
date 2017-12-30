@@ -24,7 +24,7 @@ class PagesController < ApplicationController
         close.addEventListener('click',DDCloseIframe);
         iframe.frameBorder = 'none'
         iframe.style.cssText = "min-width: 60vw; max-width: 90vw; height: 80vh; z-index: 10000";
-        iframe.src = "#{domain}/tracks/new?version=0.1&url="+encodeURIComponent(window.location)
+        iframe.src = "#{domain}/tracks/new?modal=true&version=0.1&url="+encodeURIComponent(window.location)
         div.append(iframe);
         document.body.append(div);
 

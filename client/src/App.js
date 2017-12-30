@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PeopleContainer from './components/PeopleContainer'
 import routes from './routes.js';
 
 import request from './request.js';
@@ -13,6 +14,7 @@ class App extends Component {
       .catch(error => console.log(error))
   }
   render() {
+  render()<PeopleContainer />
     return (
       <div className="App">
         <header className="App-header">

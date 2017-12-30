@@ -2,6 +2,15 @@ class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   
+  def filters
+    cliques = current_user.cliques
+    render json: {      
+      users: cliques.map(&:users).flatten.select{|us| us != current_user},
+      tags: all_tags,
+      genres: all_tags(:genre),
+    }
+  end
+
   # GET /links
   # GET /links.json
   def index

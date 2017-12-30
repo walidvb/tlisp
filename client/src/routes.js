@@ -1,9 +1,10 @@
-const host = "/api";
+
 
 const routes = {
     links: {
-        index: `${host}/links.json`
-    }
+        index: 'api/links.json',
+        filters: 'api/filters.json',
+    },
 };
 
 export default routes

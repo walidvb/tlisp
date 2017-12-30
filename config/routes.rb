@@ -33,4 +33,8 @@ DiggersDelights::Application.routes.draw do
 
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end

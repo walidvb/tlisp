@@ -7,7 +7,7 @@ export const getLinks = (filters = {}) => {
     type: types.GET_LINKS,
     filters,
     payload: new Promise(resolve => {
-      request(routes.links.index, { qs: filters })
+      request(routes.api.links.index, { qs: filters })
         .then(response => resolve(response.json(), { filters }))
         .catch(error => console.log(error))
     }),
@@ -19,7 +19,7 @@ export const filterBy = (filters) => {
     type: types.FILTER_BY,
     filters,
     payload: new Promise(resolve => {
-      request(routes.links.index)
+      request(routes.api.links.index)
         .then(response => resolve(response.json(), filters))
         .catch(error => console.log(error))
     }),

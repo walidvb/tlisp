@@ -25,6 +25,9 @@ class ApplicationController < ActionController::Base
   # Devise
   before_filter :reject_locked!, if: :devise_controller?
 
+  def fallback_index_html
+    render :file => 'public/index.html'
+  end
 
   # Redirects on successful sign in
   def after_sign_in_path_for(resource)

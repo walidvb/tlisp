@@ -44,7 +44,7 @@ const Link = ({play, link }) => {
     );
   }
   return (
-    <div onClick={() => play(link)} className="link item full-bg" style={{ backgroundImage: `url(${thumbnail_url})` }}>
+    <div onClick={() => play(link)} className={[styles.full_bg]} style={{ backgroundImage: `url(${thumbnail_url})` }}>
       {inner}
     </div>
   ); 

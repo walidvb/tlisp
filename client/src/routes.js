@@ -3,7 +3,8 @@ const routes = {
         links: {
             index: '/api/links.json',
             filters: '/api/filters.json',
-            oembed: url => `/api/oembed.json?url=${encodeURIComponent(url)}`,
+            formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
+            create: '/api/links.json',
         },
     },
     links: {

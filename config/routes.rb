@@ -15,7 +15,7 @@ DiggersDelights::Application.routes.draw do
     get '/cliques/:id/join' => "cliques#join"
     resources :links
     get '/filters.json' => "links#filters"
-    get '/oembed.json' => 'links#oembed'
+    get '/link_form_details.json' => 'links#link_form_details'
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do

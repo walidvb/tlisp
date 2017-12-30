@@ -15,12 +15,17 @@ class LinksController < ApplicationController
     }
   end
 
-  def oembed
+  def link_form_details
     url = params[:url]
     @link = Link.new(url: url)
     @link.add_oembed
+    @tags = all_tags.map(&:name)
+    @genres = all_tags(:genre).map(&:name)
+    @playlists = current_user.playlists
+    @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
     render json: {
-      link: @link
+      link: @link,
+      playlists: @playlists
     }
   end
 

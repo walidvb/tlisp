@@ -7,16 +7,17 @@ import { Form, NestedForm, Text, Radio, RadioGroup, Select, Checkbox } from 'rea
 import routes from '../routes';
 import request from '../request';
 
+import { submitLink } from '../actions/linkActions';
+
 const qs = require('qs');
 
 function LinkDetails(props) {
     return (
         <NestedForm field="link">
-            <Form>
+            <Form getApi={f => props.this.formApi = f}>
                 {formApi => (
                     <div>
-                        <label htmlFor="title" >Title</label>
-                        <Text autoFocus="true" field="title" id="title" />
+                        <Text field="url" type="hidden" />
                         <label htmlFor="description">Description</label>
                         <Text field="description" id="description" />
                     </div>
@@ -48,6 +49,7 @@ class LinksForm extends Component {
             loaded: false,
         }
         this.setDefaultValues = this.setDefaultValues.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     static propTypes = {
 
@@ -64,7 +66,17 @@ class LinksForm extends Component {
             }, this.setDefaultValues))
     }
     setDefaultValues(){
-        console.log(this.state);
+        const { description, url } = this.state.oembed;
+        this.formApi.setAllValues({
+            url,
+            description,
+        })
+    }
+    handleSubmit(body) {
+        request(routes.api.links.create, {
+            method: 'POST',
+            body,
+        }).then(r => r.json()).then(c => console.log(c))
     }
     render() {
         const { oembed, playlists, loaded } = this.state;
@@ -73,11 +85,12 @@ class LinksForm extends Component {
         }
         return (
             <div>
-                <img src={oembed.thumbnail_url} />
-                <Form onSubmit={a => console.log(a)}>
+                <img src={oembed.thumbnail_url || oembed.image} />
+                { oembed.title }
+                <Form getApi={f => this.formApi = f} dontPreventDefault={false}  onSubmit={this.handleSubmit}>
                     { formApi => (
                         <form onSubmit={formApi.submitForm} id="form2">
-                            <LinkDetails />
+                            <LinkDetails link={oembed} this={this} />
                             <Playlists playlists={playlists} />
                             <button type="submit" >Submit</button>
                         </form>
@@ -93,7 +106,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>  ({
-    
+    save: (data) => dispatch(submitLink(data))
 });
 
 

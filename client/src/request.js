@@ -1,5 +1,9 @@
 export default function(url, options = {}){
+    const method = options.method || 'GET';
     const qs = options.qs == undefined ? "" : "?"+serialize(options.qs);
+    if(options.body){
+        options.body = JSON.stringify(options.body);
+    }
     return fetch(`${url}${qs}`, {
         ...options,
         credentials: 'same-origin', 

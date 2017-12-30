@@ -25,3 +25,12 @@ export const filterBy = (filters) => {
     }),
   };
 }
+
+export const submitLink = (payload) => ({
+  type: types.SUBMIT_LINK,
+  payload: new Promise(resolve => {
+    request(routes.api.links.create, {...payload})
+      .then(response => resolve(response.json(),))
+      .catch(error => console.log(error))
+  }),
+})

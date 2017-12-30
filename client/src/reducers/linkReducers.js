@@ -4,6 +4,7 @@ const initialState = {
   list: []
 }
 
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.GET_LINKS:
@@ -18,11 +19,19 @@ export default (state = initialState, action) => {
       }
     case `${types.GET_LINKS}_REJECTED`:
     case `${types.GET_LINKS}_FULFILLED`:
-    return {
-      ...state,
-      list: action.payload,
-      loading: false
-    }
+      return {
+        ...state,
+        list: action.payload,
+        loading: false
+      }
+    case `${types.SUBMIT_LINK}_SUCCESSFUL`:
+      console.log(action.payload);
+      return {
+        ...state,
+        payload: action.payload
+      }
+    
+    // PLAYER RELATED
     case `${types.PLAY}`:
       let newList = state.list.map(l => ({
         ...l,

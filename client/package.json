@@ -9,7 +9,13 @@
     "/users": {
       "target": "http://localhost:3001"
     },
+    "/links": {
+      "target": "http://localhost:3001"
+    },
     "/admin": {
+      "target": "http://localhost:3001"
+    },
+    "/assets": {
       "target": "http://localhost:3001"
     }
   },

@@ -16,6 +16,10 @@ class LinkUI extends Component {
       ready: false,
       users: []
     }
+    this.search = this.search.bind(this)
+    this.filterBy = this.filterBy.bind(this)
+    this.renderUser = this.renderUser.bind(this)
+    this.renderClique = this.renderClique.bind(this)
   }
   static propTypes = {
     getLinks: PropTypes.func.isRequired
@@ -26,7 +30,7 @@ class LinkUI extends Component {
     })
   }
   search(){
-    const activeUsers = this.state.cliques.reduce((a, b) => a.users.filter(u => u.active).concat(b.users.filter(u => u.active)));
+    const activeUsers = this.state.cliques.map(c => c.users).reduce((a, b) => a.concat(b)).filter(u => u.active);
     this.props.getLinks({
       users: activeUsers.map(u => u.id ),
     })
@@ -52,11 +56,10 @@ class LinkUI extends Component {
     })
     this.setState({
       cliques, 
-    }, this.search)
+    }, this.search.bind(this))
 
   }
   renderUser(user, clique) {
-    console.log(styles)
     return <div 
       className={[styles.filter_item, user.active ? styles.active : {}].join(' ')}
       onClick={() => this.filterBy(user, clique)}> {user.initials} {user.active ? "1" : "0"}</div>

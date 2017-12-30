@@ -61,14 +61,8 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
-    @tags = all_tags.map(&:name)
-    @genres = all_tags(:genre).map(&:name)
-    @link = Link.new clique_id: current_user.clique_ids.first, url: params[:href]
-    @playlists = current_user.playlists
-    @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
     headers['X-Frame-Options'] = "*"
-    session[:modal] = params[:modal].present?
-    render layout: session[:modal] ? "iframe" : true
+    render :file => 'public/index.html'
   end
 
   # GET /links/1/edit

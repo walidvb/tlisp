@@ -32,7 +32,8 @@ class LinkUI extends Component {
     })
   }
   filterBy(user, clique){
-    const cliques = this.state.cliques.map((c, index) => {
+    let { cliques } = this.state;
+    cliques = cliques.map((c, index) => {
       if ( clique.name !== c.name ){
         return c;
       }
@@ -55,18 +56,21 @@ class LinkUI extends Component {
 
   }
   renderUser(user, clique) {
-    return <div onClick={() => this.filterBy(user, clique)}> {user.initials} {user.active ? "1" : "0"}</div>
+    console.log(styles)
+    return <div 
+      className={[styles.filter_item, user.active ? styles.active : {}].join(' ')}
+      onClick={() => this.filterBy(user, clique)}> {user.initials} {user.active ? "1" : "0"}</div>
   }
 
   renderClique( clique ){
     return (
       <div>
-        <div className={styles.clique_name}>
+        <ul className={styles.clique_name}>
           {clique.name} ({clique.users.length})
           {
-            clique.users.map(u => <div className={styles.clique_name} key={u.name}>{this.renderUser(u, clique)}</div>)
+            clique.users.map(u => <li className={styles.filter_item} key={u.name}>{this.renderUser(u, clique)}</li>)
           }
-        </div>
+        </ul>
         <div></div>
       </div>
     )

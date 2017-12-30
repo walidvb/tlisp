@@ -1,7 +1,12 @@
-
+@import 'reset.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
 body{
+  font-family: 'Open Sans', sans-serif;
 }
 
+h1,h2,h3,h4{
+ font-family: 'Montserrat', sans-serif; 
+}
 img{
   max-width: 100%;
   height: auto;

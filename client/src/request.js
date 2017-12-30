@@ -1,5 +1,4 @@
 export default function(url, options = {}){
-    console.log(serialize(options.qs), options.qs)
     const qs = options.qs == undefined ? "" : "?"+serialize(options.qs);
     return fetch(`${url}${qs}`, {
         ...options,
@@ -9,6 +8,7 @@ export default function(url, options = {}){
     })
 }
 
+// https://stackoverflow.com/a/42604801/1312825
 function serialize(params, prefix) {
     if(!params){
         return undefined;

@@ -13,7 +13,8 @@ class LinksContainer extends Component {
     super(props);
 
     this.state = {
-      links: []
+      links: [],
+      loading: false,
     };
   }
   
@@ -39,8 +40,10 @@ LinksContainer.propTypes = {
 };
 
 function mapStateToProps(state, props) {
+  const { links } = state;
   return {
-    links: state.links.list
+    links: links.list,
+    loading: links.loading,
   };
 }
 

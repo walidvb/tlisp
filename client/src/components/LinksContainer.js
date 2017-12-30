@@ -7,7 +7,9 @@ import request from '../request.js';
 
 import * as linkActions from '../actions/linkActions';
 import LinkList from './LinkList';
-
+ 
+import styles from './LinksContainer.js';
+console.log(styles);
 class LinksContainer extends Component {
   constructor(props) {
     super(props);

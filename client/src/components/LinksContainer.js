@@ -9,7 +9,7 @@ import * as linkActions from '../actions/linkActions';
 import LinkList from './LinkList';
  
 import styles from './LinksContainer.scss';
-console.log(styles);
+
 class LinksContainer extends Component {
   constructor(props) {
     super(props);
@@ -28,8 +28,7 @@ class LinksContainer extends Component {
     const {links} = this.props;
 
     return (
-      <div className={styles.container}>
-        <h1> Links {links.length}</h1>
+      <div>
         <LinkList links={links} />
       </div>
     );

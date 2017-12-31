@@ -3,11 +3,11 @@ require 'open-uri'
 class BandcampOembed
     def initialize url
         @url = url
-        @page = get_page
     end
 
     def get_oembed
         begin 
+            @page = get_page
             build_oembed
         rescue e
             puts "Failed getting #{url}"

@@ -17,15 +17,20 @@ class PagesController < ApplicationController
         };
         div.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;z-index:10000"
         var iframe = document.createElement('iframe');
+        var iframeContainer = document.createElement('div');
+        iframeContainer.style.position = 'relative';
         var close = document.createElement('div');
-        close.innerText = "Close";
-        close.style.color = "white";
-        div.append(close);
+        close.innerText = "X";
+        close.style.position = "absolute";
+        close.style.right = "10px";
+        close.style.top = "10px";
+        iframeContainer.append(close);
         close.addEventListener('click',DDCloseIframe);
         iframe.frameBorder = 'none'
         iframe.style.cssText = "min-width: 60vw; max-width: 90vw; height: 80vh; z-index: 10000";
         iframe.src = "#{domain}/tracks/new?modal=true&version=0.1&url="+encodeURIComponent(window.location)
-        div.append(iframe);
+        iframeContainer.append(iframe);
+        div.append(iframeContainer);
         document.body.append(div);
 
 

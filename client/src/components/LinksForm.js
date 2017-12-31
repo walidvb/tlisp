@@ -20,10 +20,16 @@ function LinkDetails(props) {
                 {formApi => (
                     <div>
                         <Text field="url" type="hidden" />
-                        <label htmlFor="description">Description</label>
-                        <TextArea field="description" id="description" />
-                        <Playlists playlists={props.playlists} />
-                        <Cliques cliques={props.cliques} />
+                        <div className="form-group">
+                            <label htmlFor="description">Description</label>
+                            <TextArea className="form-control" field="description" id="description" />
+                        </div>
+                        <div className="form-group">
+                            <Playlists className="form-control" playlists={props.playlists} />
+                        </div>
+                        <div className="form-group">
+                            <Cliques className="form-control" cliques={props.cliques} />
+                        </div>
                     </div>
                 )}
             </Form>

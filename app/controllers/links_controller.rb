@@ -75,10 +75,7 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     respond_to do |format|
-      if @link.is_duplicate?
-        format.html { redirect_to @link, notice: 'Link already existed.' }
-        format.json { render :show, status: :found, location: @link }
-      elsif @link.save
+      if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else

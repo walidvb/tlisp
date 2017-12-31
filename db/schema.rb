@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126224131) do
+ActiveRecord::Schema.define(version: 20171231110458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20171126224131) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "link_clique_assignments", force: :cascade do |t|
+    t.integer  "clique_id",  null: false
+    t.integer  "link_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "link_clique_assignments", ["clique_id"], name: "index_link_clique_assignments_on_clique_id", using: :btree
+  add_index "link_clique_assignments", ["link_id"], name: "index_link_clique_assignments_on_link_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.integer  "user_id"

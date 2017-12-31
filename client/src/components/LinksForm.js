@@ -16,7 +16,7 @@ const qs = require('qs');
 function LinkDetails(props) {
     return (
         <NestedForm field="link">
-            <Form getApi={f => props.this.formApi = f}>
+            <Form getApi={f => props.this.linkFormApi = f}>
                 {formApi => (
                     <div>
                         <Text field="url" type="hidden" />
@@ -36,7 +36,7 @@ function Cliques(props) {
     return (
             <div>
                 <label htmlFor={`cliques`}><h3> Cliques </h3></label>
-                <Select multiple="true" options={options} field={'clique_ids'} id={`cliques`} />
+                <DDSelect multiple={true} options={options} field={'clique_ids'} id={`cliques`} />
             </div>
     )
 };
@@ -46,7 +46,7 @@ function Playlists(props) {
     return (
         <div>
             <label htmlFor={`playlists`}><h3> Playlists </h3></label>
-            <DDSelect multiple={true} options={options} field={'clique_ids'} id={`playlists`} />
+            <DDSelect multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
         </div>
     )
 };
@@ -70,14 +70,17 @@ class LinksForm extends Component {
             .then(res => res.json())
             .then(({ link, playlists, cliques }) => this.setState({
                 loaded: true,
-                oembed: link.oembed,
+                link,
                 playlists,
-                cliques
+                cliques,
             }, this.setDefaultValues))
     }
     setDefaultValues(){
-        const { description, url } = this.state.oembed;
-        this.formApi.setAllValues({
+        const { url } = this.state.link;
+        const { description } = this.state.link.oembed;
+
+        console.log(this.state, description, url)
+        this.linkFormApi.setAllValues({
             url,
             description,
         })
@@ -90,18 +93,19 @@ class LinksForm extends Component {
         }).then(r => r.json()).then(c => console.log(c))
     }
     render() {
-        const { oembed, loaded, playlists, cliques } = this.state;
+        const { link,loaded, playlists, cliques } = this.state;
         if(!loaded){
             return <div>LOADING</div>
         }
+        const { oembed } = link;
         return (
             <div>
                 <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
                 { oembed.title }
-                <Form getApi={f => this.formApi = f} dontPreventDefault={false}  onSubmit={this.handleSubmit}>
+                <Form dontPreventDefault={false}  onSubmit={this.handleSubmit}>
                     { formApi => (
-                        <form onSubmit={formApi.submitForm} id="form2">
-                            <LinkDetails playlists={playlists} cliques={cliques} link={oembed} this={this} />
+                        <form  onSubmit={formApi.submitForm} id="form2">
+                            <LinkDetails getApi={f => this.linkFormApi = f} playlists={playlists} cliques={cliques} link={oembed} this={this} />
                             <button type="submit" >Submit</button>
                         </form>
                     )}

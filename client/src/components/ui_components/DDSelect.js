@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormField} from 'react-form';
-import Select from 'react-select';
+import { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 const styles = require('react-select/dist/react-select.css');
 
@@ -10,10 +10,10 @@ const propTypes = {
 }
 
 function DDSelect(props) {
-    console.log(props)
     const {
         fieldApi,
         onInput,
+        options,
         ...rest
       } = props;
 
@@ -25,9 +25,12 @@ function DDSelect(props) {
         setValue,
         setTouched,
       } = fieldApi;
-    console.log(getValue())
+
     const onChange = (e) => {
-        console.log(e);
+        console.log(options.indexOf(e));
+        if(options.indexOf(e) > 0){
+            console.log("new", e);
+        }
         setValue(e.map(v => v.value));
         if(onInput){
             onInput(e)
@@ -36,12 +39,12 @@ function DDSelect(props) {
     return (
         <div>
             <style>{styles}</style>
-            <Select
+            <Creatable
                 name="form-field-name"
                 value={getValue()}
                 multi={props.multiple}
                 onChange={onChange}
-                options={props.options}
+                options={options}
             />
         </div>
     )

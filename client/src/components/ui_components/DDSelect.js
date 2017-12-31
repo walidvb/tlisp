@@ -14,7 +14,6 @@ function DDSelect(props) {
     const {
         fieldApi,
         onInput,
-        options,
         ...rest
       } = props;
 
@@ -25,14 +24,12 @@ function DDSelect(props) {
         getSuccess,
         setValue,
         setTouched,
+        addOption,
       } = fieldApi;
-
+    
+    let options = props.options;
     const onChange = (e) => {
-        console.log(options.indexOf(e));
-        if(options.indexOf(e) > 0){
-            console.log("new", e);
-        }
-        setValue(e.map(v => v.value));
+        setValue(e);
         if(onInput){
             onInput(e)
         }

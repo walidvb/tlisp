@@ -29,32 +29,21 @@ function LinkDetails(props) {
 }
 
 function Cliques(props) {
+    const options = props.cliques.map( c => ({value: c.id, label: c.name}));
     return (
-        <div>
-            <h3> Cliques </h3>
-            {props.cliques.map((cl, i) =>
-                <div key={cl.id}>
-                    <label htmlFor={`clique-${i}`}>{cl.name}</label>
-                    <Select multiple="true" field={['clique_ids', cl.id]} id={`clique-${i}`}>
-                        <option value={cl.id}> c.name </option>
-                    </Select>
-                </div>
-            )}
-        </div>
+            <div>
+                <label htmlFor={`cliques`}><h3> Cliques </h3></label>
+                <Select multiple="true" options={options} field={'clique_ids'} id={`cliques`} />
+            </div>
     )
 };
 
 function Playlists(props) {
-    console.log(props)
+    const options = props.playlists.map( pl => ({ value: pl.id, label: pl.name }));
     return (
         <div>
-            <h3> Playlists </h3>
-            {props.playlists.map( (pl, i) => 
-                <div key={pl.id}>
-                    <Checkbox field={['playlist_ids', pl.id]} id={`playlist-${i}`} />
-                    <label htmlFor={`playlist-${i}`}>{pl.name}</label>
-                </div>
-            )}
+            <label htmlFor={`playlists`}><h3> Playlists </h3></label>
+            <Select multiple="true" options={options} field={'clique_ids'} id={`playlists`} />
         </div>
     )
 };

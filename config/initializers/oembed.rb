@@ -15,14 +15,17 @@ class DDOEmbed
         begin
             OEmbed::Providers.get(url).fields
         rescue OEmbed::NotFound => e
+            p "#{e}: #{url}"
             # need to create a bandcamp to detect source
-            oembed = BandcampOembed.new(url) 
-            if oembed.is_bandcamp?
-                return oembed.get_oembed
+            begin 
+                oembed = BandcampOembed.new(url) 
+                if oembed.is_bandcamp?
+                    return oembed.get_oembed
+                end
+            rescue => e
+                puts "other error #{e}"
+                raise e
             end
-        rescue => e
-            puts e
-            raise e
         end
     end
 end

@@ -9,7 +9,7 @@ export default function(url, options = {}){
         credentials: 'same-origin', 
         accept: 'application/json', 
         headers: { "Content-Type": "application/json" }
-    })
+    });
 }
 
 // https://stackoverflow.com/a/42604801/1312825

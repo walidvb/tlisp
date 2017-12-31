@@ -61,8 +61,8 @@ class LinksForm extends Component {
     constructor(){
         super()
         this.state = {
-            oembed: {},
             loaded: false,
+            link: {},
         }
         this.setDefaultValues = this.setDefaultValues.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -79,6 +79,7 @@ class LinksForm extends Component {
                 link,
                 playlists,
                 cliques,
+                oembeddable: typeof(link.oembed) == "object" && Object.keys(link.oembed).length > 0,
             }, this.setDefaultValues))
     }
     setDefaultValues(){
@@ -98,16 +99,25 @@ class LinksForm extends Component {
             body,
         }).then(r => r.json()).then(c => console.log(c))
     }
+    renderLinkHeader(){
+        const { link, oembeddable } = this.state;
+        const { oembed } = this.state.link;
+        return !oembeddable ? (<div> Not Suported </div>) : (
+            <div>
+                <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
+                {oembed.title}
+            </div>
+        )
+    }
     render() {
         const { link,loaded, playlists, cliques } = this.state;
         if(!loaded){
-            return <div>LOADING</div>
+            return <div className={styles.container}>LOADING</div>
         }
         const { oembed } = link;
         return (
             <div className={styles.container}>
-                <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
-                { oembed.title }
+                {this.renderLinkHeader()}
                 <Form dontPreventDefault={false}  onSubmit={this.handleSubmit}>
                     { formApi => (
                         <form  onSubmit={formApi.submitForm} id="form2">

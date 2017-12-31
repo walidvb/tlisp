@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Checkbox } from 'react-form';
 
+import DDSelect from './ui_components/DDSelect';
 import routes from '../routes';
 import request from '../request';
 
@@ -21,6 +22,8 @@ function LinkDetails(props) {
                         <Text field="url" type="hidden" />
                         <label htmlFor="description">Description</label>
                         <TextArea field="description" id="description" />
+                        <Playlists playlists={props.playlists} />
+                        <Cliques cliques={props.cliques} />
                     </div>
                 )}
             </Form>
@@ -43,7 +46,7 @@ function Playlists(props) {
     return (
         <div>
             <label htmlFor={`playlists`}><h3> Playlists </h3></label>
-            <Select multiple="true" options={options} field={'clique_ids'} id={`playlists`} />
+            <DDSelect multiple={true} options={options} field={'clique_ids'} id={`playlists`} />
         </div>
     )
 };
@@ -80,6 +83,7 @@ class LinksForm extends Component {
         })
     }
     handleSubmit(body) {
+        console.log(body);
         request(routes.api.links.create, {
             method: 'POST',
             body,
@@ -97,9 +101,7 @@ class LinksForm extends Component {
                 <Form getApi={f => this.formApi = f} dontPreventDefault={false}  onSubmit={this.handleSubmit}>
                     { formApi => (
                         <form onSubmit={formApi.submitForm} id="form2">
-                            <LinkDetails link={oembed} this={this} />
-                            <Playlists playlists={playlists} />
-                            <Cliques cliques={cliques} />
+                            <LinkDetails playlists={playlists} cliques={cliques} link={oembed} this={this} />
                             <button type="submit" >Submit</button>
                         </form>
                     )}

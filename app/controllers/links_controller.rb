@@ -125,7 +125,7 @@ class LinksController < ApplicationController
         :description, 
         :published, 
         :is_a_set,
-        :clique_id,
+        clique_ids: [],
         playlist_ids: [],
         tag_list: [], 
         genre_list: []

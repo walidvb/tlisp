@@ -46,6 +46,7 @@ function DDSelect(props) {
                 multi={props.multiple}
                 onChange={onChange}
                 options={options}
+                {...rest}
             />
         </div>
     )

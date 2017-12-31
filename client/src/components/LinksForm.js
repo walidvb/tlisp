@@ -16,7 +16,7 @@ const qs = require('qs');
 function LinkDetails(props) {
     return (
         <NestedForm field="link">
-            <Form getApi={f => props.this.linkFormApi = f}>
+            <Form getApi={props.getApi}>
                 {formApi => (
                     <div>
                         <Text field="url" type="hidden" />

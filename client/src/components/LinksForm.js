@@ -99,7 +99,7 @@ class LinksForm extends Component {
         }
         const { oembed } = link;
         return (
-            <div>
+            <div className={styles.container}>
                 <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
                 { oembed.title }
                 <Form dontPreventDefault={false}  onSubmit={this.handleSubmit}>

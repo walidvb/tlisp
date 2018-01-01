@@ -15,15 +15,13 @@ class PagesController < ApplicationController
         window.DDCloseIframe = function(){
           div.remove();
         };
-        div.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;z-index:10000"
+        div.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;z-index:10000; font-size: 16px;"
         var iframe = document.createElement('iframe');
         var iframeContainer = document.createElement('div');
         iframeContainer.style.position = 'relative';
         var close = document.createElement('div');
-        close.innerText = "X";
-        close.style.position = "absolute";
-        close.style.right = "10px";
-        close.style.top = "10px";
+        close.innerText = "╳";
+        close.style.cssText = "color: white;position: absolute;cursor: pointer;right: 15px;top: 15px;"
         iframeContainer.append(close);
         close.addEventListener('click',DDCloseIframe);
         iframe.frameBorder = 'none'

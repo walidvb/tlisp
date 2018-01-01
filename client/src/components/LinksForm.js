@@ -14,6 +14,7 @@ import { submitLink } from '../actions/linkActions';
 const qs = require('qs');
 
 function LinkDetails(props) {
+
     return (
         <NestedForm field="link">
             <Form getApi={props.getApi}>
@@ -85,27 +86,39 @@ class LinksForm extends Component {
     setDefaultValues(){
         const { url } = this.state.link;
         const { description } = this.state.link.oembed;
-
-        console.log(this.state, description, url)
         this.linkFormApi.setAllValues({
             url,
             description,
         })
     }
+    preSubmit({ link }, formApi){
+        const { clique_ids, playlist_ids } = link
+        let link_ = link;
+        if(clique_ids !== undefined){
+            link_.clique_ids = clique_ids.map(v => v.value)
+        }
+        if (playlist_ids !== undefined) {
+            link_.playlist_ids = playlist_ids.map(v => v.value)
+        }
+        return { link: link_ };
+    }
     handleSubmit(body) {
         console.log(body);
         request(routes.api.links.create, {
             method: 'POST',
-            body,
+            body
         }).then(r => r.json()).then(c => console.log(c))
     }
     renderLinkHeader(){
         const { link, oembeddable } = this.state;
         const { oembed } = this.state.link;
         return !oembeddable ? (<div> Not Suported </div>) : (
-            <div>
+            <div className={styles.details}>
                 <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
-                {oembed.title}
+                <div>
+                    <h3 className={styles.title}>{oembed.title}</h3>
+                    <div className={styles.url}>{link.url}</div>
+                </div>
             </div>
         )
     }
@@ -118,9 +131,9 @@ class LinksForm extends Component {
         return (
             <div className={styles.container}>
                 {this.renderLinkHeader()}
-                <Form dontPreventDefault={false}  onSubmit={this.handleSubmit}>
+                <Form dontPreventDefault={true}  onSubmit={this.handleSubmit} preSubmit={this.preSubmit}>
                     { formApi => (
-                        <form  onSubmit={formApi.submitForm} id="form2">
+                        <form className={styles.form_container} onSubmit={formApi.submitForm} id="form2">
                             <LinkDetails getApi={f => this.linkFormApi = f} playlists={playlists} cliques={cliques} link={oembed} this={this} />
                             <button type="submit" >Submit</button>
                         </form>

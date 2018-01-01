@@ -1,8 +1,38 @@
+@import "../_variables.scss";
+
 .container{
-    background-color: white;
+    background-color: lighten($primary-color, 5%);
+    max-width: 90vh;
+    min-width: 60vw;
+    margin: auto;
+    color: white;
+}
+.form_container, .details{
+    padding: 5px;
+}
+
+.details{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: $primary-color;
+    color: $white;
+    padding-right: 40px;
+    border-bottom: 1px solid darken($primary-color, 5%);
+}
+.title{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: larger;
+}
+.url{
+    color: $background-grey;
+    font-size: smaller;
+    font-style: italic;
 }
 .thumbnail{
-    max-width: 200px;
+    max-height: 3rem;
+    margin-right: 1rem;
 }
 
 h3{

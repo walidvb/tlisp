@@ -7,6 +7,7 @@ import {
 import './App.scss';
 import LinksContainer from './components/LinksContainer'
 import LinksForm from './components/LinksForm'
+import PlayerContainer from './components/PlayerContainer';
 import routes from './routes';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
       <div className="App">
         <Route exact path="/" component={LinksContainer} />
         <Route path={routes.links.new} component={LinksForm} />
+        <PlayerContainer />
       </div>
     );
   }

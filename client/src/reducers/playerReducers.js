@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  tracklist: []
+  tracklist: [],
 }
 
 export default (state = initialState, action) => {
@@ -9,9 +9,12 @@ export default (state = initialState, action) => {
     case types.PLAY:
       return {
         ...state,
+        currentState: 'PLAY',
         currentlyPlaying: action.payload,
       };
-    case `${types.GET_LINKS}_FULFILLED`:
+
+    
+    case types.SET_PLAYLIST:
     return {
       ...state,
       tracklist: action.payload,

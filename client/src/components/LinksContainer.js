@@ -8,6 +8,7 @@ import request from '../request.js';
 
 import LinkUI from './LinkUI';
 import * as linkActions from '../actions/linkActions';
+import { setTracklist } from '../actions/playerActions';
 import LinkList from './LinkList';
  
 import styles from './LinksContainer.scss';
@@ -26,6 +27,28 @@ class LinksContainer extends Component {
     this.props.getLinks();
   }
   
+  // TODO: move this to some playlistController
+  componentWillReceiveProps({ links }){
+    const oldProps = this.props;
+    let isSame = true;
+    if(links.length === oldProps.links.length){
+      for (let i = 0; i < links.length; i++) {
+        const link = links[i];
+        if(link.id != oldProps.links[i].id){
+          isSame = false;
+          break;
+          return;
+        }
+      }
+    }
+    else{
+      isSame = false;
+    }
+
+    if(!isSame){
+      oldProps.setTracklist(links)
+    }
+  }
   render() {
     const { links } = this.props;
 
@@ -53,7 +76,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    ...bindActionCreators(linkActions, dispatch)
+    ...bindActionCreators(linkActions, dispatch),
+    setTracklist: (tracks) => dispatch(setTracklist(tracks))
   }
 }
 

@@ -61,15 +61,15 @@ class LinkUI extends Component {
   }
   renderUser(user, clique) {
     return <div 
-      className={[styles.filter_item, user.active ? styles.active : {}].join(' ')}
-      onClick={() => this.filterBy(user, clique)}> {user.initials} {user.active ? "1" : "0"}</div>
+      className={[styles.filter_item, user.active ? styles.active : ""].join(' ')}
+      onClick={() => this.filterBy(user, clique)}> {user.initials} </div>
   }
 
   renderClique( clique ){
     return (
       <div>
-        <ul className={styles.clique_name}>
-          {clique.name} ({clique.users.length})
+        <h3 className={styles.clique_name}>{clique.name} ({clique.users.length})</h3>
+        <ul className={styles.users_container}>
           {
             clique.users.map(u => <li className={styles.filter_item} key={u.name}>{this.renderUser(u, clique)}</li>)
           }

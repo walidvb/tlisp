@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormField} from 'react-form';
+import { FormField} from 'react-form';
 
-import { Creatable } from 'react-select/dist/react-select';
+import Select from 'react-select/dist/react-select';
 import 'react-select/dist/react-select.css';
 const styles = require('react-select/dist/react-select.css');
 
@@ -27,24 +27,25 @@ function DDSelect(props) {
         addOption,
       } = fieldApi;
     
-    let options = props.options;
+    const { creatable, options } = props;
     const onChange = (e) => {
         setValue(e);
         if(onInput){
             onInput(e)
         }
     }
+    const opts = {
+        name:"form-field-name",
+        value: getValue(),
+        multi: props.multiple,
+        onChange: onChange,
+        options: options,
+        ...rest,
+    }
     return (
         <div>
             <style>{styles}</style>
-            <Creatable
-                name="form-field-name"
-                value={getValue()}
-                multi={props.multiple}
-                onChange={onChange}
-                options={options}
-                {...rest}
-            />
+            {creatable ? <Select.Creatable {...opts} /> : <Select {...opts} />}
         </div>
     )
 }

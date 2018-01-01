@@ -26,11 +26,32 @@ function LinkDetails(props) {
                             <TextArea className="form-control" field="description" id="description" />
                         </div>
                         <div className="form-group">
-                            <Playlists className="form-control" playlists={props.playlists} />
+                            <RadioGroup field="is_a_set">
+                                {group => (
+                                    <div>
+                                        <label htmlFor="mix" className="">Mix</label>
+                                        <Radio group={group} value="0" id="mix" className="" />
+                                        <Radio group={group} value="1" id="track" className="" />
+                                        <label htmlFor="track" className="">Track</label>
+                                    </div>
+                                )}
+                            </RadioGroup>
                         </div>
-                        <div className="form-group">
-                            <Cliques className="form-control" cliques={props.cliques} />
+                        <div className="form-check">
+                            <label htmlFor="published" className="form-check-label"> 
+                                <Checkbox field="published" id="published" className="form-check-input"/>
+                                Public
+                            </label>
+                            <small className={styles.help_text}>
+                                ({formApi.values.published ? "This post will be available to your selected cliques": "This link will only be visible to you"})
+                            </small>
                         </div>
+                        <div>
+                            <label htmlFor={`tags`}><h3> Tags </h3></label>
+                            <DDSelect placeholder="Tag your link" creatable={true} multiple={true} options={props.tags.map(v => ({label: v, value: v}))} field={'tag_list'} id={`tags`} />
+                        </div>
+                        <Playlists className="form-control" playlists={props.playlists} />
+                        <Cliques className="form-control" cliques={props.cliques} />
                     </div>
                 )}
             </Form>
@@ -40,20 +61,25 @@ function LinkDetails(props) {
 
 function Cliques(props) {
     const options = props.cliques.map( c => ({value: c.id, label: c.name}));
+    if(options.length < 2){
+        return (
+            <Text field={["clique_ids", 0]} type="hidden"/>
+        )
+    }
     return (
-            <div>
-                <label htmlFor={`cliques`}><h3> Cliques </h3></label>
-                <DDSelect multiple={true} options={options} field={'clique_ids'} id={`cliques`} />
-            </div>
+        <div className="form-group">
+            <label htmlFor={`cliques`}><h3> Cliques </h3></label>
+            <DDSelect placeholder="Select one or more clique to share to" multiple={true}  options={options} field={'clique_ids'} id={`cliques`} />
+        </div>
     )
 };
 
 function Playlists(props) {
     const options = props.playlists.map( pl => ({ value: pl.id, label: pl.name }));
     return (
-        <div>
+        <div className="form-group">
             <label htmlFor={`playlists`}><h3> Playlists </h3></label>
-            <DDSelect multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
+            <DDSelect placeholder="Select one or more playlists" creatable={true} multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
         </div>
     )
 };
@@ -75,11 +101,12 @@ class LinksForm extends Component {
         const params = qs.parse(this.props.location.search, {ignoreQueryPrefix: true});
         request(routes.api.links.formDetails(params.url))
             .then(res => res.json())
-            .then(({ link, playlists, cliques }) => this.setState({
+            .then(({ link, playlists, cliques, tags }) => this.setState({
                 loaded: true,
                 link,
                 playlists,
                 cliques,
+                tags,
                 oembeddable: typeof(link.oembed) == "object" && Object.keys(link.oembed).length > 0,
             }, this.setDefaultValues))
     }
@@ -89,7 +116,12 @@ class LinksForm extends Component {
         this.linkFormApi.setAllValues({
             url,
             description,
-        })
+            is_a_set: "0",
+            published: true,
+        });
+        if(this.state.cliques.length == 1){
+            this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);
+        }
     }
     preSubmit({ link }, formApi){
         const { clique_ids, playlist_ids } = link
@@ -103,7 +135,6 @@ class LinksForm extends Component {
         return { link: link_ };
     }
     handleSubmit(body) {
-        console.log(body);
         request(routes.api.links.create, {
             method: 'POST',
             body
@@ -123,7 +154,7 @@ class LinksForm extends Component {
         )
     }
     render() {
-        const { link,loaded, playlists, cliques } = this.state;
+        const { link, loaded, playlists, cliques, tags } = this.state;
         if(!loaded){
             return <div className={styles.container}>LOADING</div>
         }
@@ -134,7 +165,12 @@ class LinksForm extends Component {
                 <Form dontPreventDefault={true}  onSubmit={this.handleSubmit} preSubmit={this.preSubmit}>
                     { formApi => (
                         <form className={styles.form_container} onSubmit={formApi.submitForm} id="form2">
-                            <LinkDetails getApi={f => this.linkFormApi = f} playlists={playlists} cliques={cliques} link={oembed} this={this} />
+                            <LinkDetails getApi={f => this.linkFormApi = f} 
+                                playlists={playlists} 
+                                cliques={cliques} 
+                                tags={tags}
+                                link={oembed} 
+                                this={this} />
                             <button type="submit" >Submit</button>
                         </form>
                     )}

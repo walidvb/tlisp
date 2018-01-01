@@ -28,6 +28,7 @@ class LinksController < ApplicationController
       link: @link,
       playlists: @playlists,
       cliques: @cliques,
+      tags: @tags,
     }
   end
 

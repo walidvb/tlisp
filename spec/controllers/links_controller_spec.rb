@@ -31,6 +31,7 @@ describe LinksController do
   end
 
   describe "#create" do 
+    
     context "with valid oembed source" do 
       it "returns the link" do 
         expect { 
@@ -40,24 +41,42 @@ describe LinksController do
 
       context "when already posted in the clique by someone else" do 
         before do 
-          Fabricate(:link, url: url, user: user, cliques: [clique])
-          request.env['warden'].stub :authenticate! => user2
-          controller.stub :current_user => user2
+          Fabricate(:link, url: url, users: [user2], cliques: [clique])
         end
-        
-        it "doesn't duplicate it" do
+
+        it "doesn't duplicate the link" do 
           expect { 
             post :create, { link: {url: url, clique_ids: [clique.id]}}
           }.to change(Link, :count).by(0)
         end
 
-        it "adds an assignment" do
+        it "adds an assignment to a clique" do
           expect { 
             post :create, { link: {url: url, clique_ids: [clique.id]}}
           }.to change(LinkCliqueAssignment, :count).by(1)
         end
 
+        it "creates an unexisting playlist and adds it to it" do
+          expect { 
+            post :create, { link: {url: url, playlist_ids: ["test"]}}
+            expect(user.playlists.count).to eq(1)
+          }.to change(Playlist, :count).by(1)
+        end
+
       end
     end
+
+    context "without valid oembed source" do 
+      let :url do
+        "http://example.com"
+      end
+
+      it 'creates the link' do
+        expect { 
+          post :create, { link: {url: url, clique_ids: [clique.id]}}
+        }.to change(Link, :count).by(1)
+      end
+    end
+
   end
 end

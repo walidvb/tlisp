@@ -12,11 +12,8 @@ class Link < ActiveRecord::Base
     before_save :add_oembed
     
     validates_presence_of :url
-    validates_presence_of :cliques, if: ->{ playlist_ids.empty? }
-    validates :url, uniqueness: { scope: [:clique_id] }
-    # validates :url, uniqueness: { scope: :clique_id }, if: ->{ playlist_assignment_ids.empty? }
-    # validates :url, uniqueness: { scope: :playlist_ids }, if: ->{ clique_ids.empty? }
-    # validates :url, uniqueness: { scope: :user_id }, if: ->{ clique_ids.empty? && playlist_assignment_ids.empty? }
+    # TODO move description to link_assignment to allow unscoped uniqueness validation 
+    # validates :url, uniqueness: { scope: [:clique_id] }
 
     def is_duplicate?
         self.clique.links.where(url: self.url).count > 0

@@ -41,7 +41,7 @@ class LinksController < ApplicationController
   def index
     @cliques = current_user.cliques
     @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
-    @links = Link.where(user: @users)
+    @links = Link.where(users: @users)
 
     if params[:users] 
       @links = search
@@ -74,7 +74,8 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @link = Link.new(link_params)
+    @link = Link.find_by_url(link_params[:url]) || Link.new(link_params)
+    @link.users << current_user
     respond_to do |format|
       if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
@@ -100,16 +101,6 @@ class LinksController < ApplicationController
     end
   end
 
-  # DELETE /links/1
-  # DELETE /links/1.json
-  def destroy
-    @link.destroy
-    respond_to do |format|
-      format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
@@ -127,8 +118,6 @@ class LinksController < ApplicationController
         playlist_ids: [],
         tag_list: [], 
         genre_list: []
-      ).merge(
-          user: current_user,
       )
       if playlist_ids = pps[:playlist_ids]
         pps[:playlist_ids] = playlist_ids.map do |pid|

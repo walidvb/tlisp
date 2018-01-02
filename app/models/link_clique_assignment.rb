@@ -4,4 +4,5 @@ class LinkCliqueAssignment < ActiveRecord::Base
     belongs_to :user
 
     validates :link, uniqueness: { scope: [:clique_id, :user_id] }
+    # validates :link, uniqueness: { scope: [:playlist_id, :user_id] }
 end

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { play } from '../actions/playerActions';
+import { play } from '../../actions/playerActions';
 import styles from './Link.scss';
 
 const Link = ({play, link }) => {

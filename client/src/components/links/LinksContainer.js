@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import routes from '../routes.js';
-import request from '../request.js';
+import routes from '../../routes.js';
+import request from '../../request.js';
 
 
 import LinkUI from './LinkUI';
-import * as linkActions from '../actions/linkActions';
-import { setTracklist } from '../actions/playerActions';
+import * as linkActions from '../../actions/linkActions';
+import { setTracklist } from '../../actions/playerActions';
 import LinkList from './LinkList';
  
 import styles from './LinksContainer.scss';

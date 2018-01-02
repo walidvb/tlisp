@@ -5,8 +5,8 @@ import {
 
 
 import './App.scss';
-import LinksContainer from './components/LinksContainer'
-import LinksForm from './components/LinksForm'
+import LinksContainer from './components/links/LinksContainer'
+import LinksForm from './components/links/LinksForm'
 import PlayerContainer from './components/PlayerContainer';
 import routes from './routes';
 

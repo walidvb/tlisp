@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import request from '../request';
-import routes from '../routes';
+import request from '../../request';
+import routes from '../../routes';
 
-import * as linkActions from '../actions/linkActions';
+import * as linkActions from '../../actions/linkActions';
 import styles from './LinkUI.scss';
 
 class LinkUI extends Component {

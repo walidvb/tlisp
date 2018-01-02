@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Checkbox } from 'react-form';
 
-import DDSelect from './ui_components/DDSelect';
-import routes from '../routes';
-import request from '../request';
+import DDSelect from '../ui_components/DDSelect';
+import routes from '../../routes';
+import request from '../../request';
 
 import styles from './LinksForm.scss'
-import { submitLink } from '../actions/linkActions';
+import { submitLink } from '../../actions/linkActions';
 
 const qs = require('qs');
 

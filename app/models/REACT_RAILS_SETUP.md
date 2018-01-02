@@ -41,3 +41,27 @@ in routes.rb:
 get '*path', to: "application#fallback_index_html", constraints: ->(request) do
 !request.xhr? && request.format.html?
 end
+
+
+https://github.com/facebookincubator/create-react-app/issues/93#issuecomment-282359099
+in index.js
+```
+const render = (Component) => {
+    return ReactDOM.render(
+        <Provider store={store}>
+            <Component/>
+        </Provider>,
+        document.getElementById('root')
+    );
+};
+
+render(App);
+
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        const NextApp = require('./App').default;
+        render(NextApp);
+    });
+}
+```

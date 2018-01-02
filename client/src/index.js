@@ -16,3 +16,23 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>, document.getElementById('root'));
+
+const render = (Component) => {
+  return ReactDOM.render(
+    <Provider store={store}>
+      <Router>
+        <Component />
+      </Router>
+    </Provider>,
+    document.getElementById('root')
+  );
+};
+
+render(App);
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default;
+    render(NextApp);
+  });
+}

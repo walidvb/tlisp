@@ -6,7 +6,7 @@ import { play } from '../actions/playerActions';
 import styles from './Link.scss';
 
 const Link = ({play, link }) => {
-  const { thumbnail_url, title, width, height, provider, html } = link;
+  const { thumbnail_url, title, width, height, provider, html, users } = link;
   let inner;
   if(link.playing){
     inner = <div dangerouslySetInnerHTML={{
@@ -26,7 +26,7 @@ const Link = ({play, link }) => {
           <div className={styles.top}>
             <div className={styles.submitted}>
               <i className="fa fa-user nouse-icon"></i>
-              XXX
+              {users.map(u => u.initials).join(', ')}
             </div>
           </div>
           <div className={styles.bottom}>

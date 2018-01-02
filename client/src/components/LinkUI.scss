@@ -25,9 +25,9 @@
     margin-right: .5rem;
     cursor: pointer;
     text-transform: lowercase;
-    opacity: .7;
+    color: darken(white, 30%);
     &.active, &:hover{
-        opacity: 1;
+        color: white;
         text-transform: uppercase;
         font-weight: bold;
     }

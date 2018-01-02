@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { play } from '../../actions/playerActions';
+import { playTrack } from '../../actions/playerActions';
 import styles from './Link.scss';
 
-const Link = ({play, link }) => {
+const Link = ({ playTrack, link }) => {
   const { thumbnail_url, title, width, height, provider, html, users } = link;
   let inner;
   if(link.playing){
@@ -18,7 +18,7 @@ const Link = ({play, link }) => {
     inner = (
       <div>
         <div className={styles.thumbnail}>
-          <img width="100%" height="400" src={thumbnail_url} />
+          <img style={{visibility: 'hidden'}}width="100%" height="400" src={thumbnail_url} />
         </div>
         <div className={styles.infos}>
           <div>
@@ -47,7 +47,7 @@ const Link = ({play, link }) => {
     );
   }
   return (
-    <div onClick={() => play(link)} className={[styles.full_bg]} style={{ backgroundImage: `url(${thumbnail_url})` }}>
+    <div onClick={() => playTrack(link)} className={[styles.full_bg]} style={{ backgroundImage: `url(${thumbnail_url})` }}>
       {inner}
     </div>
   ); 
@@ -58,7 +58,7 @@ Link.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  play: (track) => dispatch(play(track))
+  playTrack: (track) => dispatch(playTrack(track))
 })
 
 const mapStateToProps = (state, ownProps) => ({

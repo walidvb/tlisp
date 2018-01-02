@@ -2,14 +2,44 @@ import * as types from './actionTypes';
 import request from '../request';
 import routes from '../routes';
 
-export const play = (track) => {
+export const playTrack = (track) => {
   return {
-    type: types.PLAY,
+    type: types.PLAY_TRACK,
     payload: track,
-  };
+  }; 
 }
+
+export const play = (payload) => ({
+  type: types.PLAY,
+  payload
+})
+
+export const pause = (payload) => ({
+  type: types.PAUSE,
+  payload
+})
+
+export const onProgress = (payload) => ({
+  type: types.PROGRESS,
+  payload
+})
+
+export const onSeek = (payload) => ({
+  type: types.SEEK,
+  payload
+})
 
 export const setTracklist = (payload) => ({
   type: types.SET_PLAYLIST,
+  payload
+})
+
+export const next = (payload) => ({
+  type: types.NEXT,
+  payload
+})
+
+export const prev = (payload) => ({
+  type: types.PREV,
   payload
 })

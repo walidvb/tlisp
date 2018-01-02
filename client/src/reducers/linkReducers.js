@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       }
     
     // PLAYER RELATED
-    case `${types.PLAY}`:
+    case `${types.PLAY_TRACK}`:
       let newList = state.list.map(l => ({
         ...l,
         playing: l.id == action.payload.id,

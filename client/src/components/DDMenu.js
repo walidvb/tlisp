@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import PlayerContainer from './player/PlayerContainer';
+import Controls from './player/Controls'
 
 import styles from './DDMenu.scss';
 
@@ -22,10 +23,7 @@ class DDMenu extends Component {
             <div className={styles.container}>
                 <ul className={styles.links_wrapper}>
                     <li>
-                        <div 
-                            onClick={() => this.setState({playerOpen: !playerOpen})}
-                            className={playerOpen ? styles.active : ""}
-                        >Player</div>
+                        <Controls togglePlayer={() => this.setState({playerOpen: !playerOpen})}/>
                         <div className={[styles.panel, playerOpen ? styles.panel__open : ""].join(' ')}>
                             <PlayerContainer />
                         </div>

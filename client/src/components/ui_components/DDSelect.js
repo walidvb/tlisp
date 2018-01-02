@@ -7,7 +7,7 @@ import 'react-select/dist/react-select.css';
 const styles = require('react-select/dist/react-select.css');
 
 const propTypes = {
-    
+    optionName: PropTypes.string.isRequired,
 }
 
 function DDSelect(props) {
@@ -45,7 +45,7 @@ function DDSelect(props) {
     return (
         <div>
             <style>{styles}</style>
-            {creatable ? <Select.Creatable {...opts} promptTextCreator={`Create a new ${props.optionName}...`} /> : <Select {...opts} />}
+            {creatable ? <Select.Creatable {...opts} promptTextCreator={() => `Create a new ${props.optionName}...`} /> : <Select {...opts} />}
         </div>
     )
 }

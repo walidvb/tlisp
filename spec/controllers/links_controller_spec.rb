@@ -59,10 +59,21 @@ describe LinksController do
       expect(response_json).not_to be_empty
       expect(response_json[0]["users"].map{|u| u["id"]}).to eq([me.id, user.id])
     end
+
+    context "search" do 
+      it 'filters by user' do
+        get :index, format: :json, user_ids
+      end
+    end
   end
 
   describe "#create" do 
-    
+
+    it 'sets visibility' do 
+      post :create, { link: {url: url, published: false }}
+      expect(LinkCliqueAssignment.last.published).not_to be_true
+    end
+
     context "with valid oembed source" do 
       it "returns the link" do 
         expect { 

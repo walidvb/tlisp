@@ -32,23 +32,22 @@ class LinksController < ApplicationController
     }
   end
 
-  def search
-    cliques = current_user.cliques
-    user_ids = params[:users]
-    @links = LinkCliqueAssignment.includes([:link, :user]).where(user: users, clique: cliques).map(&:link)
-  end
   # GET /links
   # GET /links.json
   def index
     cliques = current_user.cliques
-    @links = LinkCliqueAssignment
+    @link_assignments = LinkCliqueAssignment
       .includes(link: [:users])
       .where(clique: cliques)
       .where.not(user: current_user)
-      .map(&:link)
-    if params[:users] 
-      @links = search
+    if u_ids = params[:users].presence
+       @link_assignments = @link_assignments.where(user: u_ids)
     end
+    if c_ids = params[:cliques].presence
+      @link_assignments = @link_assignments.where(clique: c_ids)
+    end
+
+    @links = @link_assignments.map(&:link)
   end
 
   # GET /links/1

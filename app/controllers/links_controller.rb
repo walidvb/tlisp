@@ -117,15 +117,20 @@ class LinksController < ApplicationController
         tag_list: [], 
         genre_list: []
       )
-      if playlist_ids = pps[:playlist_ids]
-        pps[:playlist_ids] = playlist_ids.map do |pid|
-          if !pid.blank? && !Playlist.exists?(pid)
-            pl = Playlist.create!(name: pid, user: current_user)
-            pl.id
-          else
-            pid
-          end
-        end.compact
+      if !@params_read
+        
+        if playlist_ids = pps[:playlist_ids]
+          pps[:playlist_ids] = playlist_ids.map do |pid|
+            if !pid.blank? && !Playlist.exists?(pid)
+              pl = Playlist.create!(name: pid, user: current_user)
+              puts pl.inspect
+              pl.id
+            else
+              pid
+            end
+          end.compact
+        end
+        @params_read = true
       end
       pps
     end

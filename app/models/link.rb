@@ -20,7 +20,6 @@ class Link < ActiveRecord::Base
     end
 
     def assign_to options = { users: [] }
-        puts options
         options[:users].each do |user|
             uid = user.is_a?(User) ? user.id : user
             cliques = options[:cliques].presence

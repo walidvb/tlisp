@@ -90,8 +90,7 @@ describe LinksController do
         it "creates an unexisting playlist and adds it to it" do
           expect { 
             post :create, { link: {url: url, playlist_ids: ["test"]}}
-            expect(user.playlists.count).to eq(1)
-          }.to change(Playlist, :count).by(1)
+          }.to change(me.playlists, :count).by(1)
         end
 
       end

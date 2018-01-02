@@ -118,12 +118,10 @@ class LinksController < ApplicationController
         genre_list: []
       )
       if !@params_read
-        
         if playlist_ids = pps[:playlist_ids]
           pps[:playlist_ids] = playlist_ids.map do |pid|
             if !pid.blank? && !Playlist.exists?(pid)
               pl = Playlist.create!(name: pid, user: current_user)
-              puts pl.inspect
               pl.id
             else
               pid

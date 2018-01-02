@@ -79,7 +79,7 @@ function Playlists(props) {
     return (
         <div className="form-group">
             <label htmlFor={`playlists`}><h3> Playlists </h3></label>
-            <DDSelect placeholder="Select one or more playlists" creatable={true} multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
+            <DDSelect placeholder="Select one or more playlists" creatable={true} optionName="playlist" multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
         </div>
     )
 };

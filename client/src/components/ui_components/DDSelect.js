@@ -45,7 +45,7 @@ function DDSelect(props) {
     return (
         <div>
             <style>{styles}</style>
-            {creatable ? <Select.Creatable {...opts} /> : <Select {...opts} />}
+            {creatable ? <Select.Creatable {...opts} promptTextCreator={`Create a new ${props.optionName}...`} /> : <Select {...opts} />}
         </div>
     )
 }

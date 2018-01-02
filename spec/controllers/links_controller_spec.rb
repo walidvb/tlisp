@@ -34,23 +34,29 @@ describe LinksController do
     context "with valid oembed source" do 
       it "returns the link" do 
         expect { 
-          post :create, { link: {url: url, clique_id: clique.id}}
+          post :create, { link: {url: url, clique_ids: [clique.id]}}
         }.to change(Link, :count).by(1)
       end
 
-      context "when already posted in the clique" do 
+      context "when already posted in the clique by someone else" do 
         before do 
-          Fabricate(:link, url: url, user: user, clique: clique)
+          Fabricate(:link, url: url, user: user, cliques: [clique])
           request.env['warden'].stub :authenticate! => user2
           controller.stub :current_user => user2
         end
         
         it "doesn't duplicate it" do
-          expect(clique.links.where(url: url)).not_to be_empty
           expect { 
-            post :create, { link: {url: url, clique_id: clique.id}}
+            post :create, { link: {url: url, clique_ids: [clique.id]}}
           }.to change(Link, :count).by(0)
         end
+
+        it "adds an assignment" do
+          expect { 
+            post :create, { link: {url: url, clique_ids: [clique.id]}}
+          }.to change(LinkCliqueAssignment, :count).by(1)
+        end
+
       end
     end
   end

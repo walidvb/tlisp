@@ -1,0 +1,36 @@
+body{
+    padding-top: calc(3.5rem - 2px);
+}
+
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1EA896;
+    z-index: 50;
+    color: white;
+}
+
+.panel{
+    max-width: 500px;
+    position: absolute;
+    transform: translateY(1rem);
+    left: 0;
+    display: none;
+}
+
+.panel__open{
+    display: inline-block;
+}
+
+.links_wrapper{
+    padding: 1rem 1rem;
+    display: flex;
+    position: relative;
+    li{
+        padding: 0 1rem;
+    }
+    a{
+        text-decoration: none;
+    }
+}

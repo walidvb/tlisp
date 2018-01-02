@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import ReactPlayer from 'react-player'
 
-import { play } from '../actions/playerActions';
+import { play } from '../../actions/playerActions';
 import styles from './PlayerContainer.scss';
 
 class PlayerContainer extends Component {
@@ -30,35 +30,35 @@ class PlayerContainer extends Component {
                 {!isPlaying ? <div className="fa fa-play" /> : 
                     (<div>
                         <div className="fa fa-pause" />
-                        <ReactPlayer controls={true} muted={true} url={t.url} 
-                            onProgress={console.log} 
-                            onEnded={this.playNext.bind(this)} 
-                        />
                     </div>)
                 }
                 
             </div>
         )
     }
-    // renderCurrentlyPlaying(){
-    //     if (this.props.currentlyPlaying === undefined){
-    //         return null;
-    //     }
-    //     const { title, html, url } = this.props.currentlyPlaying;
-    //     return (<div>
-    //         {title}
-    //         <ReactPlayer url={url} onEnded={() => this.play()} />
-    //     </div>);
-    // }
+    renderCurrentlyPlaying(){
+        if (this.props.currentlyPlaying === undefined){
+            return null;
+        }
+        const { title, html, url } = this.props.currentlyPlaying;
+        return (<div>
+            {title}
+            <ReactPlayer url={url} 
+                width="100%"
+                style={{maxHeight: "200px"}}
+                onProgress={console.log}
+                onEnded={this.playNext.bind(this)}  
+            />
+        </div>);
+    }
     render() {
         const { tracklist } = this.props;
         return (
             <div className={styles.container}>
-
+                { this.renderCurrentlyPlaying() }
                 <div className={styles.tracklist}>
                     {tracklist.map(this.renderTrack.bind(this))}
                 </div>
-                {/* { this.renderCurrentlyPlaying() } */}
             </div>
         )
     }

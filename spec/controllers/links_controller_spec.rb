@@ -61,17 +61,14 @@ describe LinksController do
     end
 
     context "search" do 
-      it 'filters by user' do
-        get :index, format: :json, user_ids
-      end
     end
   end
 
   describe "#create" do 
 
     it 'sets visibility' do 
-      post :create, { link: {url: url, published: false }}
-      expect(LinkCliqueAssignment.last.published).not_to be_true
+      post :create, { link: {url: url, published: true }}
+      expect(LinkCliqueAssignment.last).to be_visible
     end
 
     context "with valid oembed source" do 

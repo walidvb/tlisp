@@ -38,6 +38,7 @@ class LinksController < ApplicationController
     cliques = current_user.cliques
     @link_assignments = LinkCliqueAssignment
       .includes(link: [:users])
+      .visible
       .where(clique: cliques)
       .where.not(user: current_user)
     if u_ids = params[:users].presence
@@ -71,7 +72,7 @@ class LinksController < ApplicationController
   def create
     clique_ids = link_params.delete(:clique_ids)
     @link = Link.find_by_url(link_params[:url]) || Link.new(link_params)
-    @link.assign_to(users: [current_user], cliques: clique_ids)
+    @link.assign_to(users: [current_user], cliques: clique_ids, visible: link_params[:published])
     
     respond_to do |format|
       if @link.save

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102005025) do
+ActiveRecord::Schema.define(version: 20180102172549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,10 +50,11 @@ ActiveRecord::Schema.define(version: 20180102005025) do
 
   create_table "link_clique_assignments", force: :cascade do |t|
     t.integer  "clique_id"
-    t.integer  "link_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "link_id",                    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
+    t.boolean  "visible",    default: false
   end
 
   add_index "link_clique_assignments", ["clique_id"], name: "index_link_clique_assignments_on_clique_id", using: :btree

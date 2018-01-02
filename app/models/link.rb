@@ -19,16 +19,16 @@ class Link < ActiveRecord::Base
         self.clique.links.where(url: self.url).count > 0
     end
 
-    def assign_to options = { users: [] }
+    def assign_to options = { users: [], visible: false }
         options[:users].each do |user|
             uid = user.is_a?(User) ? user.id : user
             cliques = options[:cliques].presence
             if cliques.nil? || cliques.empty?
-                self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid)
+                self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, visible: options[:visible])
             else
                 cliques.each do |clique|
                     cid = clique.is_a?(Clique) ? clique.id : clique
-                    self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid)
+                    self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid, visible: options[:visible])
                 end
             end
         end

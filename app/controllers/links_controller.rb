@@ -33,25 +33,21 @@ class LinksController < ApplicationController
   end
 
   def search
+    cliques = current_user.cliques
     user_ids = params[:users]
-    @links = Link.where(user_id: user_ids)
+    @links = LinkCliqueAssignment.includes([:link, :user]).where(user: users, clique: cliques).map(&:link)
   end
   # GET /links
   # GET /links.json
   def index
-    @cliques = current_user.cliques
-    @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
-    binding.pry
-    @links = LinkCliqueAssignment.includes(:link).where(user: @users, clique: @cliques).map(&:link)
+    cliques = current_user.cliques
+    @links = LinkCliqueAssignment
+      .includes(link: [:users])
+      .where(clique: cliques)
+      .where.not(user: current_user)
+      .map(&:link)
     if params[:users] 
       @links = search
-    else
-      if user_id = params[:user_id].presence
-        @links = @links.where(user_id: user_id)
-      end
-      if tag_names = params[:tag_names].presence
-        @links = @links.tagged_with(tag_names)
-      end
     end
   end
 
@@ -74,9 +70,9 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    cliques = link_params.delete(:clique_ids)
+    clique_ids = link_params.delete(:clique_ids)
     @link = Link.find_by_url(link_params[:url]) || Link.new(link_params)
-    @link.assign_to(user: current_user, cliques: cliques)
+    @link.assign_to(users: [current_user], cliques: clique_ids)
     
     respond_to do |format|
       if @link.save

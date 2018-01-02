@@ -7,9 +7,11 @@ class CreateLinkCliqueAssignments < ActiveRecord::Migration
     end
     Link.all.map do |l|
       begin
-        l.clique_ids = [l.clique_id]
-      rescue 
+        l.assign_to users: [User.find(l.user_id)], cliques: [Clique.find(l.clique_id)].compact
+        l.save!
+      rescue => e
         p "========"
+        p e
         p "#{l.inspect}"
       end
     end

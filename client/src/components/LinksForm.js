@@ -63,7 +63,10 @@ function Cliques({ canSelectCliques, cliques}) {
     const options = cliques.map( c => ({value: c.id, label: c.name}));
     if (!canSelectCliques){
         return (
-            <Text field={["clique_ids", 0]} type="hidden"/>
+            <div>
+                <p>Posting to {cliques[0].name}</p>
+                <Text field={["clique_ids", 0]} type="hidden"/>
+            </div>
         )
     }
     return (

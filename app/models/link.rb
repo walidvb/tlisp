@@ -3,22 +3,35 @@ class Link < ActiveRecord::Base
 
     acts_as_taggable_on :tags, :genre
     serialize :oembed, Hash
-    belongs_to :user
     has_many :playlist_assignments, inverse_of: :link
     has_many :playlists, through: :playlist_assignments, inverse_of: :links
-
+    
     has_many :link_clique_assignments, inverse_of: :link
+    has_many :users, through: :link_clique_assignments, inverse_of: :links
     has_many :cliques, through: :link_clique_assignments, inverse_of: :links
     before_save :add_oembed
     
-    validates_presence_of :user
-    validates_presence_of :cliques, if: ->{ playlist_ids.empty? }
-    # validates :url, uniqueness: { scope: :clique_id }, if: ->{ playlist_assignment_ids.empty? }
-    # validates :url, uniqueness: { scope: :playlist_ids }, if: ->{ clique_ids.empty? }
-    # validates :url, uniqueness: { scope: :user_id }, if: ->{ clique_ids.empty? && playlist_assignment_ids.empty? }
+    validates_presence_of :url
+    # TODO move description to link_assignment to allow unscoped uniqueness validation 
+    # validates :url, uniqueness: { scope: [:clique_id] }
 
     def is_duplicate?
         self.clique.links.where(url: self.url).count > 0
+    end
+
+    def assign_to options = { users: [] }
+        options[:users].each do |user|
+            uid = user.is_a?(User) ? user.id : user
+            cliques = options[:cliques].presence
+            if cliques.nil? || cliques.empty?
+                self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid)
+            else
+                cliques.each do |clique|
+                    cid = clique.is_a?(Clique) ? clique.id : clique
+                    self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid)
+                end
+            end
+        end
     end
 
     [   "title",

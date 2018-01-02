@@ -33,25 +33,21 @@ class LinksController < ApplicationController
   end
 
   def search
+    cliques = current_user.cliques
     user_ids = params[:users]
-    @links = Link.where(user_id: user_ids)
+    @links = LinkCliqueAssignment.includes([:link, :user]).where(user: users, clique: cliques).map(&:link)
   end
   # GET /links
   # GET /links.json
   def index
-    @cliques = current_user.cliques
-    @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
-    @links = Link.where(user: @users)
-
+    cliques = current_user.cliques
+    @links = LinkCliqueAssignment
+      .includes(link: [:users])
+      .where(clique: cliques)
+      .where.not(user: current_user)
+      .map(&:link)
     if params[:users] 
       @links = search
-    else
-      if user_id = params[:user_id].presence
-        @links = @links.where(user_id: user_id)
-      end
-      if tag_names = params[:tag_names].presence
-        @links = @links.tagged_with(tag_names)
-      end
     end
   end
 
@@ -74,7 +70,10 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @link = Link.new(link_params)
+    clique_ids = link_params.delete(:clique_ids)
+    @link = Link.find_by_url(link_params[:url]) || Link.new(link_params)
+    @link.assign_to(users: [current_user], cliques: clique_ids)
+    
     respond_to do |format|
       if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
@@ -100,16 +99,6 @@ class LinksController < ApplicationController
     end
   end
 
-  # DELETE /links/1
-  # DELETE /links/1.json
-  def destroy
-    @link.destroy
-    respond_to do |format|
-      format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
@@ -127,18 +116,21 @@ class LinksController < ApplicationController
         playlist_ids: [],
         tag_list: [], 
         genre_list: []
-      ).merge(
-          user: current_user,
       )
-      if playlist_ids = pps[:playlist_ids]
-        pps[:playlist_ids] = playlist_ids.map do |pid|
-          if !pid.blank? && !Playlist.exists?(pid)
-            pl = Playlist.create!(name: pid, user: current_user)
-            pl.id
-          else
-            pid
-          end
-        end.compact
+      if !@params_read
+        
+        if playlist_ids = pps[:playlist_ids]
+          pps[:playlist_ids] = playlist_ids.map do |pid|
+            if !pid.blank? && !Playlist.exists?(pid)
+              pl = Playlist.create!(name: pid, user: current_user)
+              puts pl.inspect
+              pl.id
+            else
+              pid
+            end
+          end.compact
+        end
+        @params_read = true
       end
       pps
     end

@@ -30,3 +30,6 @@ doc/
 /config/local_env.yml
 .secret
 .sprockets-manifest*
+
+
+*.dump

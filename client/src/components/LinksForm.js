@@ -43,7 +43,7 @@ function LinkDetails(props) {
                                 Public
                             </label>
                             <small className={styles.help_text}>
-                                ({formApi.values.published ? "This post will be available to your selected cliques": "This link will only be visible to you"})
+                                ({formApi.values.published ? "This link will be available to your selected cliques": "This link will only be visible to you"})
                             </small>
                         </div>
                         <div>
@@ -51,7 +51,7 @@ function LinkDetails(props) {
                             <DDSelect placeholder="Tag your link" creatable={true} multiple={true} options={props.tags.map(v => ({label: v, value: v}))} field={'tag_list'} id={`tags`} />
                         </div>
                         <Playlists className="form-control" playlists={props.playlists} />
-                        <Cliques className="form-control" cliques={props.cliques} />
+                        <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
                     </div>
                 )}
             </Form>
@@ -59,9 +59,9 @@ function LinkDetails(props) {
     )
 }
 
-function Cliques(props) {
-    const options = props.cliques.map( c => ({value: c.id, label: c.name}));
-    if(options.length < 2){
+function Cliques({ canSelectCliques, cliques}) {
+    const options = cliques.map( c => ({value: c.id, label: c.name}));
+    if (!canSelectCliques){
         return (
             <Text field={["clique_ids", 0]} type="hidden"/>
         )
@@ -99,16 +99,19 @@ class LinksForm extends Component {
     }
     componentDidMount() {
         const params = qs.parse(this.props.location.search, {ignoreQueryPrefix: true});
-        request(routes.api.links.formDetails(params.url))
-            .then(res => res.json())
-            .then(({ link, playlists, cliques, tags }) => this.setState({
-                loaded: true,
-                link,
-                playlists,
-                cliques,
-                tags,
-                oembeddable: typeof(link.oembed) == "object" && Object.keys(link.oembed).length > 0,
-            }, this.setDefaultValues))
+        if(params.url !== undefined){
+            request(routes.api.links.formDetails(params.url))
+                .then(res => res.json())
+                .then(({ link, playlists, cliques, tags }) => this.setState({
+                    loaded: true,
+                    link,
+                    playlists,
+                    cliques,
+                    tags,
+                    canSelectCliques: cliques.length > 1,
+                    oembeddable: typeof(link.oembed) == "object" && Object.keys(link.oembed).length > 0,
+                }, this.setDefaultValues))
+        }
     }
     setDefaultValues(){
         const { url } = this.state.link;
@@ -119,14 +122,14 @@ class LinksForm extends Component {
             is_a_set: "0",
             published: true,
         });
-        if(this.state.cliques.length == 1){
+        if(!this.state.canSelectCliques){
             this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);
         }
     }
-    preSubmit({ link }, formApi){
-        const { clique_ids, playlist_ids } = link
+    preSubmit({ link }, canSelectCliques){
+        const { clique_ids, playlist_ids } = link;
         let link_ = link;
-        if(clique_ids !== undefined){
+        if(clique_ids !== undefined && this.state.canSelectCliques){
             link_.clique_ids = clique_ids.map(v => v.value)
         }
         if (playlist_ids !== undefined) {
@@ -143,7 +146,20 @@ class LinksForm extends Component {
     renderLinkHeader(){
         const { link, oembeddable } = this.state;
         const { oembed } = this.state.link;
-        return !oembeddable ? (<div> Not Suported </div>) : (
+        if(!oembeddable){
+            return (<div className={styles.details}>
+                <div className="fa fa-question" style={{padding:"0 1.5rem", fontSize: '1.5rem'}}/>
+                <div>
+                    <h3>Oops, we can't seem to find details for this link. ({link.url})</h3>
+                    <p> You can still save it, only it will likely not be playable on Diggers' Delights (yet). </p>
+                    <div className={styles.url}>
+                        Think this is a mistake? You can leave us a note <a href="/contact" target="_blank">here</a> and we will check it out.
+                        
+                    </div>
+                </div>
+            </div>)
+        }
+        return (
             <div className={styles.details}>
                 <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
                 <div>
@@ -154,7 +170,7 @@ class LinksForm extends Component {
         )
     }
     render() {
-        const { link, loaded, playlists, cliques, tags } = this.state;
+        const { link, loaded, playlists, cliques, tags, canSelectCliques } = this.state;
         if(!loaded){
             return <div className={styles.container}>LOADING</div>
         }
@@ -162,15 +178,20 @@ class LinksForm extends Component {
         return (
             <div className={styles.container}>
                 {this.renderLinkHeader()}
-                <Form dontPreventDefault={true}  onSubmit={this.handleSubmit} preSubmit={this.preSubmit}>
+                <Form 
+                    dontPreventDefault={false}  
+                    onSubmit={this.handleSubmit} 
+                    preSubmit={(values, formApi) => this.preSubmit(values, canSelectCliques)}>
                     { formApi => (
                         <form className={styles.form_container} onSubmit={formApi.submitForm} id="form2">
                             <LinkDetails getApi={f => this.linkFormApi = f} 
                                 playlists={playlists} 
                                 cliques={cliques} 
                                 tags={tags}
-                                link={oembed} 
-                                this={this} />
+                                link={oembed}
+                                canSelectCliques={canSelectCliques} 
+                                this={this} 
+                            />
                             <button type="submit" >Submit</button>
                         </form>
                     )}

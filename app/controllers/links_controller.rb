@@ -41,8 +41,8 @@ class LinksController < ApplicationController
   def index
     @cliques = current_user.cliques
     @users = @cliques.map(&:users).flatten.select{|us| us != current_user}
-    @links = Link.where(users: @users)
-
+    binding.pry
+    @links = LinkCliqueAssignment.includes(:link).where(user: @users, clique: @cliques).map(&:link)
     if params[:users] 
       @links = search
     else
@@ -74,8 +74,10 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
+    cliques = link_params.delete(:clique_ids)
     @link = Link.find_by_url(link_params[:url]) || Link.new(link_params)
-    @link.users << current_user
+    @link.assign_to(user: current_user, cliques: cliques)
+    
     respond_to do |format|
       if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }

@@ -19,6 +19,18 @@ class Link < ActiveRecord::Base
         self.clique.links.where(url: self.url).count > 0
     end
 
+    def assign_to options = {}
+        options[:users].each do |user|
+            puts user
+            if options[:cliques].empty?
+                self.link_clique_assignments << LinkCliqueAssignment.new(user: user)
+            else
+                options[:cliques].each do |clique|
+                    self.link_clique_assignments << LinkCliqueAssignment.new(user: user, clique: clique)
+                end
+            end
+        end
+    end
     [   "title",
         "description",
         "html",

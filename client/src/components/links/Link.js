@@ -14,20 +14,23 @@ const Link = ({play, link }) => {
     }}/>;
   }
   else{
+    const splittedTitle = title && title.split(/[\|-]/);
     inner = (
       <div>
         <div className={styles.thumbnail}>
           <img width="100%" height="400" src={thumbnail_url} />
         </div>
         <div className={styles.infos}>
-          <h3 className={styles.title}>
-            { title }
-          </h3>
-          <div className={styles.top}>
+          <div>
+            <h3 className={styles.title}>
+              {title && splittedTitle.length == 2 ? <span>{splittedTitle[0]} < br /> {splittedTitle[1]}</span> : title  }
+            </h3>
             <div className={styles.submitted}>
-              <i className="fa fa-user nouse-icon"></i>
+              <i className={["fa fa-user",styles.user_icon].join(' ')}></i>
               {users.map(u => u.initials).join(', ')}
             </div>
+          </div>
+          {/* <div className={styles.top}>
           </div>
           <div className={styles.bottom}>
             <em>
@@ -38,7 +41,7 @@ const Link = ({play, link }) => {
               <a target="_blank" href="https://soundcloud.com/intimatesilence/intimate-silence-radio-016-juho-kusti"><i className="fa fa-soundcloud"></i></a>
               <a href="#"><i className="fa fa-play"></i></a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );

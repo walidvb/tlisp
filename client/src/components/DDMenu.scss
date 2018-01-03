@@ -1,13 +1,15 @@
+@import '../_variables.scss';
+
 body{
     //padding-top: calc(3.5rem - 2px);
 }
 
-$background: transparentize(#1EA896, .2);
+$background: transparentize($primary-color, .2);
 
 .container{
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 15px;
+    right: 15px;
     background-color: $background;
     z-index: 50;
     color: white;
@@ -16,7 +18,7 @@ $background: transparentize(#1EA896, .2);
 .panel{
     max-width: 500px;
     position: absolute;
-    transform: translateY(1.3rem);
+    transform: translateY(.4rem);
     left: 0;
     display: none;
     background: $background;
@@ -27,7 +29,7 @@ $background: transparentize(#1EA896, .2);
 }
 
 .links_wrapper{
-    padding: .2rem 1rem;
+    padding: .2rem 1rem 0rem 0;
     display: flex;
     position: relative;
     li{
@@ -35,5 +37,23 @@ $background: transparentize(#1EA896, .2);
     }
     a{
         text-decoration: none;
+        text-transform: lowercase;
+        &:hover{
+            text-transform: uppercase;
+        }
+    }
+    .handle{
+        font-size: smaller;
+        cursor: move;
+        padding: 6px 8px 0px;
+        border-right: solid 1px  darken($primary-color, 5%);
+        color: darken(white, 15%);
+        &:hover{
+            color: white;
+        }
+        
+    }
+    .menu__active{
+        text-transform: uppercase;
     }
 }

@@ -39,7 +39,7 @@ class DDMenu extends Component {
                             </div>
                         </li>
                         <li>
-                            <Link className={panelOpen === 'filters' ? styles.menu__active : ""} to={"/me"} onClick={() => this.togglePanel('playlists')}> My Crates </Link>
+                            <Link className={panelOpen === 'playlists' ? styles.menu__active : ""} to={"/me"} onClick={() => this.togglePanel('playlists')}> My Crates </Link>
                             <div className={[styles.panel, panelOpen === 'playlists' ? styles.panel__open : ""].join(' ')}>
                                 <PlaylistList />
                             </div>

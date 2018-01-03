@@ -104,7 +104,6 @@ class LinksForm extends Component {
         const params = qs.parse(this.props.location.search, {ignoreQueryPrefix: true});
         if(params.url !== undefined){
             request(routes.api.links.formDetails(params.url))
-                .then(res => res.json())
                 .then(({ link, playlists, cliques, tags }) => this.setState({
                     loaded: true,
                     link,
@@ -144,7 +143,18 @@ class LinksForm extends Component {
         request(routes.api.links.create, {
             method: 'POST',
             body
-        }).then(r => r.json()).then(c => console.log(c))
+        })
+        .then(c => {
+            this.setState({
+                success: true,
+            })
+        })
+        .catch( (r, e) => {
+            this.setState({
+                errors: "Seems like something went wrong.. Maybe you had this link already?"
+            });
+        })
+        
     }
     renderLinkHeader(){
         const { link, oembeddable } = this.state;
@@ -173,7 +183,7 @@ class LinksForm extends Component {
         )
     }
     render() {
-        const { link, loaded, playlists, cliques, tags, canSelectCliques } = this.state;
+        const { errors, success, link, loaded, playlists, cliques, tags, canSelectCliques } = this.state;
         if(!loaded){
             return <div className={styles.container}>LOADING</div>
         }
@@ -181,24 +191,26 @@ class LinksForm extends Component {
         return (
             <div className={styles.container}>
                 {this.renderLinkHeader()}
-                <Form 
-                    dontPreventDefault={false}  
-                    onSubmit={this.handleSubmit} 
-                    preSubmit={(values, formApi) => this.preSubmit(values, canSelectCliques)}>
-                    { formApi => (
-                        <form className={styles.form_container} onSubmit={formApi.submitForm} id="form2">
-                            <LinkDetails getApi={f => this.linkFormApi = f} 
-                                playlists={playlists} 
-                                cliques={cliques} 
-                                tags={tags}
-                                link={oembed}
-                                canSelectCliques={canSelectCliques} 
-                                this={this} 
-                            />
-                            <button type="submit" >Submit</button>
-                        </form>
-                    )}
-                </Form>
+                { errors }
+                { success ? "Link saved!" : 
+                    <Form 
+                        onSubmit={this.handleSubmit} 
+                        preSubmit={(values, formApi) => this.preSubmit(values, canSelectCliques)}>
+                        { formApi => (
+                            <form className={styles.form_container} onSubmit={formApi.submitForm} id="form2">
+                                <LinkDetails getApi={f => this.linkFormApi = f} 
+                                    playlists={playlists} 
+                                    cliques={cliques} 
+                                    tags={tags}
+                                    link={oembed}
+                                    canSelectCliques={canSelectCliques} 
+                                    this={this} 
+                                />
+                                <button type="submit" >Submit</button>
+                            </form>
+                        )}
+                    </Form>
+                }
             </div>
         )
     }

@@ -55,6 +55,7 @@ class Link < ActiveRecord::Base
 
     def add_oembed
         if new_oembed = get_oembed
+            puts new_oembed.class
             self.oembed = get_oembed
         end
     end

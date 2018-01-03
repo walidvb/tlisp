@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20180102172549) do
     t.string   "url"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.text     "oembed",      default: {}
+    t.text     "oembed",      default: "{}"
     t.text     "description"
     t.boolean  "published",   default: true
     t.boolean  "is_a_set",    default: false

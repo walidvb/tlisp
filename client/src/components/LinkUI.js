@@ -25,7 +25,7 @@ class LinkUI extends Component {
     getLinks: PropTypes.func.isRequired
   }
   componentDidMount() {
-    request(routes.api.links.filters).then(res => res.json()).then(data => {
+    request(routes.api.links.filters).then(data => {
       this.setState({ ...data, ready: true })
     })
   }

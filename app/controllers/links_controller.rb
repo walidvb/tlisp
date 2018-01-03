@@ -5,7 +5,7 @@ class LinksController < ApplicationController
   def filters
     cliques = current_user.cliques.map do |clique| 
       clique.serializable_hash.merge({
-          users: clique.users.select{|us| us != current_user} 
+          users: clique.users#.select{|us| us != current_user} 
       })
     end
     render json: {      
@@ -40,7 +40,7 @@ class LinksController < ApplicationController
       .includes(link: [:users])
       .visible
       .where(clique: cliques)
-      .where.not(user: current_user)
+      #.where.not(user: current_user)
     if u_ids = params[:users].presence
        @link_assignments = @link_assignments.where(user: u_ids)
     end
@@ -48,7 +48,7 @@ class LinksController < ApplicationController
       @link_assignments = @link_assignments.where(clique: c_ids)
     end
 
-    @links = @link_assignments.map(&:link)
+    @links = @link_assignments.map(&:link).compact
   end
 
   # GET /links/1

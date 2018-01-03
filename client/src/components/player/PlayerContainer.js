@@ -59,6 +59,7 @@ class PlayerContainer extends Component {
                 style={{maxHeight: "200px"}}
                 playing={playing}
                 onStart={this.props.play}
+                onPlay={this.props.play}
                 onProgress={this.props.onProgress}
                 onPause={this.props.pause}
                 onEnded={this.playNext.bind(this)}

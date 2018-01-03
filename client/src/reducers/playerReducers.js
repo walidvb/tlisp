@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
     case types.PLAY_TRACK:
       return {
         ...state,
-        playing: true,
         currentlyPlaying: action.payload,
       };
     case types.SET_PLAYLIST:
@@ -52,7 +51,6 @@ export default (state = initialState, action) => {
     case types.PROGRESS:
       return {
         ...state,
-        playing: true,
         progress: action.payload.played
       }
     case types.SEEK:

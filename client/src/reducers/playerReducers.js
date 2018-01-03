@@ -12,6 +12,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentlyPlaying: action.payload,
+        playing: true,
       };
     case types.SET_PLAYLIST:
     return {

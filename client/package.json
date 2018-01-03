@@ -23,9 +23,6 @@
     },
     "/contact": {
       "target": "http://localhost:3001"
-    },
-    "/playlists": {
-      "target": "http://localhost:3001"
     }
   },
   "dependencies": {

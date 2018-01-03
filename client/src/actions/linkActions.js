@@ -3,10 +3,16 @@ import request from '../request';
 import routes from '../routes';
 
 export const getLinks = ({ pathname, filters}) => {
+  console.log(pathname);
+  let path = pathname ? (pathname === '/' ? routes.api.links.explore : routes.api.links[pathname.slice(1)]) 
+    : routes.api.links.explore;
+  if(/playlists/.test(pathname)){
+    path = `/api${pathname}`;
+  }
   return {
     type: types.GET_LINKS,
     payload: new Promise(resolve => {
-      request(routes.api.links[pathname.slice(1)], { qs: filters })
+      request(path, { qs: filters })
         .then(resolve)
         .catch(error => console.log(error))
     }),

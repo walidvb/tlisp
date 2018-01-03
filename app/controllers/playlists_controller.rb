@@ -11,6 +11,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1.json
   def show
     @links = @playlist.links
+    render 'links/index'
   end
 
   # GET /playlists/new

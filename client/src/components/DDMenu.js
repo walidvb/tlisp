@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
-import PlayerContainer from './player/PlayerContainer';
 import Controls from './player/Controls'
+import PlayerContainer from './player/PlayerContainer';
+import PlaylistList from './playlists/PlaylistList';
 import LinkUI from './links/LinkUI';
 
 import styles from './DDMenu.scss';
@@ -28,13 +29,16 @@ class DDMenu extends Component {
             <div className={styles.container}>
                 <ul className={styles.links_wrapper}>
                     <li>
-                        <Link to={"explore"} onClick={() => this.togglePanel('filters')}> Explore </Link>
+                        <Link to={"/explore"} onClick={() => this.togglePanel('filters')}> Explore </Link>
                         <div className={[styles.panel, panelOpen==='filters' ? styles.panel__open : ""].join(' ')}>
                             <LinkUI />
                         </div>
                     </li>
                     <li>
-                        <Link to={"/me"}> My Crates </Link>
+                        <Link to={"/me"} onClick={() => this.togglePanel('playlists')}> My Crates </Link>
+                        <div className={[styles.panel, panelOpen === 'playlists' ? styles.panel__open : ""].join(' ')}>
+                            <PlaylistList />
+                        </div>
                     </li>
                     <li>
                         <Controls togglePlayer={() => this.togglePanel('player')}/>

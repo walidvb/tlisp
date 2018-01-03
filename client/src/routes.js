@@ -7,9 +7,17 @@ const routes = {
             formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
             create: '/api/links.json',
         },
+        playlists: {
+            index: '/api/playlists.json',
+        }
     },
     links: {
         new: '/tracks/new',
+        me: '/me',
+        explore: '/explore'
+    },
+    playlists: {
+        show: '/playlists',
     }
 }
 

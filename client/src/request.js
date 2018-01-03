@@ -8,8 +8,8 @@ export default function(url, options = {}){
         fetch(`${url}${qs}`, {
             ...options,
             credentials: 'same-origin',
-            accept: 'application/json',
-            headers: { "Content-Type": "application/json" }
+            
+            headers: { "Content-Type": "application/json", accept: 'application/json', }
         })
         .then(response => {
             if (response.status >= 200 && response.status < 300) {

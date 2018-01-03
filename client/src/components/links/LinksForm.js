@@ -48,7 +48,7 @@ function LinkDetails(props) {
                         </div>
                         <div>
                             <label htmlFor={`tags`}><h3> Tags </h3></label>
-                            <DDSelect placeholder="Tag your link" creatable={true} multiple={true} options={props.tags.map(v => ({label: v, value: v}))} field={'tag_list'} id={`tags`} />
+                            <DDSelect placeholder="Tag your link" creatable={true} optionName="tag" multiple={true} options={props.tags.map(v => ({label: v, value: v}))} field={'tag_list'} id={`tags`} />
                         </div>
                         <Playlists className="form-control" playlists={props.playlists} />
                         <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
@@ -140,6 +140,9 @@ class LinksForm extends Component {
         return { link: link_ };
     }
     handleSubmit(body) {
+        this.setState({
+            errors: undefined,
+        })
         request(routes.api.links.create, {
             method: 'POST',
             body

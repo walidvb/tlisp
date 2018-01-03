@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   scope :confirmed, ->{ where.not(confirmed_at: nil) }
   
-  has_many :link_clique_assignnments, inverse_of: :user
+  has_many :link_clique_assignments, inverse_of: :user
   has_many :links, through: :link_clique_assignments, inverse_of: :users
   
   has_many :clique_memberships, inverse_of: :user

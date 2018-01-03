@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Route
+  Route, Switch
 } from 'react-router-dom'
 
 
@@ -11,13 +11,27 @@ import DDMenu from './components/DDMenu';
 import PlayerContainer from './components/player/PlayerContainer';
 import routes from './routes';
 
+
+class AppWrapper extends Component {
+  render() {
+    return (
+      <div>
+        <DDMenu />
+        <LinksContainer />
+      </div>
+    )
+  }
+}
+
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <DDMenu />
-        <Route exact path="/" component={LinksContainer} />
-        <Route path={routes.links.new} component={LinksForm} />
+        <Switch>
+          <Route path={routes.links.new} component={LinksForm} />
+          <Route path={"/"} component={AppWrapper} />
+        </Switch>
       </div>
     );
   }

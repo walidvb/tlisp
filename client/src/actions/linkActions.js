@@ -8,7 +8,7 @@ export const getLinks = (filters = {}) => {
     filters,
     payload: new Promise(resolve => {
       request(routes.api.links.index, { qs: filters })
-        .then(response => resolve(response.json(), { filters }))
+        .then(resolve)
         .catch(error => console.log(error))
     }),
   };

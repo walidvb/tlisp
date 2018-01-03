@@ -42,6 +42,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         playing: true,
+        currentlyPlaying: state.currentlyPlaying ? state.currentlyPlaying : state.tracklist[0]
       }
     case types.PAUSE:
       return {

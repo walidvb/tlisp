@@ -2,11 +2,13 @@ body{
     //padding-top: calc(3.5rem - 2px);
 }
 
+$background: transparentize(#1EA896, .2);
+
 .container{
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #1EA896;
+    background-color: $background;
     z-index: 50;
     color: white;
 }
@@ -14,9 +16,10 @@ body{
 .panel{
     max-width: 500px;
     position: absolute;
-    transform: translateY(1rem);
+    transform: translateY(1.3rem);
     left: 0;
     display: none;
+    background: $background;
 }
 
 .panel__open{

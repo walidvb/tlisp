@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { withRouter } from 'react-router-dom'
+
 import routes from '../../routes.js';
 import request from '../../request.js';
 
@@ -14,21 +16,25 @@ import LinkList from './LinkList';
 import styles from './LinksContainer.scss';
 
 class LinksContainer extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
+  state = {
       links: [],
       loading: false,
-    };
-  }
+    }
   
   componentDidMount() {
-    this.props.getLinks();
+    this.props.getLinks({pathname: this.props.location.pathname});
   }
   
   // TODO: move this to some playlistController
-  componentWillReceiveProps({ links }){
+  componentWillReceiveProps({ links, location: { pathname } }){
+    console.log(pathname !== this.props.location.pathname, pathname, this.props.location.pathname)
+    if(pathname !== this.props.location.pathname){
+      this.props.getLinks({ pathname });
+    }
+    this.handleTracklist(links)
+  }
+  handleTracklist(links){
     const oldProps = this.props;
     let isSame = true;
     if(links.length === oldProps.links.length){
@@ -53,10 +59,7 @@ class LinksContainer extends Component {
     const { links } = this.props;
 
     return (
-      <div>
-        <LinkUI />
-        <LinkList links={links} />
-      </div>
+      <LinkList links={links} />
     );
   }
 }
@@ -66,11 +69,12 @@ LinksContainer.propTypes = {
   getLinks: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state, { location }) {
   const { links } = state;
   return {
     links: links.list,
     loading: links.loading,
+    location,
   };
 }
 
@@ -81,4 +85,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinksContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LinksContainer));

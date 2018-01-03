@@ -2,12 +2,11 @@ import * as types from './actionTypes';
 import request from '../request';
 import routes from '../routes';
 
-export const getLinks = (filters = {}) => {
+export const getLinks = ({ pathname, filters}) => {
   return {
     type: types.GET_LINKS,
-    filters,
     payload: new Promise(resolve => {
-      request(routes.api.links.index, { qs: filters })
+      request(routes.api.links[pathname.slice(1)], { qs: filters })
         .then(resolve)
         .catch(error => console.log(error))
     }),

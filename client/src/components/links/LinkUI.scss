@@ -1,13 +1,7 @@
 @import '../../variables';
 
 .container{
-    background-color: transparentize(#111111, 0.2);
-    position: fixed;
-    right: 10px;
-    top: 10px;
     min-width: 20rem;
-    z-index: 50;
-    color: $white;
     padding: 1rem;
 }
 
@@ -25,7 +19,7 @@
     margin-right: .5rem;
     cursor: pointer;
     text-transform: lowercase;
-    color: darken(white, 30%);
+    color: lighten(#1EA896, 40%);
     &.active, &:hover{
         color: white;
         text-transform: uppercase;

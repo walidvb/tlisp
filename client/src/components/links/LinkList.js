@@ -5,7 +5,6 @@ import Link from './Link';
 import styles from './LinkList.scss';
 
 const LinkList = ({ links }) => {
-  console.log(links)
   if(!links){
     return null;
   }

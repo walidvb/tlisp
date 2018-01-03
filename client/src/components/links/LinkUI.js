@@ -31,9 +31,10 @@ class LinkUI extends Component {
   }
   search(){
     const activeUsers = this.state.cliques.map(c => c.users).reduce((a, b) => a.concat(b)).filter(u => u.active);
-    this.props.getLinks({
-      users: activeUsers.map(u => u.id ),
-    })
+    const filters = {
+      users: activeUsers.map(u => u.id),
+    }
+    this.props.getLinks({ filters })
   }
   filterBy(user, clique){
     let { cliques } = this.state;

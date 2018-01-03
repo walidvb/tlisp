@@ -39,8 +39,13 @@ class LinksController < ApplicationController
     @link_assignments = LinkCliqueAssignment
       .includes(link: [:users])
       .visible
-      .where(clique: cliques)
-      #.where.not(user: current_user)
+    if params[:custom] == 'only-me'
+      @link_assignments = @link_assignments.where(user: current_user)
+    else
+      @link_assignments = @link_assignments
+        .where(clique: cliques)
+        .where.not(user: current_user)
+    end
     if u_ids = params[:users].presence
        @link_assignments = @link_assignments.where(user: u_ids)
     end

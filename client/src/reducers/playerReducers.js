@@ -52,6 +52,7 @@ export default (state = initialState, action) => {
     case types.PROGRESS:
       return {
         ...state,
+        playing: true,
         progress: action.payload.played
       }
     case types.SEEK:

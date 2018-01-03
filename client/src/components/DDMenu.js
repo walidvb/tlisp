@@ -14,7 +14,7 @@ class DDMenu extends Component {
     constructor(){
         super();
         this.state = {
-            playerOpen: true,
+            playerOpen: false,
         };
     }
     render() {

@@ -1,5 +1,13 @@
 .container{
     display: flex;
+    align-items: center;
+    > div{
+        padding: 0 10px;
+    }
+}
+
+.player_toggler{
+    font-size: larger;
 }
 
 .progress{

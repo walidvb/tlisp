@@ -19,6 +19,30 @@ export default (state = initialState, action) => {
       ...state,
       tracklist: action.payload,
     }
+    case types.NEXT:
+      const { currentlyPlaying, tracklist } = state;
+      for (let i = 0; i < tracklist.length; i++) {
+        const track = tracklist[i];
+        if(i >= tracklist.length){
+          return {
+            ...state,
+            currentlyPlaying: undefined,
+            playing: false,
+          }
+        }
+        else if (state.currentlyPlaying.id == track.id) {
+          return {
+            ...state,
+            currentlyPlaying: tracklist[i + 1],
+            playing: true
+          }
+        }
+      }
+    case types.PLAY:
+      return {
+        ...state,
+        playing: true,
+      }
     case types.PAUSE:
       return {
         ...state,

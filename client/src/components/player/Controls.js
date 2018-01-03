@@ -10,7 +10,9 @@ import '!style-loader!css-loader!./Controls.css';
 import styles from  './Controls.scss';
 const Controls = (props) => {
     return (
-        <div class={styles.container}>
+        <div className={styles.container}>
+            <div className={`fa fa-list ${styles.player_toggler}`} onClick={props.togglePlayer}>
+            </div>
             <PlaybackControls
                 isPlayable={props.tracklist.length > 0}
                 isPlaying={props.playing}
@@ -33,13 +35,11 @@ const Controls = (props) => {
                 // onSeekEnd={seekTime => { /* perform seek: */ audioEl.currentTime = seekTime }}
                 // onIntent={seekTime => { /* f.i. update intended time marker */ }}
             />
-            { !props.playing ? null : 
+            {!props.currentlyPlaying ? null : 
                 <div className={styles.track_info}>
                     {props.currentlyPlaying.title}
                 </div>
             }
-            <div className="fa fa-list" onClick={props.togglePlayer}>
-            </div>
         </div>
     )
 }

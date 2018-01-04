@@ -30,7 +30,7 @@ DiggersDelights::Application.routes.draw do
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
     }
-    get 'onboarding', to: 'user#onboarding', as: :onboarding
+    get 'welcome', to: 'user#onboarding', as: :onboarding
 
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

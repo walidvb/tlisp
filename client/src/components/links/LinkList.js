@@ -11,8 +11,8 @@ const LinkList = ({ links }) => {
   return (
     <div className={styles.container__grid}>
       {links.map((link) =>
-        <div className={styles.item__grid}>
-          <Link key={link.id} link={link} />
+        <div key={link.id} className={styles.item__grid}>
+          <Link link={link} />
         </div>
       )}
     </div>

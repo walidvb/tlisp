@@ -18,7 +18,7 @@
     "/assets": {
       "target": "http://localhost:3001"
     },
-    "/inside": {
+    "/welcome": {
       "target": "http://localhost:3001"
     },
     "/contact": {

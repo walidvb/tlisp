@@ -12,12 +12,15 @@ describe LinkCliqueAssignment do
   end
   
   let! :link do
-    Fabricate :link, url: url, users: [user], cliques: [clique]
+    ll = Fabricate :link, url: url
+    ll.assign_to users: [user], cliques: [clique]
+    ll
   end
 
   describe "uniqueness" do
     it "doesn't allow duplicate link for the same clique" do
-      @link_2 = Fabricate.build :link, users: [user], url: link.url, cliques: [clique]
+      @link_2 = Fabricate.build :link, url: link.url
+      @link_2.assign_to users: [user], cliques: [clique]
       expect(@link_2).not_to be_valid
       expect(@link_2.errors.messages[:url]).not_to be_blank
     end

@@ -39,12 +39,6 @@ describe LinksController do
     "https://www.youtube.com/watch?v=8QZ8-OCrB5s"
   end
 
-  let :link do
-    link = Fabricate.build(:link, url: url) 
-    link.assign_to users: [user], cliques: [clique.id]
-    return link
-  end
-
   describe '#index' do
     render_views
     let! :link do
@@ -65,6 +59,11 @@ describe LinksController do
   end
 
   describe "#create" do 
+    let :link do
+      link = Fabricate.build(:link, url: url) 
+      link.assign_to users: [user], cliques: [clique.id]
+      return link
+    end
 
     it 'sets visibility' do 
       post :create, { link: {url: url, published: true }}
@@ -105,7 +104,7 @@ describe LinksController do
           pl = Fabricate :playlist
           expect { 
             post :create, { link: {url: url, playlist_ids: [pl.id]}}
-          }.to change(pl.links, :count).by(1)
+          }.to change(pl.reload.links, :count).by(1)
         end
       end
     end

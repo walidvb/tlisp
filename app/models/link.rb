@@ -22,19 +22,19 @@ class Link < ActiveRecord::Base
         self.clique.links.where(url: self.url).count > 0
     end
 
-    def assign_to options = { users: [], visible: false }
+    def assign_to options = { users: [], visible: true }
+        visible = options[:visible] || true
         options[:users].each do |user|
             uid = user.is_a?(User) ? user.id : user
             cliques = options[:cliques].presence
             if cliques.nil? || cliques.empty?
-                if self.link_clique_assignments.where(clique_id: cid).empty?
-                    self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, visible: options[:visible])
-                end
+                # HACK TODO: serve a form to edit rather than skipping adding link assignments
+                self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, visible: visible)
             else
                 cliques.each do |clique|
                     cid = clique.is_a?(Clique) ? clique.id : clique
-                    if self.link_clique_assignments.where(clique_id: cid).empty?
-                        self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid, visible: options[:visible])
+                    if self.link_clique_assignments.where(clique_id: cid, user_id: uid).empty?
+                        self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid, visible: visible)
                     end
                 end
             end

@@ -9,7 +9,7 @@ class LinksController < ApplicationController
       })
     end
     render json: {      
-      cliques: cliques,
+      cliques: cliques, 
       tags: all_tags,
       genres: all_tags(:genre),
     }
@@ -55,7 +55,6 @@ class LinksController < ApplicationController
       c_ids.filter!{|c_id| clique_ids.include?(c_id)}
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
-
     @links = @link_assignments.map(&:link).compact.uniq
   end
 
@@ -78,10 +77,16 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    clique_ids = link_params.delete(:clique_ids)
-    @link = Link.find_by_url(link_params[:url]) || Link.new(link_params)
-    @link.assign_to(users: [current_user], cliques: clique_ids, visible: link_params[:published])
-    
+    # TODO: handle tag by user or clique. htf? dynamic scopes by clique maybe?
+    # remove all associations
+    _link_params = link_params
+    clique_ids = _link_params.delete(:clique_ids)
+    playlist_ids = _link_params.delete(:playlist_ids) || []
+    # find or create link
+    @link = Link.find_by_url(_link_params[:url]) || Link.new(_link_params)
+    # add associations
+    @link.playlist_ids = @link.playlist_ids.concat(playlist_ids)
+    @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published])
     respond_to do |format|
       if @link.save
         format.html { redirect_to @link, notice: 'Link was successfully created.' }

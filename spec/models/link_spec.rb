@@ -11,7 +11,9 @@ describe Link do
     end
     
     let :link do
-      Fabricate :link, users: [user], url: url, cliques: [clique]
+      ll = Fabricate :link
+      ll.assign_to users: [user], url: url, cliques: [clique]
+      ll
     end
 
     it "doesn't allow duplicate link for the same user" do

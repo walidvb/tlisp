@@ -3,7 +3,9 @@ import request from '../request';
 import routes from '../routes';
 
 export const getLinks = ({ pathname, filters}) => {
-  console.log(pathname);
+  if(/help/.test(pathname)){
+    pathname = "/";
+  }
   let path = pathname ? (pathname === '/' ? routes.api.links.explore : routes.api.links[pathname.slice(1)]) 
     : routes.api.links.explore;
   if(/playlists/.test(pathname)){

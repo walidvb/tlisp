@@ -21,7 +21,7 @@ class LinksContainer extends Component {
       links: [],
       loading: false,
     }
-  
+  // TODO Move this to state initialiser or a higher up level.
   componentDidMount() {
     this.props.getLinks({pathname: this.props.location.pathname});
   }

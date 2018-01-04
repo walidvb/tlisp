@@ -10,18 +10,32 @@ $background: transparentize($primary-color, .2);
     position: fixed;
     top: 15px;
     right: 15px;
-    background-color: $background;
     z-index: 50;
     color: white;
+    display: flex;
+    flex-flow: column;
+}
+
+.submenu{
+    width: calc(100% - 2rem);
+    align-self: flex-end;
+    > a{
+        font-size: smaller;
+    }
 }
 
 .panel{
     max-width: 500px;
     position: absolute;
-    transform: translateY(.4rem);
-    left: 0;
+    left: 1rem;
     display: none;
     background: $background;
+    .panel__top &{
+        top: 3rem;
+    }
+    .panel__bottom &{
+        bottom: calc(2rem - 3px);
+    }
 }
 
 .panel__open{
@@ -32,6 +46,7 @@ $background: transparentize($primary-color, .2);
     padding: .2rem 1rem 0rem 0;
     display: flex;
     position: relative;
+    background-color: $background;
     li{
         padding: 0 1rem;
     }

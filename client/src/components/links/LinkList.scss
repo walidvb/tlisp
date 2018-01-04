@@ -15,7 +15,7 @@
         filter: none;
     }
     @media #{$tablet}{
-        flex: 1 1 calc(50% - 10px);
+        flex: 1 1 calc(33.333% - 10px);
     }
     @media #{$md}{
         flex: 1 1 calc(33.33% - 10px);

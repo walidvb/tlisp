@@ -5,7 +5,7 @@ class LinksController < ApplicationController
   def filters
     cliques = current_user.cliques.map do |clique| 
       clique.serializable_hash.merge({
-          users: clique.users#.select{|us| us != current_user} 
+          users: clique.users.select{|us| us != current_user} 
       })
     end
     render json: {      
@@ -37,6 +37,7 @@ class LinksController < ApplicationController
   def index
     cliques = current_user.cliques
     @link_assignments = LinkCliqueAssignment
+      .order("created_at DESC")
       .includes(link: [:users])
       .visible
     if params[:custom] == 'only-me'

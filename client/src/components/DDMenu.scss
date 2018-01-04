@@ -16,6 +16,7 @@ $background: transparentize($primary-color, .2);
     flex-flow: row;
     background: $background;
     padding: .2rem 1rem 0rem 0;
+    max-width: calc(100vw - 2rem);
 }
 
 .links_wrapper{

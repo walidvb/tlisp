@@ -14,7 +14,7 @@ const Link = ({ playTrack, link }) => {
     }}/>;
   }
   else{
-    const splittedTitle = title && title.split(/[\|-]/);
+    const splittedTitle = title && title.split(/\||\-|\/| by /i);
     inner = (
       <div>
         <div className={styles.thumbnail}>
@@ -23,7 +23,7 @@ const Link = ({ playTrack, link }) => {
         <div className={styles.infos}>
           <div>
             <h3 className={styles.title}>
-              {title && splittedTitle.length == 2 ? <span>{splittedTitle[0]} < br /> {splittedTitle[1]}</span> : title  }
+              {title && splittedTitle.length == 2 ? <span>{splittedTitle[0].trim()} < br /> {splittedTitle[1].trim()}</span> : title  }
             </h3>
             <div className={styles.submitted}>
               <i className={["fa fa-user",styles.user_icon].join(' ')}></i>

@@ -24,6 +24,15 @@
     align-items: flex-end;
     justify-content: space-between;
 }
+
+.tags{
+    margin-top: .5rem;
+    opacity: .7;
+    i{
+        opacity: .5;
+        margin-right: 3px;
+    }
+}
 .title{
     margin-top: 0;
     font-size: 1.2rem;

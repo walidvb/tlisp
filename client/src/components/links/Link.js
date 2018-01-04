@@ -6,17 +6,17 @@ import { playTrack } from '../../actions/playerActions';
 import styles from './Link.scss';
 
 const Link = ({ playTrack, link }) => {
-  const { thumbnail_url, title, width, height, provider, html, users } = link;
+  const { thumbnail_url, title, width, height, provider, html, users, tag_list } = link;
   let inner;
   if(link.playing){
-    inner = <div dangerouslySetInnerHTML={{
+    inner = <div style={{height: "100%"}} dangerouslySetInnerHTML={{
       __html: html
     }}/>;
   }
   else{
     const splittedTitle = title && title.split(/\||\-|\/| by /i);
     inner = (
-      <div>
+      <div style={{height: "100%"}}>
         <div className={styles.thumbnail}>
           <img style={{visibility: 'hidden'}}width="100%" height="400" src={thumbnail_url} />
         </div>
@@ -33,10 +33,7 @@ const Link = ({ playTrack, link }) => {
           {/* <div className={styles.top}>
           </div>
           <div className={styles.bottom}>
-            <em>
-              <i className="fa fa-tags nouse-icon"></i>
-              {  }
-            </em>
+            
             <div className={styles.controls}>
               <a target="_blank" href="https://soundcloud.com/intimatesilence/intimate-silence-radio-016-juho-kusti"><i className="fa fa-soundcloud"></i></a>
               <a href="#"><i className="fa fa-play"></i></a>
@@ -49,6 +46,10 @@ const Link = ({ playTrack, link }) => {
   return (
     <div onClick={() => playTrack(link)} className={[styles.full_bg]} style={{ backgroundImage: `url(${thumbnail_url})` }}>
       {inner}
+      <div className={styles.tags}>
+        <i className="fa fa-tags nouse-icon"></i>
+        {tag_list.join(', ')}
+      </div>
     </div>
   ); 
 };

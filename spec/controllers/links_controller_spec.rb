@@ -101,6 +101,12 @@ describe LinksController do
           }.to change(me.playlists, :count).by(1)
         end
 
+        it "adds to existing playlist" do
+          pl = Fabricate :playlist
+          expect { 
+            post :create, { link: {url: url, playlist_ids: [pl.id]}}
+          }.to change(pl.links, :count).by(1)
+        end
       end
     end
 

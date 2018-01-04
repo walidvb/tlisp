@@ -135,13 +135,16 @@ class LinksForm extends Component {
         }
     }
     preSubmit({ link }, canSelectCliques){
-        const { clique_ids, playlist_ids } = link;
+        const { clique_ids, playlist_ids, tag_list} = link;
         let link_ = link;
         if(clique_ids !== undefined && this.state.canSelectCliques){
             link_.clique_ids = clique_ids.map(v => v.value)
         }
         if (playlist_ids !== undefined) {
             link_.playlist_ids = playlist_ids.map(v => v.value)
+        }
+        if (tag_list !== undefined) {
+            link_.tag_list = tag_list.map(v => v.value)
         }
         return { link: link_ };
     }

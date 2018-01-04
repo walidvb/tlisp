@@ -31,7 +31,9 @@ class Link < ActiveRecord::Base
             else
                 cliques.each do |clique|
                     cid = clique.is_a?(Clique) ? clique.id : clique
-                    self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid, visible: options[:visible])
+                    if self.link_clique_assignments.where(clique_id: cid).empty?
+                        self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, clique_id: cid, visible: options[:visible])
+                    end
                 end
             end
         end

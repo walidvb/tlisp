@@ -120,7 +120,7 @@ $gray: red;
 .VolumeSlider.isEnabled:hover .ProgressBar-intent,
 .VolumeSlider.isEnabled:hover .VolumeSlider-intent {
   position: absolute;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.35);
 }
 .ProgressBar.isSeekable .ProgressBar-elapsed,
 .ProgressBar.isSeekable .VolumeSlider-value, .ProgressBar.isEnabled .ProgressBar-elapsed,
@@ -134,7 +134,8 @@ $gray: red;
 
 .ProgressBar {
   height: 4px;
-  margin: 10px 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .ProgressBar-elapsed {
   height: 100%;
@@ -146,6 +147,7 @@ $gray: red;
   left: 0;
 }
 .ProgressBar-handle {
+  display: none;
   top: 0;
   margin: -4px 0 0 -8px;
 }

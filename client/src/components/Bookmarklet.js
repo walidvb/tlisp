@@ -44,7 +44,7 @@ export default function Bookmarklet(props){
                 <br />
                 <a style={{ marginTop: "2rem" }} className="btn btn-large btn-primary" href={`javascript:(function(){${encodeURIComponent(bookmarklet)}})();`} title="DiggersDelights me">Dig</a>
             </p>
-            <img src="https://d2ffutrenqvap3.cloudfront.net/items/1l2d3x1y2C2m1f003E0l/Screen%20Recording%202018-01-04%20at%2002.19%20AM.gif?v=8372f9df" />
+            <img src="https://d2ffutrenqvap3.cloudfront.net/items/3L3H3H0x1A3n3R033J0l/Screen%20Recording%202018-01-04%20at%2004.59%20AM.gif?v=3a670bb4" />
             <p style={{ marginTop: "3rem", marginBottom: "2rem" }}>
                 <span className={styles.counter}>2.</span> <span>Click the button to share a link to your cliques!</span>
             </p>

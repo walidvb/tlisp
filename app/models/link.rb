@@ -16,7 +16,7 @@ class Link < ActiveRecord::Base
     
     validates_presence_of :url
     # TODO move description to link_assignment to allow unscoped uniqueness validation 
-    # validates :url, uniqueness: { scope: [:clique_id] }
+    validates_uniqueness_of :url
 
     def is_duplicate?
         self.clique.links.where(url: self.url).count > 0

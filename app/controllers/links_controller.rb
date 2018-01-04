@@ -35,7 +35,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    cliques = current_user.cliques
+    clique_ids = current_user.clique_ids
     @link_assignments = LinkCliqueAssignment
       .order("created_at DESC")
       .includes(link: [:users])
@@ -44,17 +44,19 @@ class LinksController < ApplicationController
       @link_assignments = @link_assignments.where(user: current_user)
     else
       @link_assignments = @link_assignments
-        .where(clique: cliques)
+        .where(clique_id: clique_ids)
         .where.not(user: current_user)
     end
     if u_ids = params[:users].presence
        @link_assignments = @link_assignments.where(user: u_ids)
     end
     if c_ids = params[:cliques].presence
-      @link_assignments = @link_assignments.where(clique: c_ids)
+      # remove clique that the user is not part of
+      c_ids.filter!{|c_id| clique_ids.include?(c_id)}
+      @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
 
-    @links = @link_assignments.map(&:link).compact
+    @links = @link_assignments.map(&:link).compact.uniq
   end
 
   # GET /links/1

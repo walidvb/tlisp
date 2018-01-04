@@ -11,8 +11,8 @@
     flex: 1 0 300px;
 }
 .tracklist{
+    padding: 0 .5rem;
     max-height: 100%;
-    padding: 1rem .5rem;
     overflow: auto;
     padding: 5px;
     display: flex;
@@ -26,5 +26,9 @@
 }
 
 .track{
-    margin-bottom: .5rem;
+    padding: .5rem;
+    cursor: pointer;
+    &.playing, &:hover{
+        background-color: rgba(0,0,0,.3);
+    }
 }

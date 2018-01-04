@@ -38,14 +38,8 @@ class PlayerContainer extends Component {
     renderTrack(t, i){
         const isPlaying = this.props.currentlyPlaying && this.props.currentlyPlaying.id == t.id;
         return (
-            <div key={i} className={styles.track} onClick={() => this.props.playTrack(t)}>
+            <div key={i} className={[styles.track, isPlaying ? styles.playing : null].join(' ')} onClick={() => this.props.playTrack(t)}>
                 {t.title}
-                {!isPlaying ? <div className="fa fa-play" /> : 
-                    (<div>
-                        <div className="fa fa-pause" />
-                    </div>)
-                }
-                
             </div>
         )
     }

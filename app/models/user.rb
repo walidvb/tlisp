@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :cliques, through: :clique_memberships, inverse_of: :users
   has_many :playlists, inverse_of: :user
 
+  has_many :plays, inverse_of: :user
+
   before_save :ensure_authentication_token!
 
   # Include default devise modules. Others available are:

@@ -6,6 +6,7 @@ const routes = {
             filters: '/api/filters.json',
             formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
             create: '/api/links.json',
+            play: (id) => `/api/links/${id}/plays`
         },
         playlists: {
             index: '/api/playlists.json',

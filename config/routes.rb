@@ -1,6 +1,7 @@
 DiggersDelights::Application.routes.draw do
   
 
+  
   resources :playlists
   get 'static/modaljs'
   resources :cliques
@@ -13,9 +14,13 @@ DiggersDelights::Application.routes.draw do
     resources :playlists
     resources :cliques
     get '/cliques/:id/join' => "cliques#join"
-    resources :links
-    get '/filters.json' => "links#filters"
+    resources :links do 
+      resources :plays, only: [:create]
+    end
     get '/link_form_details.json' => 'links#link_form_details'
+
+    # TODO move this to other controller
+    get '/filters.json' => "links#filters"
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do

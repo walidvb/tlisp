@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102172549) do
+ActiveRecord::Schema.define(version: 20180104024243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,13 +63,14 @@ ActiveRecord::Schema.define(version: 20180102172549) do
   create_table "links", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "url"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.text     "oembed",      default: "{}"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.text     "oembed",      default: "--- {}\n"
     t.text     "description"
     t.boolean  "published",   default: true
     t.boolean  "is_a_set",    default: false
     t.integer  "clique_id"
+    t.integer  "plays_count", default: 0
   end
 
   add_index "links", ["clique_id"], name: "index_links_on_clique_id", using: :btree
@@ -92,6 +93,13 @@ ActiveRecord::Schema.define(version: 20180102172549) do
   end
 
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
+
+  create_table "plays", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -142,6 +150,7 @@ ActiveRecord::Schema.define(version: 20180102172549) do
     t.string   "name"
     t.string   "auth_token",             default: "asd", null: false
     t.string   "initials"
+    t.integer  "plays_count",            default: 0
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

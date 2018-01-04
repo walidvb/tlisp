@@ -9,6 +9,9 @@ class Link < ActiveRecord::Base
     has_many :link_clique_assignments, inverse_of: :link
     has_many :users, through: :link_clique_assignments, inverse_of: :links
     has_many :cliques, through: :link_clique_assignments, inverse_of: :links
+
+    has_many :plays, inverse_of: :user
+    
     before_save :add_oembed
     
     validates_presence_of :url

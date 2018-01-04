@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import ReactPlayer from 'react-player'
 
+import trackPlay from '../../analytics/trackPlay';
 import * as playerActions from '../../actions/playerActions';
 import styles from './PlayerContainer.scss';
 
@@ -12,10 +13,15 @@ class PlayerContainer extends Component {
         tracklist: PropTypes.array.isRequired,
         currentlyPlaying: PropTypes.object,
     }
-    componentWillReceiveProps({ seek }){
+    componentWillReceiveProps({ seek, currentlyPlaying }){
         if(seek !== this.props.seek && this.player){
             console.log(seek)
             this.player.seekTo(seek);
+        }
+
+        if(currentlyPlaying != this.props.currentlyPlaying){
+            console.log(currentlyPlaying)
+            trackPlay(currentlyPlaying);
         }
     }
     playNext(i){
@@ -47,7 +53,7 @@ class PlayerContainer extends Component {
         if (this.props.currentlyPlaying === undefined){
             return null;
         }
-        const { title, html, url } = this.props.currentlyPlaying;
+        const { title, html, url , id} = this.props.currentlyPlaying;
         const { playing } = this.props;
         return (<div>
             {title}

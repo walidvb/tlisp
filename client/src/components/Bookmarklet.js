@@ -17,8 +17,8 @@ export default function Bookmarklet(props){
             var overflow = document.body.style.overflow; \
             document.body.style.overflow = 'hidden'; \
             window.DDCloseIframe = function(){ \
-            div.remove(); \
-            document.body.overflow = overflow; \
+                div.remove(); \
+                document.body.style.overflow = overflow; \
             }; \
             div.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content:center;flex-direction: column;z-index:10000; font-size: 16px;'; \
             var iframe = document.createElement('iframe'); \

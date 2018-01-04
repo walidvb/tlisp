@@ -1,8 +1,5 @@
-$green: #1EA896;
-$white: white;
-$gray: red;
+/* as seen in https://github.com/alexanderwallin/react-player-controls/blob/master/docs/src/sass/_controls.scss */
 
-// as seen in https://github.com/alexanderwallin/react-player-controls/blob/master/docs/src/sass/_controls.scss
 
 .PlayButton,
 .PauseButton,
@@ -10,12 +7,12 @@ $gray: red;
 .NextButton,
 .SoundOnButton,
 .SoundOffButton {
-  margin-right: 10px;
+  margin-right: .2rem;
   padding: 8px;
-  background: white;
-  border: 2px solid #1EA896;
-  border-radius: 100%;
   outline: none;
+    border: none;
+  background: none;
+  --webkit-appearance: none;
 }
 .PlayButton[disabled],
 .PauseButton[disabled],
@@ -68,12 +65,12 @@ $gray: red;
 
 .Icon {
   display: block;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 .Icon-shape {
-  fill: #1EA896;
+  fill: white;
 }
 
 .ProgressBar,

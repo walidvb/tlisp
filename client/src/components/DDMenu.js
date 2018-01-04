@@ -12,12 +12,14 @@ import LinkUI from './links/LinkUI';
 
 import styles from './DDMenu.scss';
 
+const showHelpOnStartup = (localStorage.getItem('dont-show-help-on-startup') !== "true")
+
 class DDMenu extends Component {
     static propTypes = {
 
     }
     state = {
-        panelOpen: undefined,
+        panelOpen: showHelpOnStartup ? 'help' : undefined,
         panelPosition: 'under',
     };
     togglePanel(panelName){
@@ -39,34 +41,36 @@ class DDMenu extends Component {
                 onStart={() => this.setState({ dragging: true })}
                 onDrag={this.handlePanelPosition.bind(this)}
             >
-                <div className={styles.container}>
-                    <ul className={[styles.links_wrapper, styles[`panel__${panelPosition}`]].join(' ')}>
-                        <li className={`handle fa fa-arrows ${styles.handle}`} onMouseUp={this.toggleMenus} />
-                        <li>
-                            <Link className={panelOpen === 'filters' ? styles.menu__active : ""} to={"/explore"} onClick={() => this.togglePanel('filters')}> Explore </Link>
-                            <div className={[styles.panel, panelOpen==='filters' ? styles.panel__open : ""].join(' ')}>
-                                <LinkUI />
+                <div onScroll={(e) => e.stopPropagation()} className={[styles.container, styles[`panel__${panelPosition}`]].join(' ')}>
+                    <div className={`handle fa fa-arrows ${styles.handle}`} onMouseUp={this.toggleMenus} />
+                    <div>
+                        <ul className={styles.links_wrapper}>
+                            <li>
+                                <Link className={panelOpen === 'filters' ? styles.menu__active : ""} to={"/explore"} onClick={() => this.togglePanel('filters')}> Explore </Link>
+                                <div className={[styles.panel, panelOpen==='filters' ? styles.panel__open : ""].join(' ')}>
+                                    <LinkUI />
+                                </div>
+                            </li>
+                            <li>
+                                <Link className={panelOpen === 'playlists' ? styles.menu__active : ""} to={"/me"} onClick={() => this.togglePanel('playlists')}> My Crates </Link>
+                                <div className={[styles.panel, panelOpen === 'playlists' ? styles.panel__open : ""].join(' ')}>
+                                    <PlaylistList />
+                                </div>
+                            </li>
+                        </ul>
+                        <div className={[styles.links_wrapper, styles.submenu].join(' ')}>
+                            <a href="#" className={panelOpen === 'help' ? styles.menu__active : ""} onClick={() => this.togglePanel('help')}> Help </a>
+                            <div className={[styles.panel, panelOpen === 'help' ? styles.panel__open : ""].join(' ')}>
+                                <Bookmarklet showHelpOnStartup={showHelpOnStartup}/>
                             </div>
-                        </li>
-                        <li>
-                            <Link className={panelOpen === 'playlists' ? styles.menu__active : ""} to={"/me"} onClick={() => this.togglePanel('playlists')}> My Crates </Link>
-                            <div className={[styles.panel, panelOpen === 'playlists' ? styles.panel__open : ""].join(' ')}>
-                                <PlaylistList />
-                            </div>
-                        </li>
-                        <li>
-                            <Controls togglePlayer={() => this.togglePanel('player')}/>
-                            <div className={[styles.panel, panelOpen==='player' ? styles.panel__open : ""].join(' ')}>
-                                <PlayerContainer />
-                            </div>
-                        </li>
-                    </ul>
-                    <ul className={[styles.links_wrapper, styles.submenu].join(' ')}>
-                        <a href="#" className={panelOpen === 'help' ? styles.menu__active : ""} onClick={() => this.togglePanel('help')}> Help </a>
-                        <div className={[styles.panel, panelOpen === 'help' ? styles.panel__open : ""].join(' ')}>
-                            <Bookmarklet />
                         </div>
-                    </ul>
+                    </div>
+                    <div>
+                        <Controls togglePlayer={() => this.togglePanel('player')} />
+                        <div className={[styles.panel, panelOpen === 'player' ? styles.panel__open : ""].join(' ')}>
+                            <PlayerContainer />
+                        </div>
+                    </div>
                 </div>
             </Draggable>
         )

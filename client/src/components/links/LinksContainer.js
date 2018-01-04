@@ -28,7 +28,6 @@ class LinksContainer extends Component {
   
   // TODO: move this to some playlistController
   componentWillReceiveProps({ links, location: { pathname } }){
-    console.log(pathname !== this.props.location.pathname, pathname, this.props.location.pathname)
     if(pathname !== this.props.location.pathname){
       this.props.getLinks({ pathname });
     }

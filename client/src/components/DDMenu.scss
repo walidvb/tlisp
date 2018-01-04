@@ -13,28 +13,55 @@ $background: transparentize($primary-color, .2);
     z-index: 50;
     color: white;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
+    background: $background;
+    padding: .2rem 1rem 0rem 0;
+}
+
+.links_wrapper{
+    display: flex;
+    a{
+        display: inline-block;
+        text-align: center;
+        width: 10ch;
+        text-decoration: none;
+        text-transform: lowercase;
+        &:hover{
+            text-transform: uppercase;
+        }
+    }
+    .menu__active{
+        text-transform: uppercase;
+    }
 }
 
 .submenu{
     width: calc(100% - 2rem);
+    margin-top: .2rem;
+    padding-left: 1.1rem;
     align-self: flex-end;
     > a{
+        width: auto;
         font-size: smaller;
     }
 }
 
 .panel{
-    max-width: 500px;
+    min-width: 500px;
+    width: 100%;
     position: absolute;
-    left: 2rem;
+    left: 0;
     display: none;
-    background: $background;
+    background: $primary-color;
+    max-height: 500px;
+    overflow: auto;
     .panel__under &{
-        top: calc(3rem + 4px);
+        border-top: solid 1px  darken($primary-color, 5%);
+        top: calc(3rem - 1px);
     }
     .panel__over &{
-        bottom: calc(2rem - 3px);
+        border-bottom: solid 1px  darken($primary-color, 5%);
+        bottom: calc(3rem - 1px);
     }
 }
 
@@ -42,33 +69,21 @@ $background: transparentize($primary-color, .2);
     display: inline-block;
 }
 
-.links_wrapper{
-    padding: .2rem 1rem 0rem 0;
-    display: flex;
-    position: relative;
-    background-color: $background;
-    li{
-        padding: 0 1rem;
-    }
-    a{
-        text-decoration: none;
-        text-transform: lowercase;
-        &:hover{
-            text-transform: uppercase;
-        }
-    }
-    .handle{
+.handle{
         font-size: smaller;
         cursor: move;
-        padding: 6px 8px 0px;
+        padding: 7px;
+        background: $background;
         border-right: solid 1px  darken($primary-color, 5%);
-        color: darken(white, 15%);
-        &:hover{
-            color: white;
-        }
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateX(calc(-100% + 1px));
         
-    }
-    .menu__active{
-        text-transform: uppercase;
+}
+.submenu a, .handle{ 
+    color: darken(white, 15%);
+    &:hover{
+        color: white;
     }
 }

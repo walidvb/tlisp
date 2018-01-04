@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20180104024243) do
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
 
   create_table "plays", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "link_id"
+    t.integer  "user_id",    null: false
+    t.integer  "link_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

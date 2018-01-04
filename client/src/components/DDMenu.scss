@@ -27,13 +27,13 @@ $background: transparentize($primary-color, .2);
 .panel{
     max-width: 500px;
     position: absolute;
-    left: 1rem;
+    left: 2rem;
     display: none;
     background: $background;
-    .panel__top &{
-        top: 3rem;
+    .panel__under &{
+        top: calc(3rem + 4px);
     }
-    .panel__bottom &{
+    .panel__over &{
         bottom: calc(2rem - 3px);
     }
 }

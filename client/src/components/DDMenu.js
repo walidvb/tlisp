@@ -18,6 +18,7 @@ class DDMenu extends Component {
     }
     state = {
         panelOpen: undefined,
+        panelPosition: 'under',
     };
     togglePanel(panelName){
         this.setState({
@@ -25,7 +26,7 @@ class DDMenu extends Component {
         })
     }
     handlePanelPosition({ clientY }, { node }){
-        const panelPosition = clientY + node.clientHeight < window.innerHeight - 250 ? 'top' : 'bottom';
+        const panelPosition = clientY + node.clientHeight < window.innerHeight - 250 ? 'under' : 'over';
         this.setState({
             panelPosition
         });

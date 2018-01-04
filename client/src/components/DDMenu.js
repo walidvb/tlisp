@@ -43,7 +43,6 @@ class DDMenu extends Component {
         localStorage.setItem('panelPositionOnStartup', JSON.stringify(panelPositionOnStartup))
     }
     handleDragStop(evt, { node }){
-        console.log(node.style.transform)
         if (node.style.transform.length){
             const [all, x, y] = /\((-?\d+)px, (\d+)px\)/.exec(node.style.transform);
             panelPositionOnStartup.x = parseInt(x);

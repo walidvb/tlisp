@@ -59,8 +59,12 @@ function LinkDetails(props) {
     )
 }
 
+
+function mapCliquesToOptions(cliques){
+    return cliques.map(c => ({ value: c.id, label: c.name }));
+}
 function Cliques({ canSelectCliques, cliques}) {
-    const options = cliques.map( c => ({value: c.id, label: c.name}));
+    const options = mapCliquesToOptions(cliques);
     if (!canSelectCliques){
         return (
             <div className="form-group">
@@ -116,13 +120,15 @@ class LinksForm extends Component {
         }
     }
     setDefaultValues(){
-        const { url } = this.state.link;
-        const { description } = this.state.link.oembed;
+        const { cliques, link } = this.state
+        const { url } = link;
+        const { description } = link.oembed;
         this.linkFormApi.setAllValues({
             url,
             description,
             is_a_set: "0",
             published: true,
+            clique_ids: mapCliquesToOptions(cliques)
         });
         if(!this.state.canSelectCliques){
             this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);

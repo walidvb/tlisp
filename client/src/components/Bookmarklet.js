@@ -38,11 +38,11 @@ export default function Bookmarklet(props){
     
     return (
         <div style={{padding: "15px 5px", textAlign: "center"}}>
-            <h1 style={{marginBottom: "10px", fontSize: 'larger'}}>Get started!</h1>
+            <h1 style={{marginBottom: "3rem", fontSize: 'larger'}}>Get started!</h1>
             <p style={{ marginBottom: "2rem" }}>
                 <span className={styles.counter}>1.</span> <span>Drag the button to your bookmarks bar</span>
                 <br />
-                <a className="btn btn-large btn-primary" href={`javascript:(function(){${encodeURIComponent(bookmarklet)}})();`} title="DiggersDelights me">Dig</a>
+                <a style={{ marginTop: "2rem" }} className="btn btn-large btn-primary" href={`javascript:(function(){${encodeURIComponent(bookmarklet)}})();`} title="DiggersDelights me">Dig</a>
             </p>
             <img src="https://d2ffutrenqvap3.cloudfront.net/items/1l2d3x1y2C2m1f003E0l/Screen%20Recording%202018-01-04%20at%2002.19%20AM.gif?v=8372f9df" />
             <p style={{ marginTop: "3rem", marginBottom: "2rem" }}>

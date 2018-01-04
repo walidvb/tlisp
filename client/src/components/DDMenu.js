@@ -13,35 +13,54 @@ import LinkUI from './links/LinkUI';
 import styles from './DDMenu.scss';
 
 const showHelpOnStartup = (localStorage.getItem('dont-show-help-on-startup') !== "true")
+let panelPositionOnStartup = JSON.parse(localStorage.getItem('panelPositionOnStartup')) || {
+    panelPlacement: 'under',
+    x: 0,
+    y: 0,
+}
 
+console.log(panelPositionOnStartup)
 class DDMenu extends Component {
     static propTypes = {
 
     }
     state = {
         panelOpen: showHelpOnStartup ? 'help' : undefined,
-        panelPosition: 'under',
+        panelPlacement: 'under',
     };
     togglePanel(panelName){
         this.setState({
             panelOpen: this.state.panelOpen === panelName ? undefined : panelName,
         })
     }
-    handlePanelPosition({ clientY }, { node }){
-        const panelPosition = clientY + node.clientHeight < window.innerHeight - 250 ? 'under' : 'over';
+    handlePanelPlacement({ clientY }, { node }){
+        const panelPlacement = clientY + node.clientHeight < window.innerHeight - 250 ? 'under' : 'over';
+
         this.setState({
-            panelPosition
+            panelPlacement
         });
+        panelPositionOnStartup.panelPlacement = panelPlacement;
+        localStorage.setItem('panelPositionOnStartup', JSON.stringify(panelPositionOnStartup))
+    }
+    handleDragStop(evt, { node }){
+        console.log(node.style.transform)
+        if (node.style.transform.length){
+            const [all, x, y] = /\((-?\d+)px, (\d+)px\)/.exec(node.style.transform);
+            panelPositionOnStartup.x = parseInt(x);
+            panelPositionOnStartup.y = parseInt(y)
+            localStorage.setItem('panelPositionOnStartup', JSON.stringify(panelPositionOnStartup))
+        }
     }
     render() {
-        const { panelOpen, panelPosition } = this.state;
+        const { panelOpen, panelPlacement } = this.state;
         return (
             <Draggable handle=".handle" 
-                onStop={() => this.setState({ dragging: false })}
+                onStop={this.handleDragStop.bind(this)}
                 onStart={() => this.setState({ dragging: true })}
-                onDrag={this.handlePanelPosition.bind(this)}
+                onDrag={this.handlePanelPlacement.bind(this)}
+                defaultPosition={panelPositionOnStartup}
             >
-                <div onScroll={(e) => e.stopPropagation()} className={[styles.container, styles[`panel__${panelPosition}`]].join(' ')}>
+                <div onScroll={(e) => e.stopPropagation()} className={[styles.container, styles[`panel__${panelPlacement}`]].join(' ')}>
                     <div className={`handle fa fa-arrows ${styles.handle}`} onMouseUp={this.toggleMenus} />
                     <div>
                         <ul className={styles.links_wrapper}>
@@ -68,7 +87,7 @@ class DDMenu extends Component {
                     <div>
                         <Controls togglePlayer={() => this.togglePanel('player')} />
                         <div className={[styles.panel, panelOpen === 'player' ? styles.panel__open : ""].join(' ')}>
-                            <PlayerContainer placement={panelPosition} />
+                            <PlayerContainer placement={panelPlacement} />
                         </div>
                     </div>
                 </div>

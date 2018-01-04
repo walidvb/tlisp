@@ -4,7 +4,7 @@
 .join-content
     %h1 Welcome to digging 2.0
     %h3 
-        - if @inviter.blank?
+        - if !@inviter.blank?
             #{@inviter} invited you to join his clique at Diggers' Delights
         - else
             You've been invited you to join a clique at Diggers' Delights

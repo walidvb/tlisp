@@ -10,7 +10,7 @@ class Link < ActiveRecord::Base
     has_many :users, through: :link_clique_assignments, inverse_of: :links
     has_many :cliques, through: :link_clique_assignments, inverse_of: :links
 
-    has_many :plays, inverse_of: :user
+    has_many :plays, inverse_of: :link
     
     before_save :add_oembed
     
@@ -27,7 +27,9 @@ class Link < ActiveRecord::Base
             uid = user.is_a?(User) ? user.id : user
             cliques = options[:cliques].presence
             if cliques.nil? || cliques.empty?
-                self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, visible: options[:visible])
+                if self.link_clique_assignments.where(clique_id: cid).empty?
+                    self.link_clique_assignments << LinkCliqueAssignment.new(user_id: uid, visible: options[:visible])
+                end
             else
                 cliques.each do |clique|
                     cid = clique.is_a?(Clique) ? clique.id : clique

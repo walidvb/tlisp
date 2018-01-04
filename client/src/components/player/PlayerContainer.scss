@@ -15,6 +15,14 @@
     padding: 1rem .5rem;
     overflow: auto;
     padding: 5px;
+    display: flex;
+    &.under{
+        flex-direction: column;
+    }
+    &.over{
+        flex-direction: column-reverse;
+    }
+    
 }
 
 .track{

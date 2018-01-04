@@ -67,11 +67,11 @@ class PlayerContainer extends Component {
         </div>);
     }
     render() {
-        const { tracklist } = this.props;
+        const { tracklist, placement } = this.props;
         return (
             <div className={styles.container}>
                 { this.renderCurrentlyPlaying() }
-                <div className={styles.tracklist}>
+                <div className={[styles.tracklist, styles[`${placement}`]].join(' ')}>
                     {tracklist.map(this.renderTrack.bind(this))}
                 </div>
             </div>

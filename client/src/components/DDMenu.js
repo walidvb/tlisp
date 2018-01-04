@@ -68,7 +68,7 @@ class DDMenu extends Component {
                     <div>
                         <Controls togglePlayer={() => this.togglePanel('player')} />
                         <div className={[styles.panel, panelOpen === 'player' ? styles.panel__open : ""].join(' ')}>
-                            <PlayerContainer />
+                            <PlayerContainer placement={panelPosition} />
                         </div>
                     </div>
                 </div>

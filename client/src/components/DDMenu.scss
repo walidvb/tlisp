@@ -17,6 +17,7 @@ $background: transparentize($primary-color, .2);
     background: $background;
     padding: .2rem 1rem 0rem 0;
     max-width: calc(100vw - 2rem);
+    box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }
 
 .links_wrapper{
@@ -57,11 +58,9 @@ $background: transparentize($primary-color, .2);
     max-height: 500px;
     overflow: auto;
     .panel__under &{
-        border-top: solid 1px  darken($primary-color, 5%);
         top: calc(3rem - 1px);
     }
     .panel__over &{
-        border-bottom: solid 1px  darken($primary-color, 5%);
         bottom: calc(3rem - 1px);
     }
 }

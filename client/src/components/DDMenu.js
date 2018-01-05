@@ -12,8 +12,9 @@ import LinkUI from './links/LinkUI';
 
 import styles from './DDMenu.scss';
 
+const PANEL_POSITION_ON_STARTUP = 'panelPositionOnStartup';
 const showHelpOnStartup = (localStorage.getItem('dont-show-help-on-startup') !== "true")
-let panelPositionOnStartup = JSON.parse(localStorage.getItem('panelPositionOnStartup')) || {
+let panelPositionOnStartup = JSON.parse(localStorage.getItem(PANEL_POSITION_ON_STARTUP)) || {
     panelPlacement: 'under',
     x: 0,
     y: 0,
@@ -40,14 +41,14 @@ class DDMenu extends Component {
             panelPlacement
         });
         panelPositionOnStartup.panelPlacement = panelPlacement;
-        localStorage.setItem('panelPositionOnStartup', JSON.stringify(panelPositionOnStartup))
+        localStorage.setItem(PANEL_POSITION_ON_STARTUP, JSON.stringify(panelPositionOnStartup))
     }
     handleDragStop(evt, { node }){
         if (node.style.transform.length){
             const [all, x, y] = /\((-?\d+)px, (\d+)px\)/.exec(node.style.transform);
             panelPositionOnStartup.x = parseInt(x);
             panelPositionOnStartup.y = parseInt(y)
-            localStorage.setItem('panelPositionOnStartup', JSON.stringify(panelPositionOnStartup))
+            localStorage.setItem(PANEL_POSITION_ON_STARTUP, JSON.stringify(panelPositionOnStartup))
         }
     }
     render() {

@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect, } from 'react-redux';
-import * as playerActions from '../../actions/playerActions';
 
+import Marquee from './Marquee';
+
+
+import * as playerActions from '../../actions/playerActions';
 import { ProgressBar, PlaybackControls } from 'react-player-controls'
 /* eslint-disable */
 import '!style-loader!css-loader!./Controls.css';
@@ -35,13 +38,13 @@ const Controls = (props) => {
                     // onIntent={seekTime => { /* f.i. update intended time marker */ }}
                 />
             </div>
-            <div>
-                <span className={`fa fa-list ${styles.player_toggler}`} onClick={props.togglePlayer}>
-                </span>
+            <div style={{display: "flex"}}>
+                <div className={`fa fa-list ${styles.player_toggler}`} onClick={props.togglePlayer}>
+                </div>
                 {!props.currentlyPlaying ? null : 
-                    <span className={styles.track_info}>
-                        {props.currentlyPlaying.title}
-                    </span>
+                    <div >
+                        <Marquee text={props.currentlyPlaying.title} />
+                    </div>
                 }
             </div>
         </div>

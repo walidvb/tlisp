@@ -16,7 +16,7 @@ $background: transparentize($primary-color, .2);
     flex-flow: row;
     background: $background;
     padding: .2rem 1rem 0rem 0;
-    max-width: calc(100vw - 2rem);
+    max-width: calc(35vw - 2rem);
     box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }
 

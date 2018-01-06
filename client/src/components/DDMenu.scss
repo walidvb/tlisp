@@ -43,9 +43,10 @@ $background: transparentize($primary-color, .2);
     margin-top: .2rem;
     padding-left: 1.1rem;
     align-self: flex-end;
-    > a{
+    .menu{
         width: auto;
         font-size: smaller;
+        color: darken(white, 15%);
     }
 }
 
@@ -85,5 +86,18 @@ $background: transparentize($primary-color, .2);
     color: darken(white, 15%);
     &:hover{
         color: white;
+    }
+}
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: none;
+    .wrapper:hover &{
+        display: inline-block;
     }
 }

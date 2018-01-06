@@ -22,7 +22,7 @@ export default class Marquee extends Component {
                 x: this.state.x - 1 < -offset ? 0 : this.state.x - 1,
             });
             clearInterval(this.playerInterval);
-            this.componentDidCatch()
+            setTimeout(this.start.bind(this), this.props.delay);
         }, speed)
     }
     componentWillReceiveProps(props){

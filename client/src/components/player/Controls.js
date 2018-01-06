@@ -38,8 +38,8 @@ const Controls = (props) => {
                     // onIntent={seekTime => { /* f.i. update intended time marker */ }}
                 />
             </div>
-            <div style={{display: "flex"}}>
-                <div className={`fa fa-list ${styles.player_toggler}`} onClick={props.togglePlayer}>
+            <div onClick={props.togglePlayer} className={styles.track_info} style={{display: "flex"}}>
+                <div className={`fa fa-list ${styles.player_toggler}`}>
                 </div>
                 {!props.currentlyPlaying ? null : 
                     <div >

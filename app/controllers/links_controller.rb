@@ -51,8 +51,11 @@ class LinksController < ApplicationController
        @link_assignments = @link_assignments.where(user: u_ids)
     end
     if c_ids = params[:cliques].presence
-      # remove clique that the user is not part of
-      c_ids.filter!{|c_id| clique_ids.include?(c_id)}
+      # TODO remove clique that the user is not part of
+      puts "======="
+      new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
+      puts new_c_ids
+      puts clique_ids
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
     @links = @link_assignments.map(&:link).compact.uniq

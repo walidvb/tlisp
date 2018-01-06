@@ -46,7 +46,6 @@ $background: transparentize($primary-color, .2);
     .menu{
         width: auto;
         font-size: smaller;
-        color: darken(white, 15%);
     }
 }
 
@@ -80,12 +79,11 @@ $background: transparentize($primary-color, .2);
         left: 0;
         top: 0;
         transform: translateX(calc(-100% + 1px));
-        
 }
-.submenu a, .handle{ 
-    color: darken(white, 15%);
+.submenu .menu, .handle{ 
+    color: lighten(#1EA896, 40%);
     &:hover{
-        color: white;
+        color: lighten(#1EA896, 90%);
     }
 }
 

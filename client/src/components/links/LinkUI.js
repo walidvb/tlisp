@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import request from '../../request';
 import routes from '../../routes';
 
+import DDMood from '../ui_components/DDMood';
 import * as linkActions from '../../actions/linkActions';
 import styles from './LinkUI.scss';
 
@@ -96,14 +97,17 @@ class LinkUI extends Component {
       </div>
     )
   }
+  renderMood(){
+    return null//<DDMood />;
+  }
   render() {
     const { cliques, ready} = this.state;
     if(!ready){
       return null;
     }
-    console.log(cliques)
     return (
       <div className={styles.container}>
+        {this.renderMood()}
         {cliques.map((c) => <div key={c.name}>{this.renderClique(c)}</div>)}
       </div>
     )

@@ -5,7 +5,8 @@ import {
 
 
 import './App.scss';
-import './generic_no_transform.css';
+/* eslint-disable */
+import '!style-loader!css-loader!./generic_no_transform.css';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
 import DDMenu from './components/DDMenu';

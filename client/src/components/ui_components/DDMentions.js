@@ -5,6 +5,9 @@ import { FormField } from 'react-form';
 
 import styles from './DDMentions.scss';
 
+import request from '../../request';
+import routes from '../../routes';
+
 const propTypes = {
     
 }
@@ -26,9 +29,9 @@ function DDMention(props) {
         addOption,
       } = fieldApi;
     
-    const readCliques = (string_) => {
+    const readMentions = (string_, type) => {
         let result;
-        const regexp = /\(clique:(\d+)\)/gmi
+        const regexp = new RegExp(`\\(${type}:([\\d\\w ?]+)\\)`, 'gmi');
         const matches = []
         result = regexp.exec(string_)
         while ( result != null){
@@ -41,15 +44,38 @@ function DDMention(props) {
 
     const handleMentionChange = (evt) => {
         setValue(evt.target.value);
-        const detectedCliques = readCliques(evt.target.value);
+        const detectedCliques = readMentions(evt.target.value, 'clique');
         props.formApi.setValue("clique_ids", [... new Set(detectedCliques)]);
+
+        const detectedTags = readMentions(evt.target.value, 'tag');
+        props.formApi.setValue("tag_list", [... new Set(detectedTags)]);
     }
 
-    const getCliquesSuggestions = (s, cb) => {
-        cb(props.cliques.map(c => ({
-            id: `${c.id}`,
-            display: c.name,
-        })));
+    const getUsersSuggestions = (s, cb) => {
+        request(routes.api.users).then(({ users }) => {
+            cb(
+                users.map(u => ({
+                    id: u.id,
+                    display: u.name,
+                }))
+            )
+        })
+    }
+
+    const getTagsSuggestions = (s, cb) => {
+        let existing = props.tags.map(t => ({
+            id: t,
+            display: t,
+        }));
+        // add non existing tag to list
+        const newTag = s.length < 1 ? null : [{
+            id: s,
+            display: s
+        }];
+        if(newTag){
+            existing = s.concat(existing);
+        }
+        cb(existing);
     }
     return (
         <div style={{color: "black"}}>
@@ -59,16 +85,26 @@ function DDMention(props) {
                 onChange={handleMentionChange}
                 style={defaultStyles()}
                 markup="@[__display__](__type__:__id__)"
+                appendSpaceOnAdd={true}
+                allowSpaceInQuery={true}
                 >
                 <Mention 
-                    type='clique'
+                    type='users'
                     trigger="@"
-                    data={getCliquesSuggestions}
+                    data={getUsersSuggestions}
                     style={{ backgroundColor: '#FECE08', color: 'transparent'}}
-                    onAdd={console.log}
-                    onRemove={console.log}
+                />
+                <Mention
+                    type='tag'
+                    trigger="#"
+                    data={getTagsSuggestions}
+                    style={{ backgroundColor: '#FFBF3B', color: 'transparent' }}
                 />
             </MentionsInput>
+            <div className={styles.hint}> 
+                <div className="fa fa-info" />
+                Mention @friends, add #tags and describe your content (notification system coming ASAP :) )
+            </div>
         </div>
     )
 }

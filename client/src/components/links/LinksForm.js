@@ -23,44 +23,43 @@ function LinkDetails(props) {
             <Form getApi={props.getApi}>
                 {formApi => (
                     <div>
-                        
                         <Text field="url" type="hidden" />
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
-                            <TextArea className="form-control" field="description" id="description" />
+                            {/* <TextArea className="form-control" field="description" id="description" /> */}
+                            <DDMentions formApi={formApi} tags={props.tags} cliques={props.cliques} field="description"/>
                         </div>
-                        <DDMentions formApi={formApi} cliques={props.cliques} field="description"/>
-                        <div className="form-group">
-                            <RadioGroup field="is_a_set">
-                                {group => (
-                                    <div>
-                                        <label htmlFor="mix" className="">Mix</label>
-                                        <Radio group={group} value="0" id="mix" className="" />
-                                        <Radio group={group} value="1" id="track" className="" />
-                                        <label htmlFor="track" className="">Track</label>
-                                    </div>
-                                )}
-                            </RadioGroup>
+                        <div className="flex form-group">
+                            <div className="" style={{ flex: "0 0 300px", }}>
+                                <label htmlFor={`mood`}>Mood</label>
+                                <DDMood field={'mood'} id='mood' />
+                            </div>
+                            <div >
+                                <div className="form-check">
+                                    <label htmlFor="published" className="form-check-label">
+                                        <Checkbox field="published" id="published" className="form-check-input" />
+                                        Public
+                                    </label>
+                                    <small className={styles.help_text}>
+                                        ({formApi.values.published ? "This link will be available to your selected cliques" : "This link will only be visible to you"})
+                                    </small>
+                                </div>
+                                <RadioGroup field="is_a_set">
+                                    {group => (
+                                        <div>
+                                            <label htmlFor="mix" className="">Mix</label>
+                                            <Radio group={group} value="0" id="mix" className="" />
+                                            <Radio group={group} value="1" id="track" className="" />
+                                            <label htmlFor="track" className="">Track</label>
+                                        </div>
+                                    )}
+                                </RadioGroup>
+                            </div>
                         </div>
-                        <div className="form-check">
-                            <label htmlFor="published" className="form-check-label"> 
-                                <Checkbox field="published" id="published" className="form-check-input"/>
-                                Public
-                            </label>
-                            <small className={styles.help_text}>
-                                ({formApi.values.published ? "This link will be available to your selected cliques": "This link will only be visible to you"})
-                            </small>
-                        </div>
-                        <div>
-                            <label htmlFor={`tags`}><h3> Tags </h3></label>
-                            <DDSelect placeholder="Tag your link" creatable={true} optionName="tag" multiple={true} options={props.tags.map(v => ({label: v, value: v}))} field={'tag_list'} id={`tags`} />
-                        </div>
-                        <div>
-                            <label htmlFor={`mood`}><h3> Mood </h3></label>
-                            <DDMood field={'mood'} id='mood' />
-                        </div>
-                        <Playlists className="form-control" playlists={props.playlists} />
                         <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
+                        <Playlists className="form-control" playlists={props.playlists} />
+                        
+                        
                     </div>
                 )}
             </Form>
@@ -73,6 +72,11 @@ function mapCliquesToOptions(cliques){
     return cliques.map(c => ({ value: c.id, label: c.name }));
 }
 function Cliques({ canSelectCliques, cliques}) {
+    // return (<div>
+    //     Posting to: 
+    //     <div className={styles.state_info}>{formatArray(cliques.map(c => c.name))}</div>
+    // </div>);
+    // this was before you could select via mentions
     const options = mapCliquesToOptions(cliques);
     if (!canSelectCliques && cliques.length > 0){
         return (
@@ -84,7 +88,7 @@ function Cliques({ canSelectCliques, cliques}) {
     }
     return (
         <div className="form-group">
-            <label htmlFor={`cliques`}><h3> Cliques </h3></label>
+            <label htmlFor={`cliques`}>Cliques</label>
             <DDSelect placeholder="Select one or more clique to share to" multiple={true}  options={options} field={'clique_ids'} id={`cliques`} />
         </div>
     )
@@ -94,7 +98,7 @@ function Playlists(props) {
     const options = props.playlists.map( pl => ({ value: pl.id, label: pl.name }));
     return (
         <div className="form-group">
-            <label htmlFor={`playlists`}><h3> Playlists </h3></label>
+            <label htmlFor={`playlists`}>Playlists</label>
             <DDSelect placeholder="Select one or more playlists" creatable={true} optionName="playlist" multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
         </div>
     )
@@ -131,13 +135,17 @@ class LinksForm extends Component {
                 }, this.setDefaultValues))
         }
     }
+    addCliquestoDescription(desc, cliques){
+        return desc;
+        return cliques.map(c => `@[${c.name}](clique:${c.id})`).join(' ') + '\n' + (desc === undefined ? '' : desc)
+    }
     setDefaultValues(){
         const { cliques, link } = this.state
         const { url } = link;
         const { description } = link.oembed;
         this.linkFormApi.setAllValues({
             url,
-            description,
+            description: this.addCliquestoDescription(description, cliques),
             is_a_set: "0",
             published: true,
             clique_ids: mapCliquesToOptions(cliques)

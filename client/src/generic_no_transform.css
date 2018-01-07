@@ -1,3 +1,11 @@
 .flex{
     display: flex;
 }
+
+.fa{
+    opacity: .9;
+}
+
+.form-group{
+    margin-top: 1rem;
+}

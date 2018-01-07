@@ -10,7 +10,8 @@ const routes = {
         },
         playlists: {
             index: '/api/playlists.json',
-        }
+        },
+        users: '/api/users.json',
     },
     links: {
         new: '/tracks/new',

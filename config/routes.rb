@@ -17,6 +17,8 @@ DiggersDelights::Application.routes.draw do
     resources :links do 
       resources :plays, only: [:create]
     end
+
+    resources :users, only: [:index]
     get '/link_form_details.json' => 'links#link_form_details'
 
     # TODO move this to other controller
@@ -35,7 +37,7 @@ DiggersDelights::Application.routes.draw do
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
     }
-    get 'welcome', to: 'user#onboarding', as: :onboarding
+    get 'welcome', to: 'users#onboarding', as: :onboarding
 
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

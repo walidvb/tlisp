@@ -38,7 +38,7 @@ class LinksController < ApplicationController
     clique_ids = current_user.clique_ids
     @link_assignments = LinkCliqueAssignment
       .order("created_at DESC")
-      .includes(link: [:users])
+      .includes(link: [:users, :tags])
       .visible
     if params[:custom] == 'only-me'
       @link_assignments = @link_assignments.where(user: current_user)
@@ -61,7 +61,7 @@ class LinksController < ApplicationController
     if mood = params[:mood].presence
       mood = mood.to_i
       @links = @links.select do |l|
-        l.mood.nil? || (l.mood <= mood + 20 && l.mood >= mood - 20)
+        (l.mood <= mood + 20 && l.mood >= mood - 20)
       end
     end
   end

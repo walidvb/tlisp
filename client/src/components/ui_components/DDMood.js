@@ -11,7 +11,6 @@ const propTypes = {
 
 
 function DDMood(props) {
-
     return (
         <div className={[styles.container, props.className].join(' ')}>
             {/* HACK: value is empty on form initialization */}

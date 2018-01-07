@@ -26,20 +26,25 @@ class LinkUI extends Component {
   static propTypes = {
     getLinks: PropTypes.func.isRequired
   }
+  static searchDelay = 400
   componentDidMount() {
     request(routes.api.links.filters).then(data => {
       this.setState({ ...data, ready: true })
     })
   }
   search(){
-    const activeCliques = this.state.cliques.filter(c => c.active);
-    const activeUsers = this.state.cliques.map(c => c.users).reduce((a, b) => a.concat(b)).filter(u => u.active);
-    const filters = {
-      users: activeUsers.map(u => u.id),
-      cliques: activeCliques.map(c => c.id),
-      mood: this.state.mood,
-    }
-    this.props.getLinks({ filters })
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => search(this), this.searchDelay);
+    function search(self){
+      const activeCliques = self.state.cliques.filter(c => c.active);
+      const activeUsers = self.state.cliques.map(c => c.users).reduce((a, b) => a.concat(b)).filter(u => u.active);
+      const filters = {
+        users: activeUsers.map(u => u.id),
+        cliques: activeCliques.map(c => c.id),
+        mood: self.state.mood,
+      }
+      self.props.getLinks({ filters })
+    };
   }
   filterBy(user, clique){
     let { cliques } = this.state;
@@ -77,9 +82,9 @@ class LinkUI extends Component {
       cliques
     }, this.search.bind(this));
   }
-  filterByMood(v){
+  filterByMood(evt){
     this.setState({
-      mood: v,
+      mood: evt.target.value,
     }, this.search.bind(this));
 
   }

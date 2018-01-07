@@ -60,6 +60,10 @@ function DDMood(props) {
             {/* HACK: value is empty on form initialization */}
             <Gaussian  styles={styles} style={{left: `${opts.value || 50}%`}} />
             <input className={styles.input} type="range" min={0} max={100} value={opts.value} onChange={onChange}/>
+            <div className={["hint", styles.hint].join(' ')}>
+                <span style={{float: "left"}}>soft</span>
+                <span style={{ float: "right" }}>hard</span>
+            </div>
         </div>
     )
 }

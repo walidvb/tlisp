@@ -16,7 +16,7 @@ $bell-color: lighten($primary-color, 40%);
 .svg_container{
     position: absolute;
     top: 10px;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scaleX(1.6);
 }
 
 .bell{
@@ -28,7 +28,14 @@ $bell-color: lighten($primary-color, 40%);
     position: relative;
 }
 
+.hint{
+  padding-left: 0;
+  // to accomodate for the italics "hard"
+  padding-right: 3px;
+  margin-top: -1.5rem;
+}
 
+// RANGE SLIDER
 
 @mixin thumb(){
     height: 100px;

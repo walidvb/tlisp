@@ -43,12 +43,11 @@ function DDMention(props) {
     }
 
     const handleMentionChange = (evt) => {
+        // set the description field
         setValue(evt.target.value);
-        const detectedCliques = readMentions(evt.target.value, 'clique');
-        props.formApi.setValue("clique_ids", [... new Set(detectedCliques)]);
-
+        
+        // add tags to the form
         const detectedTags = readMentions(evt.target.value, 'tag');
-        console.log(detectedTags);
         props.formApi.setValue("tag_list", [... new Set(detectedTags)]);
     }
 
@@ -102,7 +101,7 @@ function DDMention(props) {
                     style={{ backgroundColor: '#FFBF3B', color: 'transparent' }}
                 />
             </MentionsInput>
-            <div className={styles.hint}> 
+            <div className={"hint"}> 
                 <div className="fa fa-info" />
                 Mention @friends, add #tags and describe your content (notification system coming ASAP :) )
             </div>

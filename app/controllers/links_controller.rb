@@ -128,6 +128,7 @@ class LinksController < ApplicationController
         :description, 
         :published, 
         :is_a_set,
+        :mood,
         clique_ids: [],
         playlist_ids: [],
         tag_list: [], 

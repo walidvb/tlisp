@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Checkbox } from 'react-form';
 
 import DDSelect from '../ui_components/DDSelect';
+import DDMood from '../ui_components/DDMood';
 import routes from '../../routes';
 import request from '../../request';
 
@@ -50,6 +51,10 @@ function LinkDetails(props) {
                             <label htmlFor={`tags`}><h3> Tags </h3></label>
                             <DDSelect placeholder="Tag your link" creatable={true} optionName="tag" multiple={true} options={props.tags.map(v => ({label: v, value: v}))} field={'tag_list'} id={`tags`} />
                         </div>
+                        <div>
+                            <label htmlFor={`mood`}><h3> Mood </h3></label>
+                            <DDMood field={'mood'} id='mood' />
+                        </div>
                         <Playlists className="form-control" playlists={props.playlists} />
                         <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
                     </div>
@@ -65,7 +70,7 @@ function mapCliquesToOptions(cliques){
 }
 function Cliques({ canSelectCliques, cliques}) {
     const options = mapCliquesToOptions(cliques);
-    if (!canSelectCliques){
+    if (!canSelectCliques && cliques.length > 0){
         return (
             <div className="form-group">
                 <p>Posting to: <em>{cliques[0].name}</em></p>
@@ -97,6 +102,9 @@ class LinksForm extends Component {
         this.state = {
             loaded: false,
             link: {},
+            playlists: [],
+            cliques: [],
+            tags: [],
         }
         this.setDefaultValues = this.setDefaultValues.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -169,10 +177,18 @@ class LinksForm extends Component {
         
     }
     renderLinkHeader(){
-        const { link, oembeddable } = this.state;
+        const { loaded, link, oembeddable } = this.state;
         const { oembed } = this.state.link;
+        if(!loaded){
+            return (<div className={styles.header}>
+                <div className="fa fa-cog fa-spin" style={{ padding: "0 1.5rem", fontSize: '1.5rem' }} />
+                <div>
+                    <h3>Fetching details...</h3>
+                </div>
+            </div>)
+        }
         if(!oembeddable){
-            return (<div className={styles.details}>
+            return (<div className={styles.header}>
                 <div className="fa fa-question" style={{padding:"0 1.5rem", fontSize: '1.5rem'}}/>
                 <div>
                     <h3>Oops, we can't seem to find details for this link. ({link.url})</h3>
@@ -185,7 +201,7 @@ class LinksForm extends Component {
             </div>)
         }
         return (
-            <div className={styles.details}>
+            <div className={styles.header}>
                 <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
                 <div>
                     <h3 className={styles.title}>{oembed.title}</h3>
@@ -196,12 +212,9 @@ class LinksForm extends Component {
     }
     render() {
         const { errors, success, link, loaded, playlists, cliques, tags, canSelectCliques } = this.state;
-        if(!loaded){
-            return <div className={styles.container}>LOADING</div>
-        }
         const { oembed } = link;
         return (
-            <div className={styles.container}>
+            <div className={[styles.container, loaded ? styles.loading : ''].join(' ')}>
                 {this.renderLinkHeader()}
                 { errors }
                 { success ? "Link saved!" : 
@@ -209,7 +222,7 @@ class LinksForm extends Component {
                         onSubmit={this.handleSubmit} 
                         preSubmit={(values, formApi) => this.preSubmit(values, canSelectCliques)}>
                         { formApi => (
-                            <form className={styles.form_container} onSubmit={formApi.submitForm} id="form2">
+                            <form className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} onSubmit={formApi.submitForm} id="form2">
                                 <LinkDetails getApi={f => this.linkFormApi = f} 
                                     playlists={playlists} 
                                     cliques={cliques} 

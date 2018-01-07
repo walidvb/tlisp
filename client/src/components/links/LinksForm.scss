@@ -11,20 +11,27 @@
 .form_container{
     overflow: auto;
     padding-top: 1rem;
+    //transform: translateY(-100%);
+    &.loaded{
+        transition: transform .15s ease-in-out;
+        transform: translateY(0);
+    }
 }
 
-.form_container, .details{
+.form_container, .header{
     padding: 5px;
 }
 
-.details{
+.header{
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
     background-color: $primary-color;
     color: $white;
     padding-right: 40px;
-    border-bottom: 1px solid darken($primary-color, 5%);
+    border-bottom: 1px solid;
+    z-index: 1;
+    min-height: 75px;
 }
 .title{
     margin-top: 0;
@@ -45,5 +52,5 @@
 .help_text{
     font-style: italic;
     margin-left: .5rem;
-    color: darken(white, 5%);
+    color: lighten($primary-color, 40%);
 }

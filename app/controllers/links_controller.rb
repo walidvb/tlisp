@@ -61,7 +61,7 @@ class LinksController < ApplicationController
     if mood = params[:mood].presence
       mood = mood.to_i
       @links = @links.select do |l|
-        (l.mood <= mood + 20 && l.mood >= mood - 20)
+        l.mood.nil? || (l.mood <= mood + 20 && l.mood >= mood - 20)
       end
     end
   end

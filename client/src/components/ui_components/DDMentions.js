@@ -26,26 +26,39 @@ function DDMention(props) {
         addOption,
       } = fieldApi;
     
+    const readCliques = (string_) => {
+        let result;
+        const regexp = /\(clique:(\d+)\)/gmi
+        const matches = []
+        result = regexp.exec(string_)
+        while ( result != null){
+            matches.push(result[1])
+            result = regexp.exec(string_);
+        }
+        return matches;
+        
+    }
+
     const handleMentionChange = (evt) => {
         setValue(evt.target.value);
-        props.formApi.setValue("clique_ids", [])
+        const detectedCliques = readCliques(evt.target.value);
+        props.formApi.setValue("clique_ids", [... new Set(detectedCliques)]);
     }
 
     const getCliquesSuggestions = (s, cb) => {
         cb(props.cliques.map(c => ({
             id: `${c.id}`,
             display: c.name,
-        })))
+        })));
     }
     return (
         <div style={{color: "black"}}>
             <MentionsInput 
-                value={getValue()} 
+                value={getValue() || ''} 
                 className={styles.container}
                 onChange={handleMentionChange}
                 style={defaultStyles()}
                 markup="@[__display__](__type__:__id__)"
-                onRemove={console.log}
                 >
                 <Mention 
                     type='clique'

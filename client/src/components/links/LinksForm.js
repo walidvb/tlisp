@@ -7,7 +7,7 @@ import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Ch
 
 import DDSelect from '../ui_components/DDSelect';
 import DDMentions from '../ui_components/DDMentions'
-import DDMood from '../ui_components/DDMood';
+import ReactFormDDMood from '../ui_components/ReactFormDDMood';
 import routes from '../../routes';
 import request from '../../request';
 
@@ -32,7 +32,7 @@ function LinkDetails(props) {
                         <div className="flex form-group">
                             <div className="" style={{ flex: "0 0 300px", }}>
                                 <label htmlFor={`mood`}>Mood</label>
-                                <DDMood field={'mood'} id='mood' />
+                                <ReactFormDDMood field={'mood'} id='mood' />
                             </div>
                             <div >
                                 <div className="form-check">
@@ -136,7 +136,7 @@ class LinksForm extends Component {
         }
     }
     addCliquestoDescription(desc, cliques){
-        return desc;
+        return desc.replace(/@/g, '');
         return cliques.map(c => `@[${c.name}](clique:${c.id})`).join(' ') + '\n' + (desc === undefined ? '' : desc)
     }
     setDefaultValues(){

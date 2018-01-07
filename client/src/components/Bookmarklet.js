@@ -30,7 +30,7 @@ export default function Bookmarklet(props){
             iframeContainer.append(close); \
             close.addEventListener('click',DDCloseIframe); \
             iframe.frameBorder = 'none'; \
-            iframe.style.cssText = 'min-width: 900px; max-width: 100%; height: 80vh; z-index: 10000'; \
+            iframe.style.cssText = 'min-width: 900px; max-width: 100vw; height: 80vh; z-index: 10000'; \
             iframe.src = '//${domain}/tracks/new?modal=true&version=0.1&url='+encodeURIComponent(window.location); \
             iframeContainer.append(iframe); \
             div.append(iframeContainer); \

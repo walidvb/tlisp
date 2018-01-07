@@ -45,3 +45,10 @@
         background: lighten($primary-color, 10%);
     }
 }
+
+
+// to be put in DDMentions.scss
+.suggestions{
+    max-height: 50vh;
+    overflow: auto;
+}

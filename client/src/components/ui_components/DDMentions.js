@@ -85,7 +85,6 @@ function DDMention(props) {
                 onChange={handleMentionChange}
                 style={defaultStyles()}
                 markup="@[__display__](__type__:__id__)"
-                appendSpaceOnAdd={true}
                 allowSpaceInQuery={true}
                 >
                 <Mention 
@@ -93,12 +92,14 @@ function DDMention(props) {
                     trigger="@"
                     data={getUsersSuggestions}
                     style={{ backgroundColor: '#FECE08', color: 'transparent'}}
+                    appendSpaceOnAdd={true}
                 />
                 <Mention
                     type='tag'
                     trigger="#"
                     data={getTagsSuggestions}
                     style={{ backgroundColor: '#FFBF3B', color: 'transparent' }}
+                    appendSpaceOnAdd={true}
                 />
             </MentionsInput>
             <div className={"hint"}> 

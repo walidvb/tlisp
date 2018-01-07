@@ -17,4 +17,8 @@
         outline: none;
         border: none;
     }
+    .suggestions{
+        max-height: 50vh;
+        overflow: auto;
+    }
 }

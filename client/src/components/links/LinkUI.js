@@ -15,6 +15,8 @@ class LinkUI extends Component {
     super();
     this.state = {
       ready: false,
+      moodActive: false,
+      mood: 0,
       users: []
     }
     this.search = this.search.bind(this)
@@ -38,10 +40,12 @@ class LinkUI extends Component {
     function search(self){
       const activeCliques = self.state.cliques.filter(c => c.active);
       const activeUsers = self.state.cliques.map(c => c.users).reduce((a, b) => a.concat(b)).filter(u => u.active);
-      const filters = {
+      let filters = {
         users: activeUsers.map(u => u.id),
         cliques: activeCliques.map(c => c.id),
-        mood: self.state.mood,
+      }
+      if (self.state.moodActive ){
+        filters.mood = self.state.mood;
       }
       self.props.getLinks({ filters })
     };
@@ -91,7 +95,7 @@ class LinkUI extends Component {
   renderUser(user, clique) {
     return <div 
       className={[styles.filter_item, user.active ? styles.active : ""].join(' ')}
-      onClick={() => this.filterBy(user, clique)}> {user.initials} </div>
+      onClick={() => this.filterBy(user, clique)}> {user.name} </div>
   }
   renderClique( clique ){
     return (
@@ -109,8 +113,16 @@ class LinkUI extends Component {
       </div>
     )
   }
+  toggleMood(){
+    this.setState({
+      moodActive: !this.state.moodActive,
+    }, this.search.bind(this));
+  }
   renderMood(){
-    return <DDMood className={styles.mood} onChange={this.filterByMood} value={this.state.mood}/>;
+    return <div className={styles.mood}>
+        <DDMood className={this.state.moodActive ? null : "disabled"} onChange={this.filterByMood} value={this.state.mood}/>
+        <div className={[styles.clique_name, styles.filter_item, this.state.moodActive ? styles.active : ""].join(' ')} onClick={this.toggleMood.bind(this)}>Mood</div>
+      </div>;
   }
   render() {
     const { cliques, ready} = this.state;

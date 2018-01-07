@@ -52,6 +52,10 @@ class DDMenu extends Component {
     }
     render() {
         const { panelOpen, panelPlacement } = this.state;
+        const defaultPosition = {
+            x: Math.max(panelPositionOnStartup.x, 0),
+            y: Math.max(panelPositionOnStartup.y, 0),
+        }
         return (
             <div className={styles.wrapper} >
                 <div className={styles.backdrop} /> 
@@ -59,7 +63,7 @@ class DDMenu extends Component {
                     onStop={this.handleDragStop.bind(this)}
                     onStart={() => this.setState({ dragging: true })}
                     onDrag={this.handlePanelPlacement.bind(this)}
-                    defaultPosition={panelPositionOnStartup}
+                    defaultPosition={defaultPosition}
                 >
                     <div onScroll={(e) => e.stopPropagation()} className={[styles.container, styles[`panel__${panelPlacement}`]].join(' ')}>
                         <div className={`handle fa fa-arrows ${styles.handle}`} onMouseUp={this.toggleMenus} />

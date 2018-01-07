@@ -4,7 +4,9 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Checkbox } from 'react-form';
 
+
 import DDSelect from '../ui_components/DDSelect';
+import DDMentions from '../ui_components/DDMentions'
 import DDMood from '../ui_components/DDMood';
 import routes from '../../routes';
 import request from '../../request';
@@ -21,11 +23,13 @@ function LinkDetails(props) {
             <Form getApi={props.getApi}>
                 {formApi => (
                     <div>
+                        
                         <Text field="url" type="hidden" />
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
                             <TextArea className="form-control" field="description" id="description" />
                         </div>
+                        <DDMentions formApi={formApi} cliques={props.cliques} field="description"/>
                         <div className="form-group">
                             <RadioGroup field="is_a_set">
                                 {group => (

@@ -29,7 +29,6 @@ function DDMood(props) {
     
     const { creatable, options } = props;
     const onChange = ({ target: { value } }) => {
-        console.log(value)
         setValue(value);
         if(onInput){
             onInput(value)

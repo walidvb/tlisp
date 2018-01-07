@@ -48,6 +48,7 @@ function DDMention(props) {
         props.formApi.setValue("clique_ids", [... new Set(detectedCliques)]);
 
         const detectedTags = readMentions(evt.target.value, 'tag');
+        console.log(detectedTags);
         props.formApi.setValue("tag_list", [... new Set(detectedTags)]);
     }
 

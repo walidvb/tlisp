@@ -17,6 +17,7 @@ $background: transparentize($primary-color, .2);
     background: $background;
     padding: .2rem 1rem 0rem 0;
     max-width: calc(35vw - 2rem);
+    min-width: 480px;
     box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }
 

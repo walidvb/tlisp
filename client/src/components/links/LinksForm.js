@@ -40,9 +40,10 @@ function LinkDetails(props) {
                                         <Checkbox field="published" id="published" className="form-check-input" />
                                         Public
                                     </label>
-                                    <small className={styles.help_text}>
-                                        ({formApi.values.published ? "This link will be available to your selected cliques" : "This link will only be visible to you"})
-                                    </small>
+                                    <span className={"hint"}>
+                                        <div className="fa fa-info" />
+                                        {formApi.values.published ? "This link will be available to your selected cliques" : "This link will only be visible to you"}
+                                    </span>
                                 </div>
                                 <RadioGroup field="is_a_set">
                                     {group => (

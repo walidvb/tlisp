@@ -44,7 +44,7 @@
     font-size: larger;
 }
 .url{
-    color: $background-grey;
+    color: lighten($primary-color, 40%);
     font-size: smaller;
     font-style: italic;
 }

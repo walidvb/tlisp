@@ -32,6 +32,7 @@ DiggersDelights::Application.routes.draw do
     get "/contact", to: "pages#contact", as: "contact"
     post "/emailconfirmation", to: "pages#email", as: "email_confirmation"
 
+    
 
     devise_for :users, controllers: {
         registrations: 'users/registrations',

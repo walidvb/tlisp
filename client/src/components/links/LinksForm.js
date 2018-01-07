@@ -240,7 +240,7 @@ class LinksForm extends Component {
                                     canSelectCliques={canSelectCliques} 
                                     this={this} 
                                 />
-                                <button type="submit" >Submit</button>
+                                <button className="button" type="submit" >Submit</button>
                             </form>
                         )}
                     </Form>

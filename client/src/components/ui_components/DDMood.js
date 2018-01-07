@@ -58,7 +58,8 @@ function DDMood(props) {
     }
     return (
         <div className={styles.container}>
-            <Gaussian  styles={styles} style={{left: `${opts.value}%`}} />
+            {/* HACK: value is empty on form initialization */}
+            <Gaussian  styles={styles} style={{left: `${opts.value || 50}%`}} />
             <input className={styles.input} type="range" min={0} max={100} value={opts.value} onChange={onChange}/>
         </div>
     )

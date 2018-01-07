@@ -3,6 +3,7 @@
 .container{
     min-width: 20rem;
     padding: 1rem;
+    position: relative;
 }
 
 .clique_name{
@@ -25,4 +26,11 @@
         text-transform: uppercase;
         font-weight: bold;
     }
+}
+
+.mood{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    max-width: 250px;
 }

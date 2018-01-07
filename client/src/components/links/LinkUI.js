@@ -19,6 +19,7 @@ class LinkUI extends Component {
     }
     this.search = this.search.bind(this)
     this.filterBy = this.filterBy.bind(this)
+    this.filterByMood = this.filterByMood.bind(this)
     this.renderUser = this.renderUser.bind(this)
     this.renderClique = this.renderClique.bind(this)
   }
@@ -36,6 +37,7 @@ class LinkUI extends Component {
     const filters = {
       users: activeUsers.map(u => u.id),
       cliques: activeCliques.map(c => c.id),
+      mood: this.state.mood,
     }
     this.props.getLinks({ filters })
   }
@@ -75,6 +77,12 @@ class LinkUI extends Component {
       cliques
     }, this.search.bind(this));
   }
+  filterByMood(v){
+    this.setState({
+      mood: v,
+    }, this.search.bind(this));
+
+  }
   renderUser(user, clique) {
     return <div 
       className={[styles.filter_item, user.active ? styles.active : ""].join(' ')}
@@ -97,7 +105,7 @@ class LinkUI extends Component {
     )
   }
   renderMood(){
-    return null//<DDMood />;
+    return <DDMood className={styles.mood} onChange={this.filterByMood} value={this.state.mood}/>;
   }
   render() {
     const { cliques, ready} = this.state;

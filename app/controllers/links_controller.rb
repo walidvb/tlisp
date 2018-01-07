@@ -55,7 +55,15 @@ class LinksController < ApplicationController
       # new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
+
+    # TODO optimize the search by mood
     @links = @link_assignments.map(&:link).compact.uniq
+    if mood = params[:mood].presence
+      mood = mood.to_i
+      @links = @links.select do |l|
+        l.mood.nil? || (l.mood <= mood + 20 && l.mood >= mood - 20)
+      end
+    end
   end
 
   # GET /links/1

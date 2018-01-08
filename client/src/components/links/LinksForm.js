@@ -136,7 +136,7 @@ class LinksForm extends Component {
         }
     }
     addCliquestoDescription(desc, cliques){
-        return desc.replace(/@/g, '');
+        return desc === undefined ? '' : desc.replace(/@/g, '');
         return cliques.map(c => `@[${c.name}](clique:${c.id})`).join(' ') + '\n' + (desc === undefined ? '' : desc)
     }
     setDefaultValues(){

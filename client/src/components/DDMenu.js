@@ -14,7 +14,7 @@ import styles from './DDMenu.scss';
 
 const CONFIG = 'CONFIG';
 let config = JSON.parse(localStorage.getItem(CONFIG)) || {
-    displayType: 'vertical',
+    displayType: 'horizontal',
     panelPlacement: 'under',
     x: 0,
     y: 0,

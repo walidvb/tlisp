@@ -12,9 +12,10 @@ before_action :configure_account_update_params, only: [:update]
   end
   
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    sign_in resource
+  end
 
   # GET /resource/edit
   # def edit

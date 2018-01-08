@@ -59,7 +59,7 @@ class DDMenu extends Component {
         }
     }
     render() {
-        const { panelOpen, panelPlacement } = this.state;
+        const { displayType, panelOpen, panelPlacement } = this.state;
         const defaultPosition = {
             x: Math.max(panelPositionOnStartup.x, 0),
             y: Math.max(panelPositionOnStartup.y, 0),
@@ -90,7 +90,7 @@ class DDMenu extends Component {
                                         <span className={styles.link_title} >Cliques </span>
                                     </Link>
                                     <div className={[styles.panel].join(' ')}>
-                                        <LinkUI />
+                                        <LinkUI displayType={displayType}/>
                                     </div>
                                 </li>
                                 <li className={panelOpen === 'playlists' ? styles.menu__open : ""}>

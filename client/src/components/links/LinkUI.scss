@@ -33,4 +33,7 @@
     top: 0;
     right: 5px;
     max-width: 250px;
+    .vertical &{
+        position: relative;
+    }
 }

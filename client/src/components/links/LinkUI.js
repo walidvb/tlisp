@@ -130,7 +130,7 @@ class LinkUI extends Component {
       return null;
     }
     return (
-      <div className={styles.container}>
+      <div className={[styles.container, styles[this.props.displayType]].join(' ')}>
         {this.renderMood()}
         {cliques.map((c) => <div key={c.name}>{this.renderClique(c)}</div>)}
       </div>

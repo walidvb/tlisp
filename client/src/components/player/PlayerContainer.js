@@ -63,6 +63,7 @@ class PlayerContainer extends Component {
                     controls={true}
                     style={{maxHeight: "200px"}}
                     playing={this.props.playing}
+                    onReady={() => this.props.playing ? this.props.play() : null}
                     onStart={(d) => console.log(this.props.play(d))}
                     onPlay={(d) => console.log(this.props.play(d))}
                     onProgress={(d) => console.log(this.props.onProgress(d))}

@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
       tracklist: action.payload,
     }
     case types.NEXT:
+    case types.ENDED:
       const { currentlyPlaying, tracklist } = state;
       for (let i = 0; i < tracklist.length; i++) {
         const track = tracklist[i];

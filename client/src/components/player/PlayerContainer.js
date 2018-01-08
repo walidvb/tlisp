@@ -54,7 +54,7 @@ class PlayerContainer extends Component {
             this.props.pause();
         }
         return (<div>
-            <h2>{canPlay ? <div className="fa fa-warning" /> : null}{title}</h2>
+            <h2>{canPlay ? <span className="fa fa-warning" /> : null} &nbsp;{title}</h2>
             {canPlay ? 
                 <ReactPlayer 
                     ref={(player) => this.player = player}

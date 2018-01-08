@@ -54,7 +54,7 @@ class PlayerContainer extends Component {
             this.props.pause();
         }
         return (<div>
-            {title}
+            <h2>{canPlay ? <div className="fa fa-warning" /> : null}{title}</h2>
             {canPlay ? 
                 <ReactPlayer 
                     ref={(player) => this.player = player}
@@ -69,11 +69,9 @@ class PlayerContainer extends Component {
                     onPause={(d) => console.log(this.props.pause(d))}
                     onEnded={(d) => console.log(this.props.onEnded(d))}
                 /> : 
-                <div className="fa fa-warning">
-                    <div style={{ height: "100%" }} dangerouslySetInnerHTML={{
-                        __html: html
-                    }} />
-                </div>
+                <div style={{ height: "100%" }} dangerouslySetInnerHTML={{
+                    __html: html
+                }} />
             }
         </div>);
     }

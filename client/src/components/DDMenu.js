@@ -108,7 +108,7 @@ class DDMenu extends Component {
                             <ul className={[styles.links_wrapper, styles[displayType]].join(' ')}>
                                 <li className={panelOpen === 'filters' ? styles.menu__open : ""}>
                                     <Link className="flex w-100" to={"/explore"} onClick={() => this.togglePanel('filters')}> 
-                                        <span className={`fa fa-${panelOpen === 'filters' ? 'arrow-left' : 'group'} ${styles.icon}`} />
+                                        <span className={`fa fa-rocket ${styles.icon}`} />
                                         <span className={styles.link_title} >Explore</span>
                                     </Link>
                                     <div className={[styles.panel].join(' ')}>
@@ -117,7 +117,7 @@ class DDMenu extends Component {
                                 </li>
                                 <li className={panelOpen === 'playlists' ? styles.menu__open : ""}>
                                     <Link className="flex w-100" to={"/me"} onClick={() => this.togglePanel('playlists')}> 
-                                        <span className={`fa fa-${panelOpen === 'playlists' ? 'arrow-left' : 'hand-peace-o'} ${styles.icon}`} />
+                                        <span className={`fa fa-hand-peace-o ${styles.icon}`} />
                                         <span className={styles.link_title} >My Digs</span>
                                     </Link>
                                     <div className={[styles.panel].join(' ')}>

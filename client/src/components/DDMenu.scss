@@ -60,11 +60,13 @@ $background: transparentize($primary-color, .1);
 .icon{
     padding: 0 .5rem;
     display: block;
+    opacity: .8;
     .vertical &{
         margin-right: .5rem;
         width: 2rem;
         border-right: solid 1px lighten($primary-color, 40%);
         margin-bottom: 1px;
+        padding-top: 3px;
     }
 }
 .handles{

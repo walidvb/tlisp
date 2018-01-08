@@ -61,6 +61,7 @@ $background: transparentize($primary-color, .1);
     padding: 0 .5rem;
     display: block;
     opacity: .8;
+    margin-bottom: .2rem;
     .vertical &{
         margin-right: .5rem;
         width: 2rem;
@@ -183,10 +184,10 @@ $background: transparentize($primary-color, .1);
         top: 0;
     }
     .panel__under &{
-        top: calc(4.3rem + 1px)
+        top: calc(4.5rem + 1px)
     }
     .panel__over &{
-        bottom: calc(3.5rem + 1px);
+        bottom: calc(4.5rem + 1px);
     }
     .menu__open &{
         display: inline-block;

@@ -18,10 +18,11 @@ let config = JSON.parse(localStorage.getItem(CONFIG)) || {
     panelPlacement: 'under',
     x: 0,
     y: 0,
-    showHelpOnStartup: true,
     panelOpen: 'help',
 }
-console.log(config);
+// this key is set in Bookmarklet.js which contains the help text
+config.showHelpOnStartup = localStorage.getItem('dont-show-help-on-startup') !== 'true';
+
 class DDMenu extends Component {
     static propTypes = {
 

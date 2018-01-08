@@ -13,7 +13,7 @@ import '!style-loader!css-loader!./Controls.css';
 import styles from  './Controls.scss';
 const Controls = (props) => {
     return (
-        <div className={styles.container}>
+        <div className={[styles.container, props.displayType == 'vertical' ? styles.vertical : null].join(' ')}>
             <div className={styles.controls}>
                 <PlaybackControls
                     isPlayable={props.tracklist.length > 0}
@@ -42,8 +42,8 @@ const Controls = (props) => {
                 <div className={`fa fa-list ${styles.player_toggler}`}>
                 </div>
                 {!props.currentlyPlaying ? null : 
-                    <div >
-                        <Marquee text={props.currentlyPlaying.title} />
+                    <div className= { styles.track_name }>
+                        <Marquee  text={props.currentlyPlaying.title} />
                     </div>
                 }
             </div>

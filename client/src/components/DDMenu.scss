@@ -4,7 +4,7 @@ body{
     //padding-top: calc(3.5rem - 2px);
 }
 
-$background: transparentize($primary-color, .2);
+$background: transparentize($primary-color, .1);
 
 .container{
     position: fixed;
@@ -27,7 +27,9 @@ $background: transparentize($primary-color, .2);
     a{
         display: inline-block;
         text-align: center;
-        width: 10ch;
+        .horizontal &{
+            width: 10ch;
+        }
         text-decoration: none;
         text-transform: lowercase;
         &:hover{
@@ -50,38 +52,43 @@ $background: transparentize($primary-color, .2);
     }
 }
 
-.panel{
-    width: 100%;
-    position: absolute;
-    left: 0;
-    display: none;
-    background: $primary-color;
-    max-height: 80vh;
-    overflow: auto;
-    .panel__under &{
-        top: calc(3.5rem + 1px)
-    }
-    .panel__over &{
-        bottom: calc(3.5rem + 1px);
+.icon{
+    padding: 0 .5rem;
+    border-right: solid 1px lighten($primary-color, 40%);
+    .vertical &{
+        margin-right: .5rem;
+        width: 2rem;
+        margin-bottom: 1px;
     }
 }
-
-.panel__open{
-    display: inline-block;
+.handles{
+    z-index: 49;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s .3s;
+    .container:hover &{
+        opacity: 1;
+        transition: all .1s 0s;
+        pointer-events: auto;
+        transform: translateY(-100%);
+    }
+    font-size: smaller;
+    background: $background;
+    border-right: solid 1px  darken($primary-color, 5%);
+    .vertical &{
+        border-right: none;
+        border-bottom: solid 1px  darken($primary-color, 5%);
+    }
+    position: absolute;
+    left: 0; 
+    transform: translateY(-70%);
 }
 
 .handle{
-        font-size: smaller;
-        cursor: move;
-        padding: 7px;
-        background: $background;
-        border-right: solid 1px  darken($primary-color, 5%);
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: translateX(calc(-100% + 1px));
+    padding: 7px;
 }
-.submenu .menu, .handle{ 
+
+.submenu .menu, .handle{
     color: lighten(#1EA896, 40%);
     &:hover{
         color: lighten(#1EA896, 90%);
@@ -97,6 +104,56 @@ $background: transparentize($primary-color, .2);
     z-index: 1;
     display: none;
     .wrapper:hover &{
+        display: inline-block;
+    }
+}
+
+.vertical{
+    flex-flow: column;
+    .container{
+        flex-flow: column;
+        min-width: 0px;
+    }
+    .link_title{
+        min-width: 10ch;
+    }
+    .submenu{
+        display: none;
+    }
+    .links_wrapper a{
+        text-align: left;
+    }
+}
+
+// PANELS
+.panel{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    display: none;
+    background: $primary-color;
+    max-height: 80vh;
+    overflow: auto;
+    .vertical &{ 
+        min-height: 400px;
+        min-width: 200%;
+        transition: all .15s ease-in-out;
+    }
+    .panel__left &{
+        left: -200%;
+        top: 0;
+    }
+    .panel__right &{
+        left: 100%;
+        top: 0;
+    }
+    .panel__under &{
+        top: calc(3.5rem + 1px)
+    }
+    .panel__over &{
+        bottom: calc(3.5rem + 1px);
+    }
+    .menu__open &{
         display: inline-block;
     }
 }

@@ -1,7 +1,11 @@
 @import "./_variables.scss";
 
 .flex{
-    display: flex;
+    display: flex!important;
+}
+
+.w-100{
+    width: 100%;
 }
 
 .fa{
@@ -49,6 +53,11 @@
 .disabled{
     opacity: .5;
     pointer-events: none;
+}
+
+// integration with other libs
+.handle .fa-arrow{
+    cursor: move;
 }
 
 // to be put in DDMentions.scss

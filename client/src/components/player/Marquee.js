@@ -17,7 +17,6 @@ export default class Marquee extends Component {
         const { speed } = this.props;
         this.playerInterval = setInterval(() => {
             const offset = this.textContainer ? this.textContainer.clientWidth : 0;
-            console.log(this.state.x, offset);
             this.setState({
                 x: this.state.x - 1 < -offset ? 0 : this.state.x - 1,
             });
@@ -38,7 +37,7 @@ export default class Marquee extends Component {
     
     render() {
         return (
-            <div ref={(div) => this.textContainer = div} style={{ overflow: 'hidden', width: '100%' }}>
+            <div ref={(div) => this.textContainer = div} className={this.props.className} style={{ overflow: 'hidden', width: '100%' }}>
                 <div style={{transform: `translateX(${this.state.x}px)`, whiteSpace: "nowrap", transition: "transform .1"}}>
                     {this.props.text}
                 </div>

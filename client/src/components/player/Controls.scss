@@ -20,11 +20,29 @@
 .progress{
     margin-left: .5rem;
     max-width: 100%;
-    min-width: 200px;
+    min-width: 100%;
 }
 
 .track_info{
-    width:300px;
     display: flex;
     flex-flow: row;
+    margin-bottom: .5rem;
+}
+
+.track_name{
+    max-width: 10ch;
+}
+
+.vertical{
+    &.container > div{
+        padding: 0;
+    }
+    .progress{
+        min-width: 75%;
+        max-width: 75%;
+    }
+    .track_name{
+        max-width: 15ch;
+        font-size: smaller;
+    }
 }

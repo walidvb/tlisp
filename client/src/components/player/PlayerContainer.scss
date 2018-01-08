@@ -22,6 +22,9 @@
     &.over{
         flex-direction: column-reverse;
     }
+    &.vertical{
+        flex-direction: column;
+    }
     
 }
 

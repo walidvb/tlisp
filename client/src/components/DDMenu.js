@@ -26,21 +26,29 @@ class DDMenu extends Component {
     }
     state = {
         panelOpen: showHelpOnStartup ? 'help' : undefined,
-        panelPlacement: 'under',
+        panelPlacement: 'left',
+        displayType: 'vertical',
     };
     togglePanel(panelName){
         this.setState({
             panelOpen: this.state.panelOpen === panelName ? undefined : panelName,
         })
     }
-    handlePanelPlacement({ clientY }, { node }){
-        const panelPlacement = clientY + node.clientHeight < window.innerHeight - 250 ? 'under' : 'over';
+    handlePanelPlacement({ clientX, clientY }, { node }){
+        const panelPlacement = this.state.displayType == 'vertical' ? 
+            (clientX < 450 ? 'right' : 'left') : 
+            (clientY + node.clientHeight < window.innerHeight - 250 ? 'under' : 'over');
 
         this.setState({
             panelPlacement
         });
         panelPositionOnStartup.panelPlacement = panelPlacement;
         localStorage.setItem(PANEL_POSITION_ON_STARTUP, JSON.stringify(panelPositionOnStartup))
+    }
+    toggleDisplayType() {
+        this.setState({
+            displayType: this.state.displayType == 'vertical' ? 'horizontal' : 'vertical',
+        });
     }
     handleDragStop(evt, { node }){
         if (node.style.transform.length){
@@ -57,27 +65,40 @@ class DDMenu extends Component {
             y: Math.max(panelPositionOnStartup.y, 0),
         }
         return (
-            <div className={styles.wrapper} >
+            <div className={[styles.wrapper, styles[this.state.displayType]].join(' ')} >
                 <div className={styles.backdrop} /> 
-                <Draggable handle=".handle" 
+                <Draggable 
+                    handle={`.${styles.handles}`} 
                     onStop={this.handleDragStop.bind(this)}
                     onStart={() => this.setState({ dragging: true })}
                     onDrag={this.handlePanelPlacement.bind(this)}
                     defaultPosition={defaultPosition}
                 >
-                    <div onScroll={(e) => e.stopPropagation()} className={[styles.container, styles[`panel__${panelPlacement}`]].join(' ')}>
-                        <div className={`handle fa fa-arrows ${styles.handle}`} onMouseUp={this.toggleMenus} />
+                    <div 
+                        onScroll={(e) => e.stopPropagation()} 
+                        className={[styles.container, styles[`panel__${panelPlacement}`]].join(' ')}
+                    >
+                        <div className={styles.handles}>
+                            <div className={`handle fa fa-arrows ${styles.handle}`} />
+                            <div className={`handle fa fa-window-minimize ${styles.handle}`} onMouseUp={this.toggleDisplayType.bind(this)} />
+                        </div>
                         <div>
-                            <ul className={styles.links_wrapper}>
-                                <li>
-                                    <Link className={panelOpen === 'filters' ? styles.menu__active : ""} to={"/explore"} onClick={() => this.togglePanel('filters')}> Cliques </Link>
-                                    <div className={[styles.panel, panelOpen==='filters' ? styles.panel__open : ""].join(' ')}>
+                            <ul className={[styles.links_wrapper, styles[this.state.displayType]].join(' ')}>
+                                <li className={panelOpen === 'filters' ? styles.menu__open : ""}>
+                                    <Link className="flex w-100" to={"/explore"} onClick={() => this.togglePanel('filters')}> 
+                                        <span className={`fa fa-${panelOpen === 'filters' ? 'arrow-left' : 'group'} ${styles.icon}`} />
+                                        <span className={styles.link_title} >Cliques </span>
+                                    </Link>
+                                    <div className={[styles.panel].join(' ')}>
                                         <LinkUI />
                                     </div>
                                 </li>
-                                <li>
-                                    <Link className={panelOpen === 'playlists' ? styles.menu__active : ""} to={"/me"} onClick={() => this.togglePanel('playlists')}> My Digs </Link>
-                                    <div className={[styles.panel, panelOpen === 'playlists' ? styles.panel__open : ""].join(' ')}>
+                                <li className={panelOpen === 'playlists' ? styles.menu__open : ""}>
+                                    <Link className="flex w-100" to={"/me"} onClick={() => this.togglePanel('playlists')}> 
+                                        <span className={`fa fa-${panelOpen === 'playlists' ? 'arrow-left' : 'hand-peace-o'} ${styles.icon}`} />
+                                        <span className={styles.link_title} >My Digs</span>
+                                    </Link>
+                                    <div className={[styles.panel].join(' ')}>
                                         <PlaylistList />
                                     </div>
                                 </li>
@@ -89,10 +110,10 @@ class DDMenu extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <Controls togglePlayer={() => this.togglePanel('player')} />
-                            <div className={[styles.panel, panelOpen === 'player' ? styles.panel__open : ""].join(' ')}>
-                                <PlayerContainer placement={panelPlacement} />
+                        <div className={panelOpen === 'player' ? styles.menu__open : ""}>
+                            <Controls displayType={this.state.displayType} togglePlayer={() => this.togglePanel('player')} />
+                            <div className={[styles.panel].join(' ')}>
+                                <PlayerContainer displayType={this.state.displayType} placement={panelPlacement} />
                             </div>
                         </div>
                     </div>

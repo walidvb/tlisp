@@ -11,3 +11,4 @@ export const PREV = 'PREV';
 export const PAUSE = 'PAUSE';
 export const PROGRESS = 'PROGRESS';
 export const SEEK = 'SEEK';
+export const ENDED = 'ENDED';

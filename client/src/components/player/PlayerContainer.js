@@ -47,23 +47,34 @@ class PlayerContainer extends Component {
         if (this.props.currentlyPlaying === undefined){
             return null;
         }
-        const { title, html, url , id} = this.props.currentlyPlaying;
-        const { playing } = this.props;
+        const { title, html, url, id} = this.props.currentlyPlaying;
+        const canPlay = ReactPlayer.canPlay(url);
+
+        if (!canPlay){
+            this.props.pause();
+        }
         return (<div>
             {title}
-            <ReactPlayer 
-                ref={(player) => this.player = player}
-                url={url} 
-                width="100%"
-                controls={true}
-                style={{maxHeight: "200px"}}
-                playing={playing}
-                onStart={this.props.play}
-                onPlay={this.props.play}
-                onProgress={this.props.onProgress}
-                onPause={this.props.pause}
-                onEnded={this.playNext.bind(this)}
-            />
+            {canPlay ? 
+                <ReactPlayer 
+                    ref={(player) => this.player = player}
+                    url={url} 
+                    width="100%"
+                    controls={true}
+                    style={{maxHeight: "200px"}}
+                    playing={this.props.playing}
+                    onStart={(d) => console.log(this.props.play(d))}
+                    onPlay={(d) => console.log(this.props.play(d))}
+                    onProgress={(d) => console.log(this.props.onProgress(d))}
+                    onPause={(d) => console.log(this.props.pause(d))}
+                    onEnded={(d) => console.log(this.props.onEnded(d))}
+                /> : 
+                <div className="fa fa-warning">
+                    <div style={{ height: "100%" }} dangerouslySetInnerHTML={{
+                        __html: html
+                    }} />
+                </div>
+            }
         </div>);
     }
     render() {

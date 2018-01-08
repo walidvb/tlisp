@@ -24,6 +24,11 @@ export const onProgress = (payload) => ({
   payload
 })
 
+export const onEnded = (payload) => ({
+  type: types.ENDED,
+  payload
+})
+
 export const onSeek = (payload) => ({
   type: types.SEEK,
   payload

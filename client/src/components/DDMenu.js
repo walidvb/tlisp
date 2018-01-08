@@ -109,7 +109,7 @@ class DDMenu extends Component {
                                 <li className={panelOpen === 'filters' ? styles.menu__open : ""}>
                                     <Link className="flex w-100" to={"/explore"} onClick={() => this.togglePanel('filters')}> 
                                         <span className={`fa fa-${panelOpen === 'filters' ? 'arrow-left' : 'group'} ${styles.icon}`} />
-                                        <span className={styles.link_title} >Cliques </span>
+                                        <span className={styles.link_title} >Explore</span>
                                     </Link>
                                     <div className={[styles.panel].join(' ')}>
                                         <LinkUI displayType={displayType}/>

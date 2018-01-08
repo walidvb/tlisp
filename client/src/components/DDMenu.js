@@ -13,12 +13,14 @@ import LinkUI from './links/LinkUI';
 import styles from './DDMenu.scss';
 
 const PANEL_POSITION_ON_STARTUP = 'panelPositionOnStartup';
+const DISPLAY_TYPE_ON_STARTUP = 'DISPLAY_TYPE_ON_STARTUP';
 const showHelpOnStartup = (localStorage.getItem('dont-show-help-on-startup') !== "true")
 let panelPositionOnStartup = JSON.parse(localStorage.getItem(PANEL_POSITION_ON_STARTUP)) || {
     panelPlacement: 'under',
     x: 0,
     y: 0,
 }
+let displayTypeOnStartup = localStorage.getItem(DISPLAY_TYPE_ON_STARTUP);
 
 class DDMenu extends Component {
     static propTypes = {
@@ -27,7 +29,7 @@ class DDMenu extends Component {
     state = {
         panelOpen: showHelpOnStartup ? 'help' : undefined,
         panelPlacement: 'left',
-        displayType: 'vertical',
+        displayType: displayTypeOnStartup,
     };
     togglePanel(panelName){
         this.setState({
@@ -46,9 +48,11 @@ class DDMenu extends Component {
         localStorage.setItem(PANEL_POSITION_ON_STARTUP, JSON.stringify(panelPositionOnStartup))
     }
     toggleDisplayType() {
+        const displayType = this.state.displayType == 'vertical' ? 'horizontal' : 'vertical'
         this.setState({
-            displayType: this.state.displayType == 'vertical' ? 'horizontal' : 'vertical',
+            displayType,
         });
+        localStorage.setItem(DISPLAY_TYPE_ON_STARTUP, displayType)
     }
     handleDragStop(evt, { node }){
         if (node.style.transform.length){
@@ -103,9 +107,9 @@ class DDMenu extends Component {
                                     </div>
                                 </li>
                             </ul>
-                            <div className={[styles.links_wrapper, styles.submenu].join(' ')}>
-                                <div className={panelOpen === 'help' ? `${styles.menu__active} ${styles.menu}` : styles.menu} onClick={() => this.togglePanel('help')}> Help </div>
-                                <div className={[styles.panel, panelOpen === 'help' ? styles.panel__open : ""].join(' ')}>
+                            <div className={[styles.links_wrapper, styles.submenu, panelOpen === 'help' ? styles.menu__open : ""].join(' ')}>
+                                <div className={styles.menu} onClick={() => this.togglePanel('help')}> Help </div>
+                                <div className={[styles.panel].join(' ')}>
                                     <Bookmarklet showHelpOnStartup={showHelpOnStartup}/>
                                 </div>
                             </div>

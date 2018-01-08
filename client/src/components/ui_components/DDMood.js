@@ -6,7 +6,7 @@ import styles from './DDMood.scss';
 
 const propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.integer
+    value: PropTypes.number
 }
 
 

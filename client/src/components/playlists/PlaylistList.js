@@ -21,7 +21,7 @@ export default class PlaylistList extends Component {
             <div>
                 <ul style={{display: 'flex', flexFlow: "row wrap"}}>
                     {this.state.playlists.map( pl => {
-                        return <li style={{padding: '.5rem 0rem'}}key={pl.slug}><Link to={`${routes.playlists.show}/${pl.slug}`}> {pl.name}</Link></li>
+                        return <li style={{padding: '.5rem .5rem'}} key={pl.slug}><Link to={`${routes.playlists.show}/${pl.slug}`}> {pl.name}</Link></li>
                     })}
                 </ul>
             </div>

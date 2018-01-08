@@ -120,7 +120,12 @@ class LinkUI extends Component {
   }
   renderMood(){
     return <div className={styles.mood}>
-        <DDMood className={this.state.moodActive ? null : "disabled"} onChange={this.filterByMood} value={this.state.mood}/>
+        <DDMood 
+          className={this.state.moodActive ? null : "disabled"} 
+          onChange={this.filterByMood} 
+          value={this.state.mood}
+          size="small"
+        />
         <div className={[styles.clique_name, styles.filter_item, this.state.moodActive ? styles.active : ""].join(' ')} onClick={this.toggleMood.bind(this)}>Mood</div>
       </div>;
   }

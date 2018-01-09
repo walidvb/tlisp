@@ -74,8 +74,8 @@ $background: transparentize($primary-color, .1);
     z-index: 49;
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.25s .3s, opacity 0.2s .3s;
-    .backdrop:hover &, .container:hover &{
+    transition: transform 0.25s 0s, opacity 0.2s 0s;
+    &.handles__visible{
         opacity: 1;
         transition: transform .1s 0s, opacity .15s 0s;
         pointer-events: auto;
@@ -91,7 +91,7 @@ $background: transparentize($primary-color, .1);
         transform: translateY(-70%);
         flex-direction: row;
     }
-    .backdrop:hover .vertical &, .vertical:hover &{
+    &.handles__visible{
         transform: translateY(-100%);
     }
     display: flex;

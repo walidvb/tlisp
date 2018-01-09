@@ -89,7 +89,7 @@ class DDMenu extends Component {
         }
         return (
             <div className={[styles.wrapper, styles[displayType]].join(' ')} >
-                <div className={styles.backdrop} /> 
+                { this.state.hovered || this.state.dragging ? <div className={styles.backdrop} /> : null }
                 <Draggable 
                     handle={`.${styles.handles}`} 
                     onStop={this.handleDragStop.bind(this)}
@@ -98,10 +98,12 @@ class DDMenu extends Component {
                     defaultPosition={defaultPosition}
                 >
                     <div 
+                        onMouseEnter={() => this.setState({hovered: true})}
+                        onMouseLeave={() => setTimeout(() => this.setState({ hovered: false }), 100)}
                         onScroll={(e) => e.stopPropagation()} 
                         className={[styles.container, styles[`panel__${panelPlacement}`]].join(' ')}
                     >
-                        <div className={styles.handles}>
+                        <div className={[styles.handles, this.state.hovered || this.state.dragging ? styles.handles__visible : ''].join(' ')}>
                             <div className={`handle fa fa-arrows ${styles.handle} ${styles.move}`} />
                             <div className={`handle fa fa-window-minimize ${styles.handle}`} onMouseUp={this.toggleDisplayType.bind(this)} />
                         </div>

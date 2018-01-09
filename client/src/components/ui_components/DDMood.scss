@@ -11,6 +11,7 @@ $bell-color: lighten($primary-color, 40%);
     padding-top: 45px;
     max-width: 300px;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 .svg_container{
@@ -25,6 +26,9 @@ $bell-color: lighten($primary-color, 40%);
   .svg_container > svg{
     height: 30px;
   }
+  .hint{
+    font-size: smallest;
+  }
 }
 .bell{
     fill: lighten($primary-color, 80%);
@@ -36,10 +40,10 @@ $bell-color: lighten($primary-color, 40%);
 }
 
 .hint{
-  padding-left: 0;
+  padding-left: 0!important;
   // to accomodate for the italics "hard"
-  padding-right: 3px;
-  margin-top: -1.5rem;
+  padding-right: 3px!important;
+  margin-top: -1.5rem!important;
 }
 
 // RANGE SLIDER

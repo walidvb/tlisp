@@ -3,7 +3,9 @@
 .flex{
     display: flex!important;
 }
-
+.flex-grow-1{
+    flex-grow: 1;
+}
 .w-100{
     width: 100%;
 }

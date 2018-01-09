@@ -119,15 +119,21 @@ class LinkUI extends Component {
     }, this.search.bind(this));
   }
   renderMood(){
-    return <div className={styles.mood}>
-        <DDMood 
-          className={this.state.moodActive ? null : "disabled"} 
-          onChange={this.filterByMood} 
-          value={this.state.mood}
-          size="small"
-        />
-        <div className={[styles.clique_name, styles.filter_item, this.state.moodActive ? styles.active : ""].join(' ')} onClick={this.toggleMood.bind(this)}>Mood</div>
-      </div>;
+    return (<div>
+      <div className={[styles.mood, "flex"].join(' ')}>
+        <div className={[styles.clique_name, styles.filter_item, this.state.moodActive ? styles.active : ""].join(' ')} onClick={this.toggleMood.bind(this)}>
+          Mood
+        </div>
+        <div className="flex-grow-1">
+          <DDMood 
+            className={this.state.moodActive ? null : "disabled"} 
+            onChange={this.filterByMood} 
+            value={this.state.mood}
+          />
+        </div> 
+      </div>
+      { this.state.moodActive ? <div class="hint"> <div className="fa fa-info" />Most tracks currently shared don't have any mood set, so this filter will not affect your view</div> : null }
+    </div>);
   }
   render() {
     const { cliques, ready} = this.state;

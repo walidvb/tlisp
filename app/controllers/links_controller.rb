@@ -104,6 +104,7 @@ def create
     if @link.save
       format.html { redirect_to @link, notice: 'Link was successfully created.' }
       format.json { render :show, status: :created, location: @link }
+      @link.notify! current_user
     else
       format.html { render :new }
       format.json { render json: @link.errors, status: :unprocessable_entity }

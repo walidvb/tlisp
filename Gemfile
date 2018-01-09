@@ -23,6 +23,7 @@ gem "autoprefixer-rails"
 # helpers
 gem 'kaminari', '0.16.3'
 gem 'friendly_id', '5.1.0'
+gem 'rest-client'
 
 # functionality
 gem 'devise', '~>4.1.0'

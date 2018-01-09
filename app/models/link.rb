@@ -41,6 +41,30 @@ class Link < ActiveRecord::Base
         end
     end
 
+    def notify! author
+        payload = {
+            attachments: [{
+                fallback: "#{self.title} digged! 🎶",
+                title: "#{self.title} digged! 🌴",
+                title_link: "http://diggersdelights.herokuapp.com",
+                text: self.description,
+                image_url: self.thumbnail_url,
+                thumb_url: self.thumbnail_url,
+                author_name: author.name,
+                footer: "Thank you for trying diggersdelights!",
+                ts: self.created_at.to_i,
+            }]
+        }
+        self.cliques.each do |cc|
+            if !cc.slack_url.blank?
+                Slack.post! cc.slack_url, payload
+            end
+        end
+    end
+
+    def payload
+
+    end
     [   "title",
         "description",
         "html",

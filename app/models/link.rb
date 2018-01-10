@@ -42,10 +42,11 @@ class Link < ActiveRecord::Base
     end
 
     def notify! author
+        emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample()
         payload = {
             attachments: [{
                 fallback: "#{self.title} digged! 🎶",
-                title: "#{self.title} digged! 🌴",
+                title: "#{self.title} digged! #{emoji}",
                 title_link: "http://diggersdelights.herokuapp.com",
                 text: self.description,
                 image_url: self.thumbnail_url,

@@ -76,7 +76,7 @@ class Link < ActiveRecord::Base
         "provider_url"
     ].each do |oembed_method|
         define_method oembed_method do |*args|
-            self.oembed[oembed_method]
+            self.respond_to?(oembed_method.to_sym) && !self.read_attribute(oembed_method.to_sym).blank? ? self.read_attribute(oembed_method.to_sym) : self.oembed[oembed_method]
         end
     end
 

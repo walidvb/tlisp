@@ -56,7 +56,7 @@ function DDMention(props) {
             cb(
                 users.map(u => ({
                     id: u.id,
-                    display: u.name,
+                    display: u.name || u.initials || "N/A",
                 }))
             )
         })

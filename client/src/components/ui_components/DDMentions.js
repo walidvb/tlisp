@@ -68,12 +68,12 @@ function DDMention(props) {
             display: t,
         }));
         // add non existing tag to list
-        const newTag = s.length < 1 ? null : [{
+        const newTag = s.length < 1 ? [] : [{
             id: s,
             display: s
         }];
         if(newTag){
-            existing = s.concat(existing);
+            existing = newTag.concat(existing);
         }
         cb(existing);
     }

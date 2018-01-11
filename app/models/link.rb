@@ -42,7 +42,7 @@ class Link < ActiveRecord::Base
     end
 
     def notify! author
-        emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample()
+        emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         payload = {
             attachments: [{
                 fallback: "#{self.title} digged! 🎶",

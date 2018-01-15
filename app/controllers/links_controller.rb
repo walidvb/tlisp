@@ -40,6 +40,7 @@ def index
   .order("created_at DESC")
   .includes(link: [:users, :tags])
   .visible
+  .oembedable
   reusable_query = @link_assignments
   if params[:custom] == 'only-me'
     @link_assignments = @link_assignments.where(user: current_user)
@@ -60,9 +61,10 @@ def index
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
   end
- 
-  # TODO optimize the search by mood
+
+  # TODO: 
   @links = @link_assignments.map(&:link).compact.uniq
+  # TODO optimize the search by mood
   if mood = params[:mood].presence
     mood = mood.to_i
     @links = @links.select do |l|

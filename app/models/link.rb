@@ -12,8 +12,10 @@ class Link < ActiveRecord::Base
 
     has_many :plays, inverse_of: :link
     
-    before_save :add_oembed
+    before_create :add_oembed
     
+    scope :oembeddable, -> { where(oembeddable: true) }
+
     validates_presence_of :url
     # TODO move description to link_assignment to allow unscoped uniqueness validation 
     validates_uniqueness_of :url
@@ -89,6 +91,9 @@ class Link < ActiveRecord::Base
         if new_oembed = get_oembed
             puts new_oembed.class
             self.oembed = get_oembed
+            self.oembeddable = true
+        else
+            self.oembeddable = false
         end
     end
 

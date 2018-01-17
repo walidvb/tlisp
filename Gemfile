@@ -31,6 +31,7 @@ gem 'devise', '~>4.1.0'
 gem 'acts_as_list'
 gem 'acts-as-taggable-on', '~> 4.0.0' 
 gem 'ruby-oembed'
+gem 'activity_notification'
 
 gem 'nokogiri'
 

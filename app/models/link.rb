@@ -1,4 +1,10 @@
 class Link < ActiveRecord::Base
+    acts_as_notifiable :users,
+         targets: ->(link, key) {
+            (link.mentionned_users).uniq
+         },
+         tracked: true #{ only: [:create] }
+
     default_scope {order("created_at DESC")}
 
     acts_as_taggable_on :tags, :genre
@@ -13,6 +19,7 @@ class Link < ActiveRecord::Base
     has_many :plays, inverse_of: :link
     
     before_create :add_oembed
+    after_create :notify_slack
     
     scope :oembeddable, -> { where(oembeddable: true) }
 
@@ -42,7 +49,14 @@ class Link < ActiveRecord::Base
         end
     end
 
-    def notify! author
+    # =================== NOTIFICATIONS
+
+    def mentionned_users
+        User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)
+    end
+
+    def notify_slack
+        author = self.users.first.name
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         payload = {
             attachments: [{
@@ -52,7 +66,7 @@ class Link < ActiveRecord::Base
                 text: self.description,
                 image_url: self.thumbnail_url,
                 thumb_url: self.thumbnail_url,
-                author_name: author.name,
+                author_name: author,
                 footer: "Thank you for trying diggersdelights!",
                 ts: self.created_at.to_i,
             }]
@@ -64,9 +78,6 @@ class Link < ActiveRecord::Base
         end
     end
 
-    def payload
-
-    end
     [   "title",
         "description",
         "html",

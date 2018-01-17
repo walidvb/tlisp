@@ -3,24 +3,29 @@
 # README
 
 ## Start server
-`$ foreman start -p Procfile.dev`
+`$ foreman start -f Procfile.dev`
 
 ## Run tests
 `$ bundle exec rake`
 
 _currently, cucumber tests are broken due to the react integration. Will need repairing at some point. RSPECs should never fail_
 
-## Setup
+# Setup
 
 Create a DB called `plis_development`
 `$ bundle exec rake db:create db:migrate`
 
-#### Setup tests
+### Setup tests
 Create a DB called `plis_development`
 `$ bundle exec rake db:test:prepare`
 
 ### Populate database
 `$ bundle exec rake db:seed` will create a user `you@me.com` with password `1234`
+
+## Tooling
+
+[React dev tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+[ReduxDevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
 
 
 ## ROADMAP

@@ -41,7 +41,8 @@ def index
   .includes(link: [:users, :tags])
   .visible
   .oembedable
-  reusable_query = @link_assignments
+
+  base_query = @link_assignments
   if params[:custom] == 'only-me'
     @link_assignments = @link_assignments.where(user: current_user)
   else
@@ -49,8 +50,10 @@ def index
     .where(clique_id: clique_ids)
     .where.not(user: current_user)
   end
+
+  # Return Walid's links if there are none in the clique yet
   if @link_assignments.count.zero?
-    @link_assignments = reusable_query.where(user_id: 1)
+    @link_assignments = base_query.where(user_id: 1)
   else
     if u_ids = params[:users].presence
       @link_assignments = @link_assignments.where(user: u_ids)
@@ -65,6 +68,7 @@ def index
   @links = Link.joins(:link_clique_assignments)
   .order("created_at DESC")
   .where('link_id IN (?)', @link_assignments.map(&:link_id))
+  .uniq
   # TODO optimize the search by mood
   if mood = params[:mood].presence
     mood = mood.to_i

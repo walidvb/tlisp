@@ -104,7 +104,6 @@ def create
   # add associations
   @link.playlist_ids = @link.playlist_ids.concat(playlist_ids)
   @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published])
-  binding.pry
   respond_to do |format|
     if @link.save
       format.html { redirect_to @link, notice: 'Link was successfully created.' }

@@ -3,22 +3,27 @@
 # README
 
 ## Start server
-`$ rails server puma -b 'ssl://0.0.0.0:3000?key=.ssl/localhost.key&cert=.ssl/localhost.crt'`
+`$ foreman start -p Procfile.dev`
 
 ## Run tests
-`bundle exec rake`
+`$ bundle exec rake`
+
+_currently, cucumber tests are broken due to the react integration. Will need repairing at some point. RSPECs should never fail_
 
 ## Setup
 
 Create a DB called `plis_development`
-`bundle exec rake db:create db:migrate`
+`$ bundle exec rake db:create db:migrate`
+
+#### Setup tests
+Create a DB called `plis_development`
+`$ bundle exec rake db:test:prepare`
 
 ### Populate database
-`bundle exec rake db:seed` will create a user `you@me.com` with password `1234`
+`$ bundle exec rake db:seed` will create a user `you@me.com` with password `1234`
 
 
 ## ROADMAP
  
- -[X] Allow public/private posts
- -[X] Allow users to join a clique
- -[X] Make it invitation-based only
+ - [X] Make it invitation-based only
+ - [ ] 

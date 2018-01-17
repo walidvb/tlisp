@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserController do
+describe UsersController do
   before do
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user

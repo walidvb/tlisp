@@ -11,8 +11,8 @@ describe Link do
     end
     
     let :link do
-      ll = Fabricate :link
-      ll.assign_to users: [user], url: url, cliques: [clique]
+      ll = Fabricate :link, url: url
+      ll.assign_to users: [user], cliques: [clique]
       ll
     end
 

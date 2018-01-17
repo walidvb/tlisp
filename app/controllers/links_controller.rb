@@ -9,10 +9,10 @@ class LinksController < ApplicationController
     })
   end
   render json: {      
-  cliques: cliques, 
-  tags: all_tags,
-  genres: all_tags(:genre),
-}
+    cliques: cliques, 
+    tags: all_tags,
+    genres: all_tags(:genre),
+  }
 end
 
 def link_form_details
@@ -25,11 +25,11 @@ def link_form_details
   @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
   @cliques = current_user.cliques
   render json: {
-  link: @link,
-  playlists: @playlists,
-  cliques: @cliques,
-  tags: @tags,
-}
+    link: @link,
+    playlists: @playlists,
+    cliques: @cliques,
+    tags: @tags,
+  }
 end
 
 # GET /links
@@ -94,6 +94,7 @@ end
 # POST /links.json
 def create
   # TODO: handle tag by user or clique. htf? dynamic scopes by clique maybe?
+  # TODO: move this to a LinkCreatorService
   # remove all associations
   _link_params = link_params
   clique_ids = _link_params.delete(:clique_ids)
@@ -103,6 +104,7 @@ def create
   # add associations
   @link.playlist_ids = @link.playlist_ids.concat(playlist_ids)
   @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published])
+  binding.pry
   respond_to do |format|
     if @link.save
       format.html { redirect_to @link, notice: 'Link was successfully created.' }
@@ -148,6 +150,7 @@ def link_params
   tag_list: [], 
   genre_list: []
   )
+  # ensure we don't parse the params twice
   if !@params_read
     if playlist_ids = pps[:playlist_ids]
       pps[:playlist_ids] = playlist_ids.map do |pid|

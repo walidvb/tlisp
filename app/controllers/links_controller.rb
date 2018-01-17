@@ -62,8 +62,9 @@ def index
     end
   end
 
-  # TODO: 
-  @links = @link_assignments.map(&:link).compact.uniq
+  @links = Link.joins(:link_clique_assignments)
+  .order("created_at DESC")
+  .where('link_id IN (?)', @link_assignments.map(&:link_id))
   # TODO optimize the search by mood
   if mood = params[:mood].presence
     mood = mood.to_i

@@ -17,7 +17,6 @@ class Link < ActiveRecord::Base
     scope :oembeddable, -> { where(oembeddable: true) }
 
     validates_presence_of :url
-    # TODO move description to link_assignment to allow unscoped uniqueness validation 
     validates_uniqueness_of :url
 
     def is_duplicate?
@@ -89,12 +88,13 @@ class Link < ActiveRecord::Base
 
     def add_oembed
         if new_oembed = get_oembed
-            puts new_oembed.class
             self.oembed = get_oembed
             self.oembeddable = true
         else
             self.oembeddable = false
         end
+        # Always return true to validate
+        return true
     end
 
     private

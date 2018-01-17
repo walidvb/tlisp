@@ -13,10 +13,12 @@ _currently, cucumber tests are broken due to the react integration. Will need re
 # Setup
 
 Create a DB called `plis_development` with user `gaston`
+
 `$ bundle exec rake db:create db:migrate`
 
 ### Setup tests
 Create a DB called `plis_test` with user `gaston`
+
 `$ bundle exec rake db:test:prepare`
 
 ### Populate database

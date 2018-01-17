@@ -2,21 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { playTrack } from '../../actions/playerActions';
+import ProgressBar from '../player/ProgressBar';
+
+import { playTrack, pause } from '../../actions/playerActions';
 import styles from './Link.scss';
 
-const Link = ({ playTrack, link }) => {
+const Link = ({ playTrack, pause, link }) => {
   const { thumbnail_url, title, width, height, provider, html, users, tag_list } = link;
   let inner;
   if(link.playing){
-    inner = <div style={{height: "100%"}} dangerouslySetInnerHTML={{
-      __html: html
-    }}/>;
+    inner = <div className={styles.playingLogo} style={{ height: "100%" }}> 
+      <div onClick={pause} className={["fa fa-pause"].join(' ')}/>
+      <ProgressBar />
+    </div>;
   }
   else{
     const splittedTitle = title && title.split(/\||\-|\/| by /i);
     inner = (
-      <div style={{height: "100%"}}>
+      <div onClick={() => playTrack(link)} style={{height: "100%"}}>
         <div className={styles.thumbnail}>
           <img style={{visibility: 'hidden'}}width="100%" height="400" src={thumbnail_url} />
         </div>
@@ -44,7 +47,7 @@ const Link = ({ playTrack, link }) => {
     );
   }
   return (
-    <div onClick={() => playTrack(link)} className={[styles.full_bg]} style={{ backgroundImage: `url(${thumbnail_url})` }}>
+    <div className={[styles.full_bg, (link.playing ? null : styles.fade)].join(' ')} style={{ backgroundImage: `url(${thumbnail_url})` }}>
       {inner}
       <div className={styles.tags}>
         <i className="fa fa-tags nouse-icon"></i>
@@ -59,7 +62,8 @@ Link.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  playTrack: (track) => dispatch(playTrack(track))
+  playTrack: (track) => dispatch(playTrack(track)),
+  pause: () => dispatch(pause()),
 })
 
 const mapStateToProps = (state, ownProps) => ({

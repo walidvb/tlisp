@@ -15,12 +15,10 @@ class PlayerContainer extends Component {
     }
     componentWillReceiveProps({ seek, currentlyPlaying }){
         if(seek !== this.props.seek && this.player){
-            console.log(seek)
             this.player.seekTo(seek);
         }
 
         if(currentlyPlaying != this.props.currentlyPlaying){
-            console.log(currentlyPlaying)
             trackPlay(currentlyPlaying);
         }
     }

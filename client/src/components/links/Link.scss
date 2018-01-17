@@ -55,3 +55,21 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.fade{
+    filter: grayscale(100%);
+    transition: filter .3s ease-in-out;
+    &:hover{
+        transition: none;
+        filter: none;
+    }
+}
+
+.playingLogo{
+    font-size: 3rem;
+    color: $primary-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect, } from 'react-redux';
+import { PlaybackControls } from 'react-player-controls'
 
 import Marquee from './Marquee';
-
+import ProgressBar from './ProgressBar';
 
 import * as playerActions from '../../actions/playerActions';
-import { ProgressBar, PlaybackControls } from 'react-player-controls'
+
+
 /* eslint-disable */
 import '!style-loader!css-loader!./Controls.css';
 import styles from  './Controls.scss';
@@ -27,16 +29,7 @@ const Controls = (props) => {
                     onNext={props.next}
                     className={[styles.controls, "PlaybackControls"].join(' ')}
                 />
-                <ProgressBar
-                    className={[styles.progress, "ProgressBar"].join(' ')}
-                    totalTime={100}
-                    currentTime={props.progress*100}
-                    isSeekable={true}
-                    onSeek={props.onSeek}
-                    // onSeekStart={seekTime => { /* perhaps freeze a video frame? */ }}
-                    // onSeekEnd={seekTime => { /* perform seek: */ audioEl.currentTime = seekTime }}
-                    // onIntent={seekTime => { /* f.i. update intended time marker */ }}
-                />
+                <ProgressBar />
             </div>
             <div onClick={props.togglePlayer} className={styles.track_info} style={{display: "flex"}}>
                 <div className={`fa fa-list ${styles.player_toggler}`}>

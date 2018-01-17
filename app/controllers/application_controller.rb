@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
+
   after_filter :allow_cors
 
   def allow_cors
@@ -26,6 +27,9 @@ class ApplicationController < ActionController::Base
   before_filter :reject_locked!, if: :devise_controller?
 
   def fallback_index_html
+    # TODO: allow iframing of session#new as well
+    authenticate_user!
+    # allow iframing for tracks new
     if /tracks\/new/.match(params[:path])
       headers['X-Frame-Options'] = "ALLOWALL"
     end
@@ -66,6 +70,7 @@ class ApplicationController < ActionController::Base
 
   # HELPERS
 
+  # move out of here!!! -> in helpers maybe?
   def all_tags context = :tags
     ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
   end

@@ -30,11 +30,12 @@ class NotificationsList extends Component {
     renderSingleNotification(notif, index){
         const link = notif.notifiable;
         const opened = notif.opened_at !== null;
-        return (<div key={index} onClick={() => playTrack(link)} className={styles.singleRow}>
+        return (
+            <div key={index} onClick={() => this.props.playTrack(link)} className={styles.singleRow}>
                 <div className={styles.thumbnail}>
                     <img src={link.thumbnail_url} />
                 </div>
-                <div>
+                <div className={styles.text}>
                     <h3> {link.title} </h3>
                     { !notif.notifier ? null : 
                         <div> from {notif.notifier.name} </div>
@@ -52,7 +53,7 @@ class NotificationsList extends Component {
                 <div onClick={this.toggleNotifs.bind(this)} className={[styles.trigger, "fa fa-inbox"].join(' ')} />
                 <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
                     <h4 className={styles.header}> Mentions </h4>
-                    {notifications.map(this.renderSingleNotification)}
+                    {notifications.map(this.renderSingleNotification.bind(this))}
                 </div>
             </div>
         )

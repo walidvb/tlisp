@@ -25,7 +25,7 @@
     position: absolute;
     bottom: 2.8rem;
     border-radius: 3px;
-    min-width: 15rem;
+    min-width: 20rem;
     max-width: 20rem;
     font-size: .8rem;
     border: darken(white, 30%) solid 1px;
@@ -62,6 +62,8 @@
     padding-top: .5rem;
     padding-bottom: .5rem;
     font-size: .8rem;
+    color: darken($primary-color, 70%);
+    border-bottom: $dark-grey solid 1px;
 }
 
 .singleRow{
@@ -69,6 +71,7 @@
     align-items: center;
     width: 100%;
     padding: .3rem 0;
+    cursor: pointer;
     &:not(:last-child){
         border-bottom: $light-grey solid 1px;
     }
@@ -79,6 +82,9 @@
     height: auto;
     margin-left: .5rem;
     margin-right: .5rem;
+}
+.text{
+    flex-grow: 2;
 }
 .status{
     &:before{

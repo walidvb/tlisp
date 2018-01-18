@@ -27,10 +27,12 @@
     display: flex;
     flex-flow: row;
     margin-bottom: .5rem;
+    cursor: pointer;
 }
 
 .track_name{
     max-width: 10ch;
+    cursor: pointer;
 }
 
 .vertical{

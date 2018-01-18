@@ -74,9 +74,9 @@ class NotificationsList extends Component {
                 <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, styles.trigger, "fa fa-inbox"].join(' ')} />
                 { showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null }
                 <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
-                    <h4 className={styles.header}> 
+                    <h4 onClick={this.toggleNotifs.bind(this)} className={styles.header}> 
                         Mentions  { count ? `(${count})` : null }
-                        <div className="fa fa-close"  onClick={this.toggleNotifs.bind(this)} />
+                        <div className="fa fa-close" style={{cursor: 'pointer'}}/>
                     </h4>
                     <div className={styles.notifsList}>
                         {count === 0 ? <div className={styles.noMentions}> You currently have no mentions 🤷‍♂️</div>:

@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 
   def fallback_index_html
     # TODO: allow iframing of session#new as well
-    authenticate_user!
     # allow iframing for tracks new
     if /tracks\/new/.match(params[:path])
       headers['X-Frame-Options'] = "ALLOWALL"

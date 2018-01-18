@@ -17,14 +17,20 @@ class NotificationsList extends Component {
     state = {
         notifications: [],
         open: false,
+        unread: 0,
+        showCount: false
     }
     componentDidMount(){
         request(routes.api.notifications.index)
-        .then( (notifications) => this.setState({ notifications }) )
+        .then( (notifications) => {
+            const unread = notifications.reduce((prev, curr) => (prev.opened_at === null ? 1 : 0), 0);
+            this.setState({ notifications, unread })
+        })
     }
     toggleNotifs(){
         this.setState({
             open: !this.state.open,
+            showCount: false,
         })
     }
     markAsRead(id){
@@ -58,12 +64,13 @@ class NotificationsList extends Component {
         </div>)
     }
     render() {
-        const { notifications, open } = this.state
+        const { notifications, open, showCount, unread } = this.state
         return (
             <div className={styles.container}>
                 <div onClick={this.toggleNotifs.bind(this)} className={[styles.trigger, "fa fa-inbox"].join(' ')} />
+                { showCount && unread !== 0 ?  <div className={styles.counter}>{unread}</div> : null }
                 <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
-                    <h4 className={styles.header}> Mentions </h4>
+                    <h4 className={styles.header}> Mentions  ({notifications.length}) </h4>
                     <div className={styles.notifsList}>
                         {notifications.map(this.renderSingleNotification.bind(this))}
                     </div>

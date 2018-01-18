@@ -52,31 +52,29 @@ class Link < ActiveRecord::Base
 
     # =================== NOTIFICATIONS
 
-    def to_json
-        {
-            test: 3
-        }
-    end
-
     def author
         # TODO: this won't work when multiple users post the link
         self.users.first
     end
 
     def mentionned_users
-
         self.description.blank? ? [] : User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)
+    end
+
+    def safe_description
+        self.description.gsub(/@\[([[[:alpha:]]| |_|-]+)\]\(\w+:[[[:alpha:]]| |_|-]+\)/, '\1')
     end
 
     def notify_slack!
         author = self.users.first.name
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
+        
         payload = {
             attachments: [{
                 fallback: "#{self.title} digged! 🎶",
                 title: "#{self.title} digged! #{emoji}",
                 title_link: "http://diggersdelights.herokuapp.com",
-                text: self.description,
+                text: self.safe_description,
                 image_url: self.thumbnail_url,
                 thumb_url: self.thumbnail_url,
                 author_name: author,

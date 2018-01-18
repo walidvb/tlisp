@@ -77,16 +77,26 @@
 
 .header{
     padding-left: .5rem;
+    padding-right: .5rem;
     padding-top: .3rem;
     padding-bottom: .3rem;
     font-size: .8rem;
     color: darken($primary-color, 70%);
     border-bottom: $dark-grey solid 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $dark-grey;
 }
 
 .notifsList{
     max-height: 60vh;
     overflow-y: auto;
+}
+
+.noMentions{
+    padding: 1rem .3rem;
+    
 }
 
 .singleRow{

@@ -19,13 +19,14 @@ class NotificationsList extends Component {
         open: false,
         unread: 0,
         showCount: true,
+        loading: true,
     }
     componentDidMount(){
         request(routes.api.notifications.index)
         .then( (notifications) => {
             const unread = notifications.reduce((prev, curr) => prev + (curr.opened_at === null ? 1 : 0), 0);
             console.log(unread)
-            this.setState({ notifications, unread })
+            this.setState({ notifications, unread, loading: false })
         })
     }
     toggleNotifs(){
@@ -67,14 +68,20 @@ class NotificationsList extends Component {
     render() {
         const { notifications, open, showCount, unread } = this.state
         const hasUnread = unread !== 0;
+        const count = notifications.length;
         return (
             <div className={styles.container}>
                 <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, styles.trigger, "fa fa-inbox"].join(' ')} />
                 { showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null }
                 <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
-                    <h4 className={styles.header}> Mentions  ({notifications.length}) </h4>
+                    <h4 className={styles.header}> 
+                        Mentions  { count ? `(${count})` : null }
+                        <div className="fa fa-close"  onClick={this.toggleNotifs.bind(this)} />
+                    </h4>
                     <div className={styles.notifsList}>
-                        {notifications.map(this.renderSingleNotification.bind(this))}
+                        {count !== 0 ? <div className={styles.noMentions}> You currently have no mentions 🤷‍♂️</div>:
+                            notifications.map(this.renderSingleNotification.bind(this))
+                        }
                     </div>
                 </div>
             </div>

@@ -3,6 +3,10 @@
 .container__grid{
     display: flex;
     flex-flow: row wrap;
+    &:after{
+        content: '';
+        flex-grow: 50;
+    }
 }
 
 .item__grid{

@@ -1,10 +1,38 @@
+.join-page {
+    header{
+        display: none;
+    }
+    main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-width: 100vw;
+    }
+    #wrap{
+        padding-bottom: 0;
+    }
+    .thumb{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .join-content{
     color: white;
     position: relative;
     text-align: center;
-    padding-top: 5rem;
     a, a:hover{
         color: white;
         text-transform: uppercase;
+    }
+}
+
+.links-container{
+    opacity: 0;
+    &:after{
+        content: '';
+        flex-grow: 50;
     }
 }

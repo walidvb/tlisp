@@ -1,6 +1,8 @@
+- content_for :body_class, "join-page"
 .links-container.large
     - @links.each do |link|
-        .thumb= image_tag link.thumbnail_url
+        .thumb
+            %div= image_tag link.thumbnail_url
 .join-content
     %h1 Welcome to digging 2.0
     %h3 
@@ -12,3 +14,15 @@
         Sign up and join 
         %br
         #{@clique.name}
+:javascript
+    var direction = 1;
+    function scrollTo(){
+        var newY = $('.links-container').scrollTop()+direction;
+        $('.links-container').scrollTop(newY)
+        if(newY >= $('.links-container')[0].scrollHeight -  window.innerHeight || newY <= 0){
+            direction = -direction;
+        }
+    }
+    $('.links-container').scrollTop($('.links-container')[0].scrollHeight -  window.innerHeight);
+    setTimeout(function(){$('.links-container').animate({opacity: 1}, 2500);}, 1000)
+    setInterval(scrollTo, 50);

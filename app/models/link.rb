@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
          targets: ->(link, key) {
             (link.mentionned_users).uniq
          },
-         tracked: true, #{ only: [:create] }
+         tracked: { only: [:create] }
          notifier: :author
 
     default_scope {order("created_at DESC")}

@@ -62,11 +62,10 @@ class Link < ActiveRecord::Base
     end
 
     def safe_description
-        self.description.gsub(/@\[([[[:alpha:]]| |_|-]+)\]\(\w+:[[[:alpha:]]| |_|-]+\)/, '\1')
+        self.description.blank? ? '' : self.description.gsub(/@\[([[[:alpha:]]| |_|-]+)\]\(\w+:[[[:alpha:]]| |_|-]+\)/, '\1')
     end
 
     def notify_slack!
-        author = self.users.first.name
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         
         payload = {
@@ -77,7 +76,7 @@ class Link < ActiveRecord::Base
                 text: self.safe_description,
                 image_url: self.thumbnail_url,
                 thumb_url: self.thumbnail_url,
-                author_name: author,
+                author_name: author.try(:name),
                 footer: "Thank you for trying diggersdelights!",
                 ts: self.created_at.to_i,
             }]

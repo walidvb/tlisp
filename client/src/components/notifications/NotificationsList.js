@@ -66,10 +66,11 @@ class NotificationsList extends Component {
     }
     render() {
         const { notifications, open, showCount, unread } = this.state
+        const hasUnread = unread !== 0;
         return (
             <div className={styles.container}>
-                <div onClick={this.toggleNotifs.bind(this)} className={[styles.trigger, "fa fa-inbox"].join(' ')} />
-                { showCount && unread !== 0 ?  <div className={styles.counter}>{unread}</div> : null }
+                <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, styles.trigger, "fa fa-inbox"].join(' ')} />
+                { showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null }
                 <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
                     <h4 className={styles.header}> Mentions  ({notifications.length}) </h4>
                     <div className={styles.notifsList}>

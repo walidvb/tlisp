@@ -63,6 +63,15 @@ class Users::NotificationsWithDeviseController < ActivityNotification::Notificat
 
   # def load_index
   #   super
+          # @notifications = 
+          # case @index_options[:filter]
+          # when :opened, 'opened'
+          #   @target.opened_notification_index_with_attributes(@index_options)
+          # when :unopened, 'unopened'
+          #   @target.unopened_notification_index_with_attributes(@index_options)
+          # else
+          #   @target.notification_index_with_attributes(@index_options)
+          # end
   # end
 
   # def controller_path

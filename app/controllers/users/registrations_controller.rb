@@ -16,6 +16,7 @@ before_action :configure_account_update_params, only: [:update]
   def create
     super
     sign_in resource
+    redirect_to onboarding_path
   end
 
   # GET /resource/edit

@@ -21,7 +21,7 @@ DiggersDelights::Application.routes.draw do
 
     resources :users, only: [:index]
     get '/notifications' => 'users/notifications_with_devise#index', devise_type: "user", target_type: "user"
-    post '/notifications/:id/open' => 'users/notifications_with_devise#open'
+    post '/notifications/:id/open' => 'users/notifications_with_devise#open', devise_type: "user", target_type: "user"
 
     notify_to :users, controller: 'users/notifications', with_devise: :users
     

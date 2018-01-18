@@ -14,7 +14,7 @@ const routes = {
         users: '/api/users.json',
         notifications: {
             index: '/api/notifications.json',
-            open: (id) => `/api/notifications/${id}/open`,
+            open: (id) => `/api/notifications/${id}/open.json`,
         }
     },
     links: {

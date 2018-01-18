@@ -59,11 +59,16 @@
 
 .header{
     padding-left: .5rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
     font-size: .8rem;
     color: darken($primary-color, 70%);
     border-bottom: $dark-grey solid 1px;
+}
+
+.notifsList{
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 .singleRow{
@@ -85,6 +90,10 @@
 }
 .text{
     flex-grow: 2;
+}
+.notifier{
+    font-style: italic;
+    color: $dark-grey;
 }
 .status{
     &:before{

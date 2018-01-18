@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+let playerInterval;
+
 export default class Marquee extends Component {
     static propTypes = {
 
@@ -15,19 +17,19 @@ export default class Marquee extends Component {
     }
     start(){
         const { speed } = this.props;
-        this.playerInterval = setInterval(() => {
+        playerInterval = setInterval(() => {
             const offset = this.textContainer ? this.textContainer.clientWidth : 0;
             this.setState({
                 x: this.state.x - 1 < -offset ? 0 : this.state.x - 1,
             });
-            clearInterval(this.playerInterval);
+            clearInterval(playerInterval);
             setTimeout(this.start.bind(this), this.props.delay);
         }, speed)
     }
     componentWillReceiveProps(props){
         if(props.text !== this.props.text){
             this.setState({x: 0});
-            clearInterval(this.playerInterval);
+            clearInterval(playerInterval);
             setTimeout(this.start.bind(this), this.props.delay);
         }
     }

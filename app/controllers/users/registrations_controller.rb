@@ -9,6 +9,7 @@ before_action :configure_account_update_params, only: [:update]
   end
 
   def onboarding
+    authenticate_user!
   end
   
   # POST /resource

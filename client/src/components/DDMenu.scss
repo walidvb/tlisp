@@ -9,14 +9,21 @@ $background: transparentize($primary-color, .1);
 .container{
     position: fixed;
     top: 25px;
-    right: 25px;
+    left: 80vw;
     z-index: 50;
     color: white;
     display: flex;
     flex-flow: row;
     background: $background;
     padding: .2rem 1rem 0rem 0;
-    max-width: calc(35vw - 2rem);
+    max-width: calc(2rem - 1px);
+    overflow: hidden;
+    transition: all 1s .1s cubic-bezier(1,0.09, 0.63, 0.97);
+    &:hover{
+        transition: max-width .15s 0s ease-in-out;
+        max-width: calc(35vw - 2rem);
+        overflow: initial;
+    }
     min-width: 480px;
     box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }

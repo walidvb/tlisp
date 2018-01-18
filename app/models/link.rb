@@ -3,7 +3,8 @@ class Link < ActiveRecord::Base
          targets: ->(link, key) {
             (link.mentionned_users).uniq
          },
-         tracked: true #{ only: [:create] }
+         tracked: true, #{ only: [:create] }
+         notifier: :author
 
     default_scope {order("created_at DESC")}
 
@@ -50,6 +51,17 @@ class Link < ActiveRecord::Base
     end
 
     # =================== NOTIFICATIONS
+
+    def to_json
+        {
+            test: 3
+        }
+    end
+
+    def author
+        # TODO: this won't work when multiple users post the link
+        self.users.first
+    end
 
     def mentionned_users
         User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)

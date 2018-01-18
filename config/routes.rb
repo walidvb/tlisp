@@ -2,6 +2,7 @@ DiggersDelights::Application.routes.draw do
   
 
   
+
   resources :playlists
   get 'static/modaljs'
   resources :cliques
@@ -19,7 +20,10 @@ DiggersDelights::Application.routes.draw do
     end
 
     resources :users, only: [:index]
-    notify_to :users
+    get '/notifications' => 'users/notifications_with_devise#index', devise_type: "user", target_type: "user"
+    post '/notifications/:id/open' => 'users/notifications_with_devise#open'
+
+    notify_to :users, controller: 'users/notifications', with_devise: :users
     
     get '/link_form_details.json' => 'links#link_form_details'
 

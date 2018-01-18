@@ -10,6 +10,7 @@ import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
 import DDMenu from './components/DDMenu';
+import NotificationsList from './components/notifications/NotificationsList';
 import PlayerContainer from './components/player/PlayerContainer';
 import routes from './routes';
 
@@ -20,6 +21,7 @@ class AppWrapper extends Component {
       <div>
         <DDMenu />
         <LinksContainer />
+        <NotificationsList />
       </div>
     )
   }

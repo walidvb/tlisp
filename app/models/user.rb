@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_target #email: :email, email_allowed: :confirmed_at
-
+  acts_as_notifier
+  
   scope :confirmed, ->{ where.not(confirmed_at: nil) }
   
   has_many :link_clique_assignments, inverse_of: :user

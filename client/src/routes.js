@@ -12,6 +12,10 @@ const routes = {
             index: '/api/playlists.json',
         },
         users: '/api/users.json',
+        notifications: {
+            index: '/api/notifications.json',
+            open: (id) => `/api/notifications/${id}/open`,
+        }
     },
     links: {
         new: '/tracks/new',

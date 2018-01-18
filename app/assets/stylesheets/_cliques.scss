@@ -31,6 +31,7 @@
 
 .links-container{
     opacity: 0;
+    background: black;
     &:after{
         content: '';
         flex-grow: 50;

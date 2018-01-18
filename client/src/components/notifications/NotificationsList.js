@@ -18,12 +18,13 @@ class NotificationsList extends Component {
         notifications: [],
         open: false,
         unread: 0,
-        showCount: false
+        showCount: true,
     }
     componentDidMount(){
         request(routes.api.notifications.index)
         .then( (notifications) => {
-            const unread = notifications.reduce((prev, curr) => (prev.opened_at === null ? 1 : 0), 0);
+            const unread = notifications.reduce((prev, curr) => prev + (curr.opened_at === null ? 1 : 0), 0);
+            console.log(unread)
             this.setState({ notifications, unread })
         })
     }

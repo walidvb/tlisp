@@ -20,7 +20,7 @@ class Link < ActiveRecord::Base
     has_many :plays, inverse_of: :link
     
     before_create :add_oembed
-    after_create :notify_slack
+    after_create :notify_slack!
     
     scope :oembeddable, -> { where(oembeddable: true) }
 
@@ -68,7 +68,7 @@ class Link < ActiveRecord::Base
         self.description.blank? ? [] : User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)
     end
 
-    def notify_slack
+    def notify_slack!
         author = self.users.first.name
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         payload = {

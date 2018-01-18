@@ -79,7 +79,7 @@ class NotificationsList extends Component {
                         <div className="fa fa-close"  onClick={this.toggleNotifs.bind(this)} />
                     </h4>
                     <div className={styles.notifsList}>
-                        {count !== 0 ? <div className={styles.noMentions}> You currently have no mentions 🤷‍♂️</div>:
+                        {count === 0 ? <div className={styles.noMentions}> You currently have no mentions 🤷‍♂️</div>:
                             notifications.map(this.renderSingleNotification.bind(this))
                         }
                     </div>

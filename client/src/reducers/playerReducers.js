@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
         ...state,
         currentlyPlaying: action.payload,
         playing: true,
+        progress: 0,
       };
     case types.SET_PLAYLIST:
     return {
@@ -35,7 +36,8 @@ export default (state = initialState, action) => {
           return {
             ...state,
             currentlyPlaying: tracklist[i + 1],
-            playing: true
+            playing: true,
+            progress: 0,
           }
         }
       }

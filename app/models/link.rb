@@ -64,7 +64,8 @@ class Link < ActiveRecord::Base
     end
 
     def mentionned_users
-        User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)
+
+        self.description.blank? ? [] : User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)
     end
 
     def notify_slack

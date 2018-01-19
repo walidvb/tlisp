@@ -10,6 +10,8 @@ import DDMood from '../ui_components/DDMood';
 import * as linkActions from '../../actions/linkActions';
 import styles from './LinkUI.scss';
 
+let timeout;
+
 class LinkUI extends Component {
   constructor() {
     super();
@@ -28,15 +30,14 @@ class LinkUI extends Component {
   static propTypes = {
     getLinks: PropTypes.func.isRequired
   }
-  static searchDelay = 400
   componentDidMount() {
     request(routes.api.links.filters).then(data => {
       this.setState({ ...data, ready: true })
     })
   }
   search(){
-    clearTimeout(this.searchTimeout);
-    this.searchTimeout = setTimeout(() => search(this), this.searchDelay);
+    clearTimeout(timeout);
+    timeout = setTimeout(() => search(this), 800);
     function search(self){
       const activeCliques = self.state.cliques.filter(c => c.active);
       const activeUsers = self.state.cliques.map(c => c.users).reduce((a, b) => a.concat(b)).filter(u => u.active);

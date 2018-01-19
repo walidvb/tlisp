@@ -31,8 +31,14 @@ class DDMenu extends Component {
         config: {
             ...config,
             panelOpen: config.showHelpOnStartup ? 'help' : config.panelOpen
-        } 
+        },
+        hovered: true,
     };
+    
+    componentDidMount() {
+        setTimeout(() => this.setState({hovered:false}), 3000);
+    }
+    
     togglePanel(panelName){
         this.setState({
             config: {
@@ -87,9 +93,10 @@ class DDMenu extends Component {
             x: Math.max(config.x, 0),
             y: Math.max(config.y, 0),
         }
+        let timeout;
         return (
             <div className={[styles.wrapper, styles[displayType]].join(' ')} >
-                { this.state.hovered || this.state.dragging ? <div className={styles.backdrop} /> : null }
+                { this.state.dragging ? <div className={styles.backdrop} /> : null }
                 <Draggable 
                     handle={`.${styles.handles}`} 
                     onStop={this.handleDragStop.bind(this)}
@@ -98,10 +105,10 @@ class DDMenu extends Component {
                     defaultPosition={defaultPosition}
                 >
                     <div 
-                        onMouseEnter={() => this.setState({hovered: true})}
-                        onMouseLeave={() => setTimeout(() => this.setState({ hovered: false }), 100)}
+                        onMouseEnter={() => { clearTimeout(timeout); this.setState({hovered: true})}}
+                        onMouseLeave={() => timeout = setTimeout(() => this.setState({ hovered: false }), 600)}
                         onScroll={(e) => e.stopPropagation()} 
-                        className={[styles.container, styles[`panel__${panelPlacement}`]].join(' ')}
+                        className={[styles.container, styles[`panel__${panelPlacement}`], this.state.hovered || this.state.dragging ? styles.hovered : null].join(' ')}
                     >
                         <div className={[styles.handles, this.state.hovered || this.state.dragging ? styles.handles__visible : ''].join(' ')}>
                             <div className={`handle fa fa-arrows ${styles.handle} ${styles.move}`} />

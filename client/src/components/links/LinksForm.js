@@ -7,6 +7,7 @@ import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Ch
 
 import DDSelect from '../ui_components/DDSelect';
 import DDMentions from '../ui_components/DDMentions'
+import LinkDetails from './LinkDetails';
 import ReactFormDDMood from '../ui_components/ReactFormDDMood';
 import routes from '../../routes';
 import request from '../../request';
@@ -16,7 +17,7 @@ import { submitLink } from '../../actions/linkActions';
 
 const qs = require('qs');
 
-function LinkDetails(props) {
+function LinkFormDetails(props) {
 
     return (
         <NestedForm field="link">
@@ -173,8 +174,9 @@ class LinksForm extends Component {
             method: 'POST',
             body
         })
-        .then(c => {
+        .then(link => {
             this.setState({
+                link,
                 success: true,
             })
         })
@@ -226,13 +228,13 @@ class LinksForm extends Component {
             <div className={[styles.container, loaded ? styles.loading : ''].join(' ')}>
                 {this.renderLinkHeader()}
                 { errors }
-                { success ? "Link saved!" : 
+                { success ? <LinkDetails link={link}/> : 
                     <Form 
                         onSubmit={this.handleSubmit} 
                         preSubmit={(values, formApi) => this.preSubmit(values, canSelectCliques)}>
                         { formApi => (
                             <form className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} onSubmit={formApi.submitForm} id="form2">
-                                <LinkDetails getApi={f => this.linkFormApi = f} 
+                                <LinkFormDetails getApi={f => this.linkFormApi = f} 
                                     playlists={playlists} 
                                     cliques={cliques} 
                                     tags={tags}

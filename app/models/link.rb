@@ -83,7 +83,7 @@ class Link < ActiveRecord::Base
         }
         self.cliques.each do |cc|
             if !cc.slack_url.blank?
-                Slack.post! cc.slack_url, payload
+                Slack.post! cc.slack_url, payload if Rails.env.production?
             end
         end
     end

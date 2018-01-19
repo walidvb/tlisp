@@ -1,3 +1,0 @@
-features/clique.feature:3
-features/links.feature:3
-features/playlist.feature:3

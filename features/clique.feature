@@ -5,6 +5,8 @@ Feature: Cliques!
         When I visit the clique invitation page
         And I choose to sign up
         Then I belong to the clique
+        And I see the onboarding page
+        And I can add my initials
 
     Scenario: I invite friends to a clique
         Given I am logged in

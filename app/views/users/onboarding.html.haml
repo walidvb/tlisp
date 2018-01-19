@@ -1,8 +1,6 @@
 %h1 Please fill in some details before we continue:
 
 = form_for @user, url: user_registration_path(), method: :PUT do |f|
-    = hidden_field_tag :redirect_to, '/'
-    = edit_user_registration_path()
     .field
         = f.label :name
         = f.text_field :name

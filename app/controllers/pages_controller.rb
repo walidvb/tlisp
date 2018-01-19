@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   ]
 
   def home
-    redirect_to inside_path if user_signed_in?
+    redirect_to root_path if user_signed_in?
   end
 
   def inside

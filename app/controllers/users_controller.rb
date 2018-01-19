@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
 
     def onboarding
+      @user = current_user
       params[:play]
     end
 end

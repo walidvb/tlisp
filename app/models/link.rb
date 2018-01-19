@@ -81,6 +81,7 @@ class Link < ActiveRecord::Base
                 ts: self.created_at.to_i,
             }]
         }
+        Slack.post! ENV['DD_SLACK_WEBHOOK_URL'], payload if Rails.env.production?
         self.cliques.each do |cc|
             if !cc.slack_url.blank?
                 Slack.post! cc.slack_url, payload if Rails.env.production?

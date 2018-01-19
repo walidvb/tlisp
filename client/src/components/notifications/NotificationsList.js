@@ -10,6 +10,9 @@ import { playTrack, pause } from '../../actions/playerActions';
 import Link from '../links/Link';
 import styles from './NotificationsList.scss';
 
+const OPENED = 'opened',
+    UNOPENED = 'unopened';
+
 class NotificationsList extends Component {
     static propTypes = {
 
@@ -17,17 +20,23 @@ class NotificationsList extends Component {
     state = {
         notifications: [],
         open: false,
-        unread: 0,
         showCount: true,
         loading: true,
+        displayState: UNOPENED
     }
     componentDidMount(){
-        request(routes.api.notifications.index)
-        .then( (notifications) => {
-            const unread = notifications.reduce((prev, curr) => prev + (curr.opened_at === null ? 1 : 0), 0);
-            console.log(unread)
-            this.setState({ notifications, unread, loading: false })
+        this.fetchNotifications();
+    }
+    fetchNotifications(){
+        request(`${routes.api.notifications.index}?filter=${this.state.displayState}`)
+        .then((notifications) => {
+            this.setState({ notifications, loading: false })
         })
+    }
+    toggleDisplayState(){
+        this.setState({
+            displayState: this.state.displayState == UNOPENED ? OPENED : UNOPENED,
+        }, this.fetchNotifications)
     }
     toggleNotifs(){
         this.setState({
@@ -66,20 +75,23 @@ class NotificationsList extends Component {
         </div>)
     }
     render() {
-        const { notifications, open, showCount, unread } = this.state
-        const hasUnread = unread !== 0;
+        const { displayState, notifications, open, showCount, unread } = this.state
+        const hasUnread = notifications.length > 0 && displayState == UNOPENED;
         const count = notifications.length;
         return (
             <div className={styles.container}>
                 <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, styles.trigger, "fa fa-inbox"].join(' ')} />
                 { showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null }
                 <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
-                    <h4 onClick={this.toggleNotifs.bind(this)} className={styles.header}> 
+                    <h4  className={styles.header}> 
                         Mentions  { count ? `(${count})` : null }
-                        <div className="fa fa-close" style={{cursor: 'pointer'}}/>
+                        <div className="flex">
+                            <div className={styles.stateToggler} onClick={this.toggleDisplayState.bind(this)} > {displayState == OPENED ? 'new' : "past"}  </div>
+                            <div className="fa fa-close" onClick={this.toggleNotifs.bind(this)} style={{cursor: 'pointer'}}/>
+                        </div>
                     </h4>
                     <div className={styles.notifsList}>
-                        {count === 0 ? <div className={styles.noMentions}> You currently have no mentions 🤷‍♂️</div>:
+                        {count === 0 ? <div className={styles.noMentions}> You have no new mentions 🤷‍♂️</div>:
                             notifications.map(this.renderSingleNotification.bind(this))
                         }
                     </div>

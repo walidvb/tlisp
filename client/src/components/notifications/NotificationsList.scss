@@ -89,6 +89,17 @@
     color: $dark-grey;
 }
 
+.stateToggler{
+    border-right: 1px solid grey;
+    padding-right: 0.5rem;
+    margin-right: .5rem;
+    line-height: 1;
+    cursor: pointer;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
 .notifsList{
     max-height: 60vh;
     overflow-y: auto;

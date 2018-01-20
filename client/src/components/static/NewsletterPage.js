@@ -12,17 +12,34 @@ export default class NewsletterPage extends Component {
 
     }
     state = {
+        by: Math.random() > .5 ? 'friends' : 'diggers',
+        for: Math.random() > .5 ? 'friends' : 'diggers',
     }
     renderForm(){
         return "THE FORM";
+    }
+    componentDidMount() {
+        this.randomize('by');
+        this.randomize('for');
+    }
+    randomize(key){
+        const timeout = () => {
+            setTimeout( () => {
+                let state = {}
+                state[key] = Math.random() > .5 ? 'friends' : 'diggers';
+                this.setState(state);
+                timeout();
+            }, Math.random()*1000+2000)
+        }
+        timeout();
     }
     render() {
         return (
             <div>
                 <ScrollingList />
-                <h3 className={styles.container_header}>Welcome back to digging 1.0</h3>
+                <h3 className={styles.container_header}>Welcome back to how it all started</h3>
                 <div className={styles.container}>
-                    <div className={styles.slogan}>By friends, for friends</div>
+                    <div className={styles.slogan}>Digging, by {this.state.by} for {this.state.for}</div>
                     <div className={styles.center}>
                         <Title />
                         {/* {this.renderForm()} */}

@@ -9,7 +9,7 @@ $border-width: 2rem;
     height: calc(100vh - #{2*$border-width});
     overflow: auto;
     flex-direction: column;
-    color: darken(white, 10%);
+    color: darken(white, 20%);
     justify-content: space-between;
     align-items: center;
     border: $border-width solid $border-color;
@@ -52,7 +52,7 @@ $border-width: 2rem;
     color: $primary-color;
     text-align: center;
     font-size: 2rem;
-    font-weight: 300;
+    font-weight: normal;
     .top{
         font-size: 1.5em;
         font-weight: bolder;

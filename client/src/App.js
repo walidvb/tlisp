@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {
   Route, Switch
 } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getUserDetails } from './actions/userActions';
 
 
 import './App.scss';
@@ -16,12 +18,15 @@ import routes from './routes';
 
 
 class AppWrapper extends Component {
+
   render() {
     return (
       <div>
+        {this.props.editing}
         <DDMenu />
         <LinksContainer />
         <NotificationsList />
+        { this.props.editing ? <LinksForm asIFrame={false} id={this.props.editing} /> : null }
       </div>
     )
   }
@@ -29,16 +34,30 @@ class AppWrapper extends Component {
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.getUserDetails();
+  }
+
   render() {
     return (
       <div className="App">
         <Switch>
           <Route path={routes.links.new} component={LinksForm} />
-          <Route path={"/"} component={AppWrapper} />
+          <Route path={"/"} component={() => <AppWrapper editing={this.props.editing}/>} />
         </Switch>
       </div>
     );
   }
 }
 
-export default App;
+
+const mapStateToProps = (state, ownProps) => ({
+  editing: state.links.editing
+})
+
+const mapDispatchToProps = (dispatch) =>({
+  getUserDetails: () => dispatch(getUserDetails()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

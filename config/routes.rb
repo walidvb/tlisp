@@ -29,6 +29,8 @@ DiggersDelights::Application.routes.draw do
 
     # TODO move this to other controller
     get '/filters.json' => "links#filters"
+
+    get '/me' => 'users#me'
     
   end
 

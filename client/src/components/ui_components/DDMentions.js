@@ -52,7 +52,7 @@ function DDMention(props) {
     }
 
     const getUsersSuggestions = (s, cb) => {
-        request(routes.api.users).then(({ users }) => {
+        request(routes.api.users.index).then(({ users }) => {
             cb(
                 users.map(u => ({
                     id: u.id,

@@ -11,9 +11,15 @@ class UsersController < ApplicationController
         users: @users,
     }
   end
+  
+  def me
+    render json: {
+      user: current_user
+    }
+  end
 
-    def onboarding
-      @user = current_user
-      params[:play]
-    end
+  def onboarding
+    @user = current_user
+    params[:play]
+  end
 end

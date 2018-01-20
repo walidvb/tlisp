@@ -43,9 +43,9 @@ class App extends Component {
   }
   componentWillReceiveProps(props){
     console.log(props)
-    let loggedIn = true;
+    let loggedIn = false;
     if(props.user.authenticated){
-      loggedIn = true;
+      loggedIn = false;
     }
     this.setState({
       loading: false,

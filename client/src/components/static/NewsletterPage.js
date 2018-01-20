@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { request, routes } from '../../request';
 
+import NewsletterForm from './NewsletterForm';
 import ScrollingList from './ScrollingList';
 import Title from '../Title';
 import styles from './NewsletterPage.scss';
@@ -16,7 +17,7 @@ export default class NewsletterPage extends Component {
         for: Math.random() > .5 ? 'friends' : 'diggers',
     }
     renderForm(){
-        return "THE FORM";
+        return <NewsletterForm />;
     }
     componentDidMount() {
         this.randomize('by');
@@ -42,7 +43,7 @@ export default class NewsletterPage extends Component {
                     <div className={styles.slogan}>Digging, by {this.state.by} for {this.state.for}</div>
                     <div className={styles.center}>
                         <Title />
-                        {/* {this.renderForm()} */}
+                        {this.renderForm()}
                     </div>
                     {/* <div className={styles.supported}>
                         <div className={styles.title}>

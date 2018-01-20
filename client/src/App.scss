@@ -1,14 +1,15 @@
 @import 'reset.css';
+@import 'assets/fonts.scss';
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
 
 body{
-  font-family: 'Open Sans', sans-serif;
+  font-family: Apercu Pro, sans-serif;
   font-size: 16px;
   line-height: 1.42;
 }
 
 h1,h2,h3,h4{
- font-family: 'Montserrat', sans-serif; 
+ font-family: Apercu Pro, sans-serif; 
 }
 img, iframe{
   max-width: 100%;

@@ -9,6 +9,9 @@ const routes = {
             create: '/api/links.json',
             play: (id) => `/api/links/${id}/plays`
         },
+        newsletter: {
+            create: '/api/newsletters',
+        },
         playlists: {
             index: '/api/playlists.json',
         },

@@ -1,0 +1,28 @@
+@import '../../_variables.scss';
+
+.container{
+    display: flex;
+    margin-top: 1rem;
+    @media #{$tablet}{
+        min-width: 50vw;
+    }
+}
+
+.input{
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px $primary-color;
+    color: $primary-color;
+    margin-right: 2rem;
+    flex-grow: 3;
+    &:focus{
+        outline: none;
+    }
+    &::placeholder{
+        color: darken($primary-color, 20%);
+    }
+}
+
+.button{
+    display: inline-block;
+}

@@ -38,18 +38,22 @@
     -webkit-appearance: none;
     border: none;
     padding: .5rem 1rem;
-    width: 100%;
     color: white;
     background: $primary-color;
-    font-size: 1.2rem;
     font-weight: bold;
-    text-transform: uppercase;
-    border: solid 1px darken($primary-color, 10%);
-    margin-top: 1rem;
-    cursor: pointer;
-    border-radius: 3px;
+    border: solid 1px $primary-color;
+    letter-spacing: .1em;
+    cursor: pointer; 
     &:hover{
         background: lighten($primary-color, 10%);
+    }
+    &.button__border{
+        background: transparent;
+        color: $primary-color;
+        &:hover{
+            color: white;
+            background: $primary-color; 
+        }
     }
 }
 

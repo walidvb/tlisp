@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   ]
 
   def covers
-    @links  = Link.visible.oembeddable.map(&:thumbnail_url)
+    @links  = Link.visible.oembeddable.map{|link| {thumbnail_url: link.thumbnail_url, provider: link.provider_name}}
     render json: {
       covers: @links,
     }

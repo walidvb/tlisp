@@ -38,9 +38,12 @@ export default class ScrollingList extends Component {
         return <div 
             ref={(coversContainer) => {this.coversContainer = coversContainer}}
             className={[listStyles.container__grid, styles.links_container,].join(' ')}>
-                {covers.map((url, i) => (
+                {covers.map(({thumbnail_url, provider}, i) => (
                     <div key={i} className={[listStyles.item__grid, listStyles.no__spacing, styles.thumb].join(' ')} >
-                        <div><img src={url} /> </div>
+                        <div>
+                        <img src={thumbnail_url} /> 
+                            <div className={[`fa fa-${provider.toLowerCase()}`, styles.provider].join(' ')}/>
+                        </div>
                     </div>))}
             </div>
     }

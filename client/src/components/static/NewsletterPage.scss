@@ -47,21 +47,3 @@ $border-width: 2rem;
     transform: rotate(90deg) translateX(100%);
     font-size: smaller;
 }
-
-.site_name{
-    color: $primary-color;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: normal;
-    .top{
-        font-size: 1.8em;
-        font-weight: bolder;
-        line-height: .5;
-    }
-    @media #{$tablet}{
-        font-size: 2rem;
-        .top{
-            font-size: 1.8em;
-        }
-    }
-}

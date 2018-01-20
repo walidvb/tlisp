@@ -15,6 +15,8 @@ import DDMenu from './components/DDMenu';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
 import PlayerContainer from './components/player/PlayerContainer';
+import Title from './components/Title'
+
 import routes from './routes';
 
 
@@ -50,11 +52,14 @@ class App extends Component {
     })
 
   }
+  renderLoading(){
+    return <div style={{display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center'}}><Title /></div>
+  }
   render() {
     const { loading, loggedIn } = this.state;
     return (
       <div className="App">
-        { loading ? "LOADING" : (
+        { loading ? this.renderLoading() : (
           !loggedIn ? <NewsletterPage /> :
           <Switch>
             <Route path={routes.links.new} component={LinksForm} />

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { request, routes } from '../../request';
 
 import ScrollingList from './ScrollingList';
-
+import Title from '../Title';
 import styles from './NewsletterPage.scss';
 import listStyles from '../links/LinkList.scss';
 export default class NewsletterPage extends Component {
@@ -24,7 +24,7 @@ export default class NewsletterPage extends Component {
                 <div className={styles.container}>
                     <div className={styles.slogan}>By friends, for friends</div>
                     <div className={styles.center}>
-                        <h1 className={styles.site_name}><div className={styles.top}>DIGGERS'</div> DELIGHTS</h1>
+                        <Title />
                         {/* {this.renderForm()} */}
                     </div>
                     {/* <div className={styles.supported}>

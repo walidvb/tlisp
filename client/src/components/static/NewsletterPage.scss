@@ -1,25 +1,61 @@
-.links_container{
-    opacity: 0.5;
-    background: black;
-    &:after{
-        content: '';
-        flex-grow: 50;
-    }
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    filter: brightness(50%);
+@import '../../_variables.scss';
+
+$border-color: transparentize(white, .25);
+$border-width: 2rem;
+
+.container{
+    position: relative;
     display: flex;
-    flex-flow: row wrap;
+    height: calc(100vh - #{2*$border-width});
     overflow: auto;
+    flex-direction: column;
+    color: darken(white, 10%);
+    justify-content: space-between;
+    align-items: center;
+    border: $border-width solid $border-color;
+    border-top: none;
+    border-bottom: none;
+    background: rgba(0,0,0,.4);
 }
 
-.thumb{
+.container_header{
+   background-color: $border-color;
+   height: $border-width;
+   color: black;
+   text-align: center;
+   vertical-align: middle;
+   text-transform: uppercase;
+   line-height: $border-width;
+   font-size: .8rem;
+   padding-left: $border-width;
+   padding-right: $border-width;
+}
+
+.center{
+    flex-grow: 50;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: white solid 1px;
-    pointer-events: none;
+    flex-direction: column;
+}
+
+.slogan{
+    position: absolute;
+    padding: 5px 10px;
+    right: 0;
+    transform-origin: top right;
+    transform: rotate(90deg) translateX(100%);
+    font-size: smaller;
+}
+
+.site_name{
+    color: $primary-color;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    .top{
+        font-size: 1.5em;
+        font-weight: bolder;
+        line-height: .5;
+    }
 }

@@ -6,7 +6,7 @@ $border-width: 2rem;
 .container{
     position: relative;
     display: flex;
-    height: calc(100vh - #{2*$border-width});
+    height: calc(100vh - #{3*$border-width});
     overflow: auto;
     flex-direction: column;
     color: darken(white, 20%);
@@ -20,15 +20,17 @@ $border-width: 2rem;
 
 .container_header{
    background-color: $border-color;
-   height: $border-width;
+   height: 1.5*$border-width;
    color: black;
    text-align: center;
    vertical-align: middle;
    text-transform: uppercase;
-   line-height: $border-width;
-   font-size: .8rem;
    padding-left: $border-width;
    padding-right: $border-width;
+   line-height: 1.5*$border-width;
+   &:last-child{
+       line-height: 1.42;
+   }
 }
 
 .center{

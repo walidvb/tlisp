@@ -31,7 +31,7 @@ export default class ScrollingList extends Component {
             }
         }
         this.coversContainer.scrollTop = this.coversContainer.scrollHeight - window.innerHeight;
-        //setInterval(scrollTo, 50);
+        setInterval(scrollTo, 50);
     }
     renderBackground(){
         const { covers, loading } = this.state;

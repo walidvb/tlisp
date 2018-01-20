@@ -25,7 +25,7 @@ export default class NewsletterPage extends Component {
                     <div className={styles.slogan}>By friends, for friends</div>
                     <div className={styles.center}>
                         <h1 className={styles.site_name}><div className={styles.top}>DIGGERS'</div> DELIGHTS</h1>
-                        {this.renderForm()}
+                        {/* {this.renderForm()} */}
                     </div>
                     {/* <div className={styles.supported}>
                         <div className={styles.title}>

@@ -20,7 +20,7 @@ export default class NewsletterPage extends Component {
     }
     componentDidMount() {
         this.randomize('by');
-        this.randomize('for');
+        setTimeout(() => this.randomize('for'), 1000);
     }
     randomize(key){
         const timeout = () => {
@@ -29,7 +29,7 @@ export default class NewsletterPage extends Component {
                 state[key] = Math.random() > .5 ? 'friends' : 'diggers';
                 this.setState(state);
                 timeout();
-            }, Math.random()*1000+2000)
+            },2000)
         }
         timeout();
     }

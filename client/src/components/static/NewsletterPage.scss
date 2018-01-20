@@ -1,6 +1,6 @@
 @import '../../_variables.scss';
 
-$border-color: transparentize(white, .25);
+$border-color: transparentize(#cacddc, .05);
 $border-width: 2rem;
 
 .container{
@@ -9,13 +9,13 @@ $border-width: 2rem;
     height: calc(100vh - #{3*$border-width});
     overflow: auto;
     flex-direction: column;
-    color: darken(white, 20%);
+    color: white;
     justify-content: space-between;
     align-items: center;
     border: $border-width solid $border-color;
     border-top: none;
     border-bottom: none;
-    background: rgba(0,0,0,.6);
+    background: transparentize(#1b1e2a, .2);
 }
 
 .container_header{

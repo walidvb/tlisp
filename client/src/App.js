@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Route, Switch
+  Route, Switch, withRouter,
 } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUserDetails } from './actions/userActions';
@@ -25,7 +25,6 @@ class AppWrapper extends Component {
   render() {
     return (
       <div>
-        {this.props.editing}
         <DDMenu />
         <LinksContainer />
         <NotificationsList />
@@ -36,13 +35,15 @@ class AppWrapper extends Component {
 
 class App extends Component {
   state = {
-    loading: true
+    loading: true,
+    logginedIn: true,
   }
   componentDidMount() {
     this.props.getUserDetails();
   }
   componentWillReceiveProps(props){
-    let loggedIn = false;
+    console.log(props)
+    let loggedIn = true;
     if(props.user.authenticated){
       loggedIn = true;
     }
@@ -80,4 +81,4 @@ const mapDispatchToProps = (dispatch) =>({
   getUserDetails: () => dispatch(getUserDetails()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

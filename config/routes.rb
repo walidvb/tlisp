@@ -11,7 +11,7 @@ DiggersDelights::Application.routes.draw do
 
   match "links" => "links#index", via: [:options]
 
-  scope :api do 
+  scope :api do
     resources :playlists
     resources :cliques
     get '/cliques/:id/join' => "cliques#join"
@@ -32,6 +32,9 @@ DiggersDelights::Application.routes.draw do
 
     get '/me' => 'users#me'
     
+    # static resources paths
+    get '/covers' => 'pages#covers'
+
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do

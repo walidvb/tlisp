@@ -3,6 +3,13 @@ class PagesController < ApplicationController
     :inside
   ]
 
+  def covers
+    @links  = Link.visible.oembeddable.map(&:thumbnail_url)
+    render json: {
+      covers: @links,
+    }
+  end
+
   def home
     redirect_to root_path if user_signed_in?
   end

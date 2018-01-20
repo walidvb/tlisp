@@ -1,6 +1,5 @@
 import * as types from './actionTypes';
-import request from '../request';
-import routes from '../routes';
+import { request, routes } from '../request';
 
 export const getLinks = ({ pathname, filters}) => {
   if(/help/.test(pathname)){

@@ -9,8 +9,7 @@ import DDSelect from '../ui_components/DDSelect';
 import DDMentions from '../ui_components/DDMentions'
 import LinkDetails from './LinkDetails';
 import ReactFormDDMood from '../ui_components/ReactFormDDMood';
-import routes from '../../routes';
-import request from '../../request';
+import { request, routes } from '../../request';
 
 import styles from './LinksForm.scss'
 import { submitLink } from '../../actions/linkActions';

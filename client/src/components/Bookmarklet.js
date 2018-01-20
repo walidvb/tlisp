@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import request from '../request';
-import routes from '../routes';
+import { request, routes } from '../request';
 
 import styles from './Bookmarklet.scss';
 

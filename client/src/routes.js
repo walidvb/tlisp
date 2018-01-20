@@ -1,5 +1,6 @@
 const routes = {
     api: {
+        covers: '/api/covers',
         links: {
             explore: '/api/links.json',
             me: '/api/links.json?custom=only-me',
@@ -25,9 +26,10 @@ const routes = {
         me: '/me',
         explore: '/explore'
     },
+    newsletter: '/keep-me-posted',
     playlists: {
         show: '/playlists',
     }
 }
 
-export default routes
+export default routes;

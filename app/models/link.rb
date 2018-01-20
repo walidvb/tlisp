@@ -23,7 +23,8 @@ class Link < ActiveRecord::Base
     after_create :notify_slack!
     
     scope :oembeddable, -> { where(oembeddable: true) }
-
+    scope :visible, -> { where(published: true)}
+    
     validates_presence_of :url
     validates_uniqueness_of :url
 

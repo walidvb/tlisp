@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 
-import request from '../../request';
-import routes from '../../routes';
+import { request, routes } from '../../request';
 import { playTrack, pause } from '../../actions/playerActions';
 
 import Link from '../links/Link';

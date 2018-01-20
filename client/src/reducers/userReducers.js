@@ -10,6 +10,10 @@ export default (state = initialState, action) => {
         return {
             ...initialState
         }
+        case `${types.GET_USER_DETAILS}_REJECTED`:
+        return {
+            ...initialState
+        }
         case `${types.GET_USER_DETAILS}_FULFILLED`:
             return {
                 ...state,

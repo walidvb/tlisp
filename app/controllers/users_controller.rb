@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index]
 
   def index
     @users = current_user.cliques.map(&:users).flatten.uniq.select{|u| u.id != current_user.id}
@@ -11,11 +11,15 @@ class UsersController < ApplicationController
         users: @users,
     }
   end
-  
+
   def me
-    render json: {
-      user: current_user
-    }
+    if current_user.nil?
+      head :unauthorized
+    else
+      render json: {
+        user: current_user
+      }
+    end
   end
 
   def onboarding

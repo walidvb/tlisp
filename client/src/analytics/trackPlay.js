@@ -1,5 +1,4 @@
-import request from '../request';
-import routes from '../routes';
+import { request, routes } from '../request';
 
 export default function trackPlay({ id }){
     request(`${routes.api.links.play(id)}`, { method: 'POST' })

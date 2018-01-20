@@ -1,4 +1,7 @@
-export default function(url, options = {}){
+import routes_ from './routes';
+export const routes = routes_;
+
+export function request(url, options = {}){
     const method = options.method || 'GET';
     const qs = options.qs == undefined ? "" : "?"+serialize(options.qs);
     if(options.body){
@@ -16,10 +19,11 @@ export default function(url, options = {}){
                 return resolve(response.json())
             }
             else {
-                console.log("Error: ", response)
-                return response.json().then((err) => reject(err))
+                console.log(`Error fetching ${url}:`, response)
+                return reject();
             }
         })
+        .catch((err) => reject(err));
     })
     
 }

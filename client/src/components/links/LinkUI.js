@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import request from '../../request';
-import routes from '../../routes';
+import { request, routes } from '../../request';
 
 import DDMood from '../ui_components/DDMood';
 import * as linkActions from '../../actions/linkActions';

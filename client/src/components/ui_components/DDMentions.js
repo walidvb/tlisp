@@ -5,8 +5,7 @@ import { FormField } from 'react-form';
 
 import styles from './DDMentions.scss';
 
-import request from '../../request';
-import routes from '../../routes';
+import { request, routes } from '../../request';
 
 const propTypes = {
     

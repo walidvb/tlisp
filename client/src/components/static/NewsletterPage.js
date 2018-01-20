@@ -1,0 +1,57 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { request, routes } from '../../request';
+
+import styles from './NewsletterPage.scss';
+import listStyles from '../links/LinkList.scss';
+
+export default class NewsletterPage extends Component {
+    static propTypes = {
+
+    }
+    state = {
+        loading: true,
+        covers: []
+    }
+    componentDidMount(){
+        request(routes.api.covers)
+        .then(({ covers }) => {
+            this.setState({ covers, loading: false });
+            this.startScrolling();
+        })
+    }
+    startScrolling(){
+        console.log(this.coversContainer.scrollHeight)
+        var direction = 1;
+        const scrollTo = () => {
+            var newY = this.coversContainer.scrollTop + direction;
+            this.coversContainer.scrollTop = newY;
+            if (newY >= this.coversContainer.scrollHeight - window.innerHeight || newY <= 0) {
+                direction = -direction;
+            }
+        }
+        this.coversContainer.scrollTop = this.coversContainer.scrollHeight - window.innerHeight;
+        setInterval(scrollTo, 50);
+    }
+    renderBackground(){
+        const { covers, loading } = this.state;
+        return <div 
+            ref={(coversContainer) => {this.coversContainer = coversContainer}}
+            className={[listStyles.container__grid, styles.links_container,].join(' ')}>
+                {covers.map((url, i) => (
+                    <div key={i} className={[listStyles.item__grid, listStyles.no__spacing, styles.thumb].join(' ')} >
+                        <div><img src={url} /> </div>
+                    </div>))}
+            </div>
+    }
+    render() {
+        const { covers, loading} = this.state;
+        return (
+            <div>
+                {this.renderBackground()}
+                <h1>DIGGERS DELIGHTS</h1>
+            </div>
+        )
+    }
+}

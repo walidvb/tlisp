@@ -4,8 +4,7 @@ import {
     Link
 } from 'react-router-dom'
 
-import request from '../../request';
-import routes from '../../routes';
+import { request, routes } from '../../request';
 
 export default class PlaylistList extends Component {
     static propTypes = {

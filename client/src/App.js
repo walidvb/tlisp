@@ -36,27 +36,20 @@ class AppWrapper extends Component {
 class App extends Component {
   state = {
     loading: true,
-    logginedIn: true,
   }
   componentDidMount() {
     this.props.getUserDetails();
   }
   componentWillReceiveProps(props){
-    let loggedIn = false;
-    if(props.user.authenticated){
-      loggedIn = false;
-    }
     this.setState({
       loading: false,
-      loggedIn,
     })
-
   }
   renderLoading(){
     return <div style={{display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center'}}><Title /></div>
   }
   render() {
-    const { loading, loggedIn } = this.state;
+    const { loading } = this.state;
     console.log(styles)
     return (
       <div className={[styles.app, styles.appear].join(' ')} >

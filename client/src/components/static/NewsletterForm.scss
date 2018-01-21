@@ -21,11 +21,12 @@
     color: $primary-color;
     margin-right: 2rem;
     flex-grow: 3;
+    font-size: 1.125rem;
     &:focus{
         outline: none;
     }
     &::placeholder{
-        color: darken($primary-color, 20%);
+        color: $primary-color;
     }
     margin-bottom: 1rem;
     @media #{$tablet}{

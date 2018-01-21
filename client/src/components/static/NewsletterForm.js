@@ -80,7 +80,7 @@ class NewsletterForm extends Component {
                         {this.state.error}
                         <input autoFocus={true} onChange={this.handleChange.bind(this)} className={styles.input} type="email" field="newsletter.email" placeholder="Your email"/>
                         <button disabled={this.state.error} className={["button button__border", styles.button].join(' ')} type="submit" >Keep me posted!</button>
-                        <div className={["hint", styles.hint].join(' ')}> Due to the very nature of the platform, access is based on invitation only.  </div>
+                        <div className={[styles.hint].join(' ')}> Due to the very nature of the platform, access is based on invitation only.  </div>
 
                     </form>
                 }

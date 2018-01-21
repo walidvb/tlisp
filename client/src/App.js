@@ -50,7 +50,6 @@ class App extends Component {
   }
   render() {
     const { loading } = this.state;
-    console.log(styles)
     return (
       <div className={[styles.app, styles.appear].join(' ')} >
         { loading ? this.renderLoading() : (

@@ -58,7 +58,7 @@ export default class NewsletterPage extends Component {
                         </ul>
                     </div> */}
                 </div>
-                <div className={styles.container_header} style={{textAlign: 'right'}}>By a friend</div>
+                <div className={styles.container_header} style={{textAlign: 'right'}}>By <span style={{fontWeight: 'bold'}}>walidvb</span></div>
             </div>
         )
     }

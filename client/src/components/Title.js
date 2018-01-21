@@ -4,7 +4,7 @@ function Title() {
     return (
         <h1 className={styles.site_name}>
             <div className={styles.top}>DI<span>G</span><span>G</span>ERS'</div> 
-            DELIGHTS
+            <div className={styles.bottom}>DELIGHTS</div>
         </h1>
     )
 }

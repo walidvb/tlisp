@@ -3,9 +3,15 @@
 .container{
     display: flex;
     margin-top: 1rem;
+    flex-flow: row wrap;
+    padding: 0 .5rem;
     @media #{$tablet}{
         min-width: 50vw;
     }
+}
+
+.iframe{
+    height: 5rem;
 }
 
 .input{
@@ -22,7 +28,28 @@
         color: darken($primary-color, 20%);
     }
 }
-
+.hint{
+    font-size: .7rem;
+    flex-basis: 100%;
+    color: darken($primary-color, 20%);
+    margin-top: 1rem;
+    text-align: center;
+}
 .button{
     display: inline-block;
+}
+
+.thanks{
+    .header{
+        text-transform: uppercase;
+        border-bottom: 1px solid $primary-color;
+        display: inline-block;
+        padding-bottom: .2rem;
+        margin-bottom: .5rem;
+
+    }
+    p{
+        margin-bottom: 1rem;
+    }
+    margin: auto;
 }

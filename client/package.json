@@ -6,6 +6,9 @@
     "/api": {
       "target": "http://localhost:3001"
     },
+    "/iframe": {
+      "target": "http://localhost:3001"
+    },
     "/users": {
       "target": "http://localhost:3001"
     },

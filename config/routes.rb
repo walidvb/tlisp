@@ -15,9 +15,11 @@ DiggersDelights::Application.routes.draw do
     resources :playlists
     resources :cliques
     get '/cliques/:id/join' => "cliques#join"
+    
     resources :links do 
       resources :plays, only: [:create]
     end
+    get '/link_form_details.json' => 'links#link_form_details'
 
     resources :users, only: [:index]
     get '/notifications' => 'users/notifications_with_devise#index', devise_type: "user", target_type: "user"
@@ -25,8 +27,7 @@ DiggersDelights::Application.routes.draw do
 
     notify_to :users, controller: 'users/notifications', with_devise: :users
     
-    get '/link_form_details.json' => 'links#link_form_details'
-
+    resources :newsletters, only: [:create]
     # TODO move this to other controller
     get '/filters.json' => "links#filters"
 
@@ -35,6 +36,10 @@ DiggersDelights::Application.routes.draw do
     # static resources paths
     get '/covers' => 'pages#covers'
 
+  end
+
+  scope :iframe do 
+    resources :newsletters
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do

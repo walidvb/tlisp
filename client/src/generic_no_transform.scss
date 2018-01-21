@@ -43,6 +43,7 @@
     font-weight: bold;
     border: solid 1px $primary-color;
     letter-spacing: .1em;
+    font-size: 1.25rem;
     cursor: pointer; 
     &:hover{
         background: lighten($primary-color, 10%);
@@ -54,6 +55,10 @@
             color: white;
             background: $primary-color; 
         }
+    }
+    &[disabled]{
+        pointer-events: none;
+        color: grey;
     }
 }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117204133) do
+ActiveRecord::Schema.define(version: 20180120120831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,13 @@ ActiveRecord::Schema.define(version: 20180117204133) do
   end
 
   add_index "links", ["clique_id"], name: "index_links_on_clique_id", using: :btree
+
+  create_table "newsletters", force: :cascade do |t|
+    t.string   "email",      null: false
+    t.string   "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "target_id",       null: false

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getUserDetails } from './actions/userActions';
 
 
-import './App.scss';
+import  styles from './App.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import LinksContainer from './components/links/LinksContainer'
@@ -42,7 +42,6 @@ class App extends Component {
     this.props.getUserDetails();
   }
   componentWillReceiveProps(props){
-    console.log(props)
     let loggedIn = false;
     if(props.user.authenticated){
       loggedIn = false;
@@ -58,8 +57,9 @@ class App extends Component {
   }
   render() {
     const { loading, loggedIn } = this.state;
+    console.log(styles)
     return (
-      <div className="App">
+      <div className={[styles.app, styles.appear].join(' ')} >
         { loading ? this.renderLoading() : (
           !loggedIn ? <NewsletterPage /> :
           <Switch>

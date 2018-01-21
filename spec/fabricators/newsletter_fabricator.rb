@@ -1,0 +1,2 @@
+Fabricator(:newsletter) do
+end

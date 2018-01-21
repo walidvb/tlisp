@@ -30,7 +30,6 @@ class NewsletterForm extends Component {
         
     }
     handleSubmit(evt) {
-        console.log(evt);
         evt.preventDefault();
         this.setState({
             errors: undefined,
@@ -38,7 +37,7 @@ class NewsletterForm extends Component {
         request(routes.api.newsletter.create, {
             method: 'POST',
             body: {
-                newsletter: { email: this.state.email }
+                newsletter: { email: this.state.email, source: qs['source'] }
             }
         })
         .then(email => {
@@ -80,8 +79,8 @@ class NewsletterForm extends Component {
                     <form onSubmit={this.handleSubmit}  id="form2" className={styles.container}>
                         {this.state.error}
                         <input autoFocus={true} onChange={this.handleChange.bind(this)} className={styles.input} type="email" field="newsletter.email" placeholder="Your email"/>
-                        <button disabled={this.state.error} className={["button button__border", styles.button].join(' ')} type="submit" >Subscribe</button>
-                        <div className={["hint", styles.hint].join(' ')}> By the very nature of the platform, access is based on invitation only.  </div>
+                        <button disabled={this.state.error} className={["button button__border", styles.button].join(' ')} type="submit" >Keep me posted!</button>
+                        <div className={["hint", styles.hint].join(' ')}> Due to the very nature of the platform, access is based on invitation only.  </div>
 
                     </form>
                 }

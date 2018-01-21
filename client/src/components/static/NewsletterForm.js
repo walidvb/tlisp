@@ -18,7 +18,7 @@ class NewsletterForm extends Component {
     constructor() {
         super()
         this.state = {
-            error: true,
+            success: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -75,13 +75,13 @@ class NewsletterForm extends Component {
         const { errors, success, loaded,  } = this.state;
         return (
             <div className={[styles.container].join(' ')}>
-                { !success ? this.renderSuccess() :
+                { success ? this.renderSuccess() :
                     
                     <form onSubmit={this.handleSubmit}  id="form2" className={styles.container}>
                         {this.state.error}
                         <input autoFocus={true} onChange={this.handleChange.bind(this)} className={styles.input} type="email" field="newsletter.email" placeholder="Your email"/>
                         <button disabled={this.state.error} className={["button button__border", styles.button].join(' ')} type="submit" >Subscribe</button>
-                        <div class={["hint", styles.hint].join(' ')}> By the very nature of the platform, access is based on invitation only.  </div>
+                        <div className={["hint", styles.hint].join(' ')}> By the very nature of the platform, access is based on invitation only.  </div>
 
                     </form>
                 }

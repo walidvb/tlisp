@@ -22,7 +22,6 @@ export default class ScrollingList extends Component {
         })
     }
     startScrolling(){
-        return;
         var direction = 1;
         const scrollTo = () => {
             var newY = this.coversContainer.scrollTop + direction;

@@ -53,7 +53,7 @@ class App extends Component {
     return (
       <div className={[styles.app, styles.appear].join(' ')} >
         { loading ? this.renderLoading() : (
-          !this.props.user.isAuthenticated ? <NewsletterPage /> :
+          !this.props.user.authenticated ? <NewsletterPage /> :
           <Switch>
             <Route path={routes.links.new} component={LinksForm} />
             <Route path={"/"} component={AppWrapper} />

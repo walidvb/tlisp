@@ -9,6 +9,7 @@ import { getUserDetails } from './actions/userActions';
 import  styles from './App.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
+import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
 import LoginForm from './components/user/LoginForm';
@@ -56,10 +57,13 @@ class App extends Component {
     </Switch>
   }
   renderAnonymousRoutes(){
-    return <Switch>
-      <Route path={routes.user.login} component={LoginForm} />
-      <Route path={'/'} component={NewsletterPage} />
-    </Switch>
+    return (
+    <AnonymousPageWrapper>
+      <Switch>
+        <Route path={routes.user.login} component={LoginForm} />
+        <Route path={'/'} component={NewsletterPage} />
+      </Switch>
+    </AnonymousPageWrapper>)
   }
   render() {
     const { loading } = this.state;

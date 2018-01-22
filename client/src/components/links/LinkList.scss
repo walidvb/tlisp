@@ -40,9 +40,9 @@
     &.no__spacing{
         padding: 0px;
         margin: 0;
-        flex-basis: 25%!important;
+
         @media #{$tablet}{
-            flex-basis: 15%!important;
+
         }
     }
 }

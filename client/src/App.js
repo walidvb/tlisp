@@ -11,6 +11,7 @@ import  styles from './App.scss';
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
+import LoginForm from './components/user/LoginForm';
 import DDMenu from './components/DDMenu';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
@@ -48,16 +49,24 @@ class App extends Component {
   renderLoading(){
     return <div style={{display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center'}}><Title /></div>
   }
+  renderAuthenticatedRoutes(){
+    return <Switch>
+      <Route path={routes.links.new} component={LinksForm} />
+      <Route path={"/"} component={AppWrapper} />
+    </Switch>
+  }
+  renderAnonymousRoutes(){
+    return <Switch>
+      <Route path={routes.user.login} component={LoginForm} />
+      <Route path={'/'} component={NewsletterPage} />
+    </Switch>
+  }
   render() {
     const { loading } = this.state;
     return (
       <div className={[styles.app, styles.appear].join(' ')} >
-        { loading ? this.renderLoading() : (
-          !this.props.user.authenticated ? <NewsletterPage /> :
-          <Switch>
-            <Route path={routes.links.new} component={LinksForm} />
-            <Route path={"/"} component={AppWrapper} />
-          </Switch>)
+        { loading ? this.renderLoading() :
+          this.props.user.authenticated ? this.renderAuthenticatedRoutes() : this.renderAnonymousRoutes()
         }
       </div>
     );

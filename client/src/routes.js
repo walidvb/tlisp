@@ -32,7 +32,10 @@ const routes = {
     newsletter: '/keep-me-posted',
     playlists: {
         show: '/playlists',
-    }
+    },
+    user: {
+        login: '/login',
+    },
 }
 
 export default routes;

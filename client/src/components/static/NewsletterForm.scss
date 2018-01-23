@@ -10,30 +10,6 @@
     }
 }
 
-.iframe{
-    height: 5rem;
-}
-
-.input{
-    background: transparent;
-    border: none;
-    border-bottom: solid 1px $primary-color;
-    color: $primary-color;
-    margin-right: 2rem;
-    flex-grow: 3;
-    font-size: 1.125rem;
-    border-radius: 0;
-    &:focus{
-        outline: none;
-    }
-    &::placeholder{
-        color: $primary-color;
-    }
-    margin-bottom: 1rem;
-    @media #{$tablet}{
-        margin-bottom: 0;
-    }
-}
 .hint{
     font-size: .7rem;
     flex-basis: 100%;

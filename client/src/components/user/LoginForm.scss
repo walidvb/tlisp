@@ -1,0 +1,13 @@
+@import '../../_variables.scss';
+
+.container{
+    margin: auto;
+    @media #{$tablet}{
+        width: 50vw;
+        max-width: 400px;
+    }
+    input{
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+}

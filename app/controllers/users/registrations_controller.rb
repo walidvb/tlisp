@@ -2,9 +2,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 before_action :configure_sign_up_params, only: [:create]
 before_action :configure_account_update_params, only: [:update]
 
+
+  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
+  respond_to :json
+
   # GET /resource/sign_up
   def new
-    @clique_id = session[:join_clique_id]
+    # @clique_id = session[:join_clique_id]
     super
   end
 
@@ -23,7 +27,8 @@ before_action :configure_account_update_params, only: [:update]
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         sign_in resource
-        respond_with resource, location: after_sign_up_path_for(resource)
+        render json: {user: resource}
+       # respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!

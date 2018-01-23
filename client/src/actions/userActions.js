@@ -9,3 +9,8 @@ export const getUserDetails = (payload) => ({
         .catch(reject)
     })
 })
+
+export const signUpSuccess = (user) => ({
+    type: types.SIGN_UP_SUCCESSFUL,
+    payload: { user }
+})

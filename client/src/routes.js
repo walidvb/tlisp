@@ -18,6 +18,8 @@ const routes = {
         users: {
             index: '/api/users.json',
             me: '/api/me.json',
+            signIn: 'api/users/sign_in',
+            signUp: 'api/users',
         },
         notifications: {
             index: '/api/notifications.json',
@@ -34,7 +36,7 @@ const routes = {
         show: '/playlists',
     },
     user: {
-        login: '/login',
+        signup: '/cliques/:clique_slug/join',
     },
 }
 

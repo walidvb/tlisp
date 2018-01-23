@@ -32,6 +32,9 @@
         margin-top: 4px;
         border-right: 1px solid lighten($primary-color, 40%);
     }
+    &.red{
+        color: red;
+    }
 }
 
 .button{
@@ -62,8 +65,33 @@
     }
 }
 
+input[type="text"], input[type="password"], input[type="email"]{
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px $primary-color;
+    color: $primary-color;
+    margin-right: 2rem;
+    flex-grow: 3;
+    font-size: 1.125rem;
+    border-radius: 0;
+    &:focus{
+        outline: none;
+    }
+    &::placeholder{
+        color: $primary-color;
+    }
+    margin-bottom: 1rem;
+    @media #{$tablet}{
+        margin-bottom: 0;
+    }
+    transition: border-color .3s ease-in-out;
+    &.invalid{
+        border-bottom-color: red;
+    }
+}
+
 .disabled{
-    opacity: .5;
+    opacity: .3;
     pointer-events: none;
 }
 

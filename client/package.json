@@ -12,9 +12,6 @@
     "/users": {
       "target": "http://localhost:3001"
     },
-    "/cliques": {
-      "target": "http://localhost:3001"
-    },
     "/links": {
       "target": "http://localhost:3001"
     },

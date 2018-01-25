@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import { withRouter } from 'react-router-dom'
 
 import {signUpSuccess} from '../../actions/userActions';
 import { request, routes } from '../../request';
@@ -14,21 +14,28 @@ class LoginForm extends Component {
 
     }
     state ={
-        user: { email: '', password: '', name: '' },
+        user: { 
+            email: '', 
+            password: '',
+            name: '', 
+            password_confirmation: '',
+        },
         valid: false,
     }
     handleChange(key, value){
         let { user } = this.state;
         user[key] = value;
         this.setState({ user });
-        this.validateForm();
+        if(!this.state.success){
+            this.validateForm();
+        }
     }
     validateForm(){
         const { name, email, password, password_confirmation } = this.state.user;
         const emailValid = emailRegExp.test(email);
         const passwordsMatch = password.length >= 4 && password == password_confirmation;
         this.setState({
-            valid: passwordsMatch && emailValid && name.length > 2,
+            valid: passwordsMatch && emailValid,
             passwordsMatch,
             emailInvalid: email.length > 0 && !emailValid,
         })
@@ -37,36 +44,89 @@ class LoginForm extends Component {
         evt.preventDefault()
         const options = {
             method: 'POST',
-            body: {user: this.state.user}
+            body: {
+                user: this.state.user,
+                clique: this.props.cliqueSlug,
+            }
         }
 
         request(routes.api.users.signUp, options)
         .then(( { user } ) => {
             this.setState({
                 success: true,
+                user
             })
-
-            this.props.signUpSuccess(user)
         })
     }
-    render() {
+    handleSubmitName(evt){
+        evt.preventDefault();
+        const options = {
+            method: 'PATCH',
+            body: { user: {
+                name: this.state.user.name,
+                initials: this.state.user.initials,
+            } }
+        }
+
+        request(routes.api.users.update, options)
+            .then(({ user }) => {
+                this.setState({
+                    success: true,
+                    user
+                })
+                this.props.signUpSuccess(user)
+            })
+
+    }
+    renderGetName(){
+        const nameValid = this.state.user.name && this.state.user.name.length > 2;
+        return (
+            <div>
+                <div>One last thing...</div>
+                <div> Let us know your name and initials, so that your friends can identify you </div>
+                <form className={styles.container} onSubmit={this.handleSubmitName.bind(this)}>
+                    <div>
+                        <div>
+                            <input type="text" autoFocus placeholder="Your name" className="input" onChange={evt => this.handleChange('name', evt.target.value)} />
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Your initials" className="input" onChange={evt => this.handleChange('initials', evt.target.value)} />
+                        </div>
+                        <button className={["button button__border"].join(' ')} disabled={!nameValid}> Show me how it works! </button>
+                    </div>
+                </form>
+            </div>
+        )
+    }
+    renderLoginForm() {
         const { emailInvalid, valid, user, passwordsMatch } = this.state;
+        const passwordValid = user.password === '' || user.password.length >= 4
+        const passwordConfirmationValid = user.password_confirmation.length <=3 || passwordsMatch ;
         return (
             <form className={styles.container} onSubmit={this.handleSubmit.bind(this)}>
-                <div><input className={["input"].join(' ')} type="email" placeholder="Your name"
-                    onChange={(evt) => this.handleChange('name', evt.target.value)} /></div>
                 <div><input className={["input", (emailInvalid ? "invalid" : null)].join(' ')} type="email" placeholder="Your email" 
-                    onChange={(evt) => this.handleChange('email', evt.target.value)}/></div>
-                <div><input className="input" type="password" placeholder="Your password" 
-                    onChange={(evt) => this.handleChange('password', evt.target.value)} /></div>
-                <div>
-                    <input className={["input", (!passwordsMatch)].join(' ')} type="password" placeholder="Repeat your password" 
-                    onChange={(evt) => this.handleChange('password_confirmation', evt.target.value)} />
-                    {(user.password_confirmation && !passwordsMatch) ? <div className="hint red"> Password confirmation doesn't match</div> : null}
+                    onChange={(evt) => this.handleChange('email', evt.target.value)}/>
                 </div>
-                <button className={["button border", styles.passwordConfirmation].join(' ')} disabled={!valid}> Sign up </button>
+                <div>
+                    <input className={["input", (!passwordValid ? 'invalid' : null)].join(' ')} type="password" placeholder="Your password" 
+                    onChange={(evt) => this.handleChange('password', evt.target.value)} />
+                </div>
+                <div>
+                    <input className={["input", (!passwordConfirmationValid ? 'invalid' : null)].join(' ')} type="password" placeholder="Repeat your password" 
+                    onChange={(evt) => this.handleChange('password_confirmation', evt.target.value)} />
+                    {(user.password_confirmation && !passwordConfirmationValid) ? <div className="hint red"> Password confirmation doesn't match</div> : null}
+                </div>
+                <button className={["button button__border"].join(' ')} disabled={!valid}> Sign up </button>
             </form>
         )
+    }
+    render(){
+        if(this.state.success){
+            return this.renderGetName();
+        }
+        else{
+            return this.renderLoginForm();
+        }
     }
 }
 
@@ -81,4 +141,4 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

@@ -5,7 +5,7 @@ import { request, routes } from '../../request';
 
 import ScrollingList from './ScrollingList';
 import styles from './AnonymousPageWrapper.scss';
-export default class NewsletterPage extends Component {
+export default class AnonymousPageWrapper extends Component {
     static propTypes = {
 
     }

@@ -10,9 +10,9 @@ import  styles from './App.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';
+import CliqueJoin from './components/cliques/CliqueJoin';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
-import LoginForm from './components/user/LoginForm';
 import DDMenu from './components/DDMenu';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
@@ -43,6 +43,9 @@ class App extends Component {
     this.props.getUserDetails();
   }
   componentWillReceiveProps(props){
+    if(this.props.user.authenticated != props.user.authenticated){
+      this.props.history.push('/');
+    }
     this.setState({
       loading: false,
     })
@@ -60,8 +63,8 @@ class App extends Component {
     return (
     <AnonymousPageWrapper>
       <Switch>
-        <Route path={routes.user.login} component={LoginForm} />
-        <Route path={'/'} component={NewsletterPage} />
+        <Route exact path={'/'} component={NewsletterPage} />
+        <Route path={"/cliques/:name/join"} component={CliqueJoin} />
       </Switch>
     </AnonymousPageWrapper>)
   }
@@ -78,7 +81,7 @@ class App extends Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ) => ({
   user: state.user,
 })
 

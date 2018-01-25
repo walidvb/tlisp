@@ -18,8 +18,9 @@ const routes = {
         users: {
             index: '/api/users.json',
             me: '/api/me.json',
-            signIn: 'api/users/sign_in',
-            signUp: 'api/users',
+            signIn: '/api/users/sign_in',
+            signUp: '/api/users',
+            update: '/api/users',
         },
         notifications: {
             index: '/api/notifications.json',

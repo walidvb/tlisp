@@ -70,6 +70,7 @@
     "react-player": "^0.25.3",
     "react-player-controls": "^0.5.17",
     "react-redux": "^5.0.6",
+    "react-rotating-text": "^1.2.1",
     "react-router-dom": "^4.2.2",
     "react-select": "^1.1.0",
     "redux": "^3.7.2",

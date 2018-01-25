@@ -5,6 +5,9 @@ import { request, routes } from '../../request';
 
 import ScrollingList from './ScrollingList';
 import styles from './AnonymousPageWrapper.scss';
+
+const ReactRotatingText = require('react-rotating-text');
+
 export default class AnonymousPageWrapper extends Component {
     static propTypes = {
 
@@ -34,7 +37,11 @@ export default class AnonymousPageWrapper extends Component {
                 <ScrollingList />
                 <h3 className={styles.container_header}>Welcome back to how it all started</h3>
                 <div className={styles.container}>
-                    <div className={styles.slogan}>Digging, by {this.state.by} for {this.state.for}</div>
+                    <div className={styles.slogan}>Digging, by &nbsp;
+                                    <ReactRotatingText style={{ minWidth: '7ch', display: 'inline-block', textAlign: 'left' }} items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random() * 2000 + 1000} /> 
+                                     for&nbsp;
+                                     <ReactRotatingText style={{ minWidth: '7ch', display: 'inline-block', textAlign: 'left' }} items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random()*2000+1000} /> 
+                                     </div>
                     <div className={styles.center}>
                         {this.props.children}
                     </div>

@@ -5,8 +5,6 @@ DiggersDelights::Application.routes.draw do
 
   resources :playlists
   get 'static/modaljs'
-  resources :cliques
-  get '/cliques/:id/join' => "cliques#join", as: :join_clique
   resources :links
 
   match "links" => "links#index", via: [:options]

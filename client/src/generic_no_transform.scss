@@ -22,6 +22,10 @@
 .hint{
     font-style: italic;
     color: lighten($primary-color, 40%);
+    transition: all .3s ease-in-out;
+    &:hover{
+        color: $primary-color;
+    }
     font-size: smaller;
     padding-left: .5rem;
     margin-top: .2rem;

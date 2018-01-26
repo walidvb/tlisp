@@ -26,7 +26,7 @@ DiggersDelights::Application.routes.draw do
     notify_to :users, controller: 'users/notifications', with_devise: :users
     devise_for :users, controllers: {
         registrations: 'users/registrations',
-    }
+    }, as: :api_devise
 
     resources :newsletters, only: [:create]
     # TODO move this to other controller
@@ -52,10 +52,10 @@ DiggersDelights::Application.routes.draw do
 
     
 
-    # devise_for :users, controllers: {
-    #     registrations: 'users/registrations',
-    #     confirmations: 'users/confirmations',
-    # }
+    devise_for :users, controllers: {
+        registrations: 'users/registrations',
+        confirmations: 'users/confirmations',
+    }
     get 'welcome', to: 'users#onboarding', as: :onboarding
 
   end

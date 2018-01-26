@@ -43,9 +43,6 @@ class App extends Component {
     this.props.getUserDetails();
   }
   componentWillReceiveProps(props){
-    if(this.props.user.authenticated != props.user.authenticated){
-      this.props.history.push('/');
-    }
     this.setState({
       loading: false,
     })

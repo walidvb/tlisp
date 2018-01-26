@@ -38,9 +38,9 @@ export default class AnonymousPageWrapper extends Component {
                 <h3 className={styles.container_header}>Welcome back to how it all started</h3>
                 <div className={styles.container}>
                     <div className={styles.slogan}>Digging, by &nbsp;
-                                    <ReactRotatingText style={{ minWidth: '7ch', display: 'inline-block', textAlign: 'left' }} items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random() * 2000 + 1000} /> 
+                                    <ReactRotatingText style={{ minWidth: '6ch', display: 'inline-block', textAlign: 'left' }} items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random() * 2000 + 1000} /> 
                                      for&nbsp;
-                                     <ReactRotatingText style={{ minWidth: '7ch', display: 'inline-block', textAlign: 'left' }} items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random()*2000+1000} /> 
+                                     <ReactRotatingText items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random()*2000+1000} /> 
                                      </div>
                     <div className={styles.center}>
                         {this.props.children}

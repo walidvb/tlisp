@@ -74,7 +74,8 @@ class LoginForm extends Component {
                     success: true,
                     user
                 })
-                this.props.signUpSuccess(user)
+                this.props.signUpSuccess(user);
+                this.props.history.push(routes.links.explore);
             })
 
     }

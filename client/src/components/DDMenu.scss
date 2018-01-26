@@ -1,23 +1,46 @@
 @import '../_variables.scss';
 
 body{
-    //padding-top: calc(3.5rem - 2px);
+    @media #{$mobile}{
+        padding-top: 75px;
+    }
 }
 
 $background: transparentize($primary-color, .1);
 
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: none;
+    .wrapper:hover &{
+        display: inline-block;
+    }
+}
+
 .container{
     position: fixed;
-    top: 25px;
-    left: 80vw;
+    top: 0;
+    left: 0;
+    width: 100%;
+    @media #{$mobile}{
+        transform: none!important;
+    }
+    @media #{$tablet}{
+        top: 25px;
+        left: 80vw;
+        max-width: calc(2rem - 1px);
+        transition: max-width 1s cubic-bezier(1,0.09, 0.63, 0.97);
+    }
     z-index: 50;
     color: white;
     display: flex;
     flex-flow: row;
     background: $background;
     padding: .2rem 1rem 0rem 0;
-    max-width: calc(2rem - 1px);
-    transition: max-width 1s cubic-bezier(1,0.09, 0.63, 0.97);
     overflow: hidden;
     &.hovered{
         transition: max-width .15s ease-in-out;
@@ -79,6 +102,7 @@ $background: transparentize($primary-color, .1);
     }
 }
 .handles{
+    display: none;
     z-index: 49;
     opacity: 0;
     transition: transform 0.35s .4s, opacity 0.45s .4s;
@@ -101,12 +125,13 @@ $background: transparentize($primary-color, .1);
     .vertical .container:hover  &{
         transform: translateY(-100%);
     }
-
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 0; 
-    top: 0;
+    @media #{$tablet}{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 0; 
+        top: 0;
+    }
 }
 
 .handle{
@@ -123,22 +148,6 @@ $background: transparentize($primary-color, .1);
     }
 }
 
-.backdrop{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    display: none;
-    .wrapper:hover &{
-        display: inline-block;
-    }
-}
-
-.submenu{
-
-}
 
 .vertical{
     flex-flow: column;

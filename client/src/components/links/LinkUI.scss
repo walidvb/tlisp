@@ -19,14 +19,7 @@
 .filter_item{
     margin-bottom: .5rem;
     margin-right: .5rem;
-    cursor: pointer;
-    text-transform: lowercase;
-    color: lighten(#1EA896, 40%);
-    &.active, &:hover{
-        color: white;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
+    flex-basis: calc(25% - .5rem);
 }
 
 .mood{

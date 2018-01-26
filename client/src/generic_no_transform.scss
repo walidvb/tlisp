@@ -107,6 +107,7 @@ input[type="text"], input[type="password"], input[type="email"]{
 
 .checkbox{
     cursor: pointer;
+    color: lighten(#1EA896, 40%);
     &:before{
         @include fa();
         transition: all 0.12s cubic-bezier(0, 0, 0.46, 1.91);
@@ -115,11 +116,12 @@ input[type="text"], input[type="password"], input[type="email"]{
     text-transform: lowercase;
     &.active{
         text-transform: uppercase;
+        font-weight: bold;
     }
-    &.active:before{
-        content: '\f00c'; // check
-        font-size: 14px;
+    &:hover{
+        color: white;
     }
+
     &.only-on:not(.active):before{
         content: '\f00c';
         font-size: 0;
@@ -128,6 +130,10 @@ input[type="text"], input[type="password"], input[type="email"]{
         &:before{
             content: '\f00d'; // times
         }
+    }
+    &.active:before{
+        content: '\f00c'; // check
+        font-size: 14px;
     }
 }
 

@@ -94,7 +94,7 @@ class LinkUI extends Component {
   }
   renderUser(user, clique) {
     return <div 
-      className={[styles.filter_item, user.active ? styles.active : ""].join(' ')}
+      className={["checkbox only-on", user.active ? "active" : ""].join(' ')}
       onClick={() => this.filterBy(user, clique)}> {user.name} </div>
   }
   renderClique( clique ){

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { MentionsInput, Mention } from 'react-mentions'
 import { FormField } from 'react-form';
-
+import fuzzysearch from 'fuzzysearch';
 import styles from './DDMentions.scss';
 
 import { request, routes } from '../../request';
@@ -56,7 +56,7 @@ function DDMention(props) {
                 users.map(u => ({
                     id: u.id,
                     display: u.name || u.initials || "N/A",
-                }))
+                })).filter(u => fuzzysearch(s.toLowerCase(), u.display.toLowerCase()))
             )
         })
     }
@@ -65,7 +65,7 @@ function DDMention(props) {
         let existing = props.tags.map(t => ({
             id: t,
             display: t,
-        }));
+        })).filter(t => fuzzysearch(s,t.display));
         // add non existing tag to list
         const newTag = s.length < 1 ? [] : [{
             id: s,

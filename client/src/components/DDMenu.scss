@@ -34,6 +34,7 @@ $background: transparentize($primary-color, .1);
         left: 80vw;
         max-width: calc(2rem - 1px);
         transition: max-width 1s cubic-bezier(1,0.09, 0.63, 0.97);
+        overflow: hidden;
     }
     z-index: 50;
     color: white;
@@ -41,7 +42,6 @@ $background: transparentize($primary-color, .1);
     flex-flow: row;
     background: $background;
     padding: .2rem 1rem 0rem 0;
-    overflow: hidden;
     &.hovered{
         transition: max-width .15s ease-in-out;
         max-width: calc(35vw - 2rem);

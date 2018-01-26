@@ -26,12 +26,11 @@ function LinkFormDetails(props) {
                         <Text field="url" type="hidden" />
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
-                            {/* <TextArea className="form-control" field="description" id="description" /> */}
                             <DDMentions formApi={formApi} tags={props.tags} cliques={props.cliques} field="description"/>
                         </div>
                         <div className="flex form-group">
                             <div className="" style={{ flex: "0 0 300px", }}>
-                                <label htmlFor={`mood`}>Mood</label>
+                                <label htmlFor={`mood`}>Energy Level</label>
                                 <ReactFormDDMood field={'mood'} id='mood' />
                             </div>
                             <div >
@@ -59,7 +58,6 @@ function LinkFormDetails(props) {
                         </div>
                         <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
                         <Playlists className="form-control" playlists={props.playlists} />
-                        {console.log(formApi) && null}
                     </div>
                 )}
             </Form>
@@ -71,21 +69,8 @@ function LinkFormDetails(props) {
 function mapCliquesToOptions(cliques){
     return cliques.map(c => ({ value: c.id, label: c.name }));
 }
-function Cliques({ canSelectCliques, cliques}) {
-    // return (<div>
-    //     Posting to: 
-    //     <div className={styles.state_info}>{formatArray(cliques.map(c => c.name))}</div>
-    // </div>);
-    // this was before you could select via mentions
+function Cliques({ cliques}) {
     const options = mapCliquesToOptions(cliques);
-    if (!canSelectCliques && cliques.length > 0){
-        return (
-            <div className="form-group">
-                <p>Posting to: <em>{cliques[0].name}</em></p>
-                <Text field={["clique_ids", 0]} type="hidden"/>
-            </div>
-        )
-    }
     return (
         <div className="form-group">
             <label htmlFor={`cliques`}>Cliques</label>
@@ -130,14 +115,9 @@ class LinksForm extends Component {
                     playlists,
                     cliques,
                     tags,
-                    canSelectCliques: cliques.length > 1,
                     oembeddable: typeof(link.oembed) == "object" && Object.keys(link.oembed).length > 0,
                 }, this.setDefaultValues))
         }
-    }
-    addCliquestoDescription(desc, cliques){
-        return desc === undefined ? '' : desc.replace(/@/g, '');
-        return cliques.map(c => `@[${c.name}](clique:${c.id})`).join(' ') + '\n' + (desc === undefined ? '' : desc)
     }
     setDefaultValues(){
         const { cliques, link } = this.state
@@ -145,14 +125,12 @@ class LinksForm extends Component {
         const { description } = link.oembed;
         this.linkFormApi.setAllValues({
             url,
-            description: this.addCliquestoDescription(description, cliques),
+            description: description,
             is_a_set: "0",
             published: true,
             clique_ids: mapCliquesToOptions(cliques)
         });
-        if(!this.state.canSelectCliques){
-            this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);
-        }
+        this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);
     }
     preSubmit({ link }, canSelectCliques){
         const { clique_ids, playlist_ids, tag_list} = link;

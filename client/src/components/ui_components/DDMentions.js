@@ -103,7 +103,7 @@ function DDMention(props) {
             </MentionsInput>
             <div className={"hint"}> 
                 <div className="fa fa-info" />
-                Mention @friends, add #tags and describe your content (notification system coming ASAP :) )
+                Mention @friends, add #tags and describe your content
             </div>
         </div>
     )

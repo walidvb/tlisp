@@ -1,7 +1,7 @@
 class CliquesController < ApplicationController
   before_action :set_clique, only: [:join, :show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:join]
+  skip_before_action :authenticate_user!, only: [:join, :show]
 
   def join
     @inviter = params[:by]
@@ -18,7 +18,6 @@ class CliquesController < ApplicationController
   # GET /cliques/1
   # GET /cliques/1.json
   def show
-    @users = @clique.users.includes(playlists: :links).where.not(id: current_user.id)
   end
 
   # GET /cliques/new

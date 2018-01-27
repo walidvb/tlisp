@@ -42,7 +42,7 @@ def index
   .visible
   .oembedable
 
-  base_query = @link_assignments
+  base_query = @link_assignments.clone
   if params[:custom] == 'only-me'
     @link_assignments = @link_assignments.where(user: current_user)
   else

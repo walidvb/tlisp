@@ -1,5 +1,6 @@
 const routes = {
     api: {
+        cliques: '/api/cliques',
         covers: '/api/covers',
         links: {
             explore: '/api/links.json',
@@ -18,9 +19,9 @@ const routes = {
         users: {
             index: '/api/users.json',
             me: '/api/me.json',
-            signIn: '/api/users/sign_in',
-            signUp: '/api/users',
-            update: '/api/users',
+            signIn: '/users/sign_in',
+            signUp: '/users',
+            update: '/users',
         },
         notifications: {
             index: '/api/notifications.json',

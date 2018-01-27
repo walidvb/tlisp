@@ -24,9 +24,9 @@ DiggersDelights::Application.routes.draw do
     post '/notifications/:id/open' => 'users/notifications_with_devise#open', devise_type: "user", target_type: "user"
 
     notify_to :users, controller: 'users/notifications', with_devise: :users
-    devise_for :users, controllers: {
-        registrations: 'users/registrations',
-    }, as: :api_devise
+    # devise_for :users, controllers: {
+    #     registrations: 'users/registrations',
+    # }, as: :api_devise
 
     resources :newsletters, only: [:create]
     # TODO move this to other controller

@@ -6,13 +6,22 @@ import LoginForm from '../user/LoginForm';
 import Title from '../Title';
 
 import styles from './CliqueJoin.scss';
-
+import { routes, request } from '../../request';
 class CliqueJoin extends Component {
     static propTypes = {
 
     }
     state = {
         displayForm: false,
+        clique: {},
+    }
+    componentDidMount() {
+        request(`${routes.api.cliques}/${this.props.match.params.name}`)
+        .then(clique => {
+            this.setState({
+                clique
+            })
+        });
     }
     renderInvitation(){
         return (<div>
@@ -20,15 +29,14 @@ class CliqueJoin extends Component {
             <Title />
             <div style={{display: 'flex', alignItems: 'center'}}>
                 <div onClick={() => this.setState({ displayForm: true })} className="button button__border"> Sign up and Join </div>
-                <div> THE ALPHAS </div>
+                <div> {this.state.clique.name} </div>
             </div>
         </div>)
     }
     render() {
-        const cliqueSlug = this.props.match.params.name;
         return (
             <div>
-                { this.state.displayForm ? <LoginForm cliqueSlug={cliqueSlug} /> : this.renderInvitation() }
+                {this.state.displayForm ? <LoginForm clique={this.state.clique} /> : this.renderInvitation() }
             </div>
         )
     }

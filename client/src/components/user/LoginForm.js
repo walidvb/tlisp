@@ -45,8 +45,10 @@ class LoginForm extends Component {
         const options = {
             method: 'POST',
             body: {
-                user: this.state.user,
-                clique: this.props.cliqueSlug,
+                user: {
+                    ...this.state.user,
+                    clique_ids: [this.props.clique.id],
+                }
             }
         }
 
@@ -54,7 +56,10 @@ class LoginForm extends Component {
         .then(( { user } ) => {
             this.setState({
                 success: true,
-                user
+                user: {
+                    ...user,
+                    clique_ids: [this.props.clique.id]
+                }
             })
         })
     }

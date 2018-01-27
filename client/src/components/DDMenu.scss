@@ -28,6 +28,8 @@ $background: transparentize($primary-color, .1);
     width: 100%;
     @media #{$mobile}{
         transform: none!important;
+        overflow: auto;
+        
     }
     @media #{$tablet}{
         top: 25px;

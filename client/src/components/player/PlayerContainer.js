@@ -62,11 +62,11 @@ class PlayerContainer extends Component {
                     style={{maxHeight: "200px"}}
                     playing={this.props.playing}
                     onReady={() => this.props.playing ? this.props.play() : null}
-                    onStart={(d) => console.log(this.props.play(d))}
-                    onPlay={(d) => console.log(this.props.play(d))}
-                    onProgress={(d) => console.log(this.props.onProgress(d))}
-                    onPause={(d) => console.log(this.props.pause(d))}
-                    onEnded={(d) => console.log(this.props.onEnded(d))}
+                    onStart={(d) => this.props.play(d)}
+                    onPlay={(d) => this.props.play(d)}
+                    onProgress={(d) => this.props.onProgress(d)}
+                    onPause={(d) => this.props.pause(d)}
+                    onEnded={(d) => this.props.onEnded(d)}
                 /> : 
                 <div style={{ height: "100%" }} dangerouslySetInnerHTML={{
                     __html: html
@@ -79,6 +79,7 @@ class PlayerContainer extends Component {
         return (
             <div className={styles.container}>
                 { this.renderCurrentlyPlaying() }
+                <div className={styles.tracklist} >NEXT UP:</div>
                 <div className={[styles.tracklist, styles[`${placement}`], styles[displayType]].join(' ')}>
                     {tracklist.map(this.renderTrack.bind(this))}
                 </div>

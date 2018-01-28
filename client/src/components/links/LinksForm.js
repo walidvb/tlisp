@@ -84,7 +84,7 @@ function Playlists(props) {
     return (
         <div className="form-group">
             <label htmlFor={`playlists`}>Playlists</label>
-            <DDSelect placeholder="Select one or more playlists" creatable={true} optionName="playlist" multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
+            <DDSelect placeholder="Select or type to create one or more playlists" creatable={true} optionName="playlist" multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
         </div>
     )
 };
@@ -128,7 +128,7 @@ class LinksForm extends Component {
             description: description,
             is_a_set: "0",
             published: true,
-            clique_ids: mapCliquesToOptions(cliques)
+            clique_ids: mapCliquesToOptions(cliques).filter(c => c.value != 1)
         });
         this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);
     }

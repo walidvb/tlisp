@@ -117,6 +117,7 @@ input[type="text"], input[type="password"], input[type="email"]{
     &.active{
         text-transform: uppercase;
         font-weight: bold;
+        color: white;
     }
     &:hover{
         color: white;

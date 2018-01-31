@@ -11,6 +11,7 @@ function dontShow(evt){
 
 export default function Bookmarklet(props){
     const domain = window.location.host;
+    
     // TODO: close an iframe within an iframe
     // https://stackoverflow.com/a/43030280/1312825
     const bookmarklet = ` \

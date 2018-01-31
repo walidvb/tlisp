@@ -24,15 +24,14 @@ $background: transparentize($primary-color, .1);
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     @media #{$mobile}{
+        width: 100%;
         transform: none!important;
         overflow: auto;
-        
     }
     @media #{$tablet}{
         top: 25px;
-        left: 80vw;
+        left: calc(100vw - 500px);
         max-width: calc(2rem - 1px);
         transition: max-width 1s cubic-bezier(1,0.09, 0.63, 0.97);
         overflow: hidden;

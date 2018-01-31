@@ -24,6 +24,7 @@ def link_form_details
   @playlists = current_user.playlists
   @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
   @cliques = current_user.cliques
+  @cliques = @cliques.where.not(id: 1) if current_user.id > 10
   render json: {
     link: @link,
     playlists: @playlists,

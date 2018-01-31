@@ -74,4 +74,9 @@ class ApplicationController < ActionController::Base
     ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
   end
 
+  def log_to_slack options = {}
+        emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
+      
+        Slack.post! ENV['DD_SLACK_WEBHOOK_URL'], options if Rails.env.production?
+  end
 end

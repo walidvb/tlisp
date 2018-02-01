@@ -52,9 +52,11 @@ DiggersDelights::Application.routes.draw do
 
     
 
+    # TODO: move this into API
     devise_for :users, controllers: {
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
+        sessions: 'users/sessions',
     }
     get 'welcome', to: 'users#onboarding', as: :onboarding
 

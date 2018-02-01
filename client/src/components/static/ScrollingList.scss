@@ -34,7 +34,10 @@ body .thumb{
 .provider{
     color: white;
     position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    font-size: 1rem;
+    right: .5rem;
+    bottom: .5rem;
+    font-size: .7rem;
+    @media #{$md}{
+        font-size: .8rem;
+    }
 }

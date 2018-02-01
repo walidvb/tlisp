@@ -24,21 +24,17 @@ class CliqueJoin extends Component {
         });
     }
     renderInvitation(){
-        return (<div>
+        return (<div className={styles.container}>
             <h1 className={styles.title}>You've been invited to join a clique at </h1>
             <Title />
-            <div style={{display: 'flex', alignItems: 'center'}}>
+            <div className={styles.actionWrappers}>
                 <div onClick={() => this.setState({ displayForm: true })} className="button button__border"> Sign up and Join </div>
                 <div> {this.state.clique.name} </div>
             </div>
         </div>)
     }
     render() {
-        return (
-            <div>
-                {this.state.displayForm ? <LoginForm clique={this.state.clique} /> : this.renderInvitation() }
-            </div>
-        )
+        return this.state.displayForm ? <LoginForm clique={this.state.clique} isSignUp={true} /> : this.renderInvitation()
     }
 }
 

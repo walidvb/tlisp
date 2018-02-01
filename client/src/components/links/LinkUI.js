@@ -107,7 +107,7 @@ class LinkUI extends Component {
           </h3>
         <ul className={styles.users_container}>
           {
-            clique.users.map(u => <li className={styles.filter_item} key={u.name}>{this.renderUser(u, clique)}</li>)
+            clique.users.map((u, i)=> <li className={styles.filter_item} key={i}>{this.renderUser(u, clique)}</li>)
           }
         </ul>
       </div>

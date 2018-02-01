@@ -19,8 +19,16 @@ export function request(url, options = {}){
                 return resolve(response.json())
             }
             else {
-                console.log(`Error fetching ${url}:`, response)
-                return reject();
+                response.text()
+                .then(text => {
+                    console.log(`Error fetching ${url}:`, response)
+                    try {
+                        const data = JSON.parse(text);
+                        reject(data);
+                    } catch (err) {
+                        reject(text)
+                    }
+                });
             }
         })
         .catch((err) => reject(err));

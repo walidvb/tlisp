@@ -47,6 +47,10 @@
     &.red{
         color: red;
     }
+    &.before{
+        margin-top: 0;
+        margin-bottom: .5rem;
+    }
 }
 
 .button{
@@ -62,6 +66,7 @@
     cursor: pointer; 
     margin: auto;
     display: block;
+    text-align: center;
     &:hover{
         background: lighten($primary-color, 10%);
     }

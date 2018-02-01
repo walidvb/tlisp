@@ -1,4 +1,27 @@
+@import '../../_variables.scss';
+
+.container{
+    @media #{$tablet}{
+        width: 100vw;
+        max-width: 500px;
+    }
+    @media #{$md}{
+        width: 50vw;
+    }
+}
+
 .title{
     font-size: 1.3em;
     text-align: center;
+}
+
+.actionWrappers{
+    @media #{$tablet}{
+        display: flex; 
+        align-items: center;
+    }
+    > div{
+        flex-basis: 50%;
+        text-align: center;
+    }
 }

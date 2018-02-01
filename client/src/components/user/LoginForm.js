@@ -13,7 +13,7 @@ class LoginForm extends Component {
     static propTypes = {
 
     }
-    state ={
+    state = {
         user: { 
             email: '', 
             password: '',
@@ -31,7 +31,7 @@ class LoginForm extends Component {
         }
     }
     validateForm(){
-        const isSignUp = this.state.isSignUp;
+        const isSignUp = this.props.isSignUp;
         const { name, email, password, password_confirmation } = this.state.user;
         const emailValid = emailRegExp.test(email);
         const passwordsMatch = password.length >= 4 && 
@@ -42,29 +42,58 @@ class LoginForm extends Component {
             emailInvalid: email.length > 0 && !emailValid,
         })
     }
-    handleSubmit(evt){
-        evt.preventDefault()
-        const isSignUp = this.state.isSignUp;
+    handleSubmitSignIn(){
+        const options = {
+            method: 'POST',
+            body: {
+                user: {
+                    email: this.state.user.email,
+                    password: this.state.user.password,
+                }
+            }
+        }
+        request(routes.api.users.signIn, options)
+        .then(({ user }) => {
+            this.props.signUpSuccess(user);
+            this.props.history.push(routes.links.explore);
+        })
+        .catch(({ error }) => {
+            this.setState({
+                error
+            })
+        })
+    }
+    handleSubmitSignUp(){
+        const { isSignUp } = this.props;
         let options = {
             method: 'POST',
             body: {
                 user: {
                     ...this.state.user,
+                    clique_ids: [this.props.clique.id],
                 }
             }
         }
-        let url = routes.api.users.signIn;
-        if(isSignUp){
-            options.body.clique_ids = [this.props.clique.id];
-            url = routes.api.users.signUp;
-        }
-        request(url, options)
+        request(routes.api.users.signUp, options)
         .then(( { user } ) => {
             this.setState({
                 success: true,
                 user,
             })
         })
+        .catch(({ errors }) => {
+            const error = Object.keys(errors).reduce((prev, val, i) => [prev,`${val} ${errors[val].join('')}`].filter(vv => vv).join(', '), '')
+            this.setState({
+                error
+            })
+        })
+    }
+    handleSubmit(evt){
+        evt.preventDefault()
+        this.setState({
+            error: undefined,
+        });
+        this.props.isSignUp ? this.handleSubmitSignUp() : this.handleSubmitSignIn();
     }
     handleSubmitName(evt){
         evt.preventDefault();
@@ -108,11 +137,15 @@ class LoginForm extends Component {
         )
     }
     renderLoginForm() {
-        const { isSignUp, emailInvalid, valid, user, passwordsMatch } = this.state;
+        const { emailInvalid, error, valid, user, passwordsMatch } = this.state;
+        const { isSignUp } = this.props;
         const passwordValid = user.password === '' || user.password.length >= 4
         const passwordConfirmationValid = user.password_confirmation.length <=3 || passwordsMatch ;
         return (
             <form className={styles.container} onSubmit={this.handleSubmit.bind(this)}>
+                { !error ? null : <div className="hint error red before">
+                    {error}
+                </div>}
                 <div><input className={["input", (emailInvalid ? "invalid" : null)].join(' ')} type="email" placeholder="Your email" 
                     onChange={(evt) => this.handleChange('email', evt.target.value)}/>
                 </div>

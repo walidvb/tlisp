@@ -13,6 +13,7 @@ import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';
 import CliqueJoin from './components/cliques/CliqueJoin';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
+import LoginForm from './components/user/LoginForm';
 import DDMenu from './components/DDMenu';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
@@ -61,7 +62,8 @@ class App extends Component {
     <AnonymousPageWrapper>
       <Switch>
         <Route exact path={'/'} component={NewsletterPage} />
-        <Route path={"/cliques/:name/join"} component={CliqueJoin} />
+        <Route path={'/cliques/:name/join'} component={CliqueJoin} />
+        <Route path={'/'} render={() => <LoginForm isSignUp={false} />} />
       </Switch>
     </AnonymousPageWrapper>)
   }

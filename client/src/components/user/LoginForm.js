@@ -31,9 +31,11 @@ class LoginForm extends Component {
         }
     }
     validateForm(){
+        const isSignUp = this.state.isSignUp;
         const { name, email, password, password_confirmation } = this.state.user;
         const emailValid = emailRegExp.test(email);
-        const passwordsMatch = password.length >= 4 && password == password_confirmation;
+        const passwordsMatch = password.length >= 4 && 
+            (!isSignUp || password == password_confirmation);
         this.setState({
             valid: passwordsMatch && emailValid,
             passwordsMatch,
@@ -42,24 +44,25 @@ class LoginForm extends Component {
     }
     handleSubmit(evt){
         evt.preventDefault()
-        const options = {
+        const isSignUp = this.state.isSignUp;
+        let options = {
             method: 'POST',
             body: {
                 user: {
                     ...this.state.user,
-                    clique_ids: [this.props.clique.id],
                 }
             }
         }
-
-        request(routes.api.users.signUp, options)
+        let url = routes.api.users.signIn;
+        if(isSignUp){
+            options.body.clique_ids = [this.props.clique.id];
+            url = routes.api.users.signUp;
+        }
+        request(url, options)
         .then(( { user } ) => {
             this.setState({
                 success: true,
-                user: {
-                    ...user,
-                    clique_ids: [this.props.clique.id]
-                }
+                user,
             })
         })
     }
@@ -105,7 +108,7 @@ class LoginForm extends Component {
         )
     }
     renderLoginForm() {
-        const { emailInvalid, valid, user, passwordsMatch } = this.state;
+        const { isSignUp, emailInvalid, valid, user, passwordsMatch } = this.state;
         const passwordValid = user.password === '' || user.password.length >= 4
         const passwordConfirmationValid = user.password_confirmation.length <=3 || passwordsMatch ;
         return (
@@ -117,21 +120,23 @@ class LoginForm extends Component {
                     <input className={["input", (!passwordValid ? 'invalid' : null)].join(' ')} type="password" placeholder="Your password" 
                     onChange={(evt) => this.handleChange('password', evt.target.value)} />
                 </div>
-                <div>
-                    <input className={["input", (!passwordConfirmationValid ? 'invalid' : null)].join(' ')} type="password" placeholder="Repeat your password" 
-                    onChange={(evt) => this.handleChange('password_confirmation', evt.target.value)} />
-                    {(user.password_confirmation && !passwordConfirmationValid) ? <div className="hint red"> Password confirmation doesn't match</div> : null}
-                </div>
-                <button className={["button button__border"].join(' ')} disabled={!valid}> Sign up </button>
+                { !isSignUp ? null :
+                    <div>
+                        <input className={["input", (!passwordConfirmationValid ? 'invalid' : null)].join(' ')} type="password" placeholder="Repeat your password" 
+                        onChange={(evt) => this.handleChange('password_confirmation', evt.target.value)} />
+                        {(user.password_confirmation && !passwordConfirmationValid) ? <div className="hint red"> Password confirmation doesn't match</div> : null}
+                    </div>
+                }
+                <button className={["button button__border"].join(' ')} disabled={!valid}> {isSignUp ? "Sign Up" : "Log In"} </button>
             </form>
         )
     }
     render(){
-        if(this.state.success){
-            return this.renderGetName();
+        if(!this.state.success){
+            return this.renderLoginForm();
         }
         else{
-            return this.renderLoginForm();
+            return this.renderGetName();
         }
     }
 }

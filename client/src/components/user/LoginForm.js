@@ -55,7 +55,9 @@ class LoginForm extends Component {
         request(routes.api.users.signIn, options)
         .then(({ user }) => {
             this.props.signUpSuccess(user);
-            this.props.history.push(routes.links.explore);
+            if (this.props.location.pathname == routes.user.signin){
+                this.props.history.push(routes.links.explore);
+            }
         })
         .catch(({ error }) => {
             this.setState({

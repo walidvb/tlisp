@@ -39,6 +39,7 @@ const routes = {
     },
     user: {
         signup: '/cliques/:clique_slug/join',
+        signin: '/login'
     },
 }
 

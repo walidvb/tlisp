@@ -22,7 +22,7 @@ def link_form_details
   @tags = all_tags.map(&:name)
   @genres = all_tags(:genre).map(&:name)
   @playlists = current_user.playlists
-  @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
+  # @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
   @cliques = current_user.cliques
   @cliques = @cliques.where.not(id: 1) if current_user.id > 10
   render json: {
@@ -79,7 +79,7 @@ def index
     @links = @links.where('mood IS ? OR (mood > ? AND mood < ?)', nil, mood - 20, mood + 20)
   end
   
-  @current_page = params['page'].to_i
+  @current_page = params[:page].to_i
   @links = @links.page(@current_page).per(10)
   @pages_count = @links.total_pages
 end

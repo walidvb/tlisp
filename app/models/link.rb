@@ -3,7 +3,8 @@ class Link < ActiveRecord::Base
          targets: ->(link, key) {
             (link.mentionned_users).uniq
          },
-         tracked: { only: [:create] },
+         # TODO: move description to comments, and make comments acts_as_notifiable instead
+         # tracked: { only: [:create] },
          notifier: :author
 
     default_scope {order("created_at DESC")}

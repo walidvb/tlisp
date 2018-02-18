@@ -111,6 +111,7 @@ def create
   @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published])
   respond_to do |format|
     if @link.save
+      @link.notify :users
       format.html { redirect_to @link, notice: 'Link was successfully created.' }
       format.json { render :show, status: :created, location: @link }
     else

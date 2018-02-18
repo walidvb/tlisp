@@ -39,7 +39,6 @@ export default (state = initialState, action) => {
         loading: false
       }
     case `${types.SUBMIT_LINK}_SUCCESSFUL`:
-      console.log(action.payload);
       return {
         ...state,
         payload: action.payload

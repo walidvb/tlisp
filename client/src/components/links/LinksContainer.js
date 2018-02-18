@@ -32,7 +32,7 @@ class LinksContainer extends Component {
   // TODO Move this to state initialiser or a higher up level.
   componentDidMount() {
     this.props.filterBy({
-      type: 'user',
+      type: 'users',
       value: this.props.user.id,
     })
     window.addEventListener('scroll', (evt) => {

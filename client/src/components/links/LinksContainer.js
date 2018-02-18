@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom'
-import InfiniteScroll from 'react-infinite-scroller';
 
 import routes from '../../routes.js';
 import request from '../../request.js';

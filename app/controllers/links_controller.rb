@@ -80,7 +80,7 @@ def index
   end
   
   @current_page = params[:page].to_i
-  @links = @links.page(@current_page).per(10)
+  @links = @links.page(@current_page).per(25)
   @pages_count = @links.total_pages
 end
 

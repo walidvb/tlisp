@@ -68,13 +68,12 @@ def index
   .order("created_at DESC")
   .where('link_id IN (?)', @link_assignments.map(&:link_id))
   .uniq
-  # TODO optimize the search by mood
+
   if mood = params[:mood].presence
     mood = mood.to_i
-    @links = @links.select do |l|
-      l.mood.nil? || (l.mood <= mood + 20 && l.mood >= mood - 20)
-    end
+    @links = @links.where('mood IS ? OR (mood > ? AND mood < ?)', nil, mood - 20, mood + 20)
   end
+  
   @current_page = params['page'].to_i
   @links = @links.page(@current_page).per(10)
   @pages_count = @links.total_pages

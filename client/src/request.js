@@ -52,7 +52,10 @@ function serialize(params, prefix) {
         if (typeof value === 'object')
             return serialize(value, key);
         else
-            return `${key}=${encodeURIComponent(value)}`;
+            if(value)
+            {
+                return `${key}=${encodeURIComponent(value)}`;
+            }
     });
 
     return [].concat.apply([], query).join('&');

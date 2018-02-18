@@ -46,8 +46,13 @@ export default (state = initialState, action) => {
     
     case `${types.FILTER_BY}`:
       const { type, value } = action.payload;
-      let newFilters = {};
-      newFilters[type] = toggleInArray(newFilters[type], value)
+      let newFilters = {...state.filters};
+      if(type == 'mood'){
+        newFilters[type] = value;
+      }
+      else{
+        newFilters[type] = toggleInArray(newFilters[type], value)
+      }
       return {
         ...state,
         filters: {
@@ -87,7 +92,7 @@ export default (state = initialState, action) => {
 };
 
 function toggleInArray(arr = [], value) {
-  const exists = arr.find((presentValue) => value == presentValue);
+  const exists = arr.includes(value);
   if (exists) {
     return arr.filter((presentValue, i) => presentValue != value);
   }

@@ -34,7 +34,6 @@ class LinksContainer extends Component {
       users: props.displayMine ? [props.user.id] : [],
     });
   }
-  // TODO Move this to state initialiser or a higher up level.
   componentDidMount() {
     this.resetFilters();
     window.addEventListener('scroll', (evt) => {

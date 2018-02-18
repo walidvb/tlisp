@@ -27,8 +27,6 @@ class ApplicationController < ActionController::Base
   before_filter :reject_locked!, if: :devise_controller?
 
   def fallback_index_html
-    # TODO: allow iframing of session#new as well
-    # allow iframing for tracks new
     if /tracks\/new/.match(params[:path])
       headers['X-Frame-Options'] = "ALLOWALL"
     end

@@ -8,15 +8,6 @@ const LinkList = ({ links }) => {
   if(!links){
     return null;
   }
-  return (
-    <div className={styles.container__grid}>
-      {links.map((link) =>
-        <div key={link.id} className={styles.item__grid}>
-          <Link link={link} />
-        </div>
-      )}
-    </div>
-  );
 };
 
 LinkList.propTypes = {

@@ -1,19 +1,12 @@
 import * as types from './actionTypes';
 import { request, routes } from '../request';
 
-export const getLinks = ({ pathname, filters}) => {
-  if(/help/.test(pathname)){
-    pathname = "/";
-  }
-  let path = pathname ? (pathname === '/' ? routes.api.links.explore : routes.api.links[pathname.slice(1)]) 
-    : routes.api.links.explore;
-  if(/playlists/.test(pathname)){
-    path = `/api${pathname}`;
-  }
+export const getLinks = ({ filters, page }) => {
+  console.log(filters);
   return {
     type: types.GET_LINKS,
     payload: new Promise(resolve => {
-      request(path, { qs: filters })
+      request(routes.api.links.explore, { qs: {...filters, page} })
         .then(resolve)
         .catch(error => console.log(error))
     }),

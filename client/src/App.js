@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getUserDetails } from './actions/userActions';
 
 
-import  styles from './App.scss';
+import styles from './App.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';

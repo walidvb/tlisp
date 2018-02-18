@@ -77,6 +77,9 @@ def index
       l.mood.nil? || (l.mood <= mood + 20 && l.mood >= mood - 20)
     end
   end
+  @current_page = params['page'].to_i
+  @links = @links.page(@current_page).per(10)
+  @pages_count = @links.total_pages
 end
 
 # GET /links/1

@@ -44,7 +44,7 @@ def index
   .oembedable
 
   base_query = @link_assignments.clone
-  if params[:users].empty?
+  if params[:users].blank? || params[:users].empty?
     @link_assignments = @link_assignments
     .where(clique_id: clique_ids)
     .where.not(user: current_user)

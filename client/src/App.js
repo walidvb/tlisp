@@ -54,7 +54,7 @@ class App extends Component {
   renderAuthenticatedRoutes(){
     return <Switch>
       <Route path={routes.links.new} component={LinksForm} />
-      <Route path={"/:filter?"} component={AppWrapper} />
+      <Route path={"/:mainPath?"} component={AppWrapper} />
     </Switch>
   }
   renderAnonymousRoutes(){

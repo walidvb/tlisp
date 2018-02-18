@@ -19,6 +19,10 @@ export const filterBy = (filter) => {
     payload: filter,
   };
 }
+export const resetFilters = (filters = {}) => ({
+  type: types.RESET_FILTERS,
+  payload: filters
+})
 
 export const submitLink = (payload) => ({
   type: types.SUBMIT_LINK,

@@ -55,6 +55,13 @@ export default (state = initialState, action) => {
           ...newFilters
         }
       }
+    case types.RESET_FILTERS:
+      return {
+        ...state,
+        filters: {
+          ...action.payload
+        }
+      }
     // PLAYER RELATED
     case `${types.PLAY_TRACK}`:
       let newList = state.list.map(l => ({

@@ -10,7 +10,7 @@ import request from '../../request.js';
 
 
 import LinkUI from './LinkUI';
-import { getLinks, filterBy } from '../../actions/linkActions';
+import { getLinks, resetFilters } from '../../actions/linkActions';
 import { setTracklist } from '../../actions/playerActions';
 import Link from './Link';
 
@@ -31,10 +31,10 @@ class LinksContainer extends Component {
   }
   // TODO Move this to state initialiser or a higher up level.
   componentDidMount() {
-    this.props.filterBy({
-      type: 'users',
-      value: this.props.user.id,
-    })
+    console.log(this.props.displayMine)
+    this.props.resetFilters({
+      users: this.props.displayMine ? [this.props.user.id] : [],
+    });
     window.addEventListener('scroll', (evt) => {
       const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
       const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
@@ -45,8 +45,12 @@ class LinksContainer extends Component {
   }
 
   // TODO: move this to some playlistController
-  componentWillReceiveProps({ links, filters }){
-    console.log(filters, this.props.filters)
+  componentWillReceiveProps({ links, filters, displayMine, user }){
+    if (displayMine != this.props.displayMine){
+      this.props.resetFilters({
+        users: displayMine ? [user.id] : [],
+      })
+    }
     if(filters != this.props.filters){
       this.props.getLinks({filters, page: 1});
     }
@@ -94,14 +98,14 @@ LinksContainer.propTypes = {
   getLinks: PropTypes.func.isRequired
 };
 
-function mapStateToProps({ links, user }, { match: { params: filter }}) {
+function mapStateToProps({ links, user }, { match: { params: mainPath }}) {
   return {
     links: links.list,
     filters: links.filters,
     pagination: links.pagination,
     loading: links.loading,
-    displayOtherUsers: filter != 'me',
-    user
+    displayMine: mainPath.mainPath == 'me',
+    user,
   };
 }
 
@@ -109,7 +113,7 @@ function mapDispatchToProps(dispatch) {
   return {
     setTracklist: (tracks) => dispatch(setTracklist(tracks)),
     getLinks: (options) => dispatch(getLinks(options)),
-    filterBy: (filter) => dispatch(filterBy(filter))
+    resetFilters: (filters) => dispatch(resetFilters(filters))
   }
 }
 

@@ -62,6 +62,11 @@ def index
       # new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
+    if p_ids = params[:playlists].presence
+       @link_assignments = PlaylistAssignment
+      .order("created_at DESC")
+      .includes(link: [:users, :tags])
+    end
   end
 
   @links = Link.joins(:link_clique_assignments)

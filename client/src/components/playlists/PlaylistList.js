@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+import { filterBy } from '../../actions/linkActions';
 import {
     Link
 } from 'react-router-dom'
 
 import { request, routes } from '../../request';
 
-export default class PlaylistList extends Component {
+class PlaylistList extends Component {
     static propTypes = {
     }
     state = {
@@ -20,10 +23,18 @@ export default class PlaylistList extends Component {
             <div>
                 <ul style={{display: 'flex', flexFlow: "row wrap"}}>
                     {this.state.playlists.map( pl => {
-                        return <li style={{padding: '.5rem .5rem'}} key={pl.slug}><Link to={`${routes.playlists.show}/${pl.slug}`}> {pl.name}</Link></li>
+                        return <li style={{padding: '.5rem .5rem'}} key={pl.slug}>
+                            <div onClick={() => this.props.filterByPlaylist(pl.id)}> {pl.name}</div>
+                        </li>
                     })}
                 </ul>
             </div>
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    filterByPlaylist: (id) => dispatch(filterBy({ type: 'playlists', value: id}))
+})
+
+export default connect(undefined, mapDispatchToProps)(PlaylistList)

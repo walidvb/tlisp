@@ -29,12 +29,14 @@ class LinksContainer extends Component {
       page,
     })
   }
+  resetFilters(props = this.props){
+    this.props.resetFilters({
+      users: props.displayMine ? [props.user.id] : [],
+    });
+  }
   // TODO Move this to state initialiser or a higher up level.
   componentDidMount() {
-    console.log(this.props.displayMine)
-    this.props.resetFilters({
-      users: this.props.displayMine ? [this.props.user.id] : [],
-    });
+    this.resetFilters();
     window.addEventListener('scroll', (evt) => {
       const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
       const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
@@ -44,16 +46,16 @@ class LinksContainer extends Component {
     })
   }
 
-  // TODO: move this to some playlistController
-  componentWillReceiveProps({ links, filters, displayMine, user }){
+  componentWillReceiveProps(props){
+    const { links, filters, displayMine, user } = props;
+    // if location had changed
     if (displayMine != this.props.displayMine){
-      this.props.resetFilters({
-        users: displayMine ? [user.id] : [],
-      })
+      this.resetFilters(props)
     }
     if(filters != this.props.filters){
       this.props.getLinks({filters, page: 1});
     }
+    // TODO: move this to some playlistController
     this.handleTracklist(links)
   }
   handleTracklist(links) {

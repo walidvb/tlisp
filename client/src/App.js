@@ -29,7 +29,7 @@ class AppWrapper extends Component {
     return (
       <div>
         <DDMenu />
-        <LinksContainer />
+        <LinksContainer {...this.props}/>
         <NotificationsList />
       </div>
     )
@@ -54,7 +54,7 @@ class App extends Component {
   renderAuthenticatedRoutes(){
     return <Switch>
       <Route path={routes.links.new} component={LinksForm} />
-      <Route path={"/"} component={AppWrapper} />
+      <Route path={"/:filter?"} component={AppWrapper} />
     </Switch>
   }
   renderAnonymousRoutes(){

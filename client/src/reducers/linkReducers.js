@@ -45,6 +45,17 @@ export default (state = initialState, action) => {
         payload: action.payload
       }
     
+    case `${types.FILTER_BY}`:
+      const { type, value } = action.payload;
+      let newFilters = {};
+      newFilters[type] = toggleInArray(newFilters[type], value)
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          ...newFilters
+        }
+      }
     // PLAYER RELATED
     case `${types.PLAY_TRACK}`:
       let newList = state.list.map(l => ({
@@ -68,3 +79,13 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+function toggleInArray(arr = [], value) {
+  const exists = arr.find((presentValue) => value == presentValue);
+  if (exists) {
+    return arr.filter((presentValue, i) => presentValue != value);
+  }
+  else {
+    return arr.concat([value]);
+  }
+}

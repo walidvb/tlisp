@@ -13,15 +13,10 @@ export const getLinks = ({ filters, page }) => {
   };
 }
 
-export const filterBy = (filters) => {
+export const filterBy = (filter) => {
   return {
     type: types.FILTER_BY,
-    filters,
-    payload: new Promise(resolve => {
-      request(routes.api.links.index)
-        .then(response => resolve(response.json(), filters))
-        .catch(error => console.log(error))
-    }),
+    payload: filter,
   };
 }
 

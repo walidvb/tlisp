@@ -10,7 +10,7 @@ import request from '../../request.js';
 
 
 import LinkUI from './LinkUI';
-import { getLinks } from '../../actions/linkActions';
+import { getLinks, filterBy } from '../../actions/linkActions';
 import { setTracklist } from '../../actions/playerActions';
 import Link from './Link';
 
@@ -31,7 +31,10 @@ class LinksContainer extends Component {
   }
   // TODO Move this to state initialiser or a higher up level.
   componentDidMount() {
-    this.getLinks(this.props.pagination.current_page);
+    this.props.filterBy({
+      type: 'user',
+      value: this.props.user.id,
+    })
     window.addEventListener('scroll', (evt) => {
       const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
       const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
@@ -41,13 +44,14 @@ class LinksContainer extends Component {
     })
   }
 
-  // // TODO: move this to some playlistController
-  // componentWillReceiveProps({ links, location: { pathname } }){
-  //   if(pathname !== this.props.location.pathname){
-  //     this.props.getLinks({ pathname });
-  //   }
-  //   this.handleTracklist(links)
-  // }
+  // TODO: move this to some playlistController
+  componentWillReceiveProps({ links, filters }){
+    console.log(filters, this.props.filters)
+    if(filters != this.props.filters){
+      this.props.getLinks({filters, page: 1});
+    }
+    this.handleTracklist(links)
+  }
   handleTracklist(links) {
     const oldProps = this.props;
     let isSame = true;
@@ -77,7 +81,6 @@ class LinksContainer extends Component {
         <Link link={link} />
       </div>)
     );
-    console.log(pagination.current_page, pagination.current_page < pagination.total - 1)
     return (
       <div ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loading' : null].join(' ')}>
         {items}
@@ -91,20 +94,22 @@ LinksContainer.propTypes = {
   getLinks: PropTypes.func.isRequired
 };
 
-function mapStateToProps({ links }, { location }) {
+function mapStateToProps({ links, user }, { match: { params: filter }}) {
   return {
     links: links.list,
+    filters: links.filters,
     pagination: links.pagination,
     loading: links.loading,
-    filters: links.filters,
-    location,
+    displayOtherUsers: filter != 'me',
+    user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     setTracklist: (tracks) => dispatch(setTracklist(tracks)),
-    getLinks: (options) => dispatch(getLinks(options))
+    getLinks: (options) => dispatch(getLinks(options)),
+    filterBy: (filter) => dispatch(filterBy(filter))
   }
 }
 

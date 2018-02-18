@@ -158,3 +158,19 @@ input[type="text"], input[type="password"], input[type="email"]{
     max-height: 50vh;
     overflow: auto;
 }
+
+.loading{
+    position: relative;
+    &:before{
+        content: 'Loading';
+        position: absolute;
+        padding-top: 50px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        text-align: center;
+        z-index: 1;
+        background: rgba(255,255,255,.7)
+    }
+}

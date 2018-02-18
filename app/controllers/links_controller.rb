@@ -22,7 +22,7 @@ def link_form_details
   @tags = all_tags.map(&:name)
   @genres = all_tags(:genre).map(&:name)
   @playlists = current_user.playlists
-  @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
+  # @playlists_as_collection = Hash[@playlists.map{|pl| [pl.name, pl.id]}]
   @cliques = current_user.cliques
   @cliques = @cliques.where.not(id: 1) if current_user.id > 10
   render json: {
@@ -44,9 +44,7 @@ def index
   .oembedable
 
   base_query = @link_assignments.clone
-  if params[:custom] == 'only-me'
-    @link_assignments = @link_assignments.where(user: current_user)
-  else
+  if params[:users].blank? || params[:users].empty?
     @link_assignments = @link_assignments
     .where(clique_id: clique_ids)
     .where.not(user: current_user)
@@ -64,19 +62,26 @@ def index
       # new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
+    if p_ids = params[:playlists].presence
+       @link_assignments = PlaylistAssignment
+      .order("created_at DESC")
+      .includes(link: [:users, :tags])
+    end
   end
 
   @links = Link.joins(:link_clique_assignments)
   .order("created_at DESC")
   .where('link_id IN (?)', @link_assignments.map(&:link_id))
   .uniq
-  # TODO optimize the search by mood
+
   if mood = params[:mood].presence
     mood = mood.to_i
-    @links = @links.select do |l|
-      l.mood.nil? || (l.mood <= mood + 20 && l.mood >= mood - 20)
-    end
+    @links = @links.where('mood IS ? OR (mood > ? AND mood < ?)', nil, mood - 20, mood + 20)
   end
+  
+  @current_page = params[:page].to_i
+  @links = @links.page(@current_page).per(10)
+  @pages_count = @links.total_pages
 end
 
 # GET /links/1

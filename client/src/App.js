@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getUserDetails } from './actions/userActions';
 
 
-import  styles from './App.scss';
+import styles from './App.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';
@@ -29,7 +29,7 @@ class AppWrapper extends Component {
     return (
       <div>
         <DDMenu />
-        <LinksContainer />
+        <LinksContainer {...this.props}/>
         <NotificationsList />
       </div>
     )
@@ -54,7 +54,7 @@ class App extends Component {
   renderAuthenticatedRoutes(){
     return <Switch>
       <Route path={routes.links.new} component={LinksForm} />
-      <Route path={"/"} component={AppWrapper} />
+      <Route path={"/:mainPath?"} component={AppWrapper} />
     </Switch>
   }
   renderAnonymousRoutes(){

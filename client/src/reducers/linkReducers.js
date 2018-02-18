@@ -1,36 +1,72 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  list: []
+  list: [],
+  pagination: {
+    current_page: 1,
+    total: 2
+  },
+  filters: {
+  }
 }
 
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.GET_LINKS:
-      return {
-        ...state,
-        list: action.payload,
-      };
+    return {
+      ...state,
+    };
     case `${types.GET_LINKS}_PENDING`:
-      return {
-        ...state,
-        loading: true,
-      }
+    return {
+      ...state,
+      loading: true,
+    }
     case `${types.GET_LINKS}_REJECTED`:
     case `${types.GET_LINKS}_FULFILLED`:
+      const { links, pagination } = action.payload;
+      let list;
+      if(pagination.current_page > 1){
+        list = [...state.list, ...links]
+      }
+      else{
+        list = links
+      }
       return {
         ...state,
-        list: action.payload,
+        list,
+        pagination: pagination,
         loading: false
       }
     case `${types.SUBMIT_LINK}_SUCCESSFUL`:
-      console.log(action.payload);
       return {
         ...state,
         payload: action.payload
       }
     
+    case `${types.FILTER_BY}`:
+      const { type, value } = action.payload;
+      let newFilters = {...state.filters};
+      if(type == 'mood'){
+        newFilters[type] = value;
+      }
+      else{
+        newFilters[type] = toggleInArray(newFilters[type], value)
+      }
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          ...newFilters
+        }
+      }
+    case types.RESET_FILTERS:
+      return {
+        ...state,
+        filters: {
+          ...action.payload
+        }
+      }
     // PLAYER RELATED
     case `${types.PLAY_TRACK}`:
       let newList = state.list.map(l => ({
@@ -54,3 +90,13 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+function toggleInArray(arr = [], value) {
+  const exists = arr.includes(value);
+  if (exists) {
+    return arr.filter((presentValue, i) => presentValue != value);
+  }
+  else {
+    return arr.concat([value]);
+  }
+}

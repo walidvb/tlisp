@@ -65,3 +65,25 @@ if (module.hot) {
     });
 }
 ```
+
+
+## Add scss
+Add to webpack.config.dev.js and webpack.prod.js:
+```
+{
+    test: /\.scss$/,
+    use: [
+        'style-loader',
+        {
+        loader: 'css-loader',
+        query: {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 2,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+        },
+        'sass-loader'
+    ]
+},
+```

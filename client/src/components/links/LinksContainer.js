@@ -1,64 +1,95 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom'
+import InfiniteScroll from 'react-infinite-scroller';
 
 import routes from '../../routes.js';
 import request from '../../request.js';
 
 
 import LinkUI from './LinkUI';
-import * as linkActions from '../../actions/linkActions';
+import { getLinks, resetFilters } from '../../actions/linkActions';
 import { setTracklist } from '../../actions/playerActions';
-import LinkList from './LinkList';
- 
+import Link from './Link';
+
 import styles from './LinksContainer.scss';
 
+const THRESHOLD = 100
 class LinksContainer extends Component {
 
   state = {
-      links: [],
-      loading: false,
-    }
-  // TODO Move this to state initialiser or a higher up level.
-  componentDidMount() {
-    this.props.getLinks({pathname: this.props.location.pathname});
+    links: [],
+    loading: false,
   }
-  
-  // TODO: move this to some playlistController
-  componentWillReceiveProps({ links, location: { pathname } }){
-    if(pathname !== this.props.location.pathname){
-      this.props.getLinks({ pathname });
+  getLinks(page) {
+    this.props.getLinks({
+      filters: this.props.filters,
+      page,
+    })
+  }
+  resetFilters(props = this.props){
+    this.props.resetFilters({
+      users: props.displayMine ? [props.user.id] : [],
+    });
+  }
+  componentDidMount() {
+    this.resetFilters();
+    window.addEventListener('scroll', (evt) => {
+      const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
+      const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
+      if(isBottom && !isLastPage && !this.props.loading){
+        this.getLinks(this.props.pagination.current_page + 1);
+      }
+    })
+  }
+
+  componentWillReceiveProps(props){
+    const { links, filters, displayMine, user } = props;
+    // if location had changed
+    if (displayMine != this.props.displayMine){
+      this.resetFilters(props)
     }
+    if(filters != this.props.filters){
+      this.props.getLinks({filters, page: 1});
+    }
+    // TODO: move this to some playlistController
     this.handleTracklist(links)
   }
-  handleTracklist(links){
+  handleTracklist(links) {
     const oldProps = this.props;
     let isSame = true;
-    if(links.length === oldProps.links.length){
+    if (links.length === oldProps.links.length) {
       for (let i = 0; i < links.length; i++) {
         const link = links[i];
-        if(link.id != oldProps.links[i].id){
+        if (link.id != oldProps.links[i].id) {
           isSame = false;
           break;
           return;
         }
       }
     }
-    else{
+    else {
       isSame = false;
     }
 
-    if(!isSame){
+    if (!isSame) {
       oldProps.setTracklist(links)
     }
   }
   render() {
-    const { links } = this.props;
-
+    const { pagination, links, loading } = this.props;
+    let items = []
+    links.map((link, i) =>
+      items.push(<div key={`link-thumb-${link.id}`} className={styles.item__grid}>
+        <Link link={link} />
+      </div>)
+    );
     return (
-      <LinkList links={links} />
+      <div ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loading' : null].join(' ')}>
+        {items}
+      </div>
     );
   }
 }
@@ -68,19 +99,22 @@ LinksContainer.propTypes = {
   getLinks: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state, { location }) {
-  const { links } = state;
+function mapStateToProps({ links, user }, { match: { params: mainPath }}) {
   return {
     links: links.list,
+    filters: links.filters,
+    pagination: links.pagination,
     loading: links.loading,
-    location,
+    displayMine: mainPath.mainPath == 'me',
+    user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    ...bindActionCreators(linkActions, dispatch),
-    setTracklist: (tracks) => dispatch(setTracklist(tracks))
+    setTracklist: (tracks) => dispatch(setTracklist(tracks)),
+    getLinks: (options) => dispatch(getLinks(options)),
+    resetFilters: (filters) => dispatch(resetFilters(filters))
   }
 }
 

@@ -5,8 +5,9 @@ export const SIGN_UP_SUCCESSFUL = 'SIGN_UP_SUCCESSFUL'; // only success needed a
 
 //========== LINKS
 export const GET_LINKS = 'GET_LINKS';
-export const FILTER_BY = 'FILTER_BY';
 export const SUBMIT_LINK = 'SUBMIT_LINK';
+export const FILTER_BY = 'FILTER_BY';
+export const RESET_FILTERS = 'RESET_FILTERS';
 
 //========== PLAYER
 export const SET_PLAYLIST = 'SET_PLAYLIST';

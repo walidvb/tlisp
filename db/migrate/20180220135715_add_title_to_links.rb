@@ -3,8 +3,7 @@ class AddTitleToLinks < ActiveRecord::Migration
     add_column :links, :title, :string
     Link.reset_column_information
     Link.all.each do |ll|
-      ll.title = ll.oembed['title']
-      ll.save!
+      ll.update_column(title: ll.oembed['title'])
     end
   end
 end

@@ -43,20 +43,13 @@ export default (state = initialState, action) => {
         ...state,
         payload: action.payload
       }
-    
-    case `${types.FILTER_BY}`:
-      const { type, value } = action.payload;
+    case types.FILTER_BY:
+      const { key, value, isArray } = action.payload;
       let newFilters = {...state.filters};
-      if(type == 'mood'){
-        newFilters[type] = value;
-      }
-      else{
-        newFilters[type] = toggleInArray(newFilters[type], value)
-      }
+      newFilters[key] = isArray ? toggleInArray(newFilters[key], value) : value;
       return {
         ...state,
         filters: {
-          ...state.filters,
           ...newFilters
         }
       }

@@ -35,21 +35,24 @@ class LinksContainer extends Component {
   }
   componentDidMount() {
     this.resetFilters();
-    window.addEventListener('scroll', (evt) => {
+    const handleScroll = () => {
       const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
       const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
-      if(isBottom && !isLastPage && !this.props.loading){
+      if (isBottom && !isLastPage && !this.props.loading) {
         this.getLinks(this.props.pagination.current_page + 1);
       }
-    })
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
   }
 
   componentWillReceiveProps(props){
     const { links, filters, displayMine, user } = props;
-    // if location had changed
+    // if location had changed from `explore` to `me`
     if (displayMine != this.props.displayMine){
       this.resetFilters(props)
     }
+    console.log(filters, this.props.filters, filters != this.props.filters)
     if(filters != this.props.filters){
       this.props.getLinks({filters, page: 1});
     }

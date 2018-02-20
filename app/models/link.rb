@@ -52,6 +52,19 @@ class Link < ActiveRecord::Base
         end
     end
 
+    def self.search(search)
+        if search
+            where("title ILIKE ?", "%#{search}%")
+        else
+            return self
+        end
+        # if search
+        #     search_length = search.split.length
+        #     find(:all, :conditions => [(['title LIKE ?'] * search_length).join(' AND ')] + search.split.map { |name| "%#{name}%" })
+        # else
+        #     find(:all)
+        # end
+    end
     # =================== NOTIFICATIONS
 
     def author
@@ -91,8 +104,8 @@ class Link < ActiveRecord::Base
         end
     end
 
-    [   "title",
-        "description",
+    # ======================= ATTRS
+    [   "description",
         "html",
         "author_name",
         "author_url",

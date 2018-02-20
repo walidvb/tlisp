@@ -18,6 +18,7 @@ class LinkUI extends Component {
     this.state = {
       ready: false,
     }
+    this.renderSearch = this.renderSearch.bind(this)
     this.renderUser = this.renderUser.bind(this)
     this.renderClique = this.renderClique.bind(this)
   }
@@ -35,7 +36,7 @@ class LinkUI extends Component {
       && users && users.includes(user.id)
     return <div 
       className={["checkbox only-on", isActive ? "active" : ""].join(' ')}
-      onClick={() => this.props.filterBy({ type: 'users', value: user.id})}> {user.name} </div>
+      onClick={() => this.props.filterBy({ key: 'users', value: user.id, isArray: true})}> {user.name} </div>
   }
   renderClique( clique ){
     const { cliques } = this.props.filters;
@@ -43,7 +44,7 @@ class LinkUI extends Component {
     return (
       <div>
         <h3 
-          onClick={() => this.props.filterBy({type: 'cliques', value: clique.id})} 
+          onClick={() => this.props.filterBy({key: 'cliques', value: clique.id, isArray: true})} 
           className={[styles.clique_name, styles.filter_item, isActive ? styles.active : ""].join(' ')}>
             {clique.name}
           </h3>
@@ -57,7 +58,7 @@ class LinkUI extends Component {
   }
   toggleMood(){
     this.props.filterBy({
-      type: 'mood',
+      key: 'mood',
       value: this.props.filters.mood ? undefined : 50,
     })
   }
@@ -72,13 +73,25 @@ class LinkUI extends Component {
         <div className="flex-grow-1">
           <DDMood 
             className={isActive ? null : "disabled"} 
-            onChange={(evt) => this.props.filterBy({type: 'mood', value: evt.target.value })} 
+            onChange={(evt) => this.props.filterBy({key: 'mood', value: evt.target.value })} 
             value={this.props.filters.mood}
           />
         </div> 
       </div>
       { this.state.moodActive ? <div class="hint"> <div className="fa fa-info" />Most tracks currently shared don't have any mood set, so this filter will not affect your view</div> : null }
     </div>);
+  }
+  handleSearch({ target: { value }}){
+    console.log(value)
+    this.props.filterBy({
+      key: 'search',
+      value
+    })
+  }
+  renderSearch(){
+    return (
+      <input value={this.props.filters.search} onChange={this.handleSearch.bind(this)} placeholder={"Search tracks..."} />
+    )
   }
   render() {
     const { cliques, ready} = this.state;
@@ -87,6 +100,7 @@ class LinkUI extends Component {
     }
     return (
       <div className={[styles.container, styles[this.props.displayType]].join(' ')}>
+        {this.renderSearch()}
         {this.renderMood()}
         {cliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
       </div>

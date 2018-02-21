@@ -70,7 +70,9 @@ class LinksController < ApplicationController
       end
     end
 
-    @links = Link.joins(:link_clique_assignments)
+    @links = Link
+    .search(params[:search])
+    .joins(:link_clique_assignments)
     .order("created_at DESC")
     .where('link_id IN (?)', @link_assignments.map(&:link_id))
     .uniq
@@ -80,7 +82,6 @@ class LinksController < ApplicationController
       @links = @links.where('mood IS ? OR (mood > ? AND mood < ?)', nil, mood - 20, mood + 20)
     end
     
-    @links = @links.search(params[:search])
     @current_page = params[:page].to_i
     @links = @links.page(@current_page).per(25)
     @pages_count = @links.total_pages

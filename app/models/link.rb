@@ -126,6 +126,7 @@ class Link < ActiveRecord::Base
     def add_oembed
         if new_oembed = get_oembed
             self.oembed = get_oembed
+            self.title = self.oembed['title']
             self.oembeddable = true
         else
             self.oembeddable = false

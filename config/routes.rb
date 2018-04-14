@@ -5,8 +5,6 @@ DiggersDelights::Application.routes.draw do
 
   resources :playlists
   get 'static/modaljs'
-  resources :cliques
-  get '/cliques/:id/join' => "cliques#join", as: :join_clique
   resources :links
 
   match "links" => "links#index", via: [:options]
@@ -26,7 +24,10 @@ DiggersDelights::Application.routes.draw do
     post '/notifications/:id/open' => 'users/notifications_with_devise#open', devise_type: "user", target_type: "user"
 
     notify_to :users, controller: 'users/notifications', with_devise: :users
-    
+    # devise_for :users, controllers: {
+    #     registrations: 'users/registrations',
+    # }, as: :api_devise
+
     resources :newsletters, only: [:create]
     # TODO move this to other controller
     get '/filters.json' => "links#filters"
@@ -51,9 +52,11 @@ DiggersDelights::Application.routes.draw do
 
     
 
+    # TODO: move this into API
     devise_for :users, controllers: {
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
+        sessions: 'users/sessions',
     }
     get 'welcome', to: 'users#onboarding', as: :onboarding
 

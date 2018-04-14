@@ -12,9 +12,6 @@
     "/users": {
       "target": "http://localhost:3001"
     },
-    "/cliques": {
-      "target": "http://localhost:3001"
-    },
     "/links": {
       "target": "http://localhost:3001"
     },
@@ -54,6 +51,7 @@
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "fuse.js": "^3.2.0",
+    "fuzzysearch": "^1.0.3",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "node-sass": "^4.7.2",
@@ -73,6 +71,7 @@
     "react-player": "^0.25.3",
     "react-player-controls": "^0.5.17",
     "react-redux": "^5.0.6",
+    "react-rotating-text": "^1.2.1",
     "react-router-dom": "^4.2.2",
     "react-select": "^1.1.0",
     "redux": "^3.7.2",

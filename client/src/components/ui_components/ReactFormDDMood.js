@@ -38,9 +38,6 @@ function ReactFormDDMood(props) {
         value: getValue(),
         ...rest,
     }
-    console.log('====================================');
-    console.log(opts);
-    console.log('====================================');
     return (
         <DDMood value={opts.value} onChange={onChange} />
     )

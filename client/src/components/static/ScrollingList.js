@@ -24,6 +24,10 @@ export default class ScrollingList extends Component {
     startScrolling(){
         var direction = 1;
         const scrollTo = () => {
+            //  Ref breaks during hot module reloading
+            if (!this.coversContainer){
+                return;
+            }
             var newY = this.coversContainer.scrollTop + direction;
             this.coversContainer.scrollTop = newY;
             if (newY >= this.coversContainer.scrollHeight - window.innerHeight || newY <= 0) {

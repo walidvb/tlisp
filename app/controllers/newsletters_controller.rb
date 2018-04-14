@@ -30,6 +30,7 @@ class NewslettersController < ApplicationController
 
     respond_to do |format|
       if @newsletter.save
+        log_to_slack title: "New subscription!", text: "#{@newsletter.email} from #{@newsletter.source}"
         format.html { redirect_to @newsletter, notice: 'Newsletter was successfully created.' }
         format.json { render :show, status: :created, location: @newsletter }
       else

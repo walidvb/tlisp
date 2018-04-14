@@ -27,8 +27,6 @@ class ApplicationController < ActionController::Base
   before_filter :reject_locked!, if: :devise_controller?
 
   def fallback_index_html
-    # TODO: allow iframing of session#new as well
-    # allow iframing for tracks new
     if /tracks\/new/.match(params[:path])
       headers['X-Frame-Options'] = "ALLOWALL"
     end
@@ -74,4 +72,7 @@ class ApplicationController < ActionController::Base
     ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
   end
 
+  def log_to_slack options = {}
+    Slack.post! ENV['DD_SLACK_LOG_WEBHOOK_URL'], options if Rails.env.production?
+  end
 end

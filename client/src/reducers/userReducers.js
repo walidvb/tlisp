@@ -15,6 +15,7 @@ export default (state = initialState, action) => {
             ...initialState
         }
         case `${types.GET_USER_DETAILS}_FULFILLED`:
+        case `${types.SIGN_UP_SUCCESSFUL}`:
             return {
                 ...state,
                 ...action.payload.user,

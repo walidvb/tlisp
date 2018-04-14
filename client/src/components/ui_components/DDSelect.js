@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { FormField} from 'react-form';
 
 import Select from 'react-select/dist/react-select';
-import 'react-select/dist/react-select.css';
-const styles = require('react-select/dist/react-select.css');
-
+import styles from './DDSelect.scss';
+/* eslint-disable */
+import '!style-loader!css-loader!sass-loader!react-select/dist/react-select.css';
 const propTypes = {
     optionName: PropTypes.string.isRequired,
 }
@@ -42,12 +42,32 @@ function DDSelect(props) {
         options: options,
         ...rest,
     }
-    return (
-        <div>
-            <style>{styles}</style>
-            {creatable ? <Select.Creatable {...opts} promptTextCreator={() => `Create a new ${props.optionName}...`} /> : <Select {...opts} />}
+    function renderAsCheckBoxes(){
+        const valueIds = opts.value ? opts.value.map(v => v.value) : [];
+        return <div className={styles.checkboxContainer}>
+            {options.map((elem, i) => {
+                const isOn = valueIds.includes(elem.value);
+                return <div 
+                    className={['checkbox only-on', isOn ? 'active' : ''].join(' ')} 
+                    key={i} 
+                    onClick={() => {
+                        !isOn ? setValue(opts.value.concat(elem)) : setValue(opts.value.filter(e => e.value != elem.value));
+                    }
+                }>
+                    {elem.label}
+                </div>
+            })}
         </div>
-    )
+    }
+    function renderAsSelect(){
+        return (
+            <div>
+                {creatable ? <Select.Creatable {...opts} promptTextCreator={() => `Create a new ${props.optionName}...`} /> : <Select {...opts} />}
+            </div>
+        )
+    }
+
+    return creatable || options.length > 20 ? renderAsSelect() : renderAsCheckBoxes();
 }
 
 DDSelect.propTypes = propTypes

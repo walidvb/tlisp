@@ -1,9 +1,9 @@
 const routes = {
     api: {
+        cliques: '/api/cliques',
         covers: '/api/covers',
         links: {
             explore: '/api/links.json',
-            me: '/api/links.json?custom=only-me',
             filters: '/api/filters.json',
             formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
             create: '/api/links.json',
@@ -18,6 +18,9 @@ const routes = {
         users: {
             index: '/api/users.json',
             me: '/api/me.json',
+            signIn: '/users/sign_in',
+            signUp: '/users',
+            update: '/users',
         },
         notifications: {
             index: '/api/notifications.json',
@@ -32,7 +35,11 @@ const routes = {
     newsletter: '/keep-me-posted',
     playlists: {
         show: '/playlists',
-    }
+    },
+    user: {
+        signup: '/cliques/:clique_slug/join',
+        signin: '/login'
+    },
 }
 
 export default routes;

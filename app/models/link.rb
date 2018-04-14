@@ -3,7 +3,8 @@ class Link < ActiveRecord::Base
          targets: ->(link, key) {
             (link.mentionned_users).uniq
          },
-         tracked: { only: [:create] },
+         # TODO: move description to comments, and make comments acts_as_notifiable instead
+         # tracked: { only: [:create] },
          notifier: :author
 
     default_scope {order("created_at DESC")}
@@ -51,6 +52,19 @@ class Link < ActiveRecord::Base
         end
     end
 
+    def self.search(search)
+        if search
+            where("title ILIKE ?", "%#{search}%")
+        else
+            return self
+        end
+        # if search
+        #     search_length = search.split.length
+        #     find(:all, :conditions => [(['title LIKE ?'] * search_length).join(' AND ')] + search.split.map { |name| "%#{name}%" })
+        # else
+        #     find(:all)
+        # end
+    end
     # =================== NOTIFICATIONS
 
     def author
@@ -92,8 +106,8 @@ class Link < ActiveRecord::Base
         end
     end
 
-    [   "title",
-        "description",
+    # ======================= ATTRS
+    [   "description",
         "html",
         "author_name",
         "author_url",
@@ -114,6 +128,7 @@ class Link < ActiveRecord::Base
     def add_oembed
         if new_oembed = get_oembed
             self.oembed = get_oembed
+            self.title = self.oembed['title']
             self.oembeddable = true
         else
             self.oembeddable = false

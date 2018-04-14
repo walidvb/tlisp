@@ -21,7 +21,7 @@ gem 'bootstrap-sass'
 gem "autoprefixer-rails"
 
 # helpers
-gem 'kaminari', '0.16.3'
+gem 'kaminari'
 gem 'friendly_id', '5.1.0'
 gem 'rest-client'
 gem 'nokogiri'

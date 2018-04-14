@@ -1,3 +1,5 @@
+@import '../../_variables.scss';
+
 .links_container{
     background: black;
     &:after{
@@ -16,19 +18,26 @@
     overflow: auto;
 }
 
-.thumb{
+body .thumb{
     display: flex;
     align-items: center;
     justify-content: center;
     border: white solid 1px;
     pointer-events: none;
-    min-height: 15vw;
+    min-height: 80px;
+    flex: 1 1 20%;
+    @media #{$tablet}{
+        flex: 1 1 10%;
+    }
 }
 
 .provider{
     color: white;
     position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    font-size: 1rem;
+    right: .5rem;
+    bottom: .5rem;
+    font-size: .7rem;
+    @media #{$md}{
+        font-size: .8rem;
+    }
 }

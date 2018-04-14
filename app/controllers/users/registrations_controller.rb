@@ -1,10 +1,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-before_action :configure_sign_up_params, only: [:create]
-before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+
+
+  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
+  respond_to :json
 
   # GET /resource/sign_up
   def new
-    @clique_id = session[:join_clique_id]
+    # @clique_id = session[:join_clique_id]
     super
   end
 
@@ -15,36 +19,54 @@ before_action :configure_account_update_params, only: [:update]
   # POST /resource
   def create
     build_resource(sign_up_params)
-
     resource.save
     yield resource if block_given?
     if resource.persisted?
+      log_to_slack title: "New user signed up!", text: "#{resource.email}"
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         sign_in resource
-        respond_with resource, location: after_sign_up_path_for(resource)
+        render json: {user: resource}
+       # respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
-        # respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
       clean_up_passwords resource
       set_minimum_password_length
-      # respond_with resource
+      respond_with resource
     end
   end
 
   # GET /resource/edit
   # def edit
   #   super
-  # end
+  # end 
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+    resource_updated = update_resource(resource, account_update_params)
+    yield resource if block_given?
+    if resource_updated
+      if is_flashing_format?
+        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+          :update_needs_confirmation : :updated
+        set_flash_message :notice, flash_key
+      end
+      sign_in resource_name, resource, bypass: true
+      render json: {user: resource}
+      #respond_with resource, location: after_update_path_for(resource)
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
+  end
 
   # DELETE /resource
   # def destroy

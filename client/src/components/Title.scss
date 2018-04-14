@@ -9,6 +9,7 @@
         font-size: 1.8em;
         font-weight: bolder;
         line-height: .5;
+        padding-top: .5rem
     }
     @media #{$tablet}{
         font-size: 2rem;
@@ -22,7 +23,6 @@
     &:hover{
         transition: all 5s ease-out;
         span{
-            animation: rotate 2s infinite linear;
             display: inline-block;
         }
     }

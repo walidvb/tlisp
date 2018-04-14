@@ -503,7 +503,7 @@ DEPENDENCIES
   jazz_hands2
   jbuilder (= 2.3.0)
   jquery-rails (= 4.0.4)
-  kaminari (= 0.16.3)
+  kaminari
   launchy
   letter_opener
   memcachier

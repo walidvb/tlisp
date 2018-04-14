@@ -20,7 +20,7 @@ class Link < ActiveRecord::Base
     has_many :plays, inverse_of: :link
     
     before_create :add_oembed
-    after_create :notify_slack!
+    after_create :notify_world!
     
     scope :oembeddable, -> { where(oembeddable: true) }
     scope :visible, -> { where(published: true)}
@@ -66,7 +66,8 @@ class Link < ActiveRecord::Base
         self.description.blank? ? '' : self.description.gsub(/@\[([[[:alpha:]]| |_|-]+)\]\(\w+:[[[:alpha:]]| |_|-]+\)/, '\1')
     end
 
-    def notify_slack!
+    def notify_world!
+        return if !Rails.env.production?
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         
         payload = {
@@ -82,10 +83,11 @@ class Link < ActiveRecord::Base
                 ts: self.created_at.to_i,
             }]
         }
-        Slack.post! ENV['DD_SLACK_WEBHOOK_URL'], payload if Rails.env.production?
+        Slack.post! ENV['DD_SLACK_WEBHOOK_URL'], payload
+        DDTwitter.post "#{self.author.name} just digged #{self.title}! #{self.tags} #{self.url}"
         self.cliques.each do |cc|
             if !cc.slack_url.blank?
-                Slack.post! cc.slack_url, payload if Rails.env.production?
+                Slack.post! cc.slack_url, payload 
             end
         end
     end

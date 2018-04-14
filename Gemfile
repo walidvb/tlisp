@@ -24,6 +24,7 @@ gem "autoprefixer-rails"
 gem 'kaminari', '0.16.3'
 gem 'friendly_id', '5.1.0'
 gem 'rest-client'
+gem 'nokogiri'
 
 # functionality
 gem 'devise', '~>4.1.0'
@@ -33,7 +34,7 @@ gem 'acts-as-taggable-on', '~> 4.0.0'
 gem 'ruby-oembed'
 gem 'activity_notification'
 
-gem 'nokogiri'
+gem 'twitter'
 
 #### I18n
 gem 'rails-i18n', '~> 4.0.0'

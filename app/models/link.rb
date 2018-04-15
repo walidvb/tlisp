@@ -100,7 +100,9 @@ class Link < ActiveRecord::Base
         Slack.post! ENV['DD_SLACK_WEBHOOK_URL'], payload
 
         return if !self.published?
-        DDTwitter.post "#{emoji} #{self.author.name} just digged #{self.title}! #{self.tags} #{self.url}"
+
+        tweet_text = "#{emoji} #{ll.author.name} just digged #{ll.title}! #{ll.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{ll.url}".gsub('*', '')
+        DDTwitter.post tweet_text
         self.cliques.each do |cc|
             if !cc.slack_url.blank?
                 Slack.post! cc.slack_url, payload 

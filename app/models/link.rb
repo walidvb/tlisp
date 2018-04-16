@@ -101,8 +101,12 @@ class Link < ActiveRecord::Base
 
         return if !self.published?
 
-        tweet_text = "#{emoji} #{ll.author.name} just digged #{ll.title}! #{ll.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{ll.url}".gsub('*', '')
-        DDTwitter.post tweet_text
+        tweet_text = "#{emoji} #{self.author.name} just digged #{self.title}! #{self.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{self.url}".gsub('*', '')
+        begin
+            DDTwitter.post tweet_text
+        rescue => e
+            puts "Error tweeting #{self.id}: #{e}"
+        end
         self.cliques.each do |cc|
             if !cc.slack_url.blank?
                 Slack.post! cc.slack_url, payload 
@@ -145,7 +149,4 @@ class Link < ActiveRecord::Base
     def get_oembed
         DDOEmbed.get(self.url)
     end
-    
-
-
 end

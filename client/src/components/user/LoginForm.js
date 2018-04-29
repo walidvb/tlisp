@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 
+import errorsToString from '../../utils/errorsToString';
+
 import {signUpSuccess} from '../../actions/userActions';
 import { request, routes } from '../../request';
 import styles from './LoginForm.scss';
@@ -84,7 +86,7 @@ class LoginForm extends Component {
             })
         })
         .catch(({ errors }) => {
-            const error = Object.keys(errors).reduce((prev, val, i) => [prev,`${val} ${errors[val].join('')}`].filter(vv => vv).join(', '), '')
+            const error = errorsToString(errors);
             this.setState({
                 error
             })

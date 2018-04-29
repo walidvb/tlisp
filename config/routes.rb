@@ -57,6 +57,7 @@ DiggersDelights::Application.routes.draw do
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
         sessions: 'users/sessions',
+        passwords: 'users/passwords',
     }
     get 'welcome', to: 'users#onboarding', as: :onboarding
 

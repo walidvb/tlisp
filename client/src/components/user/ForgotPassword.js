@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import errorsToString from '../../utils/errorsToString';
 import { request, routes } from '../../request';
 import styles from './LoginForm.scss';
 
@@ -42,21 +43,29 @@ class ForgotPassword extends Component {
             }
         })
         .then((res) => {
-            console.log(res);
+            this.setState({
+                success: true,
+                error: null
+            })
         })
+        .catch(({ errors }) => this.setState({error: errorsToString(errors)}))
     }
     renderSuccess() {
         return (
             <div>
-                Success
+                An email has just been sent to your address, please head there to reset your password!
             </div>
         )
     }
     renderForm() {
-        const { emailValid } = this.state
+        const { emailValid, error } = this.state
         return (
             <form className={styles.container} onSubmit={this.handleSubmit.bind(this)}>
-                <div><input className={["input", (emailValid ? '' : "invalid")].join(' ')} type="email" placeholder="Your email"
+                {!error ? null : <div className="hint error red before">
+                    {error}
+                </div>
+                }
+                <div><input className={["input", (emailValid ? '' : "invalid")].join(' ')} type="email" placeholder="Enter your email"
                     onChange={(evt) => this.handleChange('email', evt.target.value)} />
                 </div>
                 <button className={["button button__border"].join(' ')} disabled={!emailValid}> Send reset instructions </button>

@@ -13,7 +13,8 @@ gem 'sprockets-es6'
 
 gem 'bcrypt', '3.1.10'
 gem 'haml-rails'
-gem 'pg'
+# version blocked because of https://github.com/rails/rails/issues/31673
+gem 'pg', '~> 0.21'
 gem 'puma'
 
 gem 'font-awesome-sass'

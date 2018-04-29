@@ -9,7 +9,7 @@ $border-width: 2rem;
     height: calc(100vh - #{3*$border-width});
     overflow: auto;
     flex-direction: column;
-    color: white;
+    color: $primary-color;
     justify-content: space-between;
     align-items: center;
     border: $border-width solid $border-color;
@@ -48,4 +48,5 @@ $border-width: 2rem;
     transform-origin: top right;
     transform: rotate(90deg) translateX(100%);
     font-size: 0.875rem;
+    color: white;
 }

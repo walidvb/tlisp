@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import {signUpSuccess} from '../../actions/userActions';
 import { request, routes } from '../../request';
@@ -162,8 +162,10 @@ class LoginForm extends Component {
                         {(user.password_confirmation && !passwordConfirmationValid) ? <div className="hint red"> Password confirmation doesn't match</div> : null}
                     </div>
                 }
-                <button className={["button button__border"].join(' ')} disabled={!valid}> {isSignUp ? "Sign Up" : "Log In"} </button>
-                <Link to={routes.users.forgotPassword} className={"hint"}> I forgot my password </Link>
+                <div className={styles.forgot}>
+                    <Link to={routes.user.forgotPassword}> Forgot your password? </Link>
+                </div>
+                <button className={["button button__border"].join(' ')} disabled={!valid}> {isSignUp ? "Sign Up" : "Sign In"} </button>
             </form>
         )
     }

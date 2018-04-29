@@ -21,6 +21,7 @@ const routes = {
             signIn: '/users/sign_in',
             signUp: '/users',
             update: '/users',
+            forgotPassword: '/users/password.json',
         },
         notifications: {
             index: '/api/notifications.json',

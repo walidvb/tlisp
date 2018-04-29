@@ -11,10 +11,11 @@ import styles from './App.scss';
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';
 import CliqueJoin from './components/cliques/CliqueJoin';
+import DDMenu from './components/DDMenu';
+import ForgotPassword from './components/user/ForgotPassword';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
 import LoginForm from './components/user/LoginForm';
-import DDMenu from './components/DDMenu';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
 import PlayerContainer from './components/player/PlayerContainer';
@@ -63,6 +64,7 @@ class App extends Component {
       <Switch>
         <Route exact path={'/'} component={NewsletterPage} />
         <Route path={'/cliques/:name/join'} component={CliqueJoin} />
+        <Route path={routes.user.forgotPassword} render={() => <ForgotPassword />} />
         <Route path={'/'} render={() => <LoginForm isSignUp={false} />} />
       </Switch>
     </AnonymousPageWrapper>)

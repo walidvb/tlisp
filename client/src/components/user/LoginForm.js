@@ -163,6 +163,7 @@ class LoginForm extends Component {
                     </div>
                 }
                 <button className={["button button__border"].join(' ')} disabled={!valid}> {isSignUp ? "Sign Up" : "Log In"} </button>
+                <Link to={routes.users.forgotPassword} className={"hint"}> I forgot my password </Link>
             </form>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Form, NestedForm, Text } from 'react-form';
 
@@ -80,7 +80,8 @@ class NewsletterForm extends Component {
                         {this.state.error}
                         <input autoFocus={true} onChange={this.handleChange.bind(this)} className={styles.input} type="email" field="newsletter.email" placeholder="Your email"/>
                         <button disabled={this.state.error} className={["button button__border", styles.button].join(' ')} type="submit" >Keep me posted!</button>
-                        <div className={[styles.hint].join(' ')}> Due to the very nature of the platform, access is based on invitation only.  </div>
+                        <div className={[styles.hint].join(' ')}> Due to the very nature of the platform, access is based on invitation only.
+                        <br /> Already have an account? <Link to={routes.user.signin}> Sign in here!</Link> </div>
 
                     </form>
                 }

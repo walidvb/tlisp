@@ -82,7 +82,6 @@ class LinkUI extends Component {
     </div>);
   }
   handleSearch({ target: { value }}){
-    console.log(value)
     this.props.filterBy({
       key: 'search',
       value

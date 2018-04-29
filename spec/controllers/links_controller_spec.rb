@@ -48,10 +48,10 @@ describe LinksController do
       return link
     end
 
-    it 'returns the users assigned to the link for that clique' do 
+     it 'returns the users assigned to the link for that clique' do 
       get :index, format: :json
       expect(response_json).not_to be_empty
-      expect(response_json[0]["users"].map{|u| u["id"]}).to eq([me.id, user.id])
+      expect(response_json["links"][0]["users"].map{|u| u["id"]}).to eq([me.id, user.id])
     end
 
     context "search" do 

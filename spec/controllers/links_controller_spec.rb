@@ -50,11 +50,7 @@ describe LinksController do
 
      it 'returns the users assigned to the link for that clique' do 
       get :index, format: :json
-      expect(response_json).not_to be_empty
       expect(response_json["links"][0]["users"].map{|u| u["id"]}).to eq([me.id, user.id])
-    end
-
-    context "search" do 
     end
   end
 
@@ -114,7 +110,7 @@ describe LinksController do
         "http://example.com"
       end
 
-      it 'creates the link' do
+      it 'still creates the link' do
         expect { 
           post :create, { link: {url: url, clique_ids: [clique.id]}}
         }.to change(Link, :count).by(1)

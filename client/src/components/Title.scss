@@ -1,10 +1,13 @@
 @import '../_variables.scss';
+
 .site_name{
     color: $primary-color;
     text-align: center;
     font-size: 2rem;
     font-weight: normal;
     animation: pop-in .5s 1 cubic-bezier(0.33, 1.06, 0.27, 1.34);
+    margin: auto;
+    max-width: 200px;
     .top{
         font-size: 1.8em;
         font-weight: bolder;
@@ -27,7 +30,9 @@
         }
     }
 }
-
+.large{
+    max-width: 500px;
+}
 @keyframes pop-in{
     from{ transform: scale(.2)}
     to{ transform: scale(1)}

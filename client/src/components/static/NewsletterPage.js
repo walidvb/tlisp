@@ -12,7 +12,7 @@ export default class NewsletterPage extends Component {
     render() {
         return (
             <div>
-                <Title />
+                <Title large={true} />
                 <NewsletterForm />
             </div>
         )

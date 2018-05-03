@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 
+import Title from '../Title';
+
 import errorsToString from '../../utils/errorsToString';
 
 import {signUpSuccess} from '../../actions/userActions';
@@ -172,12 +174,18 @@ class LoginForm extends Component {
         )
     }
     render(){
+        let ret;
         if(!this.state.success){
-            return this.renderLoginForm();
+            ret = this.renderLoginForm();
         }
         else{
-            return this.renderGetName();
+            ret = this.renderGetName();
         }
+
+        return <div>
+            <Title />
+            {ret}
+            </div>
     }
 }
 

@@ -78,13 +78,8 @@ group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   #gem 'guard-bundler'
   gem 'quiet_assets'
-  gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
   gem 'pry-rails'
   gem 'letter_opener'
-  gem 'railroady'
   gem 'bullet'
   gem "rails-erd"
   gem 'meta_request'

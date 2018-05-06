@@ -15,7 +15,7 @@ import Link from './Link';
 
 import styles from './LinksContainer.scss';
 
-const THRESHOLD = 100
+const THRESHOLD = 200
 class LinksContainer extends Component {
 
   state = {
@@ -36,14 +36,17 @@ class LinksContainer extends Component {
   componentDidMount() {
     this.resetFilters();
     const handleScroll = () => {
+      if(this.props.loading){
+        return;
+      }
       const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
       const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
-      if (isBottom && !isLastPage && !this.props.loading) {
+      if (isBottom && !isLastPage) {
         this.getLinks(this.props.pagination.current_page + 1);
       }
     }
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    //handleScroll();
   }
 
   componentWillReceiveProps(props){
@@ -52,7 +55,6 @@ class LinksContainer extends Component {
     if (displayMine != this.props.displayMine){
       this.resetFilters(props)
     }
-    console.log(filters, this.props.filters, filters != this.props.filters)
     if(filters != this.props.filters){
       this.props.getLinks({filters, page: 1});
     }
@@ -84,8 +86,8 @@ class LinksContainer extends Component {
     const { pagination, links, loading } = this.props;
     let items = []
     links.map((link, i) =>
-      items.push(<div key={`link-thumb-${link.id}`} className={styles.item__grid}>
-        <Link link={link} />
+      items.push(<div key={`link-thumb-${link.id}`} className={styles.item__grid} style={{ animationDelay: `${i * 80 % 2000}ms` }}>
+        <Link link={link}/>
       </div>)
     );
     return (

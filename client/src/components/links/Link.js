@@ -7,7 +7,7 @@ import ProgressBar from '../player/ProgressBar';
 import { playTrack, pause } from '../../actions/playerActions';
 import styles from './Link.scss';
 
-const Link = ({ playTrack, pause, link }) => {
+const Link = ({ playTrack, pause, link, style }) => {
   const { thumbnail_url, title, width, height, provider, html, users, tag_list } = link;
   let inner;
   if(link.playing){

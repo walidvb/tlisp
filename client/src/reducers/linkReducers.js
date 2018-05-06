@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         list,
-        pagination: pagination,
+        pagination,
         loading: false
       }
     case `${types.SUBMIT_LINK}_SUCCESSFUL`:

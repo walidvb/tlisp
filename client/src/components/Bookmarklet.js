@@ -4,6 +4,8 @@ import { request, routes } from '../request';
 
 import styles from './Bookmarklet.scss';
 
+const drag = require('../assets/images/drag_button.gif');
+const dig = require('../assets/images/dig_it.gif');
 function dontShow(evt){
     evt.target.remove();
     localStorage.setItem('dont-show-help-on-startup', true)
@@ -46,11 +48,11 @@ export default function Bookmarklet(props){
                 <br />
                 <a style={{ marginTop: "2rem" }} className="btn btn-large btn-primary" href={`javascript:(function(){${encodeURIComponent(bookmarklet)}})();`} title="DiggersDelights me">Dig</a>
             </p>
-            <img src="https://d2ffutrenqvap3.cloudfront.net/items/3L3H3H0x1A3n3R033J0l/Screen%20Recording%202018-01-04%20at%2004.59%20AM.gif?v=3a670bb4" />
+            <img src={drag} />
             <p style={{ marginTop: "3rem", marginBottom: "2rem" }}>
                 <span className={styles.counter}>2.</span> <span>Click the button to share a link to your cliques!</span>
             </p>
-            <img src="https://d2ffutrenqvap3.cloudfront.net/items/1V3M230V3h2E391v473h/Screen%20Recording%202018-01-04%20at%2002.11%20AM.gif?v=09a02870" />
+            <img src={dig} />
             { props.showHelpOnStartup ? <div onClick={dontShow} className={styles.dont_show}> <input type="checkbox" />Don't show on startup </div> : null}
         </div>
     );

@@ -46,7 +46,6 @@ class LinksContainer extends Component {
       }
     }
     window.addEventListener('scroll', handleScroll);
-    //handleScroll();
   }
 
   componentWillReceiveProps(props){

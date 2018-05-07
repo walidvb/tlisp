@@ -46,8 +46,10 @@ class LinksController < ApplicationController
     base_query = @link_assignments.clone
     if params[:users].blank? || params[:users].empty?
       @link_assignments = @link_assignments
-      .where(clique_id: clique_ids)
       .where.not(user: current_user)
+      # return all links for the moment
+      # if no filters are active
+      #.where(clique_id: clique_ids)
     end
 
     # Return Walid's links if there are none to be shown

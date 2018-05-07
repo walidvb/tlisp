@@ -34,7 +34,7 @@ class PlaylistList extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    filterByPlaylist: (id) => dispatch(filterBy({ type: 'playlists', value: id}))
+    filterByPlaylist: (id) => dispatch(filterBy({ key: 'playlists', value: id}))
 })
 
 export default connect(undefined, mapDispatchToProps)(PlaylistList)

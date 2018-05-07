@@ -22,7 +22,7 @@ export default class ScrollingList extends Component {
         })
     }
     startScrolling(){
-        var direction = 1;
+        var direction = -1;
         const scrollTo = () => {
             //  Ref breaks during hot module reloading
             if (!this.coversContainer){
@@ -34,7 +34,7 @@ export default class ScrollingList extends Component {
                 direction = -direction;
             }
         }
-        this.coversContainer.scrollTop = this.coversContainer.scrollHeight - window.innerHeight;
+        this.coversContainer.scrollTop = this.coversContainer.scrollHeight - (window.innerHeight + 200);
         setInterval(scrollTo, 50);
     }
     renderBackground(){

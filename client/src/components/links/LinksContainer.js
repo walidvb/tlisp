@@ -15,7 +15,7 @@ import Link from './Link';
 
 import styles from './LinksContainer.scss';
 
-const THRESHOLD = 200
+const THRESHOLD = () => window.innerHeight / 2;
 class LinksContainer extends Component {
 
   state = {
@@ -40,7 +40,7 @@ class LinksContainer extends Component {
         return;
       }
       const isLastPage = this.props.pagination.current_page >= this.props.pagination.total;
-      const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD;
+      const isBottom = window.scrollY + window.innerHeight >= document.body.offsetHeight - THRESHOLD();
       if (isBottom && !isLastPage) {
         this.getLinks(this.props.pagination.current_page + 1);
       }

@@ -3,13 +3,22 @@ class LinksController < ApplicationController
   before_action :authenticate_user!
   
   def filters
-    cliques = current_user.cliques.map do |clique| 
+    cliques = current_user.cliques
+    # return all users 
+    cliques = cliques.map do |clique| 
       clique.serializable_hash.merge({
         users: clique.users.select{|us| us != current_user} 
       })
     end
+
+    others = Clique.where.not( id:current_user.clique_ids).map do |clique| 
+      clique.serializable_hash.merge({
+        users: clique.users.select{ |us| us != current_user } 
+      })
+    end
     render json: {      
-      cliques: cliques, 
+      cliques: cliques,
+      otherCliques: others,
       tags: all_tags,
       genres: all_tags(:genre),
     }

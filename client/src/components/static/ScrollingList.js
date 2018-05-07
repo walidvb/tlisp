@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { request, routes } from '../../request';
 
 import styles from './ScrollingList.scss';
-import listStyles from '../links/LinkList.scss';
+import listStyles from '../links/LinksContainer.scss';
 
 export default class ScrollingList extends Component {
     static propTypes = {
@@ -39,11 +39,12 @@ export default class ScrollingList extends Component {
     }
     renderBackground(){
         const { covers, loading } = this.state;
+        const animationDelay = (i) => (covers.length-i) * 10;
         return <div 
             ref={(coversContainer) => {this.coversContainer = coversContainer}}
             className={[listStyles.container__grid, styles.links_container,].join(' ')}>
                 {covers.map(({thumbnail_url, provider}, i) => (
-                    <div key={i} className={[listStyles.item__grid, listStyles.no__spacing, styles.thumb].join(' ')} >
+                    <div key={i} className={[listStyles.item__grid, listStyles.no__spacing, styles.thumb].join(' ')} style={{animationDelay: `${animationDelay(i)}ms`}}>
                         <div>
                         <img src={thumbnail_url} /> 
                             <div className={[`fa fa-${provider.toLowerCase()}`, styles.provider].join(' ')}/>

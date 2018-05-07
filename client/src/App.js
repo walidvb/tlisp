@@ -7,11 +7,14 @@ import { getUserDetails } from './actions/userActions';
 
 
 import styles from './App.scss';
+import tooltipStyles from './components/ui_components/DDTooltip.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';
+import Bookmarklet from './components/Bookmarklet';
 import CliqueJoin from './components/cliques/CliqueJoin';
 import DDMenu from './components/DDMenu';
+import DDTooltip from './components/ui_components/DDTooltip';
 import ForgotPassword from './components/user/ForgotPassword';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
@@ -31,7 +34,12 @@ class AppWrapper extends Component {
       <div>
         <DDMenu />
         <LinksContainer {...this.props}/>
-        <NotificationsList />
+        <div className={styles.triggerWrapper}>
+          <NotificationsList />
+          <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>
+            <Bookmarklet />
+          </DDTooltip>
+        </div>
       </div>
     )
   }

@@ -77,17 +77,6 @@ $background: transparentize($primary-color, .1);
     }
 }
 
-.submenu{
-    width: calc(100% - 2rem);
-    margin-top: .2rem;
-    padding-left: 1.1rem;
-    align-self: flex-end;
-    .menu{
-        width: auto;
-        font-size: smaller;
-    }
-}
-
 .icon{
     padding: 0 .5rem;
     display: block;

@@ -135,12 +135,6 @@ class DDMenu extends Component {
                                     </div>
                                 </li>
                             </ul>
-                            <div className={[styles.links_wrapper, styles.submenu, panelOpen === 'help' ? styles.menu__open : ""].join(' ')}>
-                                <div className={styles.menu} onClick={() => this.togglePanel('help')}> Help </div>
-                                <div className={[styles.panel].join(' ')}>
-                                    <Bookmarklet showHelpOnStartup={config.showHelpOnStartup}/>
-                                </div>
-                            </div>
                         </div>
                         <div className={panelOpen === 'player' ? styles.menu__open : ""}>
                             <Controls displayType={displayType} togglePlayer={() => this.togglePanel('player')} />

@@ -1,5 +1,6 @@
 @import 'reset.css';
 @import 'assets/fonts.scss';
+@import '_variables.scss';
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
 
 body{
@@ -41,6 +42,30 @@ a{
 }
 .appear{
  animation: fadeIn .5s 1 ease-out forwards;
+}
+
+
+.triggerWrapper{
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.trigger{
+    width: 2rem;
+    height: 2rem;
+    color: white;
+    background-color: $primary-color;
+    border: darken($primary-color, 10%);
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &.with-counter{
+        animation: wiggle .5s 2 ease-in-out;
+    }
+    margin-bottom: .5rem;
 }
 
 @keyframes fadeIn{

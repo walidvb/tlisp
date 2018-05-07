@@ -6,15 +6,16 @@ import { connect } from 'react-redux'
 import { request, routes } from '../../request';
 import { playTrack, pause } from '../../actions/playerActions';
 
+import DDTooltip from '../ui_components/DDTooltip';
 import Link from '../links/Link';
 import styles from './NotificationsList.scss';
+import triggerStyles from '../../App.scss';
 
 const OPENED = 'opened',
     UNOPENED = 'unopened';
 
 class NotificationsList extends Component {
     static propTypes = {
-
     }
     state = {
         notifications: [],
@@ -78,24 +79,30 @@ class NotificationsList extends Component {
         const hasUnread = notifications.length > 0 && displayState == UNOPENED;
         const count = notifications.length;
         return (
-            <div className={styles.container}>
-                <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, styles.trigger, "fa fa-inbox"].join(' ')} />
-                { showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null }
-                <div className={[styles.drawer, open ? styles.open : styles.closed].join(' ')} >
-                    <h4  className={styles.header}> 
-                        Mentions  { count ? `(${count})` : null }
-                        <div className="flex">
-                            <div className={styles.stateToggler} onClick={this.toggleDisplayState.bind(this)} > {displayState == OPENED ? 'new' : "past"}  </div>
-                            <div className="fa fa-close" onClick={this.toggleNotifs.bind(this)} style={{cursor: 'pointer'}}/>
+            <DDTooltip 
+                ref={(tooltip) => this.tooltip = tooltip}
+                trigger={[
+                    <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, triggerStyles.trigger, "fa fa-inbox"].join(' ')} />,
+                    showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null 
+                ]}
+            >
+                <div className={styles.container}>
+                    <div>
+                        <h4  className={styles.header}> 
+                            Mentions  { count ? `(${count})` : null }
+                            <div className="flex">
+                                <div className={styles.stateToggler} onClick={this.toggleDisplayState.bind(this)} > {displayState == OPENED ? 'new' : "past"}  </div>
+                                <div className="fa fa-close" onClick={() => this.tooltip.toggleDisplay()} style={{cursor: 'pointer'}}/>
+                            </div>
+                        </h4>
+                        <div className={styles.notifsList}>
+                            {count === 0 ? <div className={styles.noMentions}> You have no new mentions 🤷‍♂️</div>:
+                                notifications.map(this.renderSingleNotification.bind(this))
+                            }
                         </div>
-                    </h4>
-                    <div className={styles.notifsList}>
-                        {count === 0 ? <div className={styles.noMentions}> You have no new mentions 🤷‍♂️</div>:
-                            notifications.map(this.renderSingleNotification.bind(this))
-                        }
                     </div>
                 </div>
-            </div>
+            </DDTooltip>
         )
     }
 }

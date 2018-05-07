@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 import routes from '../../routes.js';
 import request from '../../request.js';
 
-
+import Bookmarklet from '../Bookmarklet';
 import LinkUI from './LinkUI';
 import { getLinks, resetFilters } from '../../actions/linkActions';
 import { setTracklist } from '../../actions/playerActions';
@@ -47,7 +47,9 @@ class LinksContainer extends Component {
     }
     window.addEventListener('scroll', handleScroll);
   }
-
+  renderEmptyStateForMe(){
+    return <Bookmarklet  />
+  }
   componentWillReceiveProps(props){
     const { links, filters, displayMine, user } = props;
     // if location had changed from `explore` to `me`
@@ -82,7 +84,12 @@ class LinksContainer extends Component {
     }
   }
   render() {
-    const { pagination, links, loading } = this.props;
+    const { displayMine, pagination, links, loading } = this.props;
+
+    if(displayMine && links.length == 0){
+      return this.renderEmptyStateForMe();
+    }
+
     let items = []
     links.map((link, i) =>
       items.push(<div key={`link-thumb-${link.id}`} className={styles.item__grid} style={{ animationDelay: `${i * 80 % 2000}ms` }}>

@@ -102,7 +102,7 @@ class LinkUI extends Component {
         {this.renderSearch()}
         {this.renderMood()}
         {cliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
-        <div class="separator"/>
+        <div className="separator"/>
         {otherCliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
       </div>
     )

@@ -195,7 +195,7 @@ $background: transparentize($primary-color, .1);
         transform: translateX(-10px);
     }
     .panel__under &{
-        top: calc(4.5rem + 1px);
+        top: calc(4rem - 2px);
         transform: translateY(-10px);
     }
     .panel__over &{

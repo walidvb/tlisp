@@ -36,7 +36,8 @@ class ApplicationController < ActionController::Base
 
   # Redirects on successful sign in
   def after_sign_in_path_for(resource)
-    resource.admin? ? rails_admin.dashboard_path : root_path
+    # resource.admin? ? rails_admin.dashboard_path : root_path
+    root_path
   end
 
   # Auto-sign out locked users

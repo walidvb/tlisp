@@ -56,6 +56,7 @@ class LinksController < ApplicationController
     if params[:users].blank? || params[:users].empty?
       @link_assignments = @link_assignments
       .where.not(user: current_user)
+      .where.not(clique_id: nil)
       # return all links for the moment
       # if no filters are active
       #.where(clique_id: clique_ids)

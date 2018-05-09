@@ -98,6 +98,8 @@ describe LinksController do
 
         it "adds to existing playlist" do
           pl = Fabricate :playlist
+          pl.links << Fabricate(:link, url: 'https://www.youtube.com/watch?v=MJi4TCMxOMY')
+          expect(pl.links.count).to eq(1)
           expect { 
             post :create, { link: {url: url, playlist_ids: [pl.id]}}
           }.to change(pl.reload.links, :count).by(1)

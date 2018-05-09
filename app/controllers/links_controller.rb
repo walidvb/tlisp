@@ -77,9 +77,9 @@ class LinksController < ApplicationController
       end
       if p_ids = params[:playlists].presence
         @link_assignments = PlaylistAssignment
+        .where(playlist_id: p_ids)
         .order("created_at DESC")
         .includes(link: [:users, :tags])
-        .where(id: p_ids)
       end
     end
 
@@ -129,7 +129,7 @@ class LinksController < ApplicationController
     # find or create link
     @link = Link.find_by_url(_link_params[:url]) || Link.new(_link_params)
     # add associations
-    @link.playlist_ids = @link.playlist_ids.concat(playlist_ids)
+    @link.playlist_ids += playlist_ids
     @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published])
     respond_to do |format|
       if @link.save

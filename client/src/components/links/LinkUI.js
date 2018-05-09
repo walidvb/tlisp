@@ -45,7 +45,7 @@ class LinkUI extends Component {
       <div>
         <h3 
           onClick={() => this.props.filterBy({key: 'cliques', value: clique.id, isArray: true})} 
-          className={[styles.clique_name, styles.filter_item, isActive ? styles.active : ""].join(' ')}>
+          className={["checkbox only-on", styles.clique_name, styles.filter_item, isActive ? "active" : ""].join(' ')}>
             {clique.name}
           </h3>
         <ul className={styles.users_container}>

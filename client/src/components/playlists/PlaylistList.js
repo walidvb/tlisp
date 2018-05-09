@@ -19,12 +19,16 @@ class PlaylistList extends Component {
         request(routes.api.playlists.index).then( playlists => this.setState({ playlists }))
     }
     render() {
+        const activePlaylist = this.props.playlistId;
         return (
             <div>
                 <ul style={{display: 'flex', flexFlow: "row wrap"}}>
                     {this.state.playlists.map( pl => {
                         return <li style={{padding: '.5rem .5rem'}} key={pl.slug}>
-                            <div onClick={() => this.props.filterByPlaylist(pl.id)}> {pl.name}</div>
+                            <div 
+                                onClick={() => this.props.filterByPlaylist(pl.id)}
+                                className={['checkbox only-on', activePlaylist == pl.id ? 'active': ''].join(' ')}
+                            > {pl.name}</div>
                         </li>
                     })}
                 </ul>
@@ -33,8 +37,12 @@ class PlaylistList extends Component {
     }
 }
 
+
+const mapStateToProps = ({ links: { filters: { playlists } } }) => ({
+    playlistId: playlists,
+})
 const mapDispatchToProps = (dispatch) => ({
     filterByPlaylist: (id) => dispatch(filterBy({ key: 'playlists', value: id}))
 })
 
-export default connect(undefined, mapDispatchToProps)(PlaylistList)
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistList)

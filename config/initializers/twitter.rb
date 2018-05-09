@@ -7,6 +7,10 @@ module DDTwitter
     end
 
     def self.post tweet
-        @client.update(tweet)
+        begin
+            @client.update(tweet)
+        rescue => e
+            puts "Error tweeting #{self.id}: #{e}"
+        end
     end
 end

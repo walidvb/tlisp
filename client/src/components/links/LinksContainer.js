@@ -28,7 +28,7 @@ class LinksContainer extends Component {
     loading: false,
   }
   getLinks(page = 1) {
-    if(this.props.loading || page == this.state.current_page){
+    if(this.props.loading){
       return;
     }
     this.props.getLinks({

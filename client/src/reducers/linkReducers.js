@@ -29,10 +29,11 @@ export default (state = initialState, action) => {
       const { links, pagination } = action.payload;
       let list;
       if(pagination.current_page > 1){
-        list = [...state.list, ...links]
+        list = [...state.list, ...links];
       }
       else{
-        list = links
+        list = links;
+        window.scrollTo({ top: 0 })
       }
       return {
         ...state,

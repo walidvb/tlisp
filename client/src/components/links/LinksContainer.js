@@ -1,3 +1,8 @@
+/** 
+ * Not too happy about the race condition management here, but it's working..
+ * 
+*/
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,12 +22,15 @@ import styles from './LinksContainer.scss';
 
 const THRESHOLD = () => window.innerHeight / 2;
 class LinksContainer extends Component {
-
+  requestId = 0
   state = {
     links: [],
     loading: false,
   }
   getLinks(page) {
+    if(this.props.loading || page == this.state.current_page){
+      return;
+    }
     this.props.getLinks({
       filters: this.props.filters,
       page,
@@ -51,7 +59,7 @@ class LinksContainer extends Component {
     return <Bookmarklet  />
   }
   componentWillReceiveProps(props){
-    const { links, filters, displayMine, user } = props;
+    const { links, filters, displayMine, pagination, user } = props;
     // if location had changed from `explore` to `me`
     if (displayMine != this.props.displayMine){
       this.resetFilters(props)
@@ -60,7 +68,10 @@ class LinksContainer extends Component {
       this.props.getLinks({filters, page: 1});
     }
     // TODO: move this to some playlistController
-    this.handleTracklist(links)
+    this.handleTracklist(links);
+    this.setState({
+      pagination
+    })
   }
   handleTracklist(links) {
     const oldProps = this.props;
@@ -96,9 +107,13 @@ class LinksContainer extends Component {
         <Link link={link}/>
       </div>)
     );
+    const loaders = <div className={`${styles.item__grid} ${styles.loading_item}`}>
+      Loading more...
+    </div>;
     return (
-      <div ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loading' : null].join(' ')}>
+      <div ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loadiang' : null].join(' ')}>
         {items}
+        {loading ? loaders : null}
       </div>
     );
   }

@@ -95,7 +95,8 @@ class LinksController < ApplicationController
     end
     
     @current_page = params[:page].to_i
-    @links = @links.page(@current_page).per(25)
+    @page_size = 25
+    @links = @links.page(@current_page).per(@page_size)
     @pages_count = @links.total_pages
   end
 

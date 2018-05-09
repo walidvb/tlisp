@@ -4,7 +4,8 @@ const initialState = {
   list: [],
   pagination: {
     current_page: 1,
-    total: 2
+    total: 2,
+    page_size: 25,
   },
   filters: {
   }

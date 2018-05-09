@@ -51,6 +51,17 @@
     }
 }
 
+.loading_item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px $light-grey;
+    color: $light-grey;
+    padding: 10px;
+    border-radius: 5px;
+    animation: fade-in-up .3s .8s 1 ease-out forwards;
+}
+
 @keyframes fade-in-up{
     from{
         opacity: 0;

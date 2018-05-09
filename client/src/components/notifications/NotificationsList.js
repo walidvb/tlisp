@@ -82,8 +82,8 @@ class NotificationsList extends Component {
             <DDTooltip 
                 ref={(tooltip) => this.tooltip = tooltip}
                 trigger={[
-                    <div onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, triggerStyles.trigger, "fa fa-inbox"].join(' ')} />,
-                    showCount && hasUnread ? <div className={styles.counter}>{unread}</div> : null 
+                    <div key="notif-trigs" onClick={this.toggleNotifs.bind(this)} className={[hasUnread ? styles.withCounter : null, triggerStyles.trigger, "fa fa-inbox"].join(' ')} />,
+                    showCount && hasUnread ? <div key="notis-count" className={styles.counter}>{unread}</div> : null 
                 ]}
             >
                 <div className={styles.container}>

@@ -12,5 +12,6 @@ end
 json.pagination do 
   json.total @pages_count
   json.current_page @current_page
+  json.page_size @page_size
 end
 json.showExample @show_example

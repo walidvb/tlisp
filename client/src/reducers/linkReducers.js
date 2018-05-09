@@ -1,5 +1,7 @@
 import * as types from '../actions/actionTypes';
 
+const filters = JSON.parse(localStorage.getItem('dd-filters')) || {};
+
 const initialState = {
   list: [],
   pagination: {
@@ -7,8 +9,7 @@ const initialState = {
     total: 2,
     page_size: 25,
   },
-  filters: {
-  }
+  filters
 }
 
 
@@ -48,6 +49,7 @@ export default (state = initialState, action) => {
       const { key, value, isArray } = action.payload;
       let newFilters = {...state.filters};
       newFilters[key] = isArray ? toggleInArray(newFilters[key], value) : value;
+      localStorage.setItem('dd-filters', JSON.stringify(newFilters));
       return {
         ...state,
         filters: {

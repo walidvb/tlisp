@@ -27,7 +27,7 @@ class LinksContainer extends Component {
     links: [],
     loading: false,
   }
-  getLinks(page) {
+  getLinks(page = 1) {
     if(this.props.loading || page == this.state.current_page){
       return;
     }
@@ -42,7 +42,7 @@ class LinksContainer extends Component {
     });
   }
   componentDidMount() {
-    this.resetFilters();
+    this.props.displayMine ? this.resetFilters() : this.getLinks();
     const handleScroll = () => {
       if(this.props.loading){
         return;

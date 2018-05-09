@@ -79,6 +79,7 @@ class LinksController < ApplicationController
         @link_assignments = PlaylistAssignment
         .order("created_at DESC")
         .includes(link: [:users, :tags])
+        .where(id: p_ids)
       end
     end
 

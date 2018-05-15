@@ -16,10 +16,11 @@ export default (state = initialState, action) => {
         }
         case `${types.GET_USER_DETAILS}_FULFILLED`:
         case `${types.SIGN_UP_SUCCESSFUL}`:
-            addTawk();
+            const user = action.payload.user
+            addTawk(user);
             return {
                 ...state,
-                ...action.payload.user,
+                ...user,
                 authenticated: true,
             }
         default:
@@ -27,9 +28,10 @@ export default (state = initialState, action) => {
     }
 };
 let tawkIs = false;
-function addTawk(){
+function addTawk(user){
     if(!tawkIs){
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        Tawk_API.visitor = user;
         (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
             s1.async=true;

@@ -9,7 +9,7 @@ const initialState = {
     total: 2,
     page_size: 25,
   },
-  filters
+  filters,
 }
 
 
@@ -48,6 +48,11 @@ export default (state = initialState, action) => {
       }
     case types.FILTER_BY:
       const { key, value, isArray } = action.payload;
+      ReactGA.event({
+        category: 'FEED',
+        action: 'filtered',
+        label: key,
+      });
       let newFilters = {...state.filters};
       newFilters[key] = isArray ? toggleInArray(newFilters[key], value) : value;
       localStorage.setItem('dd-filters', JSON.stringify(newFilters));
@@ -58,6 +63,11 @@ export default (state = initialState, action) => {
         }
       }
     case types.RESET_FILTERS:
+      ReactGA.event({
+        category: 'FEED',
+        action: 'filtered',
+        label: 'RESET',
+      })
       return {
         ...state,
         filters: {

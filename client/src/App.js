@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   Route, Switch, withRouter,
 } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { getUserDetails } from './actions/userActions';
-
 
 import styles from './App.scss';
 import tooltipStyles from './components/ui_components/DDTooltip.scss';
@@ -25,7 +25,6 @@ import PlayerContainer from './components/player/PlayerContainer';
 import Title from './components/Title'
 
 import routes from './routes';
-
 
 class AppWrapper extends Component {
 
@@ -53,6 +52,17 @@ class App extends Component {
     this.props.getUserDetails();
   }
   componentWillReceiveProps(props){
+    const { user, history, location: { pathname }  } = props;
+    // automatically redirect the user on auth
+    console.log(props)
+    if (this.state.loading && pathname == '/'){
+      if(user.authenticated){
+        history.replace(routes.links.explore);
+      }
+      else{
+        history.replace(routes.newsletter);
+      }
+    }
     this.setState({
       loading: false,
     })
@@ -70,7 +80,7 @@ class App extends Component {
     return (
     <AnonymousPageWrapper>
       <Switch>
-        <Route exact path={'/'} component={NewsletterPage} />
+        <Route exact path={routes.newsletter} component={NewsletterPage} />
         <Route path={'/cliques/:name/join'} component={CliqueJoin} />
         <Route path={routes.user.forgotPassword} render={() => <ForgotPassword />} />
         <Route path={'/'} render={() => <LoginForm isSignUp={false} />} />

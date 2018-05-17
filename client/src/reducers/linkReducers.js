@@ -1,5 +1,5 @@
+import ReactGA from 'react-ga';
 import * as types from '../actions/actionTypes';
-
 const filters = JSON.parse(localStorage.getItem('dd-filters')) || {};
 
 const initialState = {

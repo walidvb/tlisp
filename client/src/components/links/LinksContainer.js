@@ -54,6 +54,11 @@ class LinksContainer extends Component {
       }
     }
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('scroll', handleScroll);
+  }
+  componentWillUnmount(){
+    window.removeEventListener('scroll');
+    window.removeEventListener('scroll');
   }
   renderEmptyStateForMe(){
     return <Bookmarklet  />

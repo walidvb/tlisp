@@ -30,10 +30,9 @@ class LinkUI extends Component {
       this.setState({ ...data, ready: true })
     })
   }
-  renderUser(user, clique, isActivable) {
+  renderUser(user, clique) {
     const { users, cliques } = this.props.filters;
-    const isActive = (!cliques || isActivable)
-      && users && users.includes(user.id)
+    const isActive = users && users.includes(user.id)
     return <div 
       className={["checkbox only-on", isActive ? "active" : ""].join(' ')}
       onClick={() => this.props.filterBy({ key: 'users', value: user.id, isArray: true})}> {user.name} </div>
@@ -50,7 +49,7 @@ class LinkUI extends Component {
           </h3>
         <ul className={styles.users_container}>
           {
-            clique.users.map((u, i) => <li className={styles.filter_item} key={u.id}>{this.renderUser(u, clique, isActive)}</li>)
+            clique.users.map((u, i) => <li className={styles.filter_item} key={u.id}>{this.renderUser(u, clique)}</li>)
           }
         </ul>
       </div>

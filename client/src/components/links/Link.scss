@@ -55,6 +55,12 @@
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 5px;
+    @media #{$mobile}{
+        min-height: 20vh;
+        img{
+            display: none;
+        }
+    }
 }
 
 .fade{

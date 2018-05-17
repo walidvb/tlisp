@@ -94,6 +94,9 @@ class LinksContainer extends Component {
       oldProps.setTracklist(links)
     }
   }
+  renderTitle(){
+    return <h1 className={styles.pageTitle} key="title">{this.props.displayMine ? "My digs" : "Friend's digs"}</h1>
+  }
   render() {
     const { displayMine, pagination, links, loading } = this.props;
 
@@ -110,12 +113,14 @@ class LinksContainer extends Component {
     const loaders = <div className={`${styles.item__grid} ${styles.loading_item}`}>
       Loading more...
     </div>;
-    return (
-      <div ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loadiang' : null].join(' ')}>
+    return [
+      this.renderTitle(),
+      <div key="border" className={styles.borderTop}/>,
+      <div key="listt" ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loadiang' : null].join(' ')}>
         {items}
         {loading ? loaders : null}
       </div>
-    );
+    ];
   }
 }
 

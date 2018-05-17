@@ -1,6 +1,30 @@
 @import "../../variables";
 
+.pageTitle{
+    font-size: 3rem;
+    margin-top: 65px;
+    @media #{$tablet}{
+        font-size: 8rem;
+        margin-top: 0px;
+    }
+    padding-left: 10px;
+    position: sticky;
+    top: 0;
+    z-index: -1;
+}
+
+@media #{$tablet}{
+    .borderTop{
+        border-top: solid 2px $primary-color;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+}
+
 .container__grid{
+    background: white;
     display: flex;
     flex-flow: row wrap;
     width: 100%;

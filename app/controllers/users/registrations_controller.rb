@@ -8,8 +8,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    # @clique_id = session[:join_clique_id]
-    super
+    #super
+    redirect_to root_path
   end
 
   def onboarding
@@ -19,7 +19,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource.save
+    if !resource.clique_ids.empty?
+      resource.save
+    end
     yield resource if block_given?
     if resource.persisted?
       log_to_slack title: "New user signed up!", text: "#{resource.email}"

@@ -48,7 +48,6 @@ class LinksController < ApplicationController
     clique_ids = current_user.clique_ids
     @link_assignments = LinkCliqueAssignment
     .order("created_at DESC")
-    .includes(link: [:users, :tags])
     .visible
     .oembedable
 
@@ -85,6 +84,7 @@ class LinksController < ApplicationController
 
     @links = Link
     .search(params[:search])
+    .includes(:tags)
     .joins(:link_clique_assignments)
     .order("created_at DESC")
     .where('link_id IN (?)', @link_assignments.map(&:link_id))

@@ -3,7 +3,7 @@ json.links do
     json.extract! link, :id, :url, :thumbnail_url, :width, :height, :title, :tag_list, :provider_name, :html
     json.api_url link_url(link, format: :json)
     json.users do 
-      json.array!(link.users.uniq) do |u|
+      json.array!(link.users.select(:id, :name, :initials).uniq) do |u|
         json.extract! u, :id, :name, :initials
       end
     end

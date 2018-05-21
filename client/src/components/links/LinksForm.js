@@ -185,7 +185,7 @@ class LinksForm extends Component {
         }
         if(!oembeddable){
             return (<div className={styles.header}>
-                <div className="fa fa-question" style={{padding:"0 1.5rem", fontSize: '1.5rem'}}/>
+                <div className="fa fa-user-astronaut" style={{padding:"0 1.5rem", fontSize: '1.5rem'}}/>
                 <div>
                     <h3>Oops, we can't seem to find details for this link. ({link.url})</h3>
                     <p> You can still save it, only it will likely not be playable on Diggers' Delights (yet). </p>

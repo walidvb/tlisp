@@ -41,7 +41,7 @@ function LinkFormDetails(props) {
                                     </label>
                                     <span className={"hint"}>
                                         <div className="fa fa-info" />
-                                        {formApi.values.published ? "This link will be available to your selected cliques" : "This link will only be visible to you"}
+                                        {formApi.values.published ? "This link will be available to your friends" : "This link will only be visible to you"}
                                     </span>
                                 </div>
                                 <RadioGroup field="is_a_set">
@@ -75,6 +75,10 @@ function Cliques({ cliques}) {
         <div className="form-group">
             <label htmlFor={`cliques`}>Cliques</label>
             <DDSelect placeholder="Select one or more clique to share to" multiple={true}  options={options} field={'clique_ids'} id={`cliques`} />
+            <span className={"hint"}>
+                <div className="fa fa-info" />
+                Share to {formApi.values.cliques.length} cliques
+            </span>
         </div>
     )
 };
@@ -85,6 +89,10 @@ function Playlists(props) {
         <div className="form-group">
             <label htmlFor={`playlists`}>Playlists</label>
             <DDSelect placeholder="Select or type to create one or more playlists" creatable={true} optionName="playlist" multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
+            <span className={"hint"}>
+                <div className="fa fa-info" />
+                Add to an existing personal playlist or create one
+            </span>
         </div>
     )
 };

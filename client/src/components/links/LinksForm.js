@@ -56,7 +56,7 @@ function LinkFormDetails(props) {
                                 </RadioGroup>
                             </div>
                         </div>
-                        <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} formApi={formApi}/>
+                        <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
                         <Playlists className="form-control" playlists={props.playlists} />
                     </div>
                 )}
@@ -69,7 +69,7 @@ function LinkFormDetails(props) {
 function mapCliquesToOptions(cliques){
     return cliques.map(c => ({ value: c.id, label: c.name }));
 }
-function Cliques({ cliques, formApi }) {
+function Cliques({ cliques }) {
     const options = mapCliquesToOptions(cliques);
     return (
         <div className="form-group">
@@ -77,7 +77,7 @@ function Cliques({ cliques, formApi }) {
             <DDSelect placeholder="Select one or more clique to share to" multiple={true}  options={options} field={'clique_ids'} id={`cliques`} />
             <span className={"hint"}>
                 <div className="fa fa-info" />
-                Share to {formApi.values.cliques.length} cliques
+                Share to {cliques.length} cliques
             </span>
         </div>
     )

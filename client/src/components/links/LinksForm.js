@@ -56,7 +56,7 @@ function LinkFormDetails(props) {
                                 </RadioGroup>
                             </div>
                         </div>
-                        <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
+                        <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} formApi={formApi}/>
                         <Playlists className="form-control" playlists={props.playlists} />
                     </div>
                 )}
@@ -69,7 +69,7 @@ function LinkFormDetails(props) {
 function mapCliquesToOptions(cliques){
     return cliques.map(c => ({ value: c.id, label: c.name }));
 }
-function Cliques({ cliques}) {
+function Cliques({ cliques, formApi }) {
     const options = mapCliquesToOptions(cliques);
     return (
         <div className="form-group">

@@ -77,7 +77,7 @@ function Cliques({ cliques }) {
             <DDSelect placeholder="Select one or more clique to share to" multiple={true}  options={options} field={'clique_ids'} id={`cliques`} />
             <span className={"hint"}>
                 <div className="fa fa-info" />
-                Share to {cliques.length} cliques
+                Share in your cliques
             </span>
         </div>
     )

@@ -86,6 +86,21 @@ class LinkUI extends Component {
       value
     })
   }
+  randomize() {
+    this.props.resetFilters();
+    const users = flatten(this.state.cliques.map(c => c.users)).map(u => u.id);
+    const rdm = Math.floor(Math.random()*users.length)
+    const value = [users[rdm]];
+    this.props.filterBy({
+      key: 'users',
+      value
+    })
+    this.setState({
+      randomizing: true,
+    }, () => {
+      setTimeout(() => this.setState({randomizing: false}), 800);
+    })
+  }
   renderSearch(){
     return (
       <input value={this.props.filters.search} onChange={this.handleSearch.bind(this)} placeholder={"Search tracks..."} />
@@ -100,6 +115,7 @@ class LinkUI extends Component {
       <div className={[styles.container, styles[this.props.displayType]].join(' ')}>
         {this.renderSearch()}
         {this.renderMood()}
+        <div onClick={this.randomize.bind(this)} className="pointer"> <span className={`fa fa-icon fa-refresh ${this.state.randomizing ? 'fa-spin' : ''}`} /> Randomize </div>
         {cliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
         <div className="separator"/>
         <span className={"hint"}>
@@ -128,3 +144,9 @@ const mapStateToProps = ({ links: { filters } }, ownProps) => ({
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(LinkUI);
+
+function flatten(arr) {
+  return arr.reduce(function (flat, toFlatten) {
+    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+  }, []);
+}

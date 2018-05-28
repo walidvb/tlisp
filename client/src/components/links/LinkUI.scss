@@ -20,6 +20,17 @@
     margin-bottom: .5rem;
     margin-right: .5rem;
     flex-basis: calc(25% - .5rem);
+    .inactive{
+        cursor: disabled;
+        pointer-events: none;
+        
+
+    }
+    [dataCount]:after{
+        content: attr(dataCount);
+        font-size: smaller;
+
+    }
 }
 
 .mood{

@@ -33,12 +33,17 @@ class LinkUI extends Component {
   renderUser(user, clique) {
     const { users, cliques } = this.props.filters;
     const isActive = users && users.includes(user.id)
+    const hasLinks = user.link_clique_assignments_count > 0;
     return <div 
-      className={["checkbox only-on", isActive ? "active" : ""].join(' ')}
-      onClick={() => this.props.filterBy({ key: 'users', value: user.id, isArray: true})}> {user.name} </div>
+      className={["checkbox only-on", isActive ? "active" : "", hasLinks ? '' : styles.inactive].join(' ')}
+      onClick={() => hasLinks && this.props.filterBy({ key: 'users', value: user.id, isArray: true})}
+      dataCount={user.link_clique_assignments_count}  
+    > {user.name} </div>
+      
   }
   renderClique( clique ){
     const { cliques } = this.props.filters;
+    const users = clique.users.sort((a, b) => a.link_clique_assignments_count < b.link_clique_assignments_count)
     const isActive = cliques && cliques.includes(clique.id)
     return (
       <div>
@@ -49,7 +54,10 @@ class LinkUI extends Component {
           </h3>
         <ul className={styles.users_container}>
           {
-            clique.users.map((u, i) => <li className={styles.filter_item} key={u.id}>{this.renderUser(u, clique)}</li>)
+            users.map((u, i) => 
+            <li className={[styles.filter_item]} key={u.id}>
+              {this.renderUser(u, clique)}
+            </li>)
           }
         </ul>
       </div>

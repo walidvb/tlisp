@@ -13,7 +13,7 @@ class LinksController < ApplicationController
 
     others = Clique.where.not( id:current_user.clique_ids).map do |clique| 
       clique.serializable_hash.merge({
-        users: clique.users.select{ |us| us != current_user } 
+        users: clique.users.where('link_clique_assignments_count > ?', 10).select{ |us| us != current_user } 
       })
     end
     render json: {      

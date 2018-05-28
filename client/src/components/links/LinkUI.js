@@ -102,6 +102,10 @@ class LinkUI extends Component {
         {this.renderMood()}
         {cliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
         <div className="separator"/>
+        <span className={"hint"}>
+          <div className="fa fa-info" />
+          These are cliques you're not a part of, temporarily shown to you.
+        </span>
         {otherCliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
       </div>
     )

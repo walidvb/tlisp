@@ -7,7 +7,7 @@ class LinksController < ApplicationController
     # return all users 
     cliques = cliques.map do |clique| 
       clique.serializable_hash.merge({
-        users: clique.users.order('link_clique_assignments_count DESC').select{|us| us != current_user && !us.name.blank?} 
+        users: clique.users.select{|us| us != current_user && !us.name.blank?} 
       })
     end
 

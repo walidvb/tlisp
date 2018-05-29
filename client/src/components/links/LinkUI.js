@@ -43,7 +43,7 @@ class LinkUI extends Component {
   }
   renderClique( clique ){
     const { cliques } = this.props.filters;
-    const users = clique.users//.sort((a, b) => a.link_clique_assignments_count < b.link_clique_assignments_count)
+    const users = clique.users.sort((a, b) => b.link_clique_assignments_count - a.link_clique_assignments_count)
     const isActive = cliques && cliques.includes(clique.id)
     return (
       <div>

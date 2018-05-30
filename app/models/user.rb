@@ -25,6 +25,24 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_presence_of :name, :initials, if: -> { self.confirmed? }
 
+
+  rails_admin do 
+        [:created_at, :updated_at].each do |ff|
+        configure ff do
+          visible false
+        end
+      end
+
+        list do
+          field :id
+          field :name
+          field :initials
+          field :email
+          field :links_count
+          field :cliques
+        end
+    end
+
   private
   def ensure_authentication_token!
     self.auth_token ||= Devise.friendly_token[0,40]

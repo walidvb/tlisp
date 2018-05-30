@@ -145,6 +145,25 @@ class Link < ActiveRecord::Base
         return true
     end
 
+
+    rails_admin do 
+        [:created_at, :updated_at].each do |ff|
+        configure ff do
+          visible false
+        end
+      end
+
+        list do
+          field :id
+          field :title
+          field :cliques
+          field :plays_count
+          field :users
+          field :url
+          field :published
+        end
+    end
+
     private
     def get_oembed
         DDOEmbed.get(self.url)

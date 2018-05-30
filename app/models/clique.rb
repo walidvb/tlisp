@@ -9,4 +9,22 @@ class Clique < ActiveRecord::Base
     has_many :links, through: :link_clique_assignments, inverse_of: :cliques
 
     validates_presence_of :name
+
+    rails_admin do 
+        [:created_at, :updated_at].each do |ff|
+        configure ff do
+          visible false
+        end
+      end
+
+        list do
+          field :id
+          field :name
+          field :users
+          field :links
+          field :links_count do 
+            formatted_value{ bindings[:object].links.count }
+          end
+        end
+    end
 end

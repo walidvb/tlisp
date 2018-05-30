@@ -30,6 +30,10 @@ export default (state = initialState, action) => {
       loading: true,
     }
     case `${types.GET_LINKS}_REJECTED`:
+      return {
+        ...state,
+        error: "Couldn't fetch digs",
+      }
     case `${types.GET_LINKS}_FULFILLED`:
       console.log(action)
       const { links, pagination } = action.payload;
@@ -43,6 +47,7 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
+        error: undefined,
         list,
         pagination,
         loading: false

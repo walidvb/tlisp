@@ -101,7 +101,10 @@ class LinksContainer extends Component {
   }
   renderTitle(){
     const { cliques } = this.props.filters;
-    const name = cliques.length ? `All ${cliques.map(c => c.name).join(', ')} digs` : (this.props.displayMine ? "My digs" : "Friend's digs");
+    const name = this.props.error || (
+      cliques.length ? `All ${cliques.map(c => c.name).join(', ')} digs` : 
+        (this.props.displayMine ? "My digs" : "Friend's digs")
+    );
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
   render() {
@@ -138,6 +141,7 @@ LinksContainer.propTypes = {
 
 function mapStateToProps({ links, user }, { match: { params: mainPath }}) {
   return {
+    error: links.error,
     links: links.list,
     filters: links.filters,
     pagination: links.pagination,

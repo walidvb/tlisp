@@ -96,7 +96,7 @@ class LinkUI extends Component {
   }
   randomize() {
     this.props.resetFilters();
-    const users = flatten(this.state.cliques.map(c => c.users)).map(u => u.id);
+    const users = flatten(this.state.cliques.map(c => c.users));
     const rdm = Math.floor(Math.random()*users.length)
     const value = [users[rdm]];
     this.props.filterBy({

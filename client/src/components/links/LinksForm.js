@@ -58,6 +58,7 @@ function LinkFormDetails(props) {
                         </div>
                         <Cliques className="form-control" cliques={props.cliques} canSelectCliques={props.canSelectCliques} />
                         <Playlists className="form-control" playlists={props.playlists} />
+
                     </div>
                 )}
             </Form>
@@ -136,14 +137,15 @@ class LinksForm extends Component {
             description: description,
             is_a_set: "0",
             published: true,
-            clique_ids: mapCliquesToOptions(cliques).filter(c => c.value != 1)
+            clique_ids: [],
+            //clique_ids: mapCliquesToOptions(cliques).filter(c => c.value != 1)
         });
-        this.linkFormApi.setValue('clique_ids', [this.state.cliques[0].id]);
     }
     preSubmit({ link }, canSelectCliques){
         const { clique_ids, playlist_ids, tag_list} = link;
         let link_ = link;
-        if(clique_ids !== undefined && this.state.canSelectCliques){
+        console.log(link)
+        if(clique_ids !== undefined){
             link_.clique_ids = clique_ids.map(v => v.value)
         }
         if (playlist_ids !== undefined) {

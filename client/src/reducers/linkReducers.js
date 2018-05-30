@@ -1,9 +1,11 @@
 import ReactGA from 'react-ga';
 import * as types from '../actions/actionTypes';
-const filters = JSON.parse(localStorage.getItem('dd-filters')) || {
-  users: [],
-  cliques: [],
-};
+let filters = JSON.parse(localStorage.getItem('dd-filters')) || {};
+filters = {
+    users: [],
+    cliques: [],
+    ...filters
+}
 
 const initialState = {
   list: [],

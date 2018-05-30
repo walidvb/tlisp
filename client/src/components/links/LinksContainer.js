@@ -100,7 +100,9 @@ class LinksContainer extends Component {
     }
   }
   renderTitle(){
-    return <h1 className={styles.pageTitle} key="title">{this.props.displayMine ? "My digs" : "Friend's digs"}</h1>
+    const { cliques } = this.props.filters;
+    const name = cliques.length ? `All ${cliques.map(c => c.name).join(', ')} digs` : (this.props.displayMine ? "My digs" : "Friend's digs");
+    return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
   render() {
     const { displayMine, pagination, links, loading } = this.props;

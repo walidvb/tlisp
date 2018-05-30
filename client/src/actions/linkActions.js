@@ -6,7 +6,12 @@ export const getLinks = ({ filters, page }) => {
   return {
     type: types.GET_LINKS,
     payload: new Promise(resolve => {
-      request(routes.api.links.explore, { qs: {...filters, page} })
+      request(routes.api.links.explore, { qs: {
+        ...filters, 
+        users: filters.users.map(u=>u.id),
+        cliques: filters.cliques.map(c => c.id),
+        page
+      } })
         .then(resolve)
         .catch(error => console.log(error))
     }),

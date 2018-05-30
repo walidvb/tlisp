@@ -1,6 +1,9 @@
 import ReactGA from 'react-ga';
 import * as types from '../actions/actionTypes';
-const filters = JSON.parse(localStorage.getItem('dd-filters')) || {};
+const filters = JSON.parse(localStorage.getItem('dd-filters')) || {
+  users: [],
+  cliques: [],
+};
 
 const initialState = {
   list: [],
@@ -26,6 +29,7 @@ export default (state = initialState, action) => {
     }
     case `${types.GET_LINKS}_REJECTED`:
     case `${types.GET_LINKS}_FULFILLED`:
+      console.log(action)
       const { links, pagination } = action.payload;
       let list;
       if(pagination.current_page > 1){
@@ -47,7 +51,7 @@ export default (state = initialState, action) => {
         payload: action.payload
       }
     case types.FILTER_BY:
-      const { key, value, isArray } = action.payload;
+      const { key, value, isArray, displayName } = action.payload;
       ReactGA.event({
         category: 'FEED',
         action: 'filtered',
@@ -59,6 +63,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         filters: {
+          displayName,
           ...newFilters
         }
       }
@@ -101,7 +106,7 @@ export default (state = initialState, action) => {
 function toggleInArray(arr = [], value) {
   const exists = arr.includes(value);
   if (exists) {
-    return arr.filter((presentValue, i) => presentValue != value);
+    return arr.filter((presentValue, i) => presentValue.id != value.id);
   }
   else {
     return arr.concat([value]);

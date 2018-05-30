@@ -58,6 +58,10 @@ class NotificationsList extends Component {
             this.markAsRead(notif.id); 
             this.props.playTrack(link);
         }
+        if(!link){
+            console.error("Error displaying link", notif, index)
+            return <div key={index}>oops</div>
+        }
         return (
             <div key={index} onClick={onClick} className={styles.singleRow}>
                 <div className={styles.thumbnail}>

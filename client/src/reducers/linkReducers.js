@@ -4,7 +4,6 @@ let filters = JSON.parse(localStorage.getItem('dd-filters')) || {};
 filters = {
     users: [],
     cliques: [],
-    ...filters
 }
 
 const initialState = {

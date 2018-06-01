@@ -82,6 +82,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         filters: {
+          ...initialState.filters,
           ...action.payload
         }
       }

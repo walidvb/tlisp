@@ -38,7 +38,7 @@ class LinksContainer extends Component {
   }
   resetFilters(props = this.props){
     this.props.resetFilters({
-      users: props.displayMine ? [props.user.id] : [],
+      users: props.displayMine ? [{id:props.user.id}] : [],
     });
   }
   componentDidMount() {

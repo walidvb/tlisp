@@ -116,6 +116,7 @@ class LinksForm extends Component {
     }
     componentDidMount() {
         const params = qs.parse(this.props.location.search, {ignoreQueryPrefix: true});
+        console.log(this.props)
         if(params.url !== undefined){
             request(routes.api.links.formDetails(params.url))
                 .then(({ link, playlists, cliques, tags }) => this.setState({

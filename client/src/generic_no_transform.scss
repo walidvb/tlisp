@@ -141,6 +141,9 @@ input[type="text"], input[type="password"], input[type="email"]{
         content: '\f00c'; // check
         font-size: 14px;
     }
+    &:not(.active){
+        text-decoration: line-through;
+    }
 }
 
 .disabled{

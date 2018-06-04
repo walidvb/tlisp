@@ -67,7 +67,7 @@ function DDSelect(props) {
         )
     }
 
-    return creatable || options.length > 20 ? renderAsSelect() : renderAsCheckBoxes();
+    return creatable || options.length > 1 ? renderAsSelect() : renderAsCheckBoxes();
 }
 
 DDSelect.propTypes = propTypes

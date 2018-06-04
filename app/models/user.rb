@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
           field :name
           field :initials
           field :email
-          field :links_count
+          field :link_clique_assignments_count
           field :cliques
         end
     end

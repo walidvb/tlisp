@@ -6,14 +6,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom'
 
-import routes from '../../routes.js';
-import request from '../../request.js';
-
 import Bookmarklet from '../Bookmarklet';
-import LinkUI from './LinkUI';
 import { getLinks, resetFilters } from '../../actions/linkActions';
 import { setTracklist } from '../../actions/playerActions';
 import Link from './Link';
@@ -64,7 +59,7 @@ class LinksContainer extends Component {
     return <Bookmarklet  />
   }
   componentWillReceiveProps(props){
-    const { links, filters, displayMine, pagination, user } = props;
+    const { links, filters, displayMine, pagination } = props;
     // if location had changed from `explore` to `me`
     if (displayMine != this.props.displayMine){
       this.resetFilters(props)

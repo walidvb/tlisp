@@ -11,7 +11,6 @@ export function request(url, options = {}){
         fetch(`${url}${qs}`, {
             ...options,
             credentials: 'same-origin',
-            
             headers: { "Content-Type": "application/json", accept: 'application/json', }
         })
         .then(response => {

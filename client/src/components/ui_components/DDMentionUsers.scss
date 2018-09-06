@@ -1,0 +1,15 @@
+.container{
+  margin-top: .5rem;
+}
+.userTag{
+  margin-right: .5rem;
+  border: var(--white) 1px solid;
+  padding: 3px 0 3px 3px;
+  border-radius: 3px;
+}
+.close{
+  margin-left: .3rem;
+  border-left: 1px solid var(--white);
+  padding: 3px 3px 3px 3px;
+  cursor: pointer;
+}

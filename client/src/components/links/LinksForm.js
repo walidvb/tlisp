@@ -7,6 +7,7 @@ import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Ch
 
 import DDSelect from '../ui_components/DDSelect';
 import DDMentions from '../ui_components/DDMentions'
+import DDMentionUsers from '../ui_components/DDMentionUsers'
 import LinkDetails from './LinkDetails';
 import ReactFormDDMood from '../ui_components/ReactFormDDMood';
 import { request, routes } from '../../request';
@@ -27,6 +28,7 @@ function LinkFormDetails(props) {
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
                             <DDMentions formApi={formApi} tags={props.tags} cliques={props.cliques} field="description"/>
+                            <DDMentionUsers field={'mentions'} formApi={formApi} />
                         </div>
                         <div className="flex form-group">
                             <div className="" style={{ flex: "0 0 300px", }}>
@@ -107,6 +109,7 @@ class LinksForm extends Component {
             playlists: [],
             cliques: [],
             tags: [],
+            mentions: [],
         }
         this.setDefaultValues = this.setDefaultValues.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -143,7 +146,7 @@ class LinksForm extends Component {
         });
     }
     preSubmit({ link }, canSelectCliques){
-        const { clique_ids, playlist_ids, tag_list} = link;
+        const { clique_ids, playlist_ids, tag_list, mentions} = link;
         let link_ = link;
         console.log(link)
         if(clique_ids !== undefined){
@@ -151,6 +154,12 @@ class LinksForm extends Component {
         }
         if (playlist_ids !== undefined) {
             link_.playlist_ids = playlist_ids.map(v => v.value)
+        }
+        if(tag_list){
+            link.tag_list = tag_list.map(v => v.value)
+        }
+        if (mentions) {
+            link.mentions = mentions.map(v => v.value)
         }
         return { link: link_ };
     }

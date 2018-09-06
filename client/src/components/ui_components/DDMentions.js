@@ -14,49 +14,57 @@ const propTypes = {
 function DDMention(props) {
     const {
         fieldApi,
-        onInput,
-        ...rest
+        formApi,
+        mentions
       } = props;
 
     const {
         getValue,
-        getError,
-        getWarning,
-        getSuccess,
         setValue,
-        setTouched,
-        addOption,
       } = fieldApi;
     
-    const readMentions = (string_, type) => {
+    const generateRegexp = (type) => `\\[([\\d\\w ?]+)\\]\\(${type}:([\\d\\w ?]+)\\)`
+
+    const parseMentions = (string_, type) => {
         let result;
-        const regexp = new RegExp(`\\(${type}:([\\d\\w ?]+)\\)`, 'gmi');
+        const regexp = new RegExp(generateRegexp(type), 'gmi');
         const matches = []
         result = regexp.exec(string_)
         while ( result != null){
-            matches.push(result[1])
+            matches.push({
+                display: result[1],
+                value: result[2],
+            })
             result = regexp.exec(string_);
         }
         return matches;
         
     }
-
     const handleMentionChange = (evt) => {
         // set the description field
-        setValue(evt.target.value);
+        let str = evt.target.value;
         
         // add tags to the form
-        const detectedTags = readMentions(evt.target.value, 'tag');
-        props.formApi.setValue("tag_list", [... new Set(detectedTags)]);
+        const detectedTags = parseMentions(str, 'tag');
+        setValue("tag_list", [... new Set(detectedTags)]);
+        const detectedUsers = parseMentions(str, 'users');
+        detectedUsers.forEach(u => formApi.addValue("mentions", u));
+
+        str = str.replace(/@\[.+\]\(.+\)/g, '')
+        setValue(str);
     }
 
     const getUsersSuggestions = (s, cb) => {
+        const mentions = formApi.values.mentions || [];
+        console.log("mentions", mentions)
         request(routes.api.users.index).then(({ users }) => {
             cb(
                 users.map(u => ({
                     id: u.id,
                     display: u.name || u.initials || "N/A",
-                })).filter(u => fuzzysearch(s.toLowerCase(), u.display.toLowerCase()))
+                }))
+                .filter(u => fuzzysearch(s.toLowerCase(), u.display.toLowerCase()))
+                .filter(u => mentions.map(u=>parseInt(u.value)).indexOf(u.id) < 0)
             )
         })
     }
@@ -91,7 +99,7 @@ function DDMention(props) {
                     trigger="@"
                     data={getUsersSuggestions}
                     style={{ backgroundColor: '#FECE08', color: 'transparent'}}
-                    appendSpaceOnAdd={true}
+                    appendSpaceOnAdd={false}
                 />
                 <Mention
                     type='tag'
@@ -101,10 +109,6 @@ function DDMention(props) {
                     appendSpaceOnAdd={true}
                 />
             </MentionsInput>
-            <div className={"hint"}> 
-                <div className="fa fa-info" />
-                Mention @friends, add #tags and describe your content
-            </div>
         </div>
     )
 }

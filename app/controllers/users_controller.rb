@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
 
   def index
-    @users = current_user.cliques.map(&:users).flatten.uniq.select{|u| u.id != current_user.id}
+    @users = current_user.cliques.map(&:users).flatten.uniq.select{|u| u.id != current_user.id}.sort_by(&:name)
 
     # remove users with no names or initials as this endoint is currently only used for mentioning at the moment
     @users = @users.select{|u| !(u.initials.blank? && u.name.blank?)}

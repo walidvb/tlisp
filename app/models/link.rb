@@ -73,7 +73,7 @@ class Link < ActiveRecord::Base
     end
 
     def mentionned_users
-        self.description.blank? ? [] : User.where(id: self.description.scan(/\(users:(\d+)\)/).flatten)
+        User.where(id: self.mentions)
     end
 
     def safe_description

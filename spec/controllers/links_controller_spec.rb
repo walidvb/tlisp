@@ -73,6 +73,12 @@ describe LinksController do
         }.to change(Link, :count).by(1)
       end
 
+      it "creates mentions" do 
+        expect {
+            post :create, { link: {url: url, clique_ids: [clique.id], mentions: [user2.id]}}
+          }.to change(ActivityNotification::Notification, :count).by(1)
+      end
+
       context "when already posted in the clique by someone else" do 
         before do 
           link.save

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe BandcampOembed do
     let :oembed do 
-        BandcampOembed.new("http://shop.mentalgroove.ch/album/sao-paulo").get_oembed
+        BandcampOembed.new("https://shop.mentalgroove.ch/album/sao-paulo").get_oembed
     end
 
     it "gets the basic attributes" do 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FormField } from 'react-form';
 import styles from './DDMentionUsers.scss';

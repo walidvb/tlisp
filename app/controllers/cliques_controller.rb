@@ -8,16 +8,17 @@ class CliquesController < ApplicationController
     @links = @clique.links.oembeddable.uniq
     session[:join_clique_id] = @clique.id
   end
-
+  
   # GET /cliques
   # GET /cliques.json
   def index
     @cliques = Clique.all
   end
-
+  
   # GET /cliques/1
   # GET /cliques/1.json
   def show
+    @users = @clique.users
   end
 
   # GET /cliques/new
@@ -46,7 +47,7 @@ class CliquesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_clique
-      @clique = Clique.find(params[:id])
+      @clique = Clique.find(params[:id] || params[:clique_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

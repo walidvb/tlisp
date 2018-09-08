@@ -11,8 +11,9 @@ DiggersDelights::Application.routes.draw do
 
   scope :api do
     resources :playlists
-    resources :cliques
-    get '/cliques/:id/join' => "cliques#join"
+    resources :cliques do 
+      get '/join' => "cliques#join", as: :join
+    end
     
     resources :links do 
       resources :plays, only: [:create]

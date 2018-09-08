@@ -1,5 +1,6 @@
 Feature: Cliques!
 
+    @js
     Scenario: I join a clique
         Given there is 1 clique
         When I visit the clique invitation page

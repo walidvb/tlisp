@@ -1,7 +1,7 @@
 %p#notice= notice
 %h1 Invite your friends to join #{@clique.name}!
 %h4 To invite new friends to contribute to your clique, simply send them this email, the rest should be pretty straightforward.
-%b= join_clique_url @clique, by: current_user.name
+%b= clique_join_url @clique, by: current_user.name
 
 - @users.each do |us|
     %h3= us.name

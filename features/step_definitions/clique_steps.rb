@@ -5,7 +5,7 @@ Given("I belong to a clique") do
 end
 
 When("I visit the clique invitation page") do
-  visit join_clique_path @clique
+  visit clique_join_path @clique
   expect(page).to have_content(@clique.name)
 end
 
@@ -15,7 +15,7 @@ end
 
 Then("I can invite people to the clique") do
   visit clique_path @clique
-  expect(page).to have_content(join_clique_path(@clique))
+  expect(page).to have_content(clique_join_path(@clique))
 end
 
 Then("I see the onboarding page") do

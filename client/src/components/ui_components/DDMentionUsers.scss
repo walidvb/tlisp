@@ -4,13 +4,14 @@
 .userTag{
   margin-top: .5rem;
   margin-right: .5rem;
-  border: var(--white) 1px solid;
   padding: 3px 0 3px 3px;
   border-radius: 3px;
 }
+.userTag:hover .close{
+  opacity: 1;
+}
 .close{
-  margin-left: .3rem;
-  border-left: 1px solid var(--white);
-  padding: 3px 3px 3px 3px;
+  opacity: 0;
+  // padding: 3px 3px 3px 3px;
   cursor: pointer;
 }

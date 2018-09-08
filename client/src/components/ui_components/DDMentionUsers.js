@@ -3,9 +3,25 @@ import PropTypes from 'prop-types'
 import { FormField } from 'react-form';
 import styles from './DDMentionUsers.scss';
 
-function User({ user, onRemove }){
-  return <span className={[styles.userTag, 'hint'].join(' ')}>@{user.display}<span onClick={() => onRemove(user.value)}className={`fa fa-icon fa-times ${styles.close}`} /></span>;
+class User extends Component {
+  state = {
+    hovered: false
+  }
+  toggleHover(){
+    this.setState({ hovered: !this.state.hovered})
+  }
+  render() {
+    const { user, onRemove } = this.props;
+    const close = this.state.hovered ? <span onClick={() => onRemove(user.value)} className={`fa fa-icon fa-times ${styles.close}`} /> : '@'
+    return <span 
+      onMouseEnter={this.toggleHover.bind(this)} 
+      onMouseLeave={this.toggleHover.bind(this)} 
+      className={[styles.userTag, 'hint'].join(' ')}>
+      {close}{user.display}
+    </span>;
+  }
 }
+
 
 function DDMentionUsers(props) {
   const {

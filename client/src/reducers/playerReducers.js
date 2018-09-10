@@ -5,6 +5,7 @@ const initialState = {
   tracklist: [],
   progress: 0,
   playing: false,
+  history: [],
 }
 
 let nextProgressToTrack = 1; // used to track discrete progress, 1-10 (converted in the call)
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
       nextProgressToTrack = 1;
       return {
         ...state,
+        history: [state.currentlyPlaying, ...state.history],
         currentlyPlaying: action.payload,
         playing: true,
         progress: 0,
@@ -48,6 +50,7 @@ export default (state = initialState, action) => {
         if(i >= tracklist.length){
           return {
             ...state,
+            history: [currentlyPlaying, ...state.history],
             currentlyPlaying: undefined,
             playing: false,
           }
@@ -56,6 +59,7 @@ export default (state = initialState, action) => {
           nextProgressToTrack = 1;
           return {
             ...state,
+            history: [currentlyPlaying, ...state.history],
             currentlyPlaying: tracklist[i + 1],
             playing: true,
             progress: 0,

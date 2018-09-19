@@ -50,13 +50,12 @@ function DDMention(props) {
         const detectedUsers = parseMentions(str, 'users');
         detectedUsers.forEach(u => formApi.addValue("mentions", u));
 
-        str = str.replace(/@\[.+\]\(.+\)/g, '')
+        str = str.replace(/@\[[\w ]+\]\(users:\d+\)/g, '')
         setValue(str);
     }
 
     const getUsersSuggestions = (s, cb) => {
         const mentions = formApi.values.mentions || [];
-        console.log("mentions", mentions)
         request(routes.api.users.index).then(({ users }) => {
             cb(
                 users.map(u => ({
@@ -70,6 +69,9 @@ function DDMention(props) {
     }
 
     const getTagsSuggestions = (s, cb) => {
+        const tagged = formApi.values;
+        const mentions = formApi.values.mentions
+        console.log(tagged, mentions)
         let existing = props.tags.map(t => ({
             id: t,
             display: t,

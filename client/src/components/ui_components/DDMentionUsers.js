@@ -16,7 +16,7 @@ class User extends Component {
     return <span 
       onMouseEnter={this.toggleHover.bind(this)} 
       onMouseLeave={this.toggleHover.bind(this)} 
-      className={[styles.userTag, 'hint'].join(' ')}>
+      className={[styles.userTag].join(' ')}>
       {close}{user.display}
     </span>;
   }
@@ -45,7 +45,10 @@ function DDMentionUsers(props) {
     const newUsers = users.filter(u => u.value !== value);
     setValue(newUsers);
   }
-  return (<div className={styles.container}>{users.map(u => <User user={u} onRemove={onRemove}/>)}</div>)
+  return (<div className={styles.container}>
+    <span className="hint"><span className="fa fa-inbox hint-icon"/>Sending notifications to: </span>
+    {users.map(u => <User user={u} onRemove={onRemove}/>)}
+  </div>)
 }
 DDMentionUsers.propTypes = {}
 

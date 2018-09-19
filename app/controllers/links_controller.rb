@@ -45,7 +45,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    clique_ids = current_user.clique_ids
+    current_user.clique_ids
     @link_assignments = LinkCliqueAssignment
     .order("created_at DESC")
     .visible
@@ -129,11 +129,13 @@ class LinksController < ApplicationController
     _link_params = link_params
     clique_ids = _link_params.delete(:clique_ids)
     playlist_ids = _link_params.delete(:playlist_ids) || []
+    played_by = _link_params.delete(:played_by)
+    heard_at = _link_params.delete(:heard_at)
     # find or create link
     @link = Link.find_by_url(_link_params[:url]) || Link.new(_link_params)
     # add associations
     @link.playlist_ids += playlist_ids
-    @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published])
+    @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published], played_by: played_by, heard_at: heard_at)
     respond_to do |format|
       if @link.save
         @link.notify :users
@@ -169,16 +171,18 @@ class LinksController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def link_params
     pps = params.require(:link).permit(
-    :url, 
-    :description, 
-    :published, 
-    :is_a_set,
-    :mood,
-    mentions: [],
-    clique_ids: [],
-    playlist_ids: [],
-    tag_list: [], 
-    genre_list: []
+      :url, 
+      :description, 
+      :published, 
+      :is_a_set,
+      :mood,
+      :played_by,
+      :heard_at,
+      mentions: [],
+      clique_ids: [],
+      playlist_ids: [],
+      tag_list: [], 
+      genre_list: [],
     )
     # ensure we don't parse the params twice
     if !@params_read

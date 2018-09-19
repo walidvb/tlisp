@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906152712) do
+ActiveRecord::Schema.define(version: 20180919103733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20180906152712) do
     t.datetime "updated_at",                 null: false
     t.integer  "user_id"
     t.boolean  "visible",    default: false
+    t.string   "played_by"
+    t.string   "heard_at"
   end
 
   add_index "link_clique_assignments", ["clique_id"], name: "index_link_clique_assignments_on_clique_id", using: :btree

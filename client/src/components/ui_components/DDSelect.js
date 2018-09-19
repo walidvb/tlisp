@@ -62,7 +62,7 @@ function DDSelect(props) {
     function renderAsSelect(){
         return (
             <div>
-                {creatable ? <Select.Creatable {...opts} promptTextCreator={() => `Create a new ${props.optionName}...`} /> : <Select {...opts} />}
+                {creatable ? <Select.Creatable {...opts} promptTextCreator={() => `${props.optionName}...`} /> : <Select {...opts} />}
             </div>
         )
     }

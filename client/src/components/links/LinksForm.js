@@ -30,12 +30,27 @@ function LinkFormDetails(props) {
                             <DDMentions formApi={formApi} tags={props.tags} cliques={props.cliques} field="description"/>
                             <DDMentionUsers field={'mentions'} formApi={formApi} />
                         </div>
+                        <div className="form-group flex">
+                            <div>
+                                <label htmlFor="played_by">Played by</label>
+                                <div>
+                                    <DDSelect placeholder="Select who played this gem" creatable={true} optionName="Enter new" options={[]} field={'played_by'} id={`played_by`} />
+                                    {/* <Text className="form-control" field="played_by"  /> */}
+                                </div>
+                            </div>
+                            <div style={{marginLeft: ".5rem"}}>
+                                <label htmlFor="heard_at">Heard at</label>
+                                <div>
+                                    <DDSelect placeholder="Where did you hear this" creatable={true} optionName="Enter new" options={[]} field={'heard_at'} id={`heard_at`} />
+                                </div>
+                            </div>
+                        </div>
                         <div className="flex form-group">
-                            <div className="" style={{ flex: "0 0 300px", }}>
+                            <div className="" style={{ flex: "0 0 300px", marginRight: '2rem'}}>
                                 <label htmlFor={`mood`}>Energy Level</label>
                                 <ReactFormDDMood field={'mood'} id='mood' />
                             </div>
-                            <div >
+                            <div>
                                 <div className="form-check">
                                     <label htmlFor="published" className="form-check-label">
                                         <Checkbox field="published" id="published" className="form-check-input" />
@@ -46,11 +61,11 @@ function LinkFormDetails(props) {
                                         {formApi.values.published ? "This link will be available to your friends" : "This link will only be visible to you"}
                                     </span>
                                 </div>
-                                <RadioGroup field="is_a_set">
+                                <RadioGroup field="is_a_set" style={{marginTop: '1rem'}}>
                                     {group => (
                                         <div>
                                             <label htmlFor="mix" className="">Mix</label>
-                                            <Radio group={group} value="0" id="mix" className="" />
+                                            <Radio group={group} value="0" id="mix" className="" style={{marginLeft: '.5rem', marginRight: '1rem'}}/>
                                             <Radio group={group} value="1" id="track" className="" />
                                             <label htmlFor="track" className="">Track</label>
                                         </div>
@@ -91,7 +106,7 @@ function Playlists(props) {
     return (
         <div className="form-group">
             <label htmlFor={`playlists`}>Playlists</label>
-            <DDSelect placeholder="Select or type to create one or more playlists" creatable={true} optionName="playlist" multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
+            <DDSelect placeholder="Select or type to create one or more playlists" creatable={true} optionName="Create a new playlist..." multiple={true} options={options} field={'playlist_ids'} id={`playlists`} />
             <span className={"hint"}>
                 <div className="fa fa-info" />
                 Add to an existing personal playlist or create one
@@ -110,6 +125,8 @@ class LinksForm extends Component {
             cliques: [],
             tags: [],
             mentions: [],
+            played_by: '',
+            heard_at: '',
         }
         this.setDefaultValues = this.setDefaultValues.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -145,8 +162,8 @@ class LinksForm extends Component {
             //clique_ids: mapCliquesToOptions(cliques).filter(c => c.value != 1)
         });
     }
-    preSubmit({ link }, canSelectCliques){
-        const { clique_ids, playlist_ids, tag_list, mentions} = link;
+    preSubmit({ link }){
+        const { clique_ids, playlist_ids, tag_list, mentions, heard_at, played_by} = link;
         let link_ = link;
         console.log(link)
         if(clique_ids !== undefined){
@@ -156,10 +173,16 @@ class LinksForm extends Component {
             link_.playlist_ids = playlist_ids.map(v => v.value)
         }
         if(tag_list){
-            link.tag_list = tag_list.map(v => v.value)
+            link_.tag_list = tag_list.map(v => v.value)
         }
         if (mentions) {
-            link.mentions = mentions.map(v => v.value)
+            link_.mentions = mentions.map(v => v.value)
+        }
+        if(played_by){
+            link_.played_by = played_by.value
+        }
+        if (heard_at) {
+            link_.heard_at = heard_at.value
         }
         return { link: link_ };
     }

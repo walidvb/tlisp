@@ -76,6 +76,7 @@
     "react-rotating-text": "^1.2.1",
     "react-router-dom": "^4.2.2",
     "react-select": "^1.2.1",
+    "react-tabs": "^2.3.0",
     "redux": "^3.7.2",
     "redux-promise-middleware": "^5.1.1",
     "reset.css": "^2.0.2",

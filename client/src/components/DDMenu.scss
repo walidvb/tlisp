@@ -5,7 +5,7 @@ body{
     }
 }
 
-$background: transparentize($primary-color, .1);
+$background: $background-grey;
 
 .backdrop{
     position: fixed;
@@ -26,194 +26,31 @@ $background: transparentize($primary-color, .1);
     left: 0;
     @media #{$mobile}{
         width: 100%;
-        transform: none!important;
-        overflow: auto;
     }
     @media #{$tablet}{
-        top: 25px;
-        left: calc(100vw - 500px);
-        max-width: calc(2rem - 1px);
-        transition: max-width 1s cubic-bezier(1,0.09, 0.63, 0.97);
-        overflow: hidden;
+        top: 5rem;
+        left: 50%;
+        width: 600px;
+        transform: translateX(-50%);
+        max-height: 480px;
+        overflow: auto;
     }
     z-index: 50;
-    color: white;
-    display: flex;
-    flex-flow: row;
+    color: $black;
     background: $background;
     padding: .2rem 1rem 0rem 0;
-    &.hovered{
-        transition: max-width .15s ease-in-out;
-        max-width: calc(35vw - 2rem);
-        overflow: visible;
-    }
     min-width: 480px;
     box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }
 
-
-.links_wrapper{
+.menuWrapper{
     display: flex;
-    padding-top: 4px;
-    a{
-        display: inline-block;
-        text-align: center;
-        flex-direction: column;
-        .horizontal &{
-            width: 10ch;
-        }
-        text-decoration: none;
-        text-transform: lowercase;
-        padding: 0 .5rem;
-        .vertical &{
-            padding: .2rem 0;
-        }
-        &:hover{
-            text-transform: uppercase;
-        }
-    }
-    .menu__active{
-        text-transform: uppercase;
-    }
+    justify-content: space-around;
+    width: 100%;
 }
-
-.icon{
-    padding: 0 .5rem;
-    display: block;
-    opacity: .8;
-    margin-bottom: .2rem;
-    .vertical &{
-        margin-right: .5rem;
-        width: 2rem;
-        border-right: solid 1px lighten($primary-color, 40%);
-        margin-bottom: 1px;
-        padding-top: 3px;
-    }
+.menuItem{
+    padding: .5rem 1rem;
 }
-.handles{
-    display: none;
-    z-index: 49;
-    opacity: 0;
-    transition: transform 0.35s .4s, opacity 0.45s .4s;
-    .container:hover &{
-        opacity: 1;
-        transition: transform .15s 0s, opacity .15s 0s;
-        pointer-events: auto;
-        transform: translateX(-100%);
-    }
-    font-size: smaller;
-    background: $background;
-    border-right: solid 1px  darken($primary-color, 5%);
-    transform: translateX(-70%);
-    .vertical &{
-        border-right: none;
-        border-bottom: solid 1px  darken($primary-color, 5%);
-        transform: translateY(-70%);
-        flex-direction: row;
-    }
-    .vertical .container:hover  &{
-        transform: translateY(-100%);
-    }
-    @media #{$tablet}{
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        left: 0; 
-        top: 0;
-    }
-}
-
-.handle{
-    padding: 7px;
-}
-.move{
-    cursor: move;
-}
-
-.submenu .menu, .handle{
-    color: lighten(#1EA896, 40%);
-    &:hover{
-        color: lighten(#1EA896, 90%);
-    }
-}
-
-
-.vertical{
-    flex-flow: column;
-    .container{
-        flex-flow: column;
-        min-width: 0px;
-    }
-    .link_title{
-        min-width: 10ch;
-    }
-    .submenu .menu{
-        position: absolute;
-        top: 0;
-        right: 0;
-        transform: translateX(160%) rotate(90deg);
-        background: $background;
-        transform-origin: top left;
-        padding: 3px 5px;
-            opacity: 0;
-        }
-    .backdrop:hover & .submenu .menu, &:hover .submenu .menu{
-        opacity: 1;
-    }
-    .links_wrapper a{
-        text-align: left;
-        flex-direction: row;
-    }
-}
-
-
-// PANELS
-.panel{
-    $width: 25rem;
-    width: $width;
-    position: absolute;
-    left: 0;
-    display: none;
-    background: $primary-color;
-    max-height: 80vh;
+.tabsWrapper{
     overflow: auto;
-    transition: all .4s .2s ease-in-out;
-    opacity: 0;
-    pointer-events: none;
-    .vertical &{ 
-        min-height: 400px;
-        min-width: $width;
-    }
-    .panel__left &{
-        left: -$width;
-        top: 0;
-        transform: translateX(10px);
-    }
-    .panel__right &{
-        left: 100%;
-        top: 0;
-        transform: translateX(-10px);
-    }
-    .panel__under &{
-        top: calc(4rem - 2px);
-        transform: translateY(-10px);
-    }
-    .panel__over &{
-        bottom: calc(4.5rem + 1px);
-        transform: translateY(10px);
-    }
-    .menu__open &{
-        display: inline-block;
-    }
-}
-
-.hovered .panel{
-    pointer-events: auto;
-}
-.container:hover{
-    .panel{
-        transition: all .2s ease-in-out;
-        opacity: 1;
-        transform: translateX(0);
-    }
 }

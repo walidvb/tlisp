@@ -30,6 +30,7 @@ class DDMenu extends Component {
                 <Tabs onSelect={this.handlePanelToggle.bind(this)} disabledTabClassName={styles.disabled} >
                     <TabList className={styles.menuWrapper}>
                         {['explore', 'playlists', 'player'].map( menu => <Tab 
+                            key={menu}
                             className={styles.menuItem}
                         >{menu}</Tab>)}
                     </TabList>

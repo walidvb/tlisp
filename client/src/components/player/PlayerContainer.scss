@@ -18,15 +18,7 @@
     overflow: auto;
     padding: 5px;
     display: flex;
-    &.under{
-        flex-direction: column;
-    }
-    &.over{
-        flex-direction: column-reverse;
-    }
-    &.vertical{
-        flex-direction: column;
-    }
+    flex-direction: column-reverse;
     
 }
 

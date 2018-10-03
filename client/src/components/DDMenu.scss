@@ -1,24 +1,6 @@
 @import '../_variables.scss';
 
-body{
-    @media #{$mobile}{
-    }
-}
-
 $background: $background-grey;
-
-.backdrop{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    display: none;
-    .wrapper:hover &{
-        display: inline-block;
-    }
-}
 
 .container{
     position: fixed;
@@ -28,17 +10,14 @@ $background: $background-grey;
         width: 100%;
     }
     @media #{$tablet}{
-        top: 5rem;
+        top: 1rem;
         left: 50%;
         width: 600px;
         transform: translateX(-50%);
-        max-height: 480px;
-        overflow: auto;
     }
     z-index: 50;
     color: $black;
     background: $background;
-    padding: .2rem 1rem 0rem 0;
     min-width: 480px;
     box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }
@@ -52,5 +31,6 @@ $background: $background-grey;
     padding: .5rem 1rem;
 }
 .tabsWrapper{
+    max-height: 360px;
     overflow: auto;
 }

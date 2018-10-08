@@ -31,13 +31,15 @@ class DDMenu extends Component {
                             className={styles.menuItem}
                         >{menu}</Tab>)}
                     </TabList>
-                    <div style={panelsStyles} className={styles.tabsWrapper}>
-                        <TabPanel>
-                            <LinkUI />
-                        </TabPanel>
-                        <TabPanel><PlaylistList /></TabPanel>
-                        <TabPanel><PlayerContainer /></TabPanel>
-                    </div>
+                    { panelsOn ? 
+                        <div style={panelsStyles} className={styles.tabsWrapper}>
+                            <TabPanel>
+                                <LinkUI />
+                            </TabPanel>
+                            <TabPanel><PlaylistList /></TabPanel>
+                            <TabPanel><PlayerContainer /></TabPanel>
+                        </div>
+                    : null }
                 </Tabs>
             </div>
         )

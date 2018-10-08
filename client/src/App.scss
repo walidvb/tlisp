@@ -3,6 +3,10 @@
 @import '_variables.scss';
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
 
+html{
+  --light-grey: #f2f2f2;
+}
+
 body{
   font-family: Apercu Pro, sans-serif;
   font-size: 16px;

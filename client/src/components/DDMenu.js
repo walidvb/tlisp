@@ -20,11 +20,12 @@ class DDMenu extends Component {
         })
     }
     render() {
-        const panelsStyles = this.state.panelsOn ? {} : { display: 'none' }
+        const { panelsOn } = this.state;
+        const panelsStyles = panelsOn ? {} : { display: 'none' }
         return (
             <div className={styles.container}>
                 <Tabs onSelect={this.handlePanelToggle.bind(this)} disabledTabClassName={styles.disabled} >
-                    <TabList className={styles.menuWrapper}>
+                    <TabList className={styles.menuWrapper} style={{ borderBottom: `1px solid ${panelsOn ? '#f2f2f2' : 'transparent'}` }}>
                         {['explore', 'playlists', 'player'].map( menu => <Tab 
                             key={menu}
                             className={styles.menuItem}

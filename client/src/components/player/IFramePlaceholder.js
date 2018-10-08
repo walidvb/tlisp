@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 
 export default class IFramePlaceholder extends Component {
-  placeTarget(){
-    const { left, top, width, height } = this.container.getBoundingClientRect();
-    console.log(left, top, width, height);
+  placeTarget(off){
+    const { left, top } = this.container.getBoundingClientRect();
     const target = document.getElementById('player-placeholder');
     target.style.position = 'fixed';
-    target.style.top = top + 'px';
+    target.style.top = off ? '-200%' : `${top}px`;
     target.style.left = left + 'px';
   }
   componentWillReceiveProps(){
@@ -14,6 +13,9 @@ export default class IFramePlaceholder extends Component {
   }
   componentDidMount( ){
     this.placeTarget();
+  }
+  componentWillUnmount(){
+    this.placeTarget(true)
   }
   render() {
     return (

@@ -126,11 +126,11 @@ class LinkUI extends Component {
         <div onClick={this.randomize.bind(this)} className="pointer"> <span className={`fa fa-icon fa-refresh ${this.state.randomizing ? 'fa-spin' : ''}`} /> Randomize </div>
         {cliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
         <div className="separator"/>
-        <span className={"hint"}>
+        {/* <span className={"hint"}>
           <div className="fa fa-info" />
           These are cliques you're not a part of, temporarily shown to you.
         </span>
-        {otherCliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
+        {otherCliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)} */}
       </div>
     )
   }

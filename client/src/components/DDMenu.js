@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import Controls from './player/Controls'
 import PlayerContainer from './player/PlayerContainer';
 import PlaylistList from './playlists/PlaylistList';
 import LinkUI from './links/LinkUI';

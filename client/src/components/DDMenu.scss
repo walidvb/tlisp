@@ -13,12 +13,12 @@ $background: $background-grey;
         top: 1rem;
         left: 50%;
         width: 600px;
+        min-width: 480px;
         transform: translateX(-50%);
     }
     z-index: 50;
     color: $black;
     background: $background;
-    min-width: 480px;
     box-shadow: 0 2px 4px transparentize($primary-color, .82);
 }
 

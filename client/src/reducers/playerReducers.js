@@ -66,6 +66,7 @@ export default (state = initialState, action) => {
           }
         }
       }
+      break;
     case types.PLAY:
       ReactGA.event({
         category: 'PLAYER',

@@ -13,13 +13,12 @@ function IFrameAbsolute({ url, html, isSet,
   const canPlay = ReactPlayer.canPlay(url);
   return (
       <div id="player-placeholder" style={{ position: 'fixed', zIndex: 3000 }}>
-      <div>{url}{playing}</div>
         {canPlay ?
           <ReactPlayer
             url={url}
             width="100%"
             controls={true}
-            style={{ maxHeight: "200px" }}
+            style={{ maxHeight: "200px", height: '200px' }}
             playing={playing}
             onReady={() => playing ? play() : null}
             onStart={(d) => play(d)}

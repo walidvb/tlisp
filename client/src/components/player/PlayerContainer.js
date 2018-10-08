@@ -16,8 +16,6 @@ class PlayerContainer extends Component {
         currentlyPlaying: PropTypes.object,
     }
     componentWillReceiveProps({ seek, currentlyPlaying }){
-
-
         if(currentlyPlaying != this.props.currentlyPlaying){
             trackPlay(currentlyPlaying);
         }
@@ -49,8 +47,10 @@ class PlayerContainer extends Component {
         const canPlay = ReactPlayer.canPlay(url);
         return (
             <div>
+                <div className={styles.currentlyPlaying}>
+                    <IFramePlaceholder />
+                </div>
                 <h2 className={styles.title__playing}>{canPlay ? null : <span className="fa fa-warning" />} &nbsp;{title}</h2>
-                <IFramePlaceholder />
             </div>
         )
     }

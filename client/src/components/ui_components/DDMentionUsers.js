@@ -45,7 +45,7 @@ function DDMentionUsers(props) {
     const newUsers = users.filter(u => u.value !== value);
     setValue(newUsers);
   }
-  return (<div className={styles.container}>{users.map(u => <User user={u} onRemove={onRemove}/>)}</div>)
+  return (<div className={styles.container}>{users.map(u => <User user={u} key={u.id} onRemove={onRemove}/>)}</div>)
 }
 DDMentionUsers.propTypes = {}
 

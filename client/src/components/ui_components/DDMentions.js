@@ -15,7 +15,6 @@ function DDMention(props) {
     const {
         fieldApi,
         formApi,
-        mentions
       } = props;
 
     const {
@@ -46,11 +45,10 @@ function DDMention(props) {
         
         // add tags to the form
         const detectedTags = parseMentions(str, 'tag');
-        setValue("tag_list", [... new Set(detectedTags)]);
+        formApi.setValue("tag_list", [...new Set(detectedTags)]);
         const detectedUsers = parseMentions(str, 'users');
         detectedUsers.forEach(u => formApi.addValue("mentions", u));
-
-        str = str.replace(/@\[.+\]\(.+\)/g, '')
+        str = str.replace(/@\[.+\]\(users:.+\)/g, '')
         setValue(str);
     }
 
@@ -64,7 +62,7 @@ function DDMention(props) {
                     display: u.name || u.initials || "N/A",
                 }))
                 .filter(u => fuzzysearch(s.toLowerCase(), u.display.toLowerCase()))
-                .filter(u => mentions.map(u=>parseInt(u.value)).indexOf(u.id) < 0)
+                .filter(u => mentions.map( u => parseInt(u.value, 10) ).indexOf(u.id) < 0)
             )
         })
     }

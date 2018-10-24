@@ -133,7 +133,7 @@ class LinksForm extends Component {
         }
     }
     setDefaultValues(){
-        const { cliques, link } = this.state
+        const { link } = this.state
         const { url } = link;
         const { description } = link.oembed;
         this.linkFormApi.setAllValues({
@@ -145,10 +145,9 @@ class LinksForm extends Component {
             //clique_ids: mapCliquesToOptions(cliques).filter(c => c.value != 1)
         });
     }
-    preSubmit({ link }, canSelectCliques){
+    preSubmit({ link }){
         const { clique_ids, playlist_ids, tag_list, mentions} = link;
         let link_ = link;
-        console.log(link)
         if(clique_ids !== undefined){
             link_.clique_ids = clique_ids.map(v => v.value)
         }

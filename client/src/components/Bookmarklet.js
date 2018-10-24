@@ -11,9 +11,28 @@ function dontShow(evt){
     localStorage.setItem('dont-show-help-on-startup', true)
 }
 
+const domain = window.location.host;
 export default function Bookmarklet(props){
-    const domain = window.location.host;
-    
+    if(/chrome/i.test(navigator.userAgent)){
+        const extensionURL = "https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop/related"
+        return extension(extensionURL);
+    }
+    else{
+        return bookmarklet();
+    }
+}
+
+function extension(url){
+    return <div style={{padding: '5px'}}>
+         Want to add your tracks? 
+         <br />
+         Download the
+         &nbsp;<a href={url} target="_blank">browser extension</a>
+    </div>
+}
+
+
+function bookmarklet(props){
     // TODO: close an iframe within an iframe
     // https://stackoverflow.com/a/43030280/1312825
     const bookmarklet = ` \

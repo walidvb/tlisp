@@ -24,22 +24,23 @@ class DDMenu extends Component {
         const panelsStyles = panelsOn ? {} : { display: 'none' }
         return (
             <div className={styles.container}>
-                <Tabs onSelect={this.handlePanelToggle.bind(this)} disabledTabClassName={styles.disabled} >
+                <Tabs 
+                    onSelect={this.handlePanelToggle.bind(this)}
+                    disabledTabClassName={styles.disabled}
+                >
                     <TabList className={styles.menuWrapper} style={{ borderBottom: `1px solid ${panelsOn ? '#f2f2f2' : 'transparent'}` }}>
                         {['explore', 'playlists', 'player'].map( menu => <Tab 
                             key={menu}
                             className={styles.menuItem}
                         >{menu}</Tab>)}
                     </TabList>
-                    { panelsOn ? 
-                        <div style={panelsStyles} className={styles.tabsWrapper}>
-                            <TabPanel>
-                                <LinkUI />
-                            </TabPanel>
-                            <TabPanel><PlaylistList /></TabPanel>
-                            <TabPanel><PlayerContainer /></TabPanel>
-                        </div>
-                    : null }
+                    <div style={panelsStyles} className={styles.tabsWrapper}>
+                        <TabPanel>
+                            <LinkUI />
+                        </TabPanel>
+                        <TabPanel><PlaylistList /></TabPanel>
+                        <TabPanel><PlayerContainer /></TabPanel>
+                    </div>
                 </Tabs>
             </div>
         )

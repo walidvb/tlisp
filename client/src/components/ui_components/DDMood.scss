@@ -31,7 +31,7 @@ $bell-color: lighten($primary-color, 40%);
   }
 }
 .bell{
-    fill: lighten($primary-color, 80%);
+    fill: var(--light-grey);
 }
 
 .input{

@@ -1,13 +1,13 @@
 .container{
-    // height: 80px;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
     min-width: 100%;
     max-width: 100%;
 }
-.currently_playing{
-    flex: 1 0 300px;
+.currentlyPlaying{
+    height: 200px;
+    display: block;
 }
 .title__playing{
     padding: 5px;
@@ -18,15 +18,7 @@
     overflow: auto;
     padding: 5px;
     display: flex;
-    &.under{
-        flex-direction: column;
-    }
-    &.over{
-        flex-direction: column-reverse;
-    }
-    &.vertical{
-        flex-direction: column;
-    }
+    flex-direction: column-reverse;
     
 }
 

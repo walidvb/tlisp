@@ -15,13 +15,13 @@ import Bookmarklet from './components/Bookmarklet';
 import CliqueJoin from './components/cliques/CliqueJoin';
 import DDMenu from './components/DDMenu';
 import DDTooltip from './components/ui_components/DDTooltip';
+import IFrameAbsolute from './components/player/IFrameAbsolute';
 import ForgotPassword from './components/user/ForgotPassword';
 import LinksContainer from './components/links/LinksContainer'
 import LinksForm from './components/links/LinksForm';
 import LoginForm from './components/user/LoginForm';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
-import PlayerContainer from './components/player/PlayerContainer';
 import Title from './components/Title'
 
 import routes from './routes';
@@ -94,6 +94,7 @@ class App extends Component {
         { loading ? this.renderLoading() :
           this.props.user.authenticated ? this.renderAuthenticatedRoutes() : this.renderAnonymousRoutes()
         }
+        <IFrameAbsolute />
       </div>
     );
   }

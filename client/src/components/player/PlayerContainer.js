@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import ReactPlayer from 'react-player'
 
+import IFramePlaceholder from './IFramePlaceholder';
+
 import trackPlay from '../../analytics/trackPlay';
 import * as playerActions from '../../actions/playerActions';
 import styles from './PlayerContainer.scss';
@@ -14,10 +16,6 @@ class PlayerContainer extends Component {
         currentlyPlaying: PropTypes.object,
     }
     componentWillReceiveProps({ seek, currentlyPlaying }){
-        if(seek !== this.props.seek && this.player){
-            this.player.seekTo(seek);
-        }
-
         if(currentlyPlaying != this.props.currentlyPlaying){
             trackPlay(currentlyPlaying);
         }
@@ -45,34 +43,16 @@ class PlayerContainer extends Component {
         if (this.props.currentlyPlaying === undefined){
             return null;
         }
-        const { title, html, url, id} = this.props.currentlyPlaying;
+        const { title, url } = this.props.currentlyPlaying;
         const canPlay = ReactPlayer.canPlay(url);
-
-        if (!canPlay){
-            this.props.pause();
-        }
-        return (<div>
-            <h2 className={styles.title__playing}>{canPlay ? null : <span className="fa fa-warning" />} &nbsp;{title}</h2>
-            {canPlay ? 
-                <ReactPlayer 
-                    ref={(player) => this.player = player}
-                    url={url} 
-                    width="100%"
-                    controls={true}
-                    style={{maxHeight: "200px"}}
-                    playing={this.props.playing}
-                    onReady={() => this.props.playing ? this.props.play() : null}
-                    onStart={(d) => this.props.play(d)}
-                    onPlay={(d) => this.props.play(d)}
-                    onProgress={(d) => this.props.onProgress(d)}
-                    onPause={(d) => this.props.pause(d)}
-                    onEnded={(d) => this.props.onEnded(d)}
-                /> : 
-                <div style={{ height: "100%" }} dangerouslySetInnerHTML={{
-                    __html: html
-                }} />
-            }
-        </div>);
+        return (
+            <div>
+                <div className={styles.currentlyPlaying}>
+                    <IFramePlaceholder />
+                </div>
+                <h2 className={styles.title__playing}>{canPlay ? null : <span className="fa fa-warning" />} &nbsp;{title}</h2>
+            </div>
+        )
     }
     render() {
         const { tracklist, placement, displayType } = this.props;

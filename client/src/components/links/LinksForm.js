@@ -150,7 +150,7 @@ class LinksForm extends Component {
         }
     }
     setDefaultValues(){
-        const { cliques, link } = this.state
+        const { link } = this.state
         const { url } = link;
         const { description } = link.oembed;
         this.linkFormApi.setAllValues({
@@ -165,7 +165,6 @@ class LinksForm extends Component {
     preSubmit({ link }){
         const { clique_ids, playlist_ids, tag_list, mentions, heard_at, played_by} = link;
         let link_ = link;
-        console.log(link)
         if(clique_ids !== undefined){
             link_.clique_ids = clique_ids.map(v => v.value)
         }

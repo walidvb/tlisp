@@ -1,149 +1,47 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import Draggable from 'react-draggable';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import Bookmarklet from './Bookmarklet';
-import Controls from './player/Controls'
 import PlayerContainer from './player/PlayerContainer';
 import PlaylistList from './playlists/PlaylistList';
 import LinkUI from './links/LinkUI';
 
 import styles from './DDMenu.scss';
 
-const CONFIG = 'CONFIG';
-let config = JSON.parse(localStorage.getItem(CONFIG)) || {
-    displayType: 'horizontal',
-    panelPlacement: 'under',
-    x: 0,
-    y: 0,
-    panelOpen: 'help',
-}
-// this key is set in Bookmarklet.js which contains the help text
-config.showHelpOnStartup = localStorage.getItem('dont-show-help-on-startup') !== 'true';
-
 class DDMenu extends Component {
     static propTypes = {
-
     }
-    state = { 
-        config: {
-            ...config,
-            panelOpen: config.showHelpOnStartup ? 'help' : config.panelOpen
-        },
-        hovered: true,
-    };
-    
-    componentDidMount() {
-        setTimeout(() => this.setState({hovered:false}), 3000);
+    state = {
+        panelsOn: false,
+        currentIndex: 0
     }
-    
-    togglePanel(panelName){
+    handlePanelToggle(index, lastIndex){
         this.setState({
-            config: {
-                ...this.state.config,
-                panelOpen: this.state.config.panelOpen === panelName ? undefined : panelName,
-            }
+            panelsOn: (index === lastIndex) && this.state.panelsOn ? false : true,
         })
     }
-    handlePanelPlacement({ clientX, clientY }, { node }){
-        const panelPlacement = this.state.config.displayType == 'vertical' ? 
-            (clientX < 450 ? 'right' : 'left') : 
-            (clientY + node.clientHeight < window.innerHeight - 250 ? 'under' : 'over');
-
-        this.setState({
-            config: {
-                ...this.state.config,
-                panelPlacement,
-            }
-        }, this.storeConfig.bind(this));
-    }
-    storeConfig(){
-        localStorage.setItem(CONFIG, JSON.stringify(this.state.config))
-    }
-    toggleDisplayType() {
-        const displayType = this.state.config.displayType == 'vertical' ? 'horizontal' : 'vertical'
-        this.setState({
-            config: {
-                ...this.state.config,
-                displayType,
-                panelPlacement: displayType == 'vertical' ? 'left' : 'under',
-            }
-        }, this.storeConfig.bind(this));
-        console.log(displayType)
-        
-    }
-    handleDragStop(evt, { node }){
-        if (node.style.transform.length){
-            const [all, x, y] = /\((-?\d+)px, (\d+)px\)/.exec(node.style.transform);
-            this.setState({
-                config: {
-                    ...this.state.config,
-                    x: parseInt(x),
-                    y: parseInt(y)
-                }
-            })
-        }
-        this.setState({ dragging: false });
-    }
     render() {
-        const { displayType, panelOpen, panelPlacement } = this.state.config;
-        const defaultPosition = {
-            x: Math.max(config.x, 0),
-            y: Math.max(config.y, 0),
-        }
-        let timeout;
+        const { panelsOn } = this.state;
+        const panelsStyles = panelsOn ? {} : { display: 'none' }
         return (
-            <div className={[styles.wrapper, styles[displayType]].join(' ')} >
-                { this.state.dragging ? <div className={styles.backdrop} /> : null }
-                <Draggable 
-                    handle={`.${styles.handles}`} 
-                    onStop={this.handleDragStop.bind(this)}
-                    onStart={() => this.setState({ dragging: true })}
-                    onDrag={this.handlePanelPlacement.bind(this)}
-                    defaultPosition={defaultPosition}
+            <div className={styles.container}>
+                <Tabs 
+                    onSelect={this.handlePanelToggle.bind(this)}
+                    disabledTabClassName={styles.disabled}
                 >
-                    <div 
-                        onMouseEnter={() => { clearTimeout(timeout); this.setState({hovered: true})}}
-                        onMouseLeave={() => timeout = setTimeout(() => this.setState({ hovered: false }), 600)}
-                        onScroll={(e) => e.stopPropagation()} 
-                        className={[styles.container, styles[`panel__${panelPlacement}`], this.state.hovered || this.state.dragging ? styles.hovered : null].join(' ')}
-                    >
-                        <div className={[styles.handles, this.state.hovered || this.state.dragging ? styles.handles__visible : ''].join(' ')}>
-                            <div className={`handle fa fa-arrows ${styles.handle} ${styles.move}`} />
-                            <div className={`handle fa fa-window-minimize ${styles.handle}`} onMouseUp={this.toggleDisplayType.bind(this)} />
-                        </div>
-                        <div>
-                            <ul className={[styles.links_wrapper, styles[displayType]].join(' ')}>
-                                <li className={panelOpen === 'filters' ? styles.menu__open : ""}>
-                                    <Link className="flex w-100" to={"/explore"} onClick={() => this.togglePanel('filters')}> 
-                                        <span className={`fa fa-rocket ${styles.icon}`} />
-                                        <span className={styles.link_title} >Explore</span>
-                                    </Link>
-                                    <div className={[styles.panel].join(' ')}>
-                                        <LinkUI displayType={displayType}/>
-                                    </div>
-                                </li>
-                                <li className={panelOpen === 'playlists' ? styles.menu__open : ""}>
-                                    <Link className="flex w-100" to={"/me"} onClick={() => this.togglePanel('playlists')}> 
-                                        <span className={`fa fa-hand-peace-o ${styles.icon}`} />
-                                        <span className={styles.link_title} >My Digs</span>
-                                    </Link>
-                                    <div className={[styles.panel].join(' ')}>
-                                        <PlaylistList />
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className={panelOpen === 'player' ? styles.menu__open : ""}>
-                            <Controls displayType={displayType} togglePlayer={() => this.togglePanel('player')} />
-                            <div className={[styles.panel].join(' ')}>
-                                <PlayerContainer displayType={displayType} placement={panelPlacement} />
-                            </div>
-                        </div>
+                    <TabList className={styles.menuWrapper} style={{ borderBottom: `1px solid ${panelsOn ? '#f2f2f2' : 'transparent'}` }}>
+                        {['explore', 'playlists', 'player'].map( menu => <Tab 
+                            key={menu}
+                            className={styles.menuItem}
+                        >{menu}</Tab>)}
+                    </TabList>
+                    <div style={panelsStyles} className={styles.tabsWrapper}>
+                        <TabPanel>
+                            <LinkUI />
+                        </TabPanel>
+                        <TabPanel><PlaylistList /></TabPanel>
+                        <TabPanel><PlayerContainer /></TabPanel>
                     </div>
-                </Draggable>
+                </Tabs>
             </div>
         )
     }

@@ -12,7 +12,7 @@ OEmbed::Providers.register_fallback(
 )
 class DDOEmbed
     def self.get url
-        if Rails.env.prod?
+        if Rails.env.production?
             begin
                 OEmbed::Providers.get(url).fields
             rescue OEmbed::NotFound => e

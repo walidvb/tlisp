@@ -12,24 +12,22 @@ OEmbed::Providers.register_fallback(
 )
 class DDOEmbed
     def self.get url
-        if Rails.env.production?
-            begin
-                OEmbed::Providers.get(url).fields
-            rescue OEmbed::NotFound => e
-                p "#{e}: #{url}"
-                # need to create a bandcamp to detect source
-                begin 
-                    oembed = BandcampOembed.new(url) 
-                    if oembed.is_bandcamp?
-                        return oembed.get_oembed
-                    end
-                rescue => e
-                    puts "other error #{e}"
-                    raise e
+        return dummy_get if !Rails.env.production?
+
+        begin
+            OEmbed::Providers.get(url).fields
+        rescue OEmbed::NotFound => e
+            p "#{e}: #{url}"
+            # need to create a bandcamp to detect source
+            begin 
+                oembed = BandcampOembed.new(url) 
+                if oembed.is_bandcamp?
+                    return oembed.get_oembed
                 end
+            rescue => e
+                puts "other error #{e}"
+                raise e
             end
-        else
-            dummy_get
         end
     end
 

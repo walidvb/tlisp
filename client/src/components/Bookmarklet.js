@@ -14,7 +14,7 @@ function dontShow(evt){
 const domain = window.location.host;
 export default function Bookmarklet(props){
     if(/chrome/i.test(navigator.userAgent)){
-        const extensionURL = "https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop/related"
+        const extensionURL = "https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop"
         return extension(extensionURL);
     }
     else{

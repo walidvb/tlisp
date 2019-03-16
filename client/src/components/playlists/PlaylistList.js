@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Square from '../views/Square'
 import { filterBy } from '../../actions/linkActions';
-import {
-    Link
-} from 'react-router-dom'
+import styles from './PlaylistList.scss';
 
 import { request, routes } from '../../request';
 
@@ -18,17 +17,27 @@ class PlaylistList extends Component {
     componentDidMount(){
         request(routes.api.playlists.index).then( playlists => this.setState({ playlists }))
     }
-    render() {
+    renderSinglePlaylist(playlist){
         const activePlaylist = this.props.playlistId;
+        return <div
+            onClick={() => this.props.filterByPlaylist(playlist.id)}
+            className={['checkbox only-on', activePlaylist === playlist.id ? 'active' : ''].join(' ')}
+        >
+            <Square className={styles.square}>
+                <div className={styles.playlistWrapper}>
+                    {playlist.links.map(({ thumbnail_url }) => <img className={styles.thumb} src={thumbnail_url} />)}
+                </div>
+            </Square>
+            <div className={styles.name}>{playlist.name}</div>
+        </div>
+    }
+    render() {
         return (
             <div>
-                <ul style={{display: 'flex', flexFlow: "row wrap"}}>
+                <ul className="grid-square">
                     {this.state.playlists.map( pl => {
                         return <li style={{padding: '.5rem .5rem'}} key={pl.slug}>
-                            <div 
-                                onClick={() => this.props.filterByPlaylist(pl.id)}
-                                className={['checkbox only-on', activePlaylist == pl.id ? 'active': ''].join(' ')}
-                            > {pl.name}</div>
+                            {this.renderSinglePlaylist(pl)}
                         </li>
                     })}
                 </ul>

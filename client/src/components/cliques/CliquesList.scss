@@ -1,0 +1,30 @@
+.wrapper{
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: .5rem;
+  border-bottom: 1px solid var(--light-grey);
+  margin-bottom: 1rem;
+}
+
+.users{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user{
+  margin-right: 1rem;
+  margin-bottom: .5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 3rem;
+  padding: 0 7px;
+  cursor: pointer;
+}
+.user.active{
+  border-color: var(--dark-grey);
+}
+.user.noLinks{
+  pointer-events: none;
+  cursor: disabled;
+  opacity: .3;
+}

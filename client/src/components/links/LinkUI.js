@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce';
 
 import { request, routes } from '../../request';
 
+import CliquesList from '../cliques/CliquesList';
 import DDMood from '../ui_components/DDMood';
 import * as linkActions from '../../actions/linkActions';
 import styles from './LinkUI.scss';
@@ -19,8 +20,6 @@ class LinkUI extends Component {
       ready: false,
     }
     this.renderSearch = this.renderSearch.bind(this)
-    this.renderUser = this.renderUser.bind(this)
-    this.renderClique = this.renderClique.bind(this)
   }
   static propTypes = {
     filterBy: PropTypes.func.isRequired,
@@ -29,39 +28,6 @@ class LinkUI extends Component {
     request(routes.api.links.filters).then(data => {
       this.setState({ ...data, ready: true })
     })
-  }
-  renderUser(user, clique) {
-    const { users, cliques } = this.props.filters;
-    const isActive = users && users.map(e=>e.id).includes(user.id)
-    const hasLinks = user.link_clique_assignments_count > 0;
-    return <div 
-      className={["checkbox only-on", isActive ? "active" : "", hasLinks ? '' : styles.inactive].join(' ')}
-      onClick={() => hasLinks && this.props.filterBy({ key: 'users', value: user, isArray: true})}
-      datacount={user.link_clique_assignments_count}  
-    > {user.name} </div>
-      
-  }
-  renderClique( clique ){
-    const { cliques } = this.props.filters;
-    const users = clique.users.sort((a, b) => b.link_clique_assignments_count - a.link_clique_assignments_count)
-    const isActive = cliques && cliques.map(e=>e.id).includes(clique.id)
-    return (
-      <div>
-        <h3 
-          onClick={() => this.props.filterBy({key: 'cliques', value: clique, isArray: true})} 
-          className={["checkbox only-on", styles.clique_name, styles.filter_item, isActive ? "active" : ""].join(' ')}>
-            {clique.name}
-          </h3>
-        <ul className={styles.users_container}>
-          {
-            users.map((u, i) => 
-            <li className={[styles.filter_item]} key={u.id}>
-              {this.renderUser(u, clique)}
-            </li>)
-          }
-        </ul>
-      </div>
-    )
   }
   toggleMood(){
     this.props.filterBy({
@@ -124,7 +90,12 @@ class LinkUI extends Component {
         {this.renderSearch()}
         {this.renderMood()}
         <div onClick={this.randomize.bind(this)} className="pointer"> <span className={`fa fa-icon fa-refresh ${this.state.randomizing ? 'fa-spin' : ''}`} /> Randomize </div>
-        {cliques.map((c) => <div key={c.id}>{this.renderClique(c)}</div>)}
+        <CliquesList 
+          cliques={cliques} 
+          filters={this.props.filters}
+          clickName={(clique) => this.props.filterBy({ key: 'cliques', value: clique, isArray: true })} 
+          clickUser={(user) => this.props.filterBy({ key: 'users', value: user, isArray: true })} 
+        />
         <div className="separator"/>
         {/* <span className={"hint"}>
           <div className="fa fa-info" />

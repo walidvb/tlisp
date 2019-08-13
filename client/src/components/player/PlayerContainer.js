@@ -14,9 +14,13 @@ class PlayerContainer extends Component {
     static propTypes = {
         tracklist: PropTypes.array.isRequired,
         currentlyPlaying: PropTypes.object,
+        noTracking: PropTypes.boolean
     }
-    componentWillReceiveProps({ seek, currentlyPlaying }){
-        if(currentlyPlaying != this.props.currentlyPlaying){
+    static defaultProps = {
+        noTracking: false
+    }
+    componentWillReceiveProps({ noTracking, seek, currentlyPlaying }){
+        if (!noTracking && currentlyPlaying !== this.props.currentlyPlaying){
             trackPlay(currentlyPlaying);
         }
     }

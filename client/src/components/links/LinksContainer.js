@@ -105,7 +105,7 @@ class LinksContainer extends Component {
   render() {
     const { displayMine, pagination, links, loading } = this.props;
 
-    if(!loading && displayMine && links.length == 0){
+    if(!loading && displayMine && links.length === 0){
       return this.renderEmptyStateForMe();
     }
 

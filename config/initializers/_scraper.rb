@@ -20,7 +20,7 @@ class Scraper
             "title" => get_value('og:title').strip,
             "description" => get_value('og:description'),
             "image_url" => get_value('og:image'),
-            "url":  => @url,
+            "url"  => @url,
         }
     end
 

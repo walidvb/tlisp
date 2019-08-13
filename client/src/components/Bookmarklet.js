@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 
-import { request, routes } from '../request';
-
 import styles from './Bookmarklet.scss';
 
 const drag = require('../assets/images/drag_button.gif');
@@ -18,7 +16,7 @@ export default function Bookmarklet(props){
         return extension(extensionURL);
     }
     else{
-        return bookmarklet();
+        return bookmarklet(props);
     }
 }
 

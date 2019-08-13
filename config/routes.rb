@@ -10,6 +10,12 @@ DiggersDelights::Application.routes.draw do
   match "links" => "links#index", via: [:options]
 
   scope :api do
+    resources :curated_playlists do 
+      collection do 
+        get '/' => 'curated_list#show'
+      end
+    end
+
     resources :playlists
     resources :cliques do 
       get '/join' => "cliques#join", as: :join

@@ -1,5 +1,8 @@
 const routes = {
     api: {
+        curatedPlaylists: {
+            show: '/api/curated_playlists'
+        },
         cliques: '/api/cliques',
         covers: '/api/covers',
         links: {

@@ -168,6 +168,6 @@ class Link < ActiveRecord::Base
 
     private
     def get_oembed
-        DDOEmbed.get(self.url)
+        ::DDOEmbed.get(self.url)
     end
 end

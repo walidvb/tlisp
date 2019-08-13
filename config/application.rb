@@ -37,6 +37,7 @@ module DiggersDelights
 
     # autoload lib path
     config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += [Rails.root.join('app', 'services')]
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     # don't generate RSpec tests for views and helpers

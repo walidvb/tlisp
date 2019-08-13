@@ -7,34 +7,54 @@ import LinkFromSrc from './LinkFromSrc';
 import { connect } from 'react-redux';
 import { setTracklist, playTrack } from '../../actions/playerActions';
 import PlayerContainer from '../player/PlayerContainer';
-const qs = require('qs');
+import axios from 'axios'
 
-const propTypes = {
-  
-}
+import styles from '../links/LinksContainer.scss'
+const qs = require('qs');
 
 
 function ExternalPlaylist({ playTrack, setTracklist, location: { search }}) {
+  const [loading, setLoading] = useState(true)
+  const [infos, setInfos] = useState({})
+  const { source } = qs.parse(search, { ignoreQueryPrefix: true })
 
   useEffect(() => {
-    const { iframe: urls } = qs.parse(search, { ignoreQueryPrefix: true })
-    const links = urls.map(url => ({
-      id: url,
-      url: url,
-      title: url,
-    }))
-    setTracklist(links)
-    playTrack(links[0])
+    (async () => {
+      try{
+        const { data: { infos, iframes }} = await axios.get(`${routes.api.curatedPlaylists.show}?source=${encodeURIComponent(source)}`)
+        const links = iframes.map(url => ({
+          id: url,
+          url: url,
+          title: url,
+        }))
+        
+        setTracklist(links)
+        setInfos(infos)
+        playTrack(links[0])
+      }catch(error){
+        console.error(error)
+        setInfos({
+          title: 'ERROR',
+          description: "oops, looks like we couldn't scrape this page.. sorry!"
+        })
+      }
+      setLoading(false)
+    })()
   }, [])
-
+  if(loading){
+    return (<div className="container">
+      LOADING {source}...
+    </div>)
+  }
   return (
     <div className="container">
+      <h1>{infos.title}</h1>
+      <h2>{infos.description}</h2>
+      <a href={infos.url} target="_blank">Read more...</a>
       <PlayerContainer noTracking />
     </div>
   )
 }
-
-ExternalPlaylist.propTypes = propTypes
 
 function mapStateToProps({ links, user }, { match: { params: mainPath } }) {
   return {

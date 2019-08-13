@@ -99,7 +99,7 @@ class App extends Component {
   }
   renderAll(){
     return <Switch>
-      <Route path="/play-external" component={ExternalPlaylist} />
+      <Route path="/curated" component={ExternalPlaylist} />
       {this.props.user.authenticated ? this.renderAuthenticatedRoutes() : this.renderAnonymousRoutes()}
     </Switch>
   }

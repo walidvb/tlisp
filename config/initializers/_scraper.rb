@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class BandcampOembed < Scraper
+class Scraper
     def initialize url
         @url = url
         @page = get_page
@@ -15,21 +15,12 @@ class BandcampOembed < Scraper
         end
     end
 
-    def build_oembed
-        video_url = get_value 'og:video'
-        embed = build_iframe video_url
-        description = @page.search('#trackInfo .bd').text()
+    def get_infos
         {
-            "title" => get_value('og:title').split(', by ')[0].strip,
-            "description" => description,
-            "thumbnail_url" => get_value('og:image'),
-            "html" => embed,
-            "author_name" =>  get_value('og:title').split(', by ')[1].strip,
-            "height" => get_value('og:video:height'),
-            "width" => get_value('og:video:width'),
-            # author_url: 
-            "provider_name" => "Bandcamp",
-            "provider_url" => "http://bandcamp.com",
+            "title" => get_value('og:title').strip,
+            "description" => get_value('og:description'),
+            "image_url" => get_value('og:image'),
+            "url":  => @url,
         }
     end
 
@@ -44,6 +35,28 @@ class BandcampOembed < Scraper
             return
         end
         "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/v=2/#{id_er}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
+    end
+
+    def get_value property
+        if node = @page.search("[property='#{property}']").first
+            node.attribute('content').value
+        end
+    end
+    
+    def get_page
+        Nokogiri::HTML(open(@url))   
+    end
+
+    def site_name
+        get_value('og:site_name')
+    end
+
+    def canonical
+        begin
+            @page.search('link[rel="canonical"]').first.attributes['href']
+        rescue
+            @url
+        end
     end
 
     def is_bandcamp?

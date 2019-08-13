@@ -13,18 +13,7 @@ let nextProgressToTrack = 1; // used to track discrete progress, 1-10 (converted
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.PLAY_TRACK:
-      ReactGA.event({
-        category: 'PLAYER',
-        action: 'play_track',
-      })
-      nextProgressToTrack = 1;
-      return {
-        ...state,
-        history: [state.currentlyPlaying, ...state.history],
-        currentlyPlaying: action.payload,
-        playing: true,
-        progress: 0,
-      };
+      return playTrack(state, action);
     case types.SET_PLAYLIST:
     return {
       ...state,
@@ -32,7 +21,7 @@ export default (state = initialState, action) => {
     }
     case types.NEXT:
     case types.ENDED:
-      if(action.type == types.NEXT){
+      if(action.type === types.NEXT){
         ReactGA.event({
           category: 'PLAYER',
           action: 'next',
@@ -55,7 +44,7 @@ export default (state = initialState, action) => {
             playing: false,
           }
         }
-        else if (state.currentlyPlaying.id == track.id) {
+        else if (state.currentlyPlaying.id === track.id) {
           nextProgressToTrack = 1;
           return {
             ...state,
@@ -122,4 +111,19 @@ const trackProgressMaybe = (prog) => {
     } 
   };
 
+}
+
+function playTrack(state, action) {
+  ReactGA.event({
+    category: 'PLAYER',
+    action: 'play_track',
+  });
+  nextProgressToTrack = 1;
+  return {
+    ...state,
+    history: [state.currentlyPlaying, ...state.history],
+    currentlyPlaying: action.payload,
+    playing: true,
+    progress: 0,
+  };
 }

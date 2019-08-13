@@ -8,19 +8,22 @@ function CliquesList(props) {
   const filteredCliqueIds = cliques.map(e => e.id)
   return (
     <div>
-      {cliques.map(clique => {
-        const users = clique.users.sort((a, b) => b.link_clique_assignments_count - a.link_clique_assignments_count)
-        const isActive = cliques && filteredCliqueIds.includes(clique.id)
-        return <div key={clique.id} className={[styles.wrapper, isActive ? styles.active : ''].join(' ')}>
-          <div className={styles.cliqueName} onClick={() => clickName(clique)}>{clique.name}</div>
-          <div className={styles.users}>
-            {users.map(renderUser)}
-          </div>
-        </div>
-      })}
+      {cliques.map(renderClique)}
     </div>
   )
 
+  function renderClique(clique){
+      const users = clique.users.sort((a, b) => b.link_clique_assignments_count - a.link_clique_assignments_count)
+      const isActive = cliques && filteredCliqueIds.includes(clique.id)
+      return <div key={clique.id} className={[styles.wrapper, isActive ? styles.active : ''].join(' ')}>
+        <div >
+          <div className={styles.cliqueName} onClick={() => clickName(clique)}>{clique.name}</div>
+        </div>
+        <div className={styles.users}>
+          {users.map(renderUser)}
+        </div>
+      </div>
+  }
   function renderUser(user){
     const isActive = users && filteredUserIds.includes(user.id)
     const hasLinks = user.link_clique_assignments_count > 0;

@@ -22,6 +22,7 @@ import LinksForm from './components/links/LinksForm';
 import LoginForm from './components/user/LoginForm';
 import NewsletterPage from './components/static/NewsletterPage';
 import NotificationsList from './components/notifications/NotificationsList';
+import ExternalPlaylist from './components/external/ExternalPlaylist'
 import Title from './components/Title'
 
 import routes from './routes';
@@ -91,12 +92,16 @@ class App extends Component {
     const { loading } = this.state;
     return (
       <div className={[styles.app, styles.appear].join(' ')} >
-        { loading ? this.renderLoading() :
-          this.props.user.authenticated ? this.renderAuthenticatedRoutes() : this.renderAnonymousRoutes()
-        }
+        { loading ? this.renderLoading() : this.renderAll() }
         <IFrameAbsolute />
       </div>
     );
+  }
+  renderAll(){
+    return <Switch>
+      <Route path="/play-external" component={ExternalPlaylist} />
+      {this.props.user.authenticated ? this.renderAuthenticatedRoutes() : this.renderAnonymousRoutes()}
+    </Switch>
   }
 }
 

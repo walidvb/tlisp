@@ -21,12 +21,12 @@ const Link = ({ playTrack, pause, link, style }) => {
     inner = (
       <div onClick={() => playTrack(link)} style={{height: "100%"}}>
         <div className={styles.thumbnail}>
-          <img style={{visibility: 'hidden'}}width="100%" height="400" src={thumbnail_url} />
+          <img alt={title} style={{visibility: 'hidden'}}width="100%" height="400" src={thumbnail_url} />
         </div>
         <div className={styles.infos}>
           <div>
             <h3 className={styles.title}>
-              {title && splittedTitle.length == 2 ? <span>{splittedTitle[0].trim()} < br /> {splittedTitle[1].trim()}</span> : title  }
+              {title && splittedTitle.length === 2 ? <span>{splittedTitle[0].trim()} < br /> {splittedTitle[1].trim()}</span> : title  }
             </h3>
             <div className={styles.submitted}>
               <i className={["fa fa-user",styles.user_icon].join(' ')}></i>

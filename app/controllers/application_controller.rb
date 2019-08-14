@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
 
-  after_filter :allow_cors
+  after_action :allow_cors
 
   def allow_cors
    headers["Access-Control-Allow-Origin"] = "*"
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Devise
-  before_filter :reject_locked!, if: :devise_controller?
+  before_action :reject_locked!, if: :devise_controller?
 
   def fallback_index_html
     if /tracks\/new/.match(params[:path])

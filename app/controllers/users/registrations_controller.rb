@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
 
-  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
+  # skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
   respond_to :json
 
   # GET /resource/sign_up

@@ -42,6 +42,5 @@ module DiggersDelights
    config.assets.paths << Rails.root.join('node_modules')
    
    config.assets.precompile += ['application.css, application.js']
-    config.active_record.raise_in_transactional_callbacks = true
   end
 end

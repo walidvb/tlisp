@@ -49,7 +49,7 @@ describe LinksController do
     end
 
      it 'returns the users assigned to the link for that clique' do 
-      get :index, format: :json
+      get :index, params: { format: :json }
       expect(response_json["links"][0]["users"].map{|u| u["id"]}).to eq([me.id, user.id])
     end
   end
@@ -62,20 +62,20 @@ describe LinksController do
     end
 
     it 'sets visibility' do 
-      post :create, { link: {url: url, published: true }}
+      post :create, params: { link: {url: url, published: true }}
       expect(LinkCliqueAssignment.last).to be_visible
     end
 
     context "with valid oembed source" do 
       it "returns the link" do 
         expect { 
-          post :create, { link: {url: url, clique_ids: [clique.id]}}
+          post :create, params: { link: {url: url, clique_ids: [clique.id]}}
         }.to change(Link, :count).by(1)
       end
 
       it "creates mentions" do 
         expect {
-            post :create, { link: {url: url, clique_ids: [clique.id], mentions: [user2.id]}}
+            post :create, params: { link: {url: url, clique_ids: [clique.id], mentions: [user2.id]}}
           }.to change(ActivityNotification::Notification, :count).by(1)
       end
 
@@ -86,19 +86,19 @@ describe LinksController do
 
         it "doesn't duplicate the link" do 
           expect { 
-            post :create, { link: {url: url, clique_ids: [clique.id]}}
+            post :create, params: { link: {url: url, clique_ids: [clique.id]}}
           }.to change(Link, :count).by(0)
         end
 
         it "adds an assignment to a clique" do
           expect { 
-            post :create, { link: {url: url, clique_ids: [clique.id]}}
+            post :create, params: { link: {url: url, clique_ids: [clique.id]}}
           }.to change(LinkCliqueAssignment, :count).by(1)
         end
 
         it "creates an unexisting playlist and adds it to it" do
           expect { 
-            post :create, { link: {url: url, playlist_ids: ["test"]}}
+            post :create, params: { link: {url: url, playlist_ids: ["test"]}}
           }.to change(me.playlists, :count).by(1)
         end
 
@@ -107,7 +107,7 @@ describe LinksController do
           pl.links << Fabricate(:link, url: 'https://www.youtube.com/watch?v=MJi4TCMxOMY')
           expect(pl.links.count).to eq(1)
           expect { 
-            post :create, { link: {url: url, playlist_ids: [pl.id]}}
+            post :create, params: { link: {url: url, playlist_ids: [pl.id]}}
           }.to change(pl.reload.links, :count).by(1)
         end
       end
@@ -120,7 +120,7 @@ describe LinksController do
 
       it 'still creates the link' do
         expect { 
-          post :create, { link: {url: url, clique_ids: [clique.id]}}
+          post :create, params: { link: {url: url, clique_ids: [clique.id]}}
         }.to change(Link, :count).by(1)
       end
     end

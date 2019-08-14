@@ -26,7 +26,7 @@ describe Users::RegistrationsController do
       end
 
       it "returns the new user" do
-        post :create, valid_parameters.merge({format: :json})
+        post :create, params: valid_parameters.merge({ format: :json })
         expect(response).to have_http_status(:success)
         expect(response_json['user']['email']).to eq(valid_parameters[:user][:email])
         expect(User.first.clique_ids.include?(clique.id)).to be_truthy
@@ -35,7 +35,7 @@ describe Users::RegistrationsController do
 
     context 'with invalid parameters' do 
       it 'returns the errors' do 
-        post :create, { format: :json, 
+        post :create, params: { format: :json, 
           user: { email: 'test@user.com', password: '1234', password_confirmation: '4321'} ,
           clique: 'test'
         }

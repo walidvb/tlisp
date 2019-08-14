@@ -86,12 +86,11 @@ class LinksController < ApplicationController
     end
 
     @links = Link
-    .search(params[:search])
-    .includes(:tags)
-    .joins(:link_clique_assignments)
-    .order("created_at DESC")
-    .where('link_id IN (?)', @link_assignments.map(&:link_id))
-    .uniq
+      .search(params[:search])
+      .includes(:tags)
+      .joins(:link_clique_assignments)
+      .order("created_at DESC")
+      .where('link_id IN (?)', @link_assignments.map(&:link_id))
 
     if mood = params[:mood].presence
       mood = mood.to_i

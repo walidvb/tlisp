@@ -4,19 +4,10 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module DiggersDelights
   class Application < Rails::Application
-
-    config.before_configuration do
-      env_file = File.join(Rails.root, 'config', 'local_env.yml')
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value.to_s
-      end if File.exists?(env_file)
-    end
-    config.secret_key_base = ENV['SECRET']
-    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -29,10 +20,8 @@ module DiggersDelights
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # turn off warnings triggered by friendly_id
-    I18n.enforce_available_locales = false
-
-    # Test framework
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+# Test framework
     config.generators.test_framework false
 
     # autoload lib path
@@ -53,8 +42,6 @@ module DiggersDelights
    config.assets.paths << Rails.root.join('node_modules')
    
    config.assets.precompile += ['application.css, application.js']
-   #DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
-   config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.raise_in_transactional_callbacks = true
   end
-
 end

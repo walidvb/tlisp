@@ -153,7 +153,8 @@ class Link < ActiveRecord::Base
             mood: mood,
             thumbnail_url: thumbnail_url,
             published: published,
-            oembed: oembed
+            oembed: oembed,
+            url: url,
         }
     end
 

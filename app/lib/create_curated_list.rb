@@ -22,12 +22,19 @@ class CreateCuratedList
 
   private
   def fetch_links
-    links = CuratedListScraper.new(@curated_list.url).get_iframes
-    links.each do |url|
-      scraped = Scraper.new(url)
-      link = Link.find_or_create_by(url: scraped.canonical)
-      @curated_list.links << link
-      CuratedListChannel.broadcast_to @curated_list, link.as_json
+    begin
+      links = CuratedListScraper.new(@curated_list.url).get_iframes
+      links.each do |url|
+        scraped = Scraper.new(url)
+        link = Link.find_or_create_by(url: scraped.canonical)
+        @curated_list.links << link
+        CuratedListChannel.broadcast_to @curated_list, link.as_json
+      end
+    rescue => e
+      CuratedListChannel.broadcast_to @curated_list, {
+        code: 'error',
+        error_message: e.inspect,
+      }
     end
   end
   handle_asynchronously :fetch_links, priority: 100

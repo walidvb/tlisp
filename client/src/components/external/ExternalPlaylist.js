@@ -17,12 +17,12 @@ const qs = require('qs');
 function ExternalPlaylist({ playTrack, setTracklist, location: { search }}) {
   const [loading, setLoading] = useState(true)
   const [infos, setInfos] = useState({})
-  const { source } = qs.parse(search, { ignoreQueryPrefix: true })
+  const { url } = qs.parse(search, { ignoreQueryPrefix: true })
 
   useEffect(() => {
     (async () => {
       try{
-        const { data: { infos, iframes }} = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(source)}`)
+        const { data: { infos, iframes }} = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(url)}`)
         const links = iframes.map(url => ({
           id: url,
           url: url,
@@ -44,7 +44,7 @@ function ExternalPlaylist({ playTrack, setTracklist, location: { search }}) {
   }, [])
   if(loading){
     return (<div className="container">
-      LOADING {source}...
+      LOADING {url}...
     </div>)
   }
   return (

@@ -1,7 +1,7 @@
 class CuratedListController < ApplicationController
 
   def show
-    source = params[:source]
+    source = params[:url]
     scraped = CuratedListScraper.new(source)
     render json: {
       infos: scraped.get_infos,

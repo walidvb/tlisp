@@ -22,7 +22,7 @@ function ExternalPlaylist({ playTrack, setTracklist, location: { search }}) {
   useEffect(() => {
     (async () => {
       try{
-        const { data: { infos, iframes }} = await axios.get(`${routes.api.curatedPlaylists.show}?source=${encodeURIComponent(source)}`)
+        const { data: { infos, iframes }} = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(source)}`)
         const links = iframes.map(url => ({
           id: url,
           url: url,
@@ -50,7 +50,7 @@ function ExternalPlaylist({ playTrack, setTracklist, location: { search }}) {
   return (
     <div className="container pt-4">
       <CuratedListForm />
-      <h1 style="margin-top: 2rem;">{infos.title}</h1>
+      <h1 style={{marginTop: "2rem"}}>{infos.title}</h1>
       <h2>{infos.description}</h2>
       <a href={infos.url} target="_blank">Read more...</a>
       <PlayerContainer noTracking />

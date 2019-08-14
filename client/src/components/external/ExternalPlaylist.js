@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
 import { connect } from 'react-redux';
 import { setTracklist, playTrack, addToTracklist } from '../../actions/playerActions';
 import PlayerContainer from '../player/PlayerContainer';
-import axios from 'axios'
 
-import styles from '../links/LinksContainer.scss'
 import CuratedListForm from './CuratedListForm';
 import useCuratedList from '../../store/useCuratedList';
 const qs = require('qs');

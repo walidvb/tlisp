@@ -9,7 +9,14 @@ const useCuratedList = (props) => {
   const [infos, setInfos] = useState({})
   let hasStarted = false
   const cableHandlers = {
-    received: (link) => {
+    received: ({ code, error_message, ...link}) => {
+      if(code === 'error'){
+        setInfos({
+          ...infos,
+          description: `Error fetching the tracks: ${error_message}`,
+        })
+        return
+      }
       addToTracklist(link)
       if(!hasStarted){
         playTrack(link)
@@ -19,9 +26,11 @@ const useCuratedList = (props) => {
   }
   useEffect(() => {
     (async () => {
+      setTracklist([])
+      setLoading(true)
       try {
         const { data: { links, curated_list: { id, ...infos} } } = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(url)}`)
-        if(links){
+        if(links && links.length > 0){
           setTracklist(links)
           playTrack(links[0])
         }
@@ -38,7 +47,7 @@ const useCuratedList = (props) => {
       }
       setLoading(false)
     })()
-  }, [])
+  }, [url])
 
   return [{
     loading,

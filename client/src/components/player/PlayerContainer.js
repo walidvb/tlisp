@@ -65,7 +65,7 @@ class PlayerContainer extends Component {
                 { this.renderCurrentlyPlaying() }
                 <div className={styles.tracklist} >NEXT UP:</div>
                 <div className={[styles.tracklist, styles[`${placement}`], styles[displayType]].join(' ')}>
-                    {tracklist.map(this.renderTrack.bind(this))}
+                    {tracklist.map(this.renderTrack.bind(this)).reverse()}
                 </div>
             </div>
         )

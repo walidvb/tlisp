@@ -1,16 +1,34 @@
 import React, { useState } from 'react'
 
 import styles from '../static/NewsletterForm.scss'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 
-const CuratedListForm = () => {
+const CuratedListForm = ({ history}) => {
   const [url, setUrl] = useState('')
-
-  return <div className={styles.container}>
-    <input placeholder="Paste a link here to see the page as a playlist" type="text" className={styles.input} value={url} onChange={({target: { value } } ) => setUrl(value)}/>
-    <Link to={`/curated?url=${encodeURIComponent(url)}`}> See all embeds</Link>
-  </div>
+  const [disabled, setDisabled] = useState(true)
+  const destination = () => `/curated?url=${encodeURIComponent(url)}`
+  const onSubmit = (e) => {
+    e.preventDefault()
+    history.push(destination())
+  }
+  const handleChange = ({ target: { value } }) => {
+    setUrl(value)
+    setDisabled(!isValidUrl(value))
+  }
+  return <form method="GET" className={styles.container} onSubmit={onSubmit}>
+    <input placeholder="Enter a valid URL" type="text" className={styles.input} value={url} onChange={handleChange}/>
+    <button type="submit" className="button button__border" disabled={disabled}>Listen</button>
+  </form>
 }
 
-export default CuratedListForm
+export default withRouter(CuratedListForm)
+
+const isValidUrl = (string) => {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}

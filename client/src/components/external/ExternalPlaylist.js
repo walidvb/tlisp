@@ -10,6 +10,7 @@ import PlayerContainer from '../player/PlayerContainer';
 import axios from 'axios'
 
 import styles from '../links/LinksContainer.scss'
+import CuratedListForm from './CuratedListForm';
 const qs = require('qs');
 
 
@@ -47,8 +48,9 @@ function ExternalPlaylist({ playTrack, setTracklist, location: { search }}) {
     </div>)
   }
   return (
-    <div className="container">
-      <h1>{infos.title}</h1>
+    <div className="container pt-4">
+      <CuratedListForm />
+      <h1 style="margin-top: 2rem;">{infos.title}</h1>
       <h2>{infos.description}</h2>
       <a href={infos.url} target="_blank">Read more...</a>
       <PlayerContainer noTracking />

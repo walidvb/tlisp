@@ -14,7 +14,7 @@ class PlayerContainer extends Component {
     static propTypes = {
         tracklist: PropTypes.array.isRequired,
         currentlyPlaying: PropTypes.object,
-        noTracking: PropTypes.boolean
+        noTracking: PropTypes.bool
     }
     static defaultProps = {
         noTracking: false

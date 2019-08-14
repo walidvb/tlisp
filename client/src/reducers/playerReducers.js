@@ -19,6 +19,11 @@ export default (state = initialState, action) => {
       ...state,
       tracklist: action.payload,
     }
+    case types.ADD_TO_PLAYLIST: 
+      return {
+        ...state,
+        tracklist: [...state.tracklist, action.payload]
+      }
     case types.NEXT:
     case types.ENDED:
       if(action.type === types.NEXT){

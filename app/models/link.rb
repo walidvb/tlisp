@@ -18,6 +18,7 @@ class Link < ActiveRecord::Base
     has_many :users, through: :link_clique_assignments, inverse_of: :links
     has_many :cliques, through: :link_clique_assignments, inverse_of: :links
 
+    belongs_to :curated_list
     has_many :plays, inverse_of: :link
     
     before_create :add_oembed
@@ -60,12 +61,6 @@ class Link < ActiveRecord::Base
         else
             return self
         end
-        # if search
-        #     search_length = search.split.length
-        #     find(:all, :conditions => [(['title LIKE ?'] * search_length).join(' AND ')] + search.split.map { |name| "%#{name}%" })
-        # else
-        #     find(:all)
-        # end
     end
     # =================== NOTIFICATIONS
 
@@ -147,6 +142,20 @@ class Link < ActiveRecord::Base
         return true
     end
 
+    def as_json
+        {
+            id: id, 
+            title: title,
+            safe_description: safe_description,
+            playlists: playlists,
+            cliques: cliques,
+            tags: tags,
+            mood: mood,
+            thumbnail_url: thumbnail_url,
+            published: published,
+            oembed: oembed
+        }
+    end
 
     rails_admin do 
         [:created_at, :updated_at].each do |ff|

@@ -11,7 +11,7 @@ gem 'jbuilder'#, '2.3.0'
 gem 'sass-rails'
 gem 'sprockets'#, '>= 3.0.0'
 gem 'sprockets-es6'
-
+gem 'redis'
 gem 'bcrypt', '3.1.10'
 gem 'haml-rails'
 # version blocked because of https://github.com/rails/rails/issues/31673
@@ -27,7 +27,7 @@ gem 'kaminari'
 gem 'friendly_id', '5.1.0'
 gem 'rest-client'
 gem 'nokogiri'
-
+gem 'delayed_job'
 # functionality
 gem 'devise'#, '~>4.1.0'
 # gem "paperclip", '~> 4.1'
@@ -38,7 +38,7 @@ gem 'activity_notification'
 gem 'rails_admin'
 gem 'twitter'
 
-
+gem 'delayed_job_active_record'
 #### I18n
 # gem 'rails-i18n', '~> 4.0.0'
 # gem 'globalize'

@@ -26,9 +26,13 @@
     },
     "/contact": {
       "target": "http://localhost:3001"
+    },
+    "/cable": {
+      "target": "http://localhost:3001"
     }
   },
   "dependencies": {
+    "actioncable": "^5.2.3",
     "autoprefixer": "7.1.6",
     "axios": "^0.19.0",
     "babel-core": "6.26.0",

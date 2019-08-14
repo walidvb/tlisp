@@ -21,20 +21,8 @@ class Scraper
             "description" => get_value('og:description'),
             "image_url" => get_value('og:image'),
             "url"  => @url,
+            "site_name" => site_name
         }
-    end
-
-    def build_iframe url
-        id_er = ""
-        if matches = /album=(\d+)\//.match(url)
-            id_er = "album=#{matches[1]}"
-        elsif matches = /track=(\d+)\//.match(url)
-            id_er = "track=#{matches[1]}"
-        else
-            p "Failed to get album_id for #{url}"
-            return
-        end
-        "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/v=2/#{id_er}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
     end
 
     def get_value property
@@ -53,7 +41,7 @@ class Scraper
 
     def canonical
         begin
-            @page.search('link[rel="canonical"]').first.attributes['href']
+            @page.search('link[rel="canonical"]').first.attributes['href'].value
         rescue
             @url
         end

@@ -12,7 +12,7 @@ OEmbed::Providers.register_fallback(
 )
 class DDOEmbed
     def self.get url
-        return dummy_get if !Rails.env.production?
+        return dummy_get if Rails.env.test?
 
         begin
             OEmbed::Providers.get(url).fields

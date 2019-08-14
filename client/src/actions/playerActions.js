@@ -38,6 +38,11 @@ export const setTracklist = (payload) => ({
   payload
 })
 
+export const addToTracklist = (payload) => ({
+  type: types.ADD_TO_PLAYLIST,
+  payload
+})
+
 export const next = (payload) => ({
   type: types.NEXT,
   payload

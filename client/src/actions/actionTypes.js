@@ -11,6 +11,7 @@ export const RESET_FILTERS = 'RESET_FILTERS';
 
 //========== PLAYER
 export const SET_PLAYLIST = 'SET_PLAYLIST';
+export const ADD_TO_PLAYLIST = 'ADD_TO_PLAYLIST';
 export const PLAY_TRACK = 'PLAY_TRACK'
 export const PLAY = 'PLAY';
 export const NEXT = 'NEXT';

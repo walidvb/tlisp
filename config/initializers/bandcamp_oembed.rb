@@ -1,20 +1,6 @@
 require 'open-uri'
 
 class BandcampOembed < Scraper
-    def initialize url
-        @url = url
-        @page = get_page
-    end
-
-    def get_oembed
-        begin 
-            build_oembed
-        rescue e
-            puts "Failed getting #{url}"
-            raise e
-        end
-    end
-
     def build_oembed
         video_url = get_value 'og:video'
         embed = build_iframe video_url
@@ -44,9 +30,5 @@ class BandcampOembed < Scraper
             return
         end
         "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/v=2/#{id_er}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
-    end
-
-    def is_bandcamp?
-        /bandcamp/.match(get_value("twitter:site"))
     end
 end

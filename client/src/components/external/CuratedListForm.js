@@ -4,7 +4,7 @@ import styles from '../static/NewsletterForm.scss'
 import { Link } from 'react-router-dom';
 
 
-const CuratedListForm = ({}) => {
+const CuratedListForm = () => {
   const [url, setUrl] = useState('')
 
   return <div className={styles.container}>

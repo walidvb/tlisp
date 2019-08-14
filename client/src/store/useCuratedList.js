@@ -7,25 +7,28 @@ const useCuratedList = (props) => {
   const { url, playTrack, setTracklist, addToTracklist } = props
   const [loading, setLoading] = useState(true)
   const [infos, setInfos] = useState({})
-
+  let hasStarted = false
   const cableHandlers = {
-    received: addToTracklist
+    received: (link) => {
+      addToTracklist(link)
+      if(!hasStarted){
+        playTrack(link)
+        hasStarted = true
+      }
+    }
   }
   useEffect(() => {
     (async () => {
       try {
-        const { data: { id, infos, iframes } } = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(url)}`)
-        appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
-
-        const links = iframes.map(url => ({
-          id: url,
-          url: url,
-          title: url,
-        }))
-
-        setTracklist(links)
+        const { data: { links, curated_list: { id, ...infos} } } = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(url)}`)
+        if(links){
+          setTracklist(links)
+          playTrack(links[0])
+        }
+        else{
+          appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
+        }
         setInfos(infos)
-        playTrack(links[0])
       } catch (error) {
         console.error(error)
         setInfos({

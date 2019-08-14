@@ -1,5 +1,3 @@
-require 'rails_helper'
-
-RSpec.describe CuratedListController, type: :controller do
+RSpec.describe CuratedListsController, type: :controller do
 
 end

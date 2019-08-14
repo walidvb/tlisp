@@ -5,7 +5,7 @@ import appCable from '../utils/appCable';
 
 const useCuratedList = (props) => {
   const { url, playTrack, setTracklist, addToTracklist } = props
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [infos, setInfos] = useState({})
   let hasStarted = false
   const cableHandlers = {
@@ -25,6 +25,9 @@ const useCuratedList = (props) => {
     }
   }
   useEffect(() => {
+    if(!url){
+      return
+    }
     (async () => {
       setTracklist([])
       setLoading(true)

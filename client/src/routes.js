@@ -1,7 +1,8 @@
 const routes = {
     api: {
         curatedPlaylists: {
-            show: '/api/curated_playlists'
+            index: '/api/curated_lists',
+            show: '/api/curated_lists/fetch',
         },
         cliques: '/api/cliques',
         covers: '/api/covers',
@@ -39,6 +40,9 @@ const routes = {
     newsletter: '/keep-me-posted',
     playlists: {
         show: '/playlists',
+    },
+    curatedList: {
+        show: '/curated',
     },
     user: {
         signup: '/cliques/:clique_slug/join',

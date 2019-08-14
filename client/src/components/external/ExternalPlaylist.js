@@ -6,6 +6,7 @@ import PlayerContainer from '../player/PlayerContainer';
 
 import CuratedListForm from './CuratedListForm';
 import useCuratedList from '../../store/useCuratedList';
+import CuratedListIndex from './CuratedListIndex';
 const qs = require('qs');
 
 
@@ -21,6 +22,13 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
     return (<div className="container">
       LOADING {url}...
     </div>)
+  }
+  if(!url){
+    return (
+      <div className="container pt-4">
+        <CuratedListForm />
+        <CuratedListIndex />
+      </div>)
   }
   return (
     <div className="container pt-4">

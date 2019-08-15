@@ -35,7 +35,7 @@ class LinksController < ApplicationController
     @cliques = current_user.cliques
     @cliques = @cliques.where.not(id: 1) if current_user.id > 10
     render json: {
-      link: @link,
+      link: @link.as_json,
       playlists: @playlists,
       cliques: @cliques,
       tags: @tags,

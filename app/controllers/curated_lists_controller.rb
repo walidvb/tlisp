@@ -34,11 +34,11 @@ class CuratedListsController < ApplicationController
     else
       @curated_list = CuratedList.create(
         {
-          url: page.canonical,
-          host: page.site_name,
-        }.merge(page.get_infos)
+          url: scraped.canonical,
+          host: scraped.site_name,
+        }.merge(scraped.get_infos)
       )
-      Slack.log text: "New Curated List for #{page.canonical}! 🔥"
+      Slack.log text: "New Curated List for #{scraped.canonical}! 🔥"
       CreateCuratedList.new(@curated_list, sources).add_sources(notify: true)
     end
     render json: {

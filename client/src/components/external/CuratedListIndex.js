@@ -13,7 +13,7 @@ const CuratedListIndex = ({}) => {
     })()
   }, [])
   return <div>
-    <div className="mt-6 mb-10">Or listen to the most recently discovered:</div>
+    <div className="mt-6 mb-10 text-2xl underline">MOST RECENT</div>
     {lists.map(l => <CuratedListSingle key={l.id} {...l} />)}
   </div>
 }

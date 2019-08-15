@@ -22,29 +22,22 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
     infos,
     loading
   }] = useCuratedList({ curatedListID, url, playTrack, setTracklist, addToTracklist })
-  
-  if(loading){
-    return (<div className="container">
-      LOADING {url}...
-    </div>)
-  }
-  if(!url && !curatedListID){
-    return (
-      <div className="container pt-4">
-        <CuratedListForm />
-        <CuratedListIndex />
-      </div>)
-  }
+  const hidePlayer = !url && !curatedListID
   return (
-    <div className="container pt-4">
-      <CuratedListForm />
-      <div className="mb-6">
-        <h1 className="text-xl mt-6 mb-2">{infos.title}</h1>
-        <h2 className="mb-2">{infos.description}</h2>
-        <a className="text-gray-600 text-sm" href={infos.url} target="_blank">Read more on {infos.site_name}...</a>
+    <div className="container pt-4 pb-4">
+      {(!loading && !hidePlayer) && <div>
+        <div className="mb-6">
+          <h1 className="text-xl mt-6 mb-2">{infos.title}</h1>
+          <h2 className="mb-2">{infos.description}</h2>
+          <a className="text-gray-600 text-sm" href={infos.url} target="_blank">Read more on {infos.site_name}...</a>
+        </div>
+        <PlayerContainer noTracking />
+        <div className="border-gray-500 border-b-2 border-solid w-100 my-8"/>
       </div>
-      <PlayerContainer noTracking />
-
+      }
+      <CuratedListIndex />
+      <div className="text-2xl underline mt-10 mb-4">CREATE YOURS</div>
+      <CuratedListForm />
       <div className={styles.triggerWrapper}>
         <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>
           <Bookmarklet />

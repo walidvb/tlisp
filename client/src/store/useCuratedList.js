@@ -50,7 +50,7 @@ const useCuratedList = (props) => {
       }
       setLoading(false)
     })()
-  }, [url])
+  }, [url, curatedListID])
 
   return [{
     loading,

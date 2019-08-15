@@ -18,7 +18,8 @@ class Link < ActiveRecord::Base
     has_many :users, through: :link_clique_assignments, inverse_of: :links
     has_many :cliques, through: :link_clique_assignments, inverse_of: :links
 
-    belongs_to :curated_list
+    has_many :curated_list_links
+    has_many :curated_lists, through: :curated_list_links
     has_many :plays, inverse_of: :link
     
     before_create :add_oembed
@@ -79,6 +80,7 @@ class Link < ActiveRecord::Base
 
     def notify_world!
         return if !Rails.env.production?
+        return if !self.curated_lists.empy?
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         
         payload = {
@@ -94,16 +96,12 @@ class Link < ActiveRecord::Base
                 ts: self.created_at.to_i,
             }]
         }
-        Slack.post! ENV['DD_SLACK_WEBHOOK_URL'], payload
+        Slack.log ENV['DD_SLACK_WEBHOOK_URL'], payload
 
         return if !self.published?
 
         tweet_text = "#{emoji} #{self.author.name} just digged #{self.title}! #{self.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{self.url}".gsub('*', '')
-        begin
-            DDTwitter.post tweet_text
-        rescue => e
-            puts "Error tweeting #{self.id}: #{e}"
-        end
+        DDTwitter.post tweet_text
         self.cliques.each do |cc|
             if !cc.slack_url.blank?
                 Slack.post! cc.slack_url, payload 

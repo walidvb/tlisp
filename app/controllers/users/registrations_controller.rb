@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     yield resource if block_given?
     if resource.persisted?
-      log_to_slack title: "New user signed up!", text: "#{resource.email}"
+      Slack.log title: "New user signed up!", text: "#{resource.email}"
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)

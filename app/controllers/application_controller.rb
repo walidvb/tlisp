@@ -72,8 +72,4 @@ class ApplicationController < ActionController::Base
   def all_tags context = :tags
     ActsAsTaggableOn::Tagging.where(context: context).select(:tag_id).distinct.includes(:tag).map(&:tag)
   end
-
-  def log_to_slack options = {}
-    Slack.post! ENV['DD_SLACK_LOG_WEBHOOK_URL'], options if Rails.env.production?
-  end
 end

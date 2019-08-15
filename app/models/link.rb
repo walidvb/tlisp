@@ -95,11 +95,10 @@ class Link < ActiveRecord::Base
                 ts: self.created_at.to_i,
             }]
         }
-        Slack.log ENV['DD_SLACK_WEBHOOK_URL'], payload
-
+        Slack.log payload
         return if !self.published?
 
-        tweet_text = "#{emoji} #{self.author.name} just digged #{self.title}! #{self.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{self.url}".gsub('*', '')
+        tweet_text = "#{emoji} #{self.author.try(:name)} just digged #{self.title}! #{self.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{self.url}".gsub('*', '')
         DDTwitter.post tweet_text
         self.cliques.each do |cc|
             if !cc.slack_url.blank?

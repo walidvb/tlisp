@@ -17,7 +17,7 @@ const CuratedListForm = ({ history}) => {
     setDisabled(!isValidUrl(value))
   }
   return <form method="GET" className={styles.container} onSubmit={onSubmit}>
-    <input placeholder="Enter a valid URL" type="text" className={styles.input} value={url} onChange={handleChange}/>
+    <input placeholder="Enter the url of a page containing embeds" type="text" className={styles.input} value={url} onChange={handleChange}/>
     <button type="submit" className="button button__border" disabled={disabled}>Listen</button>
   </form>
 }

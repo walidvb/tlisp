@@ -30,9 +30,10 @@ class CreateCuratedList
   def fetch_single_link url
     begin
       scraped = Scraper.new(url)
-      link = Link.find_or_create_by(url: scraped.canonical)
-      @curated_list.links << link
-      CuratedListChannel.broadcast_to @curated_list, link.as_json
+      if link = Link.create(url: scraped.canonical)
+        @curated_list.links << link
+        CuratedListChannel.broadcast_to @curated_list, link.as_json
+      end
     rescue => e
       puts "Error scraping #{url}"
       puts e

@@ -95,7 +95,7 @@ class Link < ActiveRecord::Base
                 ts: self.created_at.to_i,
             }]
         }
-        ::Slack.log payload
+        Slack.log payload
         return if !self.published?
 
         tweet_text = "#{emoji} #{self.author.try(:name)} just digged #{self.title}! #{self.tags.map{|tt| tt.name.gsub(' ', '').prepend('#')}.join(' ')} #{self.url}".gsub('*', '')

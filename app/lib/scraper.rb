@@ -17,26 +17,30 @@ class Scraper
 
     def get_infos
         {
-            "title" => get_value('og:title').strip,
-            "description" => get_value('og:description'),
-            "image_url" => get_value('og:image'),
+            "title" => get_title,
+            "description" => get_meta('og:description'),
+            "image_url" => get_meta('og:image'),
             "url"  => canonical,
             "site_name" => site_name
         }
     end
 
-    def get_value property
-        if node = @page.search("[property='#{property}']").first
+    def get_meta property
+        if node = @page.search("[property='#{property}'], [name='#{property}']").first
             node.attribute('content').value
         end
     end
     
+    def get_title
+        get_meta('og:title').try(:strip) || @page.search('title').try(:text) || 'Undefined title'
+    end
+
     def get_page
         Nokogiri::HTML(open(@url))   
     end
 
     def site_name
-        get_value('og:site_name')
+        get_meta('og:site_name')
     end
 
     def canonical
@@ -48,6 +52,6 @@ class Scraper
     end
 
     def is_bandcamp?
-        /bandcamp/.match(get_value("twitter:site"))
+        /bandcamp/.match(get_meta("twitter:site"))
     end
 end

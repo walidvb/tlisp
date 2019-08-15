@@ -35,11 +35,11 @@ const useCuratedList = (props) => {
         const fetchURLBase = `${routes.api.curatedPlaylists.show}`
         const fetchURL = curatedListID ? `${fetchURLBase}/${curatedListID}` : `${fetchURLBase}/by-url/?url=${encodeURIComponent(url)}`
         const { data: { links, curated_list: { id, ...infos} } } = await axios.get(fetchURL)
+        appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
         if(links && links.length > 0){
           setTracklist(links)
           playTrack(links[0])
         }
-        appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
         setInfos(infos)
       } catch (error) {
         console.error(error)

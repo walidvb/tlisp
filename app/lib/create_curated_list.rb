@@ -30,12 +30,12 @@ class CreateCuratedList
   def fetch_single_link url
     begin
       scraped = Scraper.new(url)
-      if link = Link.create(url: scraped.canonical)
-        @curated_list.links << link
-        CuratedListChannel.broadcast_to @curated_list, link.as_json
-      end
+      link = Link.find_or_create_by(url: scraped.canonical)
+      @curated_list.links << link
+      CuratedListChannel.broadcast_to @curated_list, link.as_json
+    rescue ActiveRecord::RecordNotUnique => e
     rescue => e
-      puts "Error scraping #{url}"
+      puts "Error scraping #{url} for #{@curated_list.id}"
       puts e
       ::Slack.log(text: "Error Scraping #{url}, from #{@curated_list.id}: #{e.inspect}")
       CuratedListChannel.broadcast_to @curated_list, {code: 'error', message: e.inspect, url: url}

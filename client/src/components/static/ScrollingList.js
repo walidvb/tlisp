@@ -34,7 +34,9 @@ export default class ScrollingList extends Component {
                 direction = -direction;
             }
         }
-        this.coversContainer.scrollTop = this.coversContainer.scrollHeight - (window.innerHeight + 200);
+        if(this.coversContainer){
+            this.coversContainer.scrollTop = this.coversContainer.scrollHeight - (window.innerHeight + 200);
+        }
         setInterval(scrollTo, 50);
     }
     renderBackground(){

@@ -36,7 +36,7 @@ class CreateCuratedList
     rescue => e
       puts "Error scraping #{url}"
       puts e
-      Slack.log(text: "Error Scraping #{url}, from #{@curated_list.id}: #{e.inspect}")
+      ::Slack.log(text: "Error Scraping #{url}, from #{@curated_list.id}: #{e.inspect}")
       CuratedListChannel.broadcast_to @curated_list, {code: 'error', message: e.inspect, url: url}
     end
   end

@@ -7,6 +7,11 @@ import PlayerContainer from '../player/PlayerContainer';
 import CuratedListForm from './CuratedListForm';
 import useCuratedList from '../../store/useCuratedList';
 import CuratedListIndex from './CuratedListIndex';
+import DDTooltip from '../ui_components/DDTooltip';
+import Bookmarklet from '../Bookmarklet';
+
+import styles from '../../App.scss';
+
 const qs = require('qs');
 
 
@@ -39,6 +44,13 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
         <a className="text-gray-600 text-sm" href={infos.url} target="_blank">Read more on {infos.site_name}...</a>
       </div>
       <PlayerContainer noTracking />
+
+      <div className={styles.triggerWrapper}>
+        <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>
+          <Bookmarklet />
+        </DDTooltip>
+      </div>
+
     </div>
   )
 }

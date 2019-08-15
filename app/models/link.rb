@@ -79,8 +79,7 @@ class Link < ActiveRecord::Base
     end
 
     def notify_world!
-        return if !Rails.env.production?
-        return if !self.curated_lists.empy?
+        return if !self.curated_lists.empty?
         emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
         
         payload = {

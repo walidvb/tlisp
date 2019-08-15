@@ -8,6 +8,7 @@ module DDTwitter
 
     def self.post tweet
         begin
+            return if !Rails.env.production?
             @client.update(tweet)
         rescue => e
             puts "Error tweeting #{self.id}: #{e}"

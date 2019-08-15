@@ -36,6 +36,9 @@ class AppWrapper extends Component {
         <LinksContainer {...this.props}/>
         <div className={styles.triggerWrapper}>
           <NotificationsList />
+          <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>
+            <Bookmarklet />
+          </DDTooltip>
         </div>
       </div>
     )
@@ -92,9 +95,6 @@ class App extends Component {
       <div className={[styles.app, styles.appear].join(' ')} >
         { loading ? this.renderLoading() : this.renderAll() }
         <IFrameAbsolute />
-        <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>
-          <Bookmarklet />
-        </DDTooltip>
       </div>
     );
   }

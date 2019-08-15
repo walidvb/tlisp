@@ -1,4 +1,4 @@
-module Slack
+class Slack
   def self.log options = {}
     self.post! ENV['DD_SLACK_LOG_WEBHOOK_URL'], options
   end

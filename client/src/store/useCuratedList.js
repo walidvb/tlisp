@@ -4,7 +4,7 @@ import { routes } from '../request';
 import appCable from '../utils/appCable';
 
 const useCuratedList = (props) => {
-  const { url, playTrack, setTracklist, addToTracklist } = props
+  const { curatedListID, url, playTrack, setTracklist, addToTracklist } = props
   const [loading, setLoading] = useState(false)
   const [infos, setInfos] = useState({})
   let hasStarted = false
@@ -25,21 +25,21 @@ const useCuratedList = (props) => {
     }
   }
   useEffect(() => {
-    if(!url){
+    if(!url && !curatedListID){
       return
     }
     (async () => {
       setTracklist([])
       setLoading(true)
       try {
-        const { data: { links, curated_list: { id, ...infos} } } = await axios.get(`${routes.api.curatedPlaylists.show}?url=${encodeURIComponent(url)}`)
+        const fetchURLBase = `${routes.api.curatedPlaylists.show}`
+        const fetchURL = curatedListID ? `${fetchURLBase}/${curatedListID}` : `${fetchURLBase}/by-url/?url=${encodeURIComponent(url)}`
+        const { data: { links, curated_list: { id, ...infos} } } = await axios.get(fetchURL)
         if(links && links.length > 0){
           setTracklist(links)
           playTrack(links[0])
         }
-        else{
-          appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
-        }
+        appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
         setInfos(infos)
       } catch (error) {
         console.error(error)

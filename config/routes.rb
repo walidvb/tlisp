@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   match "links" => "links#index", via: [:options]
 
   scope :api do
-    resources :curated_lists, only: [:index] do 
+    resources :curated_lists, only: [:create, :show, :index] do 
       collection do 
-        get '/fetch' => 'curated_lists#show'
+        get '/by-url' => 'curated_lists#by_url'
       end
     end
 

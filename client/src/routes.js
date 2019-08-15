@@ -2,7 +2,7 @@ const routes = {
     api: {
         curatedPlaylists: {
             index: '/api/curated_lists',
-            show: '/api/curated_lists/fetch',
+            show: '/api/curated_lists',
         },
         cliques: '/api/cliques',
         covers: '/api/covers',

@@ -51,11 +51,12 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.getUserDetails();
+    this.setState({loading: false})
   }
   componentWillReceiveProps(props){
     const { user, history, location: { pathname }  } = props;
     // automatically redirect the user on auth
-    console.log(props)
+    console.log("props", props)
     if (this.state.loading && pathname == '/'){
       if(user.authenticated){
         history.replace(routes.links.explore);
@@ -99,7 +100,7 @@ class App extends Component {
   }
   renderAll(){
     return <Switch>
-      <Route path="/curated" component={ExternalPlaylist} />
+      <Route path="/curated/:curatedListID?" component={ExternalPlaylist} />
       {this.props.user.authenticated ? this.renderAuthenticatedRoutes() : this.renderAnonymousRoutes()}
     </Switch>
   }

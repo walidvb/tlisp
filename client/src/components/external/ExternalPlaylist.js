@@ -10,20 +10,20 @@ import CuratedListIndex from './CuratedListIndex';
 const qs = require('qs');
 
 
-function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: { search }}) {
+function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: { search }, match: { params: { curatedListID }}}) {
   
   const { url } = qs.parse(search, { ignoreQueryPrefix: true })
   const [{
     infos,
     loading
-  }] = useCuratedList({ url, playTrack, setTracklist, addToTracklist })
+  }] = useCuratedList({ curatedListID, url, playTrack, setTracklist, addToTracklist })
   
   if(loading){
     return (<div className="container">
       LOADING {url}...
     </div>)
   }
-  if(!url){
+  if(!url && !curatedListID){
     return (
       <div className="container pt-4">
         <CuratedListForm />
@@ -33,9 +33,11 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
   return (
     <div className="container pt-4">
       <CuratedListForm />
-      <h1 style={{marginTop: "2rem"}}>{infos.title}</h1>
-      <h2>{infos.description}</h2>
-      <a href={infos.url} target="_blank">Read more...</a>
+      <div className="mb-6">
+        <h1 className="text-xl mt-6 mb-2">{infos.title}</h1>
+        <h2 className="mb-2">{infos.description}</h2>
+        <a className="text-gray-600 text-sm" href={infos.url} target="_blank">Read more on {infos.site_name}...</a>
+      </div>
       <PlayerContainer noTracking />
     </div>
   )

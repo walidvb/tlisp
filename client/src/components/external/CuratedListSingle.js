@@ -6,7 +6,7 @@ const CuratedListSingle = ({id, image_url, title, site_name, description}) => {
   const destination = [routes.curatedList.show, "/", id].join('')
   return <Link to={destination} className={'no-underline'}>
     <div className="my-4 flex no-underline align-start hover:opacity-75">
-      <div className="mr-4 w-64">
+      <div className="mr-4 w-64 flex-shrink-0">
         <img className={""} src={image_url} alt={title}/>
       </div>
       <div className="flex flex-col">

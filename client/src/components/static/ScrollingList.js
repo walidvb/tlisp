@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { request, routes } from '../../request';
 
@@ -40,7 +39,7 @@ export default class ScrollingList extends Component {
         setInterval(scrollTo, 50);
     }
     renderBackground(){
-        const { covers, loading } = this.state;
+        const { covers } = this.state;
         const animationDelay = (i) => (covers.length-i) * 10;
         return <div 
             ref={(coversContainer) => {this.coversContainer = coversContainer}}
@@ -48,14 +47,13 @@ export default class ScrollingList extends Component {
                 {covers.map(({thumbnail_url, provider}, i) => (
                     <div key={i} className={[listStyles.item__grid, listStyles.no__spacing, styles.thumb].join(' ')} style={{animationDelay: `${animationDelay(i)}ms`}}>
                         <div>
-                        <img src={thumbnail_url} /> 
+                        <img alt="just an pic..." src={thumbnail_url} /> 
                             <div className={[`fa fa-${provider.toLowerCase()}`, styles.provider].join(' ')}/>
                         </div>
                     </div>))}
             </div>
     }
     render() {
-        const { covers, loading} = this.state;
         return (
             <div>
                 {this.renderBackground()}

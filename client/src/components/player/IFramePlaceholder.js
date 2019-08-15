@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class IFramePlaceholder extends Component {
   rePlace = this.rePlace.bind(this)
   placeTarget(off = false, placeTop = true){
-    const { left, top, width, height } = this.container.getBoundingClientRect();
+    const { left, top, width } = this.container.getBoundingClientRect();
     const target = document.getElementById('player-placeholder');
     target.style.position = 'fixed';
     target.style.top = off && placeTop ? '-200%' : `${top}px`;

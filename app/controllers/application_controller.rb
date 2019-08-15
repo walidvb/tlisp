@@ -44,8 +44,6 @@ class ApplicationController < ActionController::Base
   def reject_locked!
     if current_user && current_user.locked?
       sign_out current_user
-      user_session = nil
-      current_user = nil
       flash[:alert] = "Your account is locked."
       flash[:notice] = nil
       redirect_to root_url

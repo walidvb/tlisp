@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from '../static/NewsletterForm.scss'
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 const CuratedListForm = ({ history}) => {

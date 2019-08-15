@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { request, routes } from '../../request';
 
 import ScrollingList from './ScrollingList';
 import styles from './AnonymousPageWrapper.scss';
@@ -39,9 +36,9 @@ export default class AnonymousPageWrapper extends Component {
                 <div className={styles.container}>
                     <div className={styles.slogan}>Digging, by &nbsp;
                                     <ReactRotatingText style={{ minWidth: '6ch', display: 'inline-block', textAlign: 'left' }} items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random() * 2000 + 1000} /> 
-                                     for&nbsp;
-                                     <ReactRotatingText items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random()*2000+1000} /> 
-                                     </div>
+                                    for&nbsp;
+                                    <ReactRotatingText items={['friends', 'diggers']} cursor={false} eraseMode="erase" pause={Math.random()*2000+1000} /> 
+                                    </div>
                     <div className={styles.center}>
                         {this.props.children}
                     </div>

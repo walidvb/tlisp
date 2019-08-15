@@ -28,7 +28,7 @@ class PlayerContainer extends Component {
         const { currentlyPlaying, tracklist, play } = this.props;
         for (let i = 0; i < tracklist.length; i++) {
             const track = tracklist[i];
-            if (currentlyPlaying.id == track.id && i < tracklist.length ){
+            if (currentlyPlaying.id === track.id && i < tracklist.length ){
                 play(tracklist[i + 1])
                 return;
             }
@@ -39,7 +39,7 @@ class PlayerContainer extends Component {
         const isPlaying = this.props.currentlyPlaying && this.props.currentlyPlaying.id == t.id;
         return (
             <div key={i} className={["flex", styles.track, isPlaying ? styles.playing : null].join(' ')} onClick={() => this.props.playTrack(t)}>
-                <img src={t.thumbnail_url} className="w-8 mr-2"/>
+                <img alt="thumbnail" src={t.thumbnail_url} className="w-8 mr-2"/>
                 {t.title}
             </div>
         )

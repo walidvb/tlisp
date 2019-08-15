@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { getUserDetails } from './actions/userActions';
 
 import styles from './App.scss';
-import tooltipStyles from './components/ui_components/DDTooltip.scss';
 /* eslint-disable */
 import '!style-loader!css-loader!sass-loader!./generic_no_transform.scss';
 import AnonymousPageWrapper from './components/static/AnonymousPageWrapper';

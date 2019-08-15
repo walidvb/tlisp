@@ -87,7 +87,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
       return ENV['DOMAIN']
-      params[:redirect_to].present? ? params[:redirect_to] : user_path(resource)
+      # params[:redirect_to].present? ? params[:redirect_to] : user_path(resource)
   end
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

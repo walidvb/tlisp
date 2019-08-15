@@ -7,13 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case `${types.GET_USER_DETAILS}_REJECTED`:
-        return {
-            ...initialState
-        }
-        case `${types.GET_USER_DETAILS}_REJECTED`:
-        return {
-            ...initialState
-        }
+        return initialState
         case `${types.GET_USER_DETAILS}_FULFILLED`:
         case `${types.SIGN_UP_SUCCESSFUL}`:
             const user = action.payload.user
@@ -30,9 +24,8 @@ export default (state = initialState, action) => {
 let tawkIs = false;
 function addTawk(user){
     if(!tawkIs){
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        var Tawk_API=Tawk_API||{}
         Tawk_API.visitor = user;
-        console.log(user, Tawk_API);
         (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
             s1.async=true;

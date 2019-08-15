@@ -105,7 +105,7 @@ const trackProgressMaybe = (prog) => {
   // use 1-10 instead of 1-100, much easier to track :)
   const progress = Math.floor(10*prog);
   for (let threshold = 1; threshold < 10; threshold++) {
-    if (progress == threshold && nextProgressToTrack == threshold){
+    if (progress === threshold && nextProgressToTrack === threshold){
       nextProgressToTrack = threshold+1;
       ReactGA.event({
         category: 'PLAYER',

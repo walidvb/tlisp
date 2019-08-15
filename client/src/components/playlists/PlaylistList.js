@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Square from '../views/Square'
@@ -25,7 +24,7 @@ class PlaylistList extends Component {
         >
             <Square className={styles.square}>
                 <div className={styles.playlistWrapper}>
-                    {playlist.links.map(({ thumbnail_url }) => <img className={styles.thumb} src={thumbnail_url} />)}
+                    {playlist.links.map(({ thumbnail_url }) => <img alt="thumbnail" className={styles.thumb} src={thumbnail_url} />)}
                 </div>
             </Square>
             <div className={styles.name}>{playlist.name}</div>

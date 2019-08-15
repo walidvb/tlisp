@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import errorsToString from '../../utils/errorsToString';
 import { request, routes } from '../../request';

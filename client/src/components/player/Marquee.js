@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 let playerInterval;
 
 export default class Marquee extends Component {

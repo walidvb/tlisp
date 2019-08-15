@@ -61,10 +61,10 @@ class LinksContainer extends Component {
   componentWillReceiveProps(props){
     const { links, filters, displayMine, pagination } = props;
     // if location had changed from `explore` to `me`
-    if (displayMine != this.props.displayMine){
+    if (displayMine !== this.props.displayMine){
       this.resetFilters(props)
     }
-    if(filters != this.props.filters){
+    if(filters !== this.props.filters){
       this.props.getLinks({filters, page: 1});
     }
     // TODO: move this to some playlistController
@@ -79,10 +79,9 @@ class LinksContainer extends Component {
     if (links.length === oldProps.links.length) {
       for (let i = 0; i < links.length; i++) {
         const link = links[i];
-        if (link.id != oldProps.links[i].id) {
+        if (link.id !== oldProps.links[i].id) {
           isSame = false;
           break;
-          return;
         }
       }
     }
@@ -103,7 +102,7 @@ class LinksContainer extends Component {
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
   render() {
-    const { displayMine, pagination, links, loading } = this.props;
+    const { displayMine, links, loading } = this.props;
 
     if(!loading && displayMine && links.length === 0){
       return this.renderEmptyStateForMe();
@@ -141,7 +140,7 @@ function mapStateToProps({ links, user }, { match: { params: mainPath }}) {
     filters: links.filters,
     pagination: links.pagination,
     loading: links.loading,
-    displayMine: mainPath.mainPath == 'me',
+    displayMine: mainPath.mainPath === 'me',
     user,
   };
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import debounce from 'lodash/debounce';
 
 import { request, routes } from '../../request';
 
@@ -11,7 +10,6 @@ import DDMood from '../ui_components/DDMood';
 import * as linkActions from '../../actions/linkActions';
 import styles from './LinkUI.scss';
 
-let timeout;
 
 class LinkUI extends Component {
   constructor() {
@@ -36,7 +34,7 @@ class LinkUI extends Component {
     })
   }
   renderMood(){
-    const isActive = this.props.filters.mood != undefined;
+    const isActive = this.props.filters.mood !== undefined;
     return (<div>
       <div className={[styles.mood, "flex"].join(' ')}>
         <div className={[styles.clique_name, styles.filter_item, isActive ? styles.active : ""].join(' ')} 
@@ -81,7 +79,7 @@ class LinkUI extends Component {
     )
   }
   render() {
-    const { cliques, otherCliques, ready } = this.state;
+    const { cliques, ready } = this.state;
     if(!ready){
       return null;
     }

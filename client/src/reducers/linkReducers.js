@@ -90,7 +90,7 @@ export default (state = initialState, action) => {
     case `${types.PLAY_TRACK}`:
       let newList = state.list.map(l => ({
         ...l,
-        playing: l.id == action.payload.id,
+        playing: l.id === action.payload.id,
       }))
       return {
         ...state,
@@ -113,7 +113,7 @@ export default (state = initialState, action) => {
 function toggleInArray(arr = [], value) {
   const exists = arr.includes(value);
   if (exists) {
-    return arr.filter((presentValue, i) => presentValue.id != value.id);
+    return arr.filter((presentValue, i) => presentValue.id !== value.id);
   }
   else {
     return arr.concat([value]);

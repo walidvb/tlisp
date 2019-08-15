@@ -1,8 +1,7 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { Form, NestedForm, TextArea, Text, Radio, RadioGroup, Select, Option, Checkbox } from 'react-form';
+import { Form, NestedForm, Text, Radio, RadioGroup, Checkbox } from 'react-form';
 
 
 import DDSelect from '../ui_components/DDSelect';
@@ -145,7 +144,7 @@ class LinksForm extends Component {
                     playlists,
                     cliques,
                     tags,
-                    oembeddable: typeof(link.oembed) == "object" && Object.keys(link.oembed).length > 0,
+                    oembeddable: typeof(link.oembed) === "object" && Object.keys(link.oembed).length > 0,
                 }, this.setDefaultValues))
         }
     }
@@ -232,7 +231,7 @@ class LinksForm extends Component {
         }
         return (
             <div className={styles.header}>
-                <img className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
+                <img alt="thumbnail" className={styles.thumbnail} src={oembed.thumbnail_url || oembed.image} />
                 <div>
                     <h3 className={styles.title}>{oembed.title}</h3>
                     <div className={styles.url}>{link.url}</div>

@@ -7,8 +7,8 @@ import ProgressBar from '../player/ProgressBar';
 import { playTrack, pause } from '../../actions/playerActions';
 import styles from './Link.scss';
 
-const Link = ({ playTrack, pause, link, style }) => {
-  const { thumbnail_url, title, width, height, provider, html, users, tag_list } = link;
+const Link = ({ playTrack, pause, link }) => {
+  const { thumbnail_url, title, users, tag_list } = link;
   let inner;
   if(link.playing){
     inner = <div className={styles.playingLogo} style={{ height: "100%" }}> 
@@ -17,7 +17,7 @@ const Link = ({ playTrack, pause, link, style }) => {
     </div>;
   }
   else{
-    const splittedTitle = title && title.split(/\||\-|\/| by /i);
+    const splittedTitle = title && title.split(/\||-|\/| by /i);
     inner = (
       <div onClick={() => playTrack(link)} style={{height: "100%"}}>
         <div className={styles.thumbnail}>

@@ -1,16 +1,11 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { Form, NestedForm, Text } from 'react-form';
 
-
-import DDSelect from '../ui_components/DDSelect';
 import { request, routes } from '../../request';
 
 import styles from './NewsletterForm.scss'
 import { submitLink } from '../../actions/linkActions';
-import classCallCheck from 'babel-runtime/helpers/classCallCheck';
 const qs = require('qs');
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -24,10 +19,6 @@ class NewsletterForm extends Component {
     }
     static propTypes = {
 
-    }
-    componentDidMount() {
-        const params = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
-        
     }
     handleSubmit(evt) {
         evt.preventDefault();
@@ -71,7 +62,7 @@ class NewsletterForm extends Component {
         </div>);
     }
     render() {
-        const { errors, success, loaded,  } = this.state;
+        const { success  } = this.state;
         return (
             <div className={[styles.container].join(' ')}>
                 { success ? this.renderSuccess() :

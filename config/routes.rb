@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     resources :curated_lists, only: [:create, :show, :index] do 
       collection do 
         get '/by-url' => 'curated_lists#by_url'
-        match '/', via: :options
       end
     end
 
@@ -71,8 +70,11 @@ Rails.application.routes.draw do
 
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
+  
+  match '*path', via: [:options], to:  lambda {|_| [204, {'Access-Control-Allow-Headers' => "Origin, Content-Type, Accept, Authorization, Token", 'Access-Control-Allow-Origin' => "*", 'Content-Type' => 'text/plain'}, []]}
   get '*path', to: "application#fallback_index_html", as: :app, constraints: ->(request) do
     !request.xhr? && request.format.html?
   end
+
+
 end

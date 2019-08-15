@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :curated_lists, only: [:create, :show, :index] do 
       collection do 
         get '/by-url' => 'curated_lists#by_url'
+        match '/', via: :options
       end
     end
 

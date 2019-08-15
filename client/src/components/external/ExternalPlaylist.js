@@ -26,10 +26,11 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
   return (
     <div className="container pt-4 pb-4">
       <div className="lg:w-4/6 mx-auto">
-        {(!loading && !hidePlayer) && <div>
+        { loading && <div className="mb-6">Loading {url}...</div>}
+        {(!hidePlayer && !loading) && <div>
           <div className="mb-6">
-            <h1 className="text-xl mt-6 mb-2">{infos.title}</h1>
-            <h2 className="mb-2">{infos.description}</h2>
+            <h1 className="text-2xl mt-6 mb-2">{infos.title}</h1>
+            <h2 className="mb-2 text-xl">{infos.description}</h2>
             <a className="text-gray-600 text-sm" href={infos.url} target="_blank">Read more on {infos.site_name}...</a>
           </div>
           <PlayerContainer noTracking />
@@ -44,7 +45,7 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
           <br/>
           Enter the url of that page here, and let the magic happen
           <br/>
-          <span className="text-sm text-gray-600">PS: try the extension if this page doesn't work</span>
+          <span className="text-sm text-gray-600">PS: try the <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" rel="noopener noreferrer" target="_blank">extension</a> if this page doesn't work</span>
         </div>
         <CuratedListForm />
         <div className={styles.triggerWrapper}>

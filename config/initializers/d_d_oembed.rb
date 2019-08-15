@@ -1,3 +1,6 @@
+# This file is not in app/lib because i don't know 
+# how to name it so that it's autoloaded -.-
+
 require 'oembed'
 OEmbed::Providers.register_all
 

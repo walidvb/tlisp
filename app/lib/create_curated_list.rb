@@ -30,8 +30,9 @@ class CreateCuratedList
   def fetch_single_link url
     begin
       scraped = Scraper.new(url)
-      link = Link.find_or_create_by(url: scraped.canonical)
+      link = Link.find_or_initialize_by(url: scraped.canonical)
       @curated_list.links << link
+      link.save
       CuratedListChannel.broadcast_to @curated_list, link.as_json
     rescue ActiveRecord::RecordNotUnique => e
     rescue => e

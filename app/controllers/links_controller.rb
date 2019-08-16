@@ -91,7 +91,7 @@ class LinksController < ApplicationController
       .joins(:link_clique_assignments)
       .order("created_at DESC")
       .where('link_id IN (?)', @link_assignments.map(&:link_id))
-
+      .distinct(:id)
     if mood = params[:mood].presence
       mood = mood.to_i
       @links = @links.where('mood IS ? OR (mood > ? AND mood < ?)', nil, mood - 20, mood + 20)

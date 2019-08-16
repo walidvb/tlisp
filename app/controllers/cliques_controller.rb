@@ -47,7 +47,7 @@ class CliquesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_clique
-      @clique = Clique.find(params[:id] || params[:clique_id])
+      @clique = Clique.find(params[:clique_id] || params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

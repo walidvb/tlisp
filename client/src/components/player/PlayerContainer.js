@@ -39,7 +39,9 @@ class PlayerContainer extends Component {
         const isPlaying = this.props.currentlyPlaying && this.props.currentlyPlaying.id == t.id;
         return (
             <div key={i} className={["flex", styles.track, isPlaying ? styles.playing : null].join(' ')} onClick={() => this.props.playTrack(t)}>
-                <img alt="thumbnail" src={t.thumbnail_url} className="w-8 mr-2"/>
+                <div className="w-8 mr-2">
+                    <img alt="thumbnail" src={t.thumbnail_url}/>
+                </div>
                 {t.title}
             </div>
         )

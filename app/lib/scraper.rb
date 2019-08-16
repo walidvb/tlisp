@@ -6,15 +6,6 @@ class Scraper
         @page = get_page
     end
 
-    def get_oembed
-        begin 
-            build_oembed
-        rescue e
-            puts "Failed getting #{url}"
-            raise e
-        end
-    end
-
     def get_infos
         {
             "title" => get_title,

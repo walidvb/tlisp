@@ -1,21 +1,31 @@
 require 'open-uri'
 
 class BandcampOembed < Scraper
+
+    def get_oembed
+        begin 
+            build_oembed
+        rescue => e
+            puts "Failed getting #{url}: #{e}"
+            raise e
+        end
+    end
+
     def build_oembed
-        video_url = get_value 'og:video'
-        embed = build_iframe video_url
+        video_url = get_meta 'og:video'
+        embed = build_iframe(video_url)
         description = @page.search('#trackInfo .bd').text()
         {
-            "title" => get_value('og:title').split(', by ')[0].strip,
+            "title" => get_meta('og:title').split(', by ')[0].strip,
             "description" => description,
-            "thumbnail_url" => get_value('og:image'),
+            "thumbnail_url" => get_meta('og:image'),
             "html" => embed,
-            "author_name" =>  get_value('og:title').split(', by ')[1].strip,
-            "height" => get_value('og:video:height'),
-            "width" => get_value('og:video:width'),
+            "author_name" =>  get_meta('og:title').split(', by ')[1].strip,
+            "height" => get_meta('og:video:height'),
+            "width" => get_meta('og:video:width'),
             # author_url: 
             "provider_name" => "Bandcamp",
-            "provider_url" => "http://bandcamp.com",
+            "provider_url" => "https://bandcamp.com",
         }
     end
 

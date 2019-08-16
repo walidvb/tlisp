@@ -37,16 +37,16 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
           <div className="border-gray-500 border-b-2 border-solid w-100 my-8"/>
         </div>
         }
-        <CuratedListIndex />
-        <div className="text-2xl underline mt-10 mb-4">CREATE YOURS</div>
         <div>
-          Ever felt as happy to find someone who curated a list of great tracks, 
+          Ever felt as happy to find someone who curated a list of great tracks,
           as annoyed that you had to get back to that page to play the next one?
-          <br/>
+          <br />
           Enter the url of that page here, and let the magic happen
-          <br/>
+          <br />
           <span className="text-sm text-gray-600">PS: try the <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" rel="noopener noreferrer" target="_blank">extension</a> if this page doesn't work</span>
         </div>
+        <CuratedListIndex />
+        <div className="text-2xl underline mt-10 mb-4">CREATE YOURS</div>
         <CuratedListForm />
         <div className={styles.triggerWrapper}>
           <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>

@@ -22,9 +22,7 @@ class CreateCuratedList
   private
 
   def iframe_sources
-    (@sources || CuratedListScraper.new(@curated_list.url).get_iframes).select do |src|
-      /^https?:\/\/[^\/]*.(facebook.com|twitter.com|google.com)/.match(src).nil?
-    end
+    (@sources || CuratedListScraper.new(@curated_list.url).get_iframes)
   end
 
   def fetch_single_link url
@@ -33,7 +31,9 @@ class CreateCuratedList
       link = Link.find_or_initialize_by(url: scraped.canonical)
       @curated_list.links << link
       link.save
-      CuratedListChannel.broadcast_to @curated_list, link.as_json
+      if link.oembeddable?
+        CuratedListChannel.broadcast_to @curated_list, link.as_json
+      end
     rescue ActiveRecord::RecordNotUnique => e
     rescue => e
       puts "Error scraping #{url} for #{@curated_list.id}"

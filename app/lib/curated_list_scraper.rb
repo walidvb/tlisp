@@ -3,7 +3,7 @@ class CuratedListScraper < Scraper
     @page.search('iframe[src]').map do |iframe|
       add_missing_protocol(iframe.attributes['src'].value)
     end.select do |src|
-      !/faebook\.com|twitter\.com|googletagmanager.com|google.com/.match(src)
+      !/facebook\.com|twitter\.com|googletagmanager.com|google.com|googlesyndication.com/.match(src)
     end.compact
   end
 

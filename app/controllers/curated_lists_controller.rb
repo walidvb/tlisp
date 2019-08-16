@@ -19,7 +19,7 @@ class CuratedListsController < ApplicationController
     @curated_list = CuratedList.find(params[:id])
     render json: {
       curated_list: @curated_list,
-      links: @curated_list.links.map(&:as_json)
+      links: @curated_list.links.oembeddable.map(&:as_json)
     }
   end
 
@@ -30,6 +30,12 @@ class CuratedListsController < ApplicationController
   def create_or_show sources = nil
     url = params[:url]
     scraped = CuratedListScraper.new(url)
+    iframes_count = scraped.get_iframes.count
+    if iframes_count < 3 && (sources.nil? || sources.count < 3)
+      count = iframes_count || (!sources.nil? && sources.count < 3)
+      render json: { error: "This page only contains #{count} player#{count == 1 ? '' : 's'}, are we really that lazy?"}, status: :bad_request
+      return
+    end
 
     if @curated_list = CuratedList.find_by_url(scraped.canonical)
       # try to add the sources again, in case it had not worked the first time

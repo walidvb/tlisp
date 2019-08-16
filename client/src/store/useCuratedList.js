@@ -34,19 +34,29 @@ const useCuratedList = (props) => {
       try {
         const fetchURLBase = `${routes.api.curatedPlaylists.show}`
         const fetchURL = curatedListID ? `${fetchURLBase}/${curatedListID}` : `${fetchURLBase}/by-url/?url=${encodeURIComponent(url)}`
-        const { data: { links, curated_list: { id, ...infos} } } = await axios.get(fetchURL)
+        const res = await axios.get(fetchURL)
+        const { data: { links, curated_list: { id, ...infos } } }  = res
         appCable.subscriptions.create({ channel: 'CuratedListChannel', id }, cableHandlers)
         if(links && links.length > 0){
           setTracklist(links)
           playTrack(links[0])
         }
         setInfos(infos)
-      } catch (error) {
-        console.error(error)
-        setInfos({
-          title: 'ERROR',
-          description: "oops, looks like we couldn't scrape this page.. sorry!"
-        })
+      } catch (err) {
+        try{
+          const { response: { data: { error } } } = err
+          setInfos({
+            title: 'ERROR',
+            description: error
+          })
+        }
+        catch(err){
+          console.error(err)
+          setInfos({
+            title: 'ERROR',
+            description: "Oops, looks like we couldn't scrape that page. Maybe try with the extension?"
+          })
+        }
       }
       setLoading(false)
     })()

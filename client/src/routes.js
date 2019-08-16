@@ -37,7 +37,7 @@ const routes = {
         me: '/me',
         explore: '/explore'
     },
-    newsletter: '/keep-me-posted',
+    newsletter: '/',
     playlists: {
         show: '/playlists',
     },

@@ -50,7 +50,6 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.getUserDetails();
-    this.setState({loading: false})
   }
   componentWillReceiveProps(props){
     const { user, history, location: { pathname }  } = props;
@@ -81,10 +80,10 @@ class App extends Component {
     return (
     <AnonymousPageWrapper>
       <Switch>
-        <Route exact path={routes.newsletter} component={NewsletterPage} />
+        <Route exact path={'/'} component={NewsletterPage} />
         <Route path={'/cliques/:name/join'} component={CliqueJoin} />
         <Route path={routes.user.forgotPassword} render={() => <ForgotPassword />} />
-        <Route path={'/'} render={() => <LoginForm isSignUp={false} />} />
+        <Route path={'/login'} render={() => <LoginForm isSignUp={false} />} />
       </Switch>
     </AnonymousPageWrapper>)
   }

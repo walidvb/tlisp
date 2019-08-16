@@ -1,13 +1,15 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-    authenticated: false,
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case `${types.GET_USER_DETAILS}_REJECTED`:
-        return initialState
+        return {
+            ...initialState,
+            authenticated: false,
+        }
         case `${types.GET_USER_DETAILS}_FULFILLED`:
         case `${types.SIGN_UP_SUCCESSFUL}`:
             const user = action.payload.user

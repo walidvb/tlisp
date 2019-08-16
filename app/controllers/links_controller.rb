@@ -45,11 +45,11 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    current_user.clique_ids
     @link_assignments = LinkCliqueAssignment
-    .order("created_at DESC")
-    .visible
-    .oembedable
+      .order("created_at DESC")
+      .visible
+      .oembedable
+      .where(clique: current_user.clique_ids)
 
     base_query = @link_assignments.clone
     if params[:users].blank? || params[:users].empty?
@@ -64,25 +64,19 @@ class LinksController < ApplicationController
       #.where(clique_id: clique_ids)
     end
 
-    # Return Walid's links if there are none to be shown
-    if @link_assignments.count.zero?
-      @link_assignments = base_query.where(user_id: 1)
-      @showing_example = true
-    else
-      if u_ids = params[:users].presence
-        @link_assignments = @link_assignments.where(user: u_ids)
-      end
-      if c_ids = params[:cliques].presence
-        # TODO remove clique that the user is not part of
-        # new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
-        @link_assignments = @link_assignments.where(clique_id: c_ids)
-      end
-      if p_ids = params[:playlists].presence
-        @link_assignments = PlaylistAssignment
-        .where(playlist_id: p_ids)
-        .order("created_at DESC")
-        .includes(link: [:users, :tags])
-      end
+    if u_ids = params[:users].presence
+      @link_assignments = @link_assignments.where(user: u_ids)
+    end
+    if c_ids = params[:cliques].presence
+      # TODO remove clique that the user is not part of
+      # new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
+      @link_assignments = @link_assignments.where(clique_id: c_ids)
+    end
+    if p_ids = params[:playlists].presence
+      @link_assignments = PlaylistAssignment
+      .where(playlist_id: p_ids)
+      .order("created_at DESC")
+      .includes(link: [:users, :tags])
     end
 
     @links = Link

@@ -26,6 +26,7 @@ function IFrameAbsolute({ url, html, isSet,
             onProgress={(d) => onProgress(d)}
             onPause={(d) => pause(d)}
             onEnded={(d) => onEnded(d)}
+            loop={false}
           /> :
           <div style={{ height: "100%" }} dangerouslySetInnerHTML={{
             __html: html

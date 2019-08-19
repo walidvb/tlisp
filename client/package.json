@@ -75,7 +75,7 @@
     "react-form": "^2.16.3",
     "react-ga": "^2.6.0",
     "react-mentions": "^1.2.2",
-    "react-player": "^1.11.2",
+    "react-player": "^1.12.0",
     "react-player-controls": "^0.5.21",
     "react-redux": "^5.1.1",
     "react-rotating-text": "^1.4.1",

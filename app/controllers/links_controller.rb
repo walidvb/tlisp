@@ -51,7 +51,6 @@ class LinksController < ApplicationController
       .oembedable
       .where(clique: current_user.clique_ids)
 
-    base_query = @link_assignments.clone
     if params[:users].blank? || params[:users].empty?
       @link_assignments = @link_assignments
       .where.not(clique_id: nil)
@@ -79,6 +78,11 @@ class LinksController < ApplicationController
       .includes(link: [:users, :tags])
     end
 
+    if @link_assignments.empty?
+      @link_assignments = @link_assignments.where(user_id: 1)
+      @is_walid = true
+    end
+
     @links = Link
       .search(params[:search])
       .includes(:tags)
@@ -90,6 +94,7 @@ class LinksController < ApplicationController
       mood = mood.to_i
       @links = @links.where('mood IS ? OR (mood > ? AND mood < ?)', nil, mood - 20, mood + 20)
     end
+
     
     @current_page = params[:page].to_i
     @page_size = 25

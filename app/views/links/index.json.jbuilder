@@ -14,4 +14,4 @@ json.pagination do
   json.current_page @current_page
   json.page_size @page_size
 end
-json.showExample @show_example
+json.isWalid @is_walid

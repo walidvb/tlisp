@@ -101,6 +101,14 @@ class LinksContainer extends Component {
     );
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
+  renderIsWalid(){
+    return this.props.isWalid ? <div key="isWalid" style={{flexBasis: '100%'}}>
+      Noone digged tracks to this clique yet, so we're showing you <em>all the founder's digs</em>!
+      <br />
+      To dig your own music, <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" target="_blank">download the extension</a>, or 
+      <a href="mailto:hello@walidvb.com">contact me</a>! 
+    </div>: null
+  }
   render() {
     const { displayMine, links, loading } = this.props;
 
@@ -119,6 +127,7 @@ class LinksContainer extends Component {
     </div>;
     return [
       this.renderTitle(),
+      this.renderIsWalid(),
       <div key="border" className={styles.borderTop}/>,
       <div key="listt" ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loadiang' : null].join(' ')}>
         {items}
@@ -133,7 +142,7 @@ LinksContainer.propTypes = {
   getLinks: PropTypes.func.isRequired
 };
 
-function mapStateToProps({ links, user }, { match: { params: mainPath }}) {
+function mapStateToProps({ links, user, isWalid }, { match: { params: mainPath }}) {
   return {
     error: links.error,
     links: links.list,
@@ -142,6 +151,7 @@ function mapStateToProps({ links, user }, { match: { params: mainPath }}) {
     loading: links.loading,
     displayMine: mainPath.mainPath === 'me',
     user,
+    isWalid
   };
 }
 

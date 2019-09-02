@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       }
     case `${types.GET_LINKS}_FULFILLED`:
       console.log(action)
-      const { links, pagination } = action.payload;
+      const { links, pagination, isWalid } = action.payload;
       let list;
       if(pagination.current_page > 1){
         list = [...state.list, ...links];
@@ -49,7 +49,8 @@ export default (state = initialState, action) => {
         error: undefined,
         list,
         pagination,
-        loading: false
+        loading: false,
+        isWalid,
       }
     case `${types.SUBMIT_LINK}_SUCCESSFUL`:
       return {

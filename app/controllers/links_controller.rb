@@ -51,6 +51,7 @@ class LinksController < ApplicationController
       .oembedable
       .where(clique: current_user.clique_ids)
 
+    base_query = @link_assignments
     if params[:users].blank? || params[:users].empty?
       @link_assignments = @link_assignments
       .where.not(clique_id: nil)
@@ -79,7 +80,7 @@ class LinksController < ApplicationController
     end
 
     if @link_assignments.empty?
-      @link_assignments = @link_assignments.where(user_id: 1)
+      @link_assignments = base_query.where(user_id: 1)
       @is_walid = true
     end
 

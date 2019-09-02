@@ -102,11 +102,10 @@ class LinksContainer extends Component {
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
   renderIsWalid(){
-    return this.props.isWalid ? <div key="isWalid" style={{flexBasis: '100%'}}>
-      Noone digged tracks to this clique yet, so we're showing you <em>all the founder's digs</em>!
+    return this.props.isWalid ? <div key="isWalid" style={{flexBasis: '100%', paddingLeft: '15px'}}>
+      Oops! No one digged tracks to this clique yet, so we're showing you <em>all the founder's digs</em>!
       <br />
-      To dig your own music, <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" target="_blank">download the extension</a>, or 
-      <a href="mailto:hello@walidvb.com">contact me</a>! 
+      To dig your own music, <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" target="_blank">download the extension</a>, or <a href="mailto:hello@walidvb.com">contact me</a>! 
     </div>: null
   }
   render() {

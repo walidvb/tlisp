@@ -142,10 +142,10 @@ LinksContainer.propTypes = {
   getLinks: PropTypes.func.isRequired
 };
 
-function mapStateToProps({ links: { error, list, filters, pagination, loading, isWalid }, user }, { match: { params: mainPath }}) {
+function mapStateToProps({ links: { error, list: links, filters, pagination, loading, isWalid }, user }, { match: { params: mainPath }}) {
   return {
     error,
-    list,
+    links,
     filters,
     pagination,
     isWalid,

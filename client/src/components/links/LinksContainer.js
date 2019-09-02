@@ -102,10 +102,11 @@ class LinksContainer extends Component {
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
   renderIsWalid(){
+  const total = this.props.pagination.total * this.props.pagination.page_size
     return this.props.isWalid ? <div key="isWalid" style={{flexBasis: '100%', paddingLeft: '15px'}}>
-      Oops! No one digged tracks to this clique yet, so we're showing you <em>all the founder's digs</em>!
+      Oops! No one digged tracks to this clique yet. When this happens, we show you all {total} founder's digs.
       <br />
-      To dig your own music, <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" target="_blank">download the extension</a>, or <a href="mailto:hello@walidvb.com">contact me</a>! 
+      To dig your own music, <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" target="_blank">download the extension</a>, or <a href="mailto:hello@walidvb.com">contact me</a>, Walid! 
     </div>: null
   }
   render() {
@@ -126,8 +127,8 @@ class LinksContainer extends Component {
     </div>;
     return [
       this.renderTitle(),
-      this.renderIsWalid(),
       <div key="border" className={styles.borderTop}/>,
+      this.renderIsWalid(),
       <div key="listt" ref={(container) => this.container = container } className={[styles.container__grid, loading ? 'loadiang' : null].join(' ')}>
         {items}
         {loading ? loaders : null}

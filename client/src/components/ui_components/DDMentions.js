@@ -68,9 +68,6 @@ function DDMention(props) {
     }
 
     const getTagsSuggestions = (s, cb) => {
-        const tagged = formApi.values;
-        const mentions = formApi.values.mentions
-        console.log(tagged, mentions)
         let existing = props.tags.map(t => ({
             id: t,
             display: t,

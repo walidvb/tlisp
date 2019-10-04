@@ -94,6 +94,7 @@ function DDMention(props) {
                 style={defaultStyles()}
                 markup="@[__display__](__type__:__id__)"
                 allowSpaceInQuery={true}
+                placeholder="Write a few words about the track, send it to a @friend, tag the #artist and #genre..."
                 >
                 <Mention 
                     type='users'

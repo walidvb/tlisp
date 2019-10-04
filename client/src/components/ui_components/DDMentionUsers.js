@@ -35,10 +35,7 @@ function DDMentionUsers(props) {
 
   const users = getValue();
   if(!users || users.length == 0){
-    return (<div className={"hint"}>
-      <div className="fa fa-info" />
-      Mention @friends, add #tags and describe your content
-      </div>)
+    return null
   }
 
   const onRemove = (value) => {

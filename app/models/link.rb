@@ -104,7 +104,7 @@ class Link < ActiveRecord::Base
             end
         end
     end
-
+    handle_asynchronously :notify_world!
     # ======================= ATTRS
     [   "description",
         "html",

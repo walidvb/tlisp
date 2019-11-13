@@ -19,7 +19,7 @@ class CuratedListsController < ApplicationController
     @curated_list = CuratedList.find(params[:id])
     render json: {
       curated_list: @curated_list,
-      links: @curated_list.links.oembeddable.map(&:as_json)
+      links: @curated_list.links.order("curated_list_links.position ASC").oembeddable.map(&:as_json)
     }
   end
 

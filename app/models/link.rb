@@ -7,8 +7,6 @@ class Link < ActiveRecord::Base
          # tracked: { only: [:create] },
          notifier: :author
 
-    default_scope {order("created_at DESC")}
-
     acts_as_taggable_on :tags, :genre
     serialize :oembed, Hash
     has_many :playlist_assignments, inverse_of: :link

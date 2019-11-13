@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_035001) do
+ActiveRecord::Schema.define(version: 2019_11_13_123743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.integer "link_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position", default: 0
     t.index ["curated_list_id", "link_id"], name: "index_curated_list_links_on_curated_list_id_and_link_id", unique: true
     t.index ["curated_list_id"], name: "index_curated_list_links_on_curated_list_id"
     t.index ["link_id"], name: "index_curated_list_links_on_link_id"

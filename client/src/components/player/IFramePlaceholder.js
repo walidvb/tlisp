@@ -16,10 +16,12 @@ export default class IFramePlaceholder extends Component {
   componentDidMount( ){
     this.placeTarget();
     window.addEventListener('resize', this.rePlace, true) 
+    window.addEventListener('scroll', this.rePlace, true) 
   }
   componentWillUnmount(){
     this.placeTarget(true)
     window.removeEventListener('resize', this.rePlace, true)
+    window.removeEventListener('scroll', this.rePlace, true)
   }
   render() {
     return (

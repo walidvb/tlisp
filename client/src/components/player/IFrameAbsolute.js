@@ -18,7 +18,7 @@ function IFrameAbsolute({ url, html, isSet,
             url={url}
             width="100%"
             controls={true}
-            style={{ maxHeight: "200px", height: '200px' }}
+            style={{ maxHeight: "400px", height: '300px' }}
             playing={playing}
             onReady={() => playing ? play() : null}
             onStart={(d) => play(d)}

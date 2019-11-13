@@ -18,8 +18,11 @@ h1,h2,h3,h4{
  font-family: Apercu Pro, sans-serif; 
 }
 img, iframe{
+max-width: 100%;
+height: auto;
+}
+iframe{
   max-width: 100%;
-  height: auto;
 }
 
 *{

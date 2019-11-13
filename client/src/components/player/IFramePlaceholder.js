@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 export default class IFramePlaceholder extends Component {
   rePlace = this.rePlace.bind(this)
   placeTarget(off = false, placeTop = true){
-    const { left, top, width } = this.container.getBoundingClientRect();
+    let { left, top, width } = this.container.getBoundingClientRect();
     // currently height is hard coded at 300
     if(top < 300){
-      return
+      top = 0
     }
     const target = document.getElementById('player-placeholder');
     target.style.position = 'fixed';

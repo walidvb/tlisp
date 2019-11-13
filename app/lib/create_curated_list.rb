@@ -6,11 +6,11 @@ class CreateCuratedList
     return self
   end
 
-  def add_sources options = { notify: false }
+  def add_sources notify: false, get_canonical: true
     iframe_sources.each do |url|
-      fetch_single_link(url)
+      fetch_single_link(url, get_canonical: get_canonical)
     end
-    if options[:notify]
+    if notify
       emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
       listen_url = "http://www.diggersdelights.net/curated/#{@curated_list.id}"
       tweet_text = "#{emoji} #{@curated_list.title} from #{@curated_list.site_name} now listenable in one go via #{listen_url}".gsub('*', '')
@@ -25,10 +25,10 @@ class CreateCuratedList
     (@sources || CuratedListScraper.new(@curated_list.url).get_iframes)
   end
 
-  def fetch_single_link url
+  def fetch_single_link url, get_canonical
     begin
-      scraped = Scraper.new(url)
-      link = Link.find_or_initialize_by(url: scraped.canonical)
+      canonical_url = get_canonical ? Scraper.new(url).canonical : url
+      link = Link.find_or_initialize_by(url: canonical_url)
       @curated_list.links << link
       link.save
       if link.oembeddable?

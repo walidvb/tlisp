@@ -15,6 +15,27 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "clique_memberships", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "clique_id"
@@ -31,6 +52,41 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.datetime "updated_at", null: false
     t.string "slack_url"
     t.index ["slug"], name: "index_cliques_on_slug", unique: true
+  end
+
+  create_table "contributions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "creative_session_id"
+    t.bigint "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.string "avatar_url"
+    t.string "skill_name"
+    t.string "session_name"
+    t.string "track_title"
+    t.index ["creative_session_id"], name: "index_contributions_on_creative_session_id"
+    t.index ["skill_id"], name: "index_contributions_on_skill_id"
+    t.index ["user_id", "creative_session_id", "skill_id"], name: "index_contributions_on_skill_id_and_creative_session_id", unique: true
+    t.index ["user_id"], name: "index_contributions_on_user_id"
+  end
+
+  create_table "creative_sessions", force: :cascade do |t|
+    t.bigint "track_id"
+    t.string "session_token"
+    t.string "readable_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "declared_contributors_count"
+    t.integer "participations_count", default: 0, null: false
+    t.datetime "ended_at"
+    t.string "track_title"
+    t.index ["readable_id"], name: "index_creative_sessions_on_readable_id"
+    t.index ["session_token"], name: "index_creative_sessions_on_session_token", unique: true
+    t.index ["track_id"], name: "index_creative_sessions_on_track_id"
+    t.index ["user_id"], name: "index_creative_sessions_on_user_id"
   end
 
   create_table "curated_list_links", id: :serial, force: :cascade do |t|
@@ -69,6 +125,30 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "token"
+    t.string "model"
+    t.string "os", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "app_version"
+    t.index ["token"], name: "index_devices_on_token"
+    t.index ["user_id"], name: "index_devices_on_user_id"
+  end
+
+  create_table "email_invitations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "email"
+    t.bigint "creative_session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "token"
+    t.index ["creative_session_id"], name: "index_email_invitations_on_creative_session_id"
+    t.index ["token"], name: "index_email_invitations_on_token"
+    t.index ["user_id"], name: "index_email_invitations_on_user_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
@@ -116,6 +196,18 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.index ["curated_list_id"], name: "index_links_on_curated_list_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.boolean "system"
+    t.string "text"
+    t.string "messageable_type"
+    t.bigint "messageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "newsletters", id: :serial, force: :cascade do |t|
     t.string "email", null: false
     t.string "source"
@@ -145,6 +237,22 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.index ["target_type", "target_id"], name: "index_notifications_on_target_type_and_target_id"
   end
 
+  create_table "participations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "creative_session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.bigint "track_id"
+    t.string "track_title"
+    t.string "session_readable_id"
+    t.string "avatar_url"
+    t.string "session_name"
+    t.index ["creative_session_id"], name: "index_participations_on_creative_session_id"
+    t.index ["track_id"], name: "index_participations_on_track_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
   create_table "playlist_assignments", id: :serial, force: :cascade do |t|
     t.integer "playlist_id"
     t.integer "link_id"
@@ -169,6 +277,22 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.string "profession"
+    t.string "category"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "credit_section"
+    t.index ["category"], name: "index_skills_on_category"
+  end
+
+  create_table "skills_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+  end
+
   create_table "subscriptions", id: :serial, force: :cascade do |t|
     t.integer "target_id", null: false
     t.string "target_type", null: false
@@ -185,6 +309,16 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.index ["key"], name: "index_subscriptions_on_key"
     t.index ["target_type", "target_id", "key"], name: "index_subscriptions_on_target_type_and_target_id_and_key", unique: true
     t.index ["target_type", "target_id"], name: "index_subscriptions_on_target_type_and_target_id"
+  end
+
+  create_table "system_notifications", force: :cascade do |t|
+    t.string "route"
+    t.string "message"
+    t.bigint "user_id"
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_system_notifications_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -210,6 +344,15 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "initials"
+    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -241,5 +384,27 @@ ActiveRecord::Schema.define(version: 2019_08_15_035001) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "playlists", "users"
+  create_table "validations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "contribution_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contribution_id"], name: "index_validations_on_contribution_id"
+    t.index ["status"], name: "index_validations_on_status"
+    t.index ["user_id", "contribution_id"], name: "index_validations_on_user_id_and_contribution_id", unique: true
+    t.index ["user_id"], name: "index_validations_on_user_id"
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "contributions", "creative_sessions"
+  add_foreign_key "contributions", "skills"
+  add_foreign_key "creative_sessions", "tracks"
+  add_foreign_key "devices", "users"
+  add_foreign_key "email_invitations", "creative_sessions"
+  add_foreign_key "email_invitations", "users"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participations", "creative_sessions"
+  add_foreign_key "validations", "contributions"
+  add_foreign_key "validations", "users"
 end

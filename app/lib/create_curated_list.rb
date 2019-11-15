@@ -19,6 +19,18 @@ class CreateCuratedList
   end
   handle_asynchronously :add_sources, priority: 100
 
+
+  def self.manually url, sources
+    scraped = CuratedListScraper.new(url);
+    curated_list = CuratedList.create(
+      {
+        url: scraped.canonical,
+        host: scraped.site_name,
+      }.merge(scraped.get_infos)
+    );
+    CreateCuratedList.new(curated_list, sources).add_sources(notify: true);
+  end
+  
   private
 
   def iframe_sources

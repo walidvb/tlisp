@@ -4,10 +4,6 @@ export default class IFramePlaceholder extends Component {
   rePlace = this.rePlace.bind(this)
   placeTarget(off = false, placeTop = true){
     let { left, top, width } = this.container.getBoundingClientRect();
-    // currently height is hard coded at 300
-    if(top + 300 < 0){
-      return
-    }
     const target = document.getElementById('player-placeholder');
     target.style.position = 'fixed';
     target.style.top = off && placeTop ? '-200%' : `${top}px`;

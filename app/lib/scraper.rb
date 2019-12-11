@@ -12,7 +12,8 @@ class Scraper
             "description" => get_meta('og:description'),
             "image_url" => get_meta('og:image'),
             "url"  => canonical,
-            "site_name" => site_name
+            "site_name" => site_name,
+            "twitter_handle" => get_meta('twitter:site'),
         }
     end
 

@@ -13,7 +13,7 @@ class CreateCuratedList
     if notify
       emoji = %w{🌴 🏖 👍 🤘 🎉 ✌🏻 👌 🤷‍♂️ 💫 🔥 🌈 📻 🛀🏿}.sample
       listen_url = "http://www.diggersdelights.net/curated/#{@curated_list.id}"
-      tweet_text = "#{emoji} #{@curated_list.title} from #{@curated_list.site_name} now listenable in one go via #{listen_url}".gsub('*', '')
+      tweet_text = "#{emoji} #{@curated_list.title} from #{{@curated_list.twitter_handle || @curated_list.site_name} now listenable in one go via #{listen_url}".gsub('*', '')
       DDTwitter.post tweet_text
     end
   end
@@ -26,6 +26,7 @@ class CreateCuratedList
       {
         url: scraped.canonical,
         host: scraped.site_name,
+
       }.merge(scraped.get_infos)
     );
     CreateCuratedList.new(curated_list, sources).add_sources(notify: true);

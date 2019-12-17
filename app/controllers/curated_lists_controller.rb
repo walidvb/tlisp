@@ -28,32 +28,34 @@ class CuratedListsController < ApplicationController
   end
   
   def create_or_show sources = nil
-    url = params[:url]
-    scraped = CuratedListScraper.new(url)
-    iframes_count = scraped.get_iframes.count
-    if iframes_count < 3 && (sources.nil? || sources.count < 3)
-      count = iframes_count || (!sources.nil? && sources.count < 3)
-      render json: { error: "This page only contains #{count} player#{count == 1 ? '' : 's'}, are we really that lazy?"}, status: :bad_request
-      return
-    end
+    ActiveRecord::Base.transaction do
+      url = params[:url]
+      scraped = CuratedListScraper.new(url)
+      iframes_count = scraped.get_iframes.count
+      if iframes_count < 3 && (sources.nil? || sources.count < 3)
+        count = iframes_count || (!sources.nil? && sources.count < 3)
+        render json: { error: "This page only contains #{count} player#{count == 1 ? '' : 's'}, are we really that lazy?"}, status: :bad_request
+        return
+      end
 
-    if @curated_list = CuratedList.find_by_url(scraped.canonical)
-      # try to add the sources again, in case it had not worked the first time
-      CreateCuratedList.new(@curated_list, sources).add_sources
-    else
-      @curated_list = CuratedList.create(
-        {
-          url: scraped.canonical,
-          host: scraped.site_name,
-        }.merge(scraped.get_infos)
-      )
-      Slack.log text: "New Curated List for #{scraped.canonical}! 🔥"
-      CreateCuratedList.new(@curated_list, sources).add_sources(notify: true)
+      if @curated_list = CuratedList.find_by_url(scraped.canonical)
+        # try to add the sources again, in case it had not worked the first time
+        CreateCuratedList.new(@curated_list, sources).add_sources
+      else
+        @curated_list = CuratedList.create(
+          {
+            url: scraped.canonical,
+            host: scraped.site_name,
+          }.merge(scraped.get_infos)
+        )
+        Slack.log text: "New Curated List for #{scraped.canonical}! 🔥"
+        CreateCuratedList.new(@curated_list, sources).add_sources(notify: true)
+      end
+      render json: {
+        curated_list: @curated_list,
+        links: @curated_list.links.map(&:as_json)
+      }
     end
-    render json: {
-      curated_list: @curated_list,
-      links: @curated_list.links.map(&:as_json)
-    }
   end
 
   private

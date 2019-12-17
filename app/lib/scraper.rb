@@ -43,6 +43,10 @@ class Scraper
         end
     end
 
+    def twitter_handle
+        get_meta('twitter:site')
+    end
+
     def is_bandcamp?
         /bandcamp/.match(get_meta("twitter:site"))
     end

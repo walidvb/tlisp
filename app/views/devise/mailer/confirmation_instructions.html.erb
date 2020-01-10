@@ -1,12 +1,32 @@
-<p>Welcome!</p>
-
-<p>You need to confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
-<br/>
+<p>Welcome to DiggersDelights!!</p>
 
 <p>
+  This platform is currently a work in progress, and your testing and patience are greatly appreciated.
+  <br/>
+  Diggers Delights was created out of a craving for the old times, when music was shared via a tape passed from hand to hand during school breaks. 
+  Algorithms nowadays rule the way we consume music, creating a bucket of music that is easy to fall in.
+  <br/>
+  DD aims to return to these good old times, by creating reasonably sized cliques of similar taste people, to share the music they find.
+  It aims to be platform agnostic, and currently supports youtube, vimeo, soundcloud, mixcloud, bandcamp(with no automatic playback yet :( ) and more.
+  <br/>
+  As it fills up, you will be able to filter the list by the cliques you belong to, as well as by single people in those cliques: <i>Hey, Clara really has some killer baile funk tracks, let's go through her sounds!</i>
+  <br/>
+  Eventually, you'll also be able to create your own clique, share your playlists publicly, etc
+</p>
+<p>
+  You can download the chrome extension <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" target="_blank">here</a>
+  If you have any questions, holler at me here: <a href="mailto:info@diggersdelights.net" target="_blank">info@diggersdelights.net</a>
+</p>
+<p>
+  To get started, you'll need to confirm your account email through the link below:
+  </p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
+<p>
+  Oh, I almost forgot to mention, all tracks are posted to <a href="https://twitter.com/delightsdiggers">our twitter account</a>! (except if you set uncheck public when posting)
+</p>
+<p>
   Thank you,<br/><br/>
-  Yourself<br/>
-  <%= link_to "Your URL", "#" %>
+  Walid, for
+  <%= link_to "Diggers Delights", "http://www.diggersdelights.net" %>
 </p>

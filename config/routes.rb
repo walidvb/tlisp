@@ -21,7 +21,12 @@ Rails.application.routes.draw do
       get '/join' => "cliques#join", as: :join
     end
     
-    resources :links do 
+    resources :links do
+      collection do 
+        get 'like/status'
+        post 'like/toggle' => 'like#toggle'
+        get 'my_links' => 'links#my_links'
+      end
       resources :plays, only: [:create]
     end
     get '/link_form_details.json' => 'links#link_form_details'

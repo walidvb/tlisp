@@ -29,10 +29,6 @@ class Link < ActiveRecord::Base
     validates_presence_of :url
     validates_uniqueness_of :url
 
-    def is_duplicate?
-        self.clique.links.where(url: self.url).count > 0
-    end
-
     def assign_to options = { users: [], visible: true }
         visible = options[:visible] || true
         played_by = options[:played_by]

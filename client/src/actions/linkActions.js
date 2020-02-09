@@ -1,12 +1,12 @@
 import * as types from './actionTypes';
 import { request, routes } from '../request';
 
-export const getLinks = ({ filters, page }) => {
-  console.log(filters);
+export const getLinks = ({ filters, page, }) => {
   return {
     type: types.GET_LINKS,
     payload: new Promise(resolve => {
-      request(routes.api.links.explore, { qs: {
+      const url = filters.mineOnly ? routes.api.links.myLinks : routes.api.links.explore
+      request(url, { qs: {
         ...filters, 
         users: filters.users.map(u=>u.id),
         cliques: filters.cliques.map(c => c.id),

@@ -30,6 +30,8 @@ $background: $background-grey;
 }
 .menuItem{
     padding: .5rem 1rem;
+    cursor: pointer;
+    text-decoration: none;
 }
 .tabsWrapper{
     max-height: 360px;

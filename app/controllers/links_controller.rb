@@ -42,6 +42,14 @@ class LinksController < ApplicationController
     }
   end
 
+  def my_links
+    @current_page = params[:page].to_i
+    @page_size = 25
+    @links = current_user.links.page(@current_page).per(@page_size)
+    @pages_count = @links.total_pages
+    render :index
+  end
+
   # GET /links
   # GET /links.json
   def index
@@ -72,6 +80,7 @@ class LinksController < ApplicationController
       # new_c_ids = c_ids.select{|c_id| clique_ids.include?(c_id)}
       @link_assignments = @link_assignments.where(clique_id: c_ids)
     end
+
     if p_ids = params[:playlists].presence
       @link_assignments = PlaylistAssignment
       .where(playlist_id: p_ids)

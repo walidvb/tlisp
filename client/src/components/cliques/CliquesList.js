@@ -34,7 +34,7 @@ function CliquesList(props) {
     ].join(' ')} key={user.id}
       onClick={() => hasLinks && clickUser(user)}>
       {user.name}
-      <span class={styles.badge}>{user.link_clique_assignments_count}</span>
+      <span className={styles.badge}>{user.link_clique_assignments_count}</span>
     </div>
   }
 }

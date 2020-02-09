@@ -6,6 +6,8 @@ import PlaylistList from './playlists/PlaylistList';
 import LinkUI from './links/LinkUI';
 
 import styles from './DDMenu.scss';
+import MyLinks from './ui_components/MyLinks';
+import { Link } from 'react-router-dom';
 
 class DDMenu extends Component {
     static propTypes = {
@@ -29,10 +31,11 @@ class DDMenu extends Component {
                     disabledTabClassName={styles.disabled}
                 >
                     <TabList className={styles.menuWrapper} style={{ borderBottom: `1px solid ${panelsOn ? '#f2f2f2' : 'transparent'}` }}>
-                        {['explore', 'playlists', 'player'].map( menu => <Tab 
-                            key={menu}
-                            className={styles.menuItem}
-                        >{menu}</Tab>)}
+                        <Link to="/me" className={styles.menuItem}>My Digs</Link>
+                        <Tab className={styles.menuItem} ><Link style={{textDecoration: 'none'}} to='/explore'>explore</Link></Tab>
+                        <Tab className={styles.menuItem} >playlists</Tab>
+                        <Tab className={styles.menuItem} >player</Tab>
+
                     </TabList>
                     <div style={panelsStyles} className={styles.tabsWrapper}>
                         <TabPanel>

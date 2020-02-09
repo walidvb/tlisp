@@ -8,6 +8,7 @@ const routes = {
         covers: '/api/covers',
         links: {
             explore: '/api/links.json',
+            myLinks: '/api/links/my_links.json',
             filters: '/api/filters.json',
             formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
             create: '/api/links.json',

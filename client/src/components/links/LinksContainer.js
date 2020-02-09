@@ -34,6 +34,7 @@ class LinksContainer extends Component {
   resetFilters(props = this.props){
     this.props.resetFilters({
       users: props.displayMine ? [{id:props.user.id}] : [],
+      mineOnly: props.displayMine,
     });
   }
   componentDidMount() {
@@ -102,7 +103,7 @@ class LinksContainer extends Component {
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }
   renderIsWalid(){
-  const total = this.props.pagination.total * this.props.pagination.page_size
+    const total = this.props.pagination.total * this.props.pagination.page_size
     return this.props.isWalid ? <div key="isWalid" style={{flexBasis: '100%', paddingLeft: '15px'}}>
       Oops! No one digged tracks to this clique yet. When this happens, we show you all {total} founder's digs.
       <br />

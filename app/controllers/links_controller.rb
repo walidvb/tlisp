@@ -45,7 +45,7 @@ class LinksController < ApplicationController
   def my_links
     @current_page = params[:page].to_i
     @page_size = 25
-    @links = current_user.links.page(@current_page).per(@page_size)
+    @links = current_user.links.joins(:link_clique_assignments).page(@current_page).per(@page_size).order("link_clique_assignments.created_at DESC")
     @pages_count = @links.total_pages
     render :index
   end

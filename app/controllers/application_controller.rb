@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def allow_cors
    headers["Access-Control-Allow-Origin"] = "*"
+   headers['Access-Control-Request-Method'] = 'GET, DELETE, POST, PUT, OPTIONS'
   end
 
   def authenticate_user_from_token!

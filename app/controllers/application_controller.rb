@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       headers['X-Frame-Options'] = "ALLOWALL"
     end
     
-    render :file => 'public/index.html', layout: false
+    render :react_wrapper, layout: false
   end
 
   # Redirects on successful sign in

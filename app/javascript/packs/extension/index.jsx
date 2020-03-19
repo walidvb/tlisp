@@ -1,4 +1,8 @@
 import React from 'react'
 import Like from './Like'
+import styles from './index.scss';
 
-export default () => <Like />
+console.log(styles)
+export default () => <div className={styles.container}>
+  <Like />
+</div>

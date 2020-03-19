@@ -54,7 +54,6 @@ class App extends Component {
   componentWillReceiveProps(props){
     const { user, history, location: { pathname }  } = props;
     // automatically redirect the user on auth
-    console.log("props", props)
     if (this.state.loading && pathname == '/'){
       if(user.authenticated){
         history.replace(routes.links.explore);

@@ -1,46 +1,46 @@
 {
-  "application.js": "/packs/js/application-5bbf47227f2bc41488de.js",
-  "application.js.map": "/packs/js/application-5bbf47227f2bc41488de.js.map",
+  "application.js": "/packs/js/application-fd934079570b602866ac.js",
+  "application.js.map": "/packs/js/application-fd934079570b602866ac.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-5bbf47227f2bc41488de.js"
+        "/packs/js/application-fd934079570b602866ac.js"
       ],
       "js.map": [
-        "/packs/js/application-5bbf47227f2bc41488de.js.map"
+        "/packs/js/application-fd934079570b602866ac.js.map"
       ]
     },
     "extension": {
       "js": [
-        "/packs/js/extension-70945eaa64517901a811.js"
+        "/packs/js/extension-0df86c64f2813a1cfd5f.js"
       ],
       "js.map": [
-        "/packs/js/extension-70945eaa64517901a811.js.map"
+        "/packs/js/extension-0df86c64f2813a1cfd5f.js.map"
       ]
     },
     "extension/index": {
       "js": [
-        "/packs/js/extension/index-d4a0b99efbf113520e8f.js"
+        "/packs/js/extension/index-843ffed13ee0c01f2b9f.js"
       ],
       "js.map": [
-        "/packs/js/extension/index-d4a0b99efbf113520e8f.js.map"
+        "/packs/js/extension/index-843ffed13ee0c01f2b9f.js.map"
       ]
     },
     "extension/Like": {
       "js": [
-        "/packs/js/extension/Like-6b9a2bdb3646baefd289.js"
+        "/packs/js/extension/Like-2f622f51ee1e7e2905cc.js"
       ],
       "js.map": [
-        "/packs/js/extension/Like-6b9a2bdb3646baefd289.js.map"
+        "/packs/js/extension/Like-2f622f51ee1e7e2905cc.js.map"
       ]
     }
   },
-  "extension.js": "/packs/js/extension-70945eaa64517901a811.js",
-  "extension.js.map": "/packs/js/extension-70945eaa64517901a811.js.map",
-  "extension/Like.js": "/packs/js/extension/Like-6b9a2bdb3646baefd289.js",
-  "extension/Like.js.map": "/packs/js/extension/Like-6b9a2bdb3646baefd289.js.map",
-  "extension/index.js": "/packs/js/extension/index-d4a0b99efbf113520e8f.js",
-  "extension/index.js.map": "/packs/js/extension/index-d4a0b99efbf113520e8f.js.map",
+  "extension.js": "/packs/js/extension-0df86c64f2813a1cfd5f.js",
+  "extension.js.map": "/packs/js/extension-0df86c64f2813a1cfd5f.js.map",
+  "extension/Like.js": "/packs/js/extension/Like-2f622f51ee1e7e2905cc.js",
+  "extension/Like.js.map": "/packs/js/extension/Like-2f622f51ee1e7e2905cc.js.map",
+  "extension/index.js": "/packs/js/extension/index-843ffed13ee0c01f2b9f.js",
+  "extension/index.js.map": "/packs/js/extension/index-843ffed13ee0c01f2b9f.js.map",
   "media/frontend/assets/ApercuPro-Italic.eot": "/packs/media/frontend/assets/ApercuPro-Italic-91eed330d3a50d34263b43ac435fff8b.eot",
   "media/frontend/assets/ApercuPro-Italic.woff": "/packs/media/frontend/assets/ApercuPro-Italic-181ca832fc29e8ad08c8343b31ac2d7c.woff",
   "media/frontend/assets/ApercuPro-Italic.woff2": "/packs/media/frontend/assets/ApercuPro-Italic-68aa6fd197b8263261b192ae8300c8af.woff2",

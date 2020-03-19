@@ -12,10 +12,10 @@
     },
     "extension": {
       "js": [
-        "/packs/js/extension-0a122926bb3ac7915ded.js"
+        "/packs/js/extension-28e89f673bb6ada4ef77.js"
       ],
       "js.map": [
-        "/packs/js/extension-0a122926bb3ac7915ded.js.map"
+        "/packs/js/extension-28e89f673bb6ada4ef77.js.map"
       ]
     },
     "extension/index": {
@@ -35,8 +35,8 @@
       ]
     }
   },
-  "extension.js": "/packs/js/extension-0a122926bb3ac7915ded.js",
-  "extension.js.map": "/packs/js/extension-0a122926bb3ac7915ded.js.map",
+  "extension.js": "/packs/js/extension-28e89f673bb6ada4ef77.js",
+  "extension.js.map": "/packs/js/extension-28e89f673bb6ada4ef77.js.map",
   "extension/Like.js": "/packs/js/extension/Like-65f67a576f7789959398.js",
   "extension/Like.js.map": "/packs/js/extension/Like-65f67a576f7789959398.js.map",
   "extension/index.js": "/packs/js/extension/index-f06aae509f49e2a3e71b.js",

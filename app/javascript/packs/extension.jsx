@@ -20,17 +20,17 @@ import ReactDOM from 'react-dom';
 // import withTracker from '../../../client/src/utils/withTracker';
 import '../frontend/index.css';
 
-import App from './extension/index';
-// import { Provider } from 'react-redux';
-// import configureStore from '../../../client/src/store/configureStore';
+import App from '../extension/index';
+import { Provider } from 'react-redux';
+import configureStore from '../frontend/store/configureStore';
 
-// const store = configureStore();
+const store = configureStore();
 
 const render = (Component) => {
   return ReactDOM.render(
-    // <Provider store={store}>
-    <Component />,
-    // </Provider>,
+    <Provider store={store}>
+      <Component />
+    </Provider>,
     document.body.appendChild(document.createElement('div'))
   );
 };

@@ -98,7 +98,7 @@ class LinksContainer extends Component {
     const { cliques } = this.props.filters;
     const name = this.props.error || (
       cliques.length ? `All ${cliques.map(c => c.name).join(', ')} digs` : 
-        (this.props.displayMine ? "My digs" : "Frieand's digs")
+        (this.props.displayMine ? "My digs" : "Friend's digs")
     );
     return <h1 className={styles.pageTitle} key="title">{name}</h1>
   }

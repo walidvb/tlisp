@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  
-
-  
 
   resources :playlists
   get 'static/modaljs'
@@ -57,7 +54,7 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /en|fr/, defaults: {locale: 'en'} do
-    root "pages#home"
+    root "application#fallback_index_html"
     get "inside", to: "pages#inside", as: :inside
     get "home", to: "pages#home", as: "home"
     get "/contact", to: "pages#contact", as: "contact"
@@ -77,6 +74,7 @@ Rails.application.routes.draw do
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
+
   # this is required for the OPTIONS preflight method to go through
   # https://gist.github.com/dhoelzgen/cd7126b8652229d32eb4#gistcomment-1856812
   match '*path', via: [:options], to:  lambda {|_| [204, {
@@ -88,6 +86,4 @@ Rails.application.routes.draw do
   get '*path', to: "application#fallback_index_html", as: :app, constraints: ->(request) do
     !request.xhr? && request.format.html?
   end
-
-
 end

@@ -17,6 +17,7 @@ gem 'haml-rails'
 # version blocked because of https://github.com/rails/rails/issues/31673
 gem 'pg'#, '~> 0.21'
 gem 'puma'
+gem 'webpacker', '~> 4.x'
 
 gem 'font-awesome-sass'
 gem 'bootstrap-sass'

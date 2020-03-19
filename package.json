@@ -4,14 +4,22 @@
     "node": "6.3.1"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "reset-css": "^2.2.1",
-    "select2": "^4.0.6-rc.1"
+    "select2": "^4.0.6-rc.1",
+    "webpack": "^4.42.0"
   },
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
     "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+  },
+  "devDependencies": {
+    "@rails/webpacker": "^4.2.2",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }

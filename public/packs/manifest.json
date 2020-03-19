@@ -1,30 +1,14 @@
 {
-  "application.css": "/packs/css/application-fcb3d5ea.css",
-  "application.css.map": "/packs/css/application-fcb3d5ea.css.map",
-  "application.js": "/packs/application-d0c4521026f900618d2d.js",
-  "application.js.map": "/packs/js/application-0ac5d31ce21e6baed7f9.hot-update.js.map",
+  "application.js": "/packs/js/application-785043d7b33a5994efaf.js",
+  "application.js.map": "/packs/js/application-785043d7b33a5994efaf.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/application-d0c4521026f900618d2d.js"
+        "/packs/js/application-785043d7b33a5994efaf.js"
       ],
       "js.map": [
-        "/packs/application-d0c4521026f900618d2d.js.map",
-        "/packs/js/application-0ac5d31ce21e6baed7f9.hot-update.js.map"
+        "/packs/js/application-785043d7b33a5994efaf.js.map"
       ]
     }
-  },
-  "media/frontend/assets/ApercuPro-Italic.eot": "/packs/media/frontend/assets/ApercuPro-Italic-779d13b3c40f0b4496ee38375f56d84f.eot",
-  "media/frontend/assets/ApercuPro-Italic.woff": "/packs/media/frontend/assets/ApercuPro-Italic-4e202ee2af661ebf82ff485afca277be.woff",
-  "media/frontend/assets/ApercuPro-Italic.woff2": "/packs/media/frontend/assets/ApercuPro-Italic-f44107c74c4970d1fac397879eea3e26.woff2",
-  "media/frontend/assets/ApercuPro-Medium.eot": "/packs/media/frontend/assets/ApercuPro-Medium-16dbccb11a19692c99a168ae45d78d53.eot",
-  "media/frontend/assets/ApercuPro-Medium.woff": "/packs/media/frontend/assets/ApercuPro-Medium-b43a99b3cbe17b275857357b79622834.woff",
-  "media/frontend/assets/ApercuPro-Medium.woff2": "/packs/media/frontend/assets/ApercuPro-Medium-ad2ae28124b6b2d8b621070cad2142f2.woff2",
-  "media/frontend/assets/ApercuPro.eot": "/packs/media/frontend/assets/ApercuPro-c5d11fb976411d26d02f8f1cad9ac871.eot",
-  "media/frontend/assets/ApercuPro.woff": "/packs/media/frontend/assets/ApercuPro-75b446c1d7e088dca784d2a32bec6cf4.woff",
-  "media/frontend/assets/ApercuPro.woff2": "/packs/media/frontend/assets/ApercuPro-b4a3fc4ed61f106fb0592b4fdbac3f1d.woff2",
-  "media/frontend/assets/images/dig_it.gif": "/packs/media/frontend/assets/images/dig_it-98b3133f4ac8ae747bc6f4ea5ee4e8f7.gif",
-  "media/frontend/assets/images/drag_button.gif": "/packs/media/frontend/assets/images/drag_button-46c6fb8e6cdcaf66cd866147da1660f9.gif",
-  "media/frontend/assets/images/logo.svg": "/packs/media/frontend/assets/images/logo-d396f12fae7c345342e3e6fd23345a7b.svg",
-  "media/frontend/components/ui_components/gaussian.svg": "/packs/media/frontend/components/ui_components/gaussian-b643de40055b735ea610e3bb1dd80552.svg"
+  }
 }

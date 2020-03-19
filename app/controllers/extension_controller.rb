@@ -2,7 +2,7 @@ class ExtensionController < ApplicationController
 
   def show
     headers['CONTENT-TYPE'] = 'application/javascript'
-    sc = %{
+    @sc = %{
       (function(){
         var div = document.createElement('div');
         div.id = 'diggersdelights';
@@ -11,6 +11,6 @@ class ExtensionController < ApplicationController
         console.log(div);
       })()
     }.delete("\n")
-    render inline: sc
+    render layout: false
   end
 end

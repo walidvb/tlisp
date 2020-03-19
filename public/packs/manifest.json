@@ -1,48 +1,57 @@
 {
-  "application.js": "/packs/js/application-680726c1c5655dff1551.js",
-  "application.js.map": "/packs/js/application-680726c1c5655dff1551.js.map",
-  "components/Like.js": "/packs/js/components/Like-9c5ab054caa76ee5105c.js",
-  "components/Like.js.map": "/packs/js/components/Like-9c5ab054caa76ee5105c.js.map",
+  "application.js": "/packs/js/application-5bbf47227f2bc41488de.js",
+  "application.js.map": "/packs/js/application-5bbf47227f2bc41488de.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-680726c1c5655dff1551.js"
+        "/packs/js/application-5bbf47227f2bc41488de.js"
       ],
       "js.map": [
-        "/packs/js/application-680726c1c5655dff1551.js.map"
-      ]
-    },
-    "components/Like": {
-      "js": [
-        "/packs/js/components/Like-9c5ab054caa76ee5105c.js"
-      ],
-      "js.map": [
-        "/packs/js/components/Like-9c5ab054caa76ee5105c.js.map"
+        "/packs/js/application-5bbf47227f2bc41488de.js.map"
       ]
     },
     "extension": {
       "js": [
-        "/packs/js/extension-e1131f40ae971a3a5f87.js"
+        "/packs/js/extension-70945eaa64517901a811.js"
       ],
       "js.map": [
-        "/packs/js/extension-e1131f40ae971a3a5f87.js.map"
+        "/packs/js/extension-70945eaa64517901a811.js.map"
       ]
     },
     "extension/index": {
       "js": [
-        "/packs/js/extension/index-fbd3000eea1aaff8be6c.js"
+        "/packs/js/extension/index-d4a0b99efbf113520e8f.js"
       ],
       "js.map": [
-        "/packs/js/extension/index-fbd3000eea1aaff8be6c.js.map"
+        "/packs/js/extension/index-d4a0b99efbf113520e8f.js.map"
+      ]
+    },
+    "extension/Like": {
+      "js": [
+        "/packs/js/extension/Like-6b9a2bdb3646baefd289.js"
+      ],
+      "js.map": [
+        "/packs/js/extension/Like-6b9a2bdb3646baefd289.js.map"
       ]
     }
   },
-  "extension.js": "/packs/js/extension-e1131f40ae971a3a5f87.js",
-  "extension.js.map": "/packs/js/extension-e1131f40ae971a3a5f87.js.map",
-  "extension/index.js": "/packs/js/extension/index-fbd3000eea1aaff8be6c.js",
-  "extension/index.js.map": "/packs/js/extension/index-fbd3000eea1aaff8be6c.js.map",
-  "media/frontend/assets/images/dig_it.gif": "/packs/media/frontend/assets/images/dig_it-98b3133f4ac8ae747bc6f4ea5ee4e8f7.gif",
-  "media/frontend/assets/images/drag_button.gif": "/packs/media/frontend/assets/images/drag_button-46c6fb8e6cdcaf66cd866147da1660f9.gif",
-  "media/frontend/assets/images/logo.svg": "/packs/media/frontend/assets/images/logo-d396f12fae7c345342e3e6fd23345a7b.svg",
-  "media/frontend/components/ui_components/gaussian.svg": "/packs/media/frontend/components/ui_components/gaussian-b643de40055b735ea610e3bb1dd80552.svg"
+  "extension.js": "/packs/js/extension-70945eaa64517901a811.js",
+  "extension.js.map": "/packs/js/extension-70945eaa64517901a811.js.map",
+  "extension/Like.js": "/packs/js/extension/Like-6b9a2bdb3646baefd289.js",
+  "extension/Like.js.map": "/packs/js/extension/Like-6b9a2bdb3646baefd289.js.map",
+  "extension/index.js": "/packs/js/extension/index-d4a0b99efbf113520e8f.js",
+  "extension/index.js.map": "/packs/js/extension/index-d4a0b99efbf113520e8f.js.map",
+  "media/frontend/assets/ApercuPro-Italic.eot": "/packs/media/frontend/assets/ApercuPro-Italic-91eed330d3a50d34263b43ac435fff8b.eot",
+  "media/frontend/assets/ApercuPro-Italic.woff": "/packs/media/frontend/assets/ApercuPro-Italic-181ca832fc29e8ad08c8343b31ac2d7c.woff",
+  "media/frontend/assets/ApercuPro-Italic.woff2": "/packs/media/frontend/assets/ApercuPro-Italic-68aa6fd197b8263261b192ae8300c8af.woff2",
+  "media/frontend/assets/ApercuPro-Medium.eot": "/packs/media/frontend/assets/ApercuPro-Medium-d5ec197f2ae550b24ad1fbfe32f29a81.eot",
+  "media/frontend/assets/ApercuPro-Medium.woff": "/packs/media/frontend/assets/ApercuPro-Medium-7794ae580c5bcbb5951d7f04fb566993.woff",
+  "media/frontend/assets/ApercuPro-Medium.woff2": "/packs/media/frontend/assets/ApercuPro-Medium-cf1891d78ea41d6967178deb060c8767.woff2",
+  "media/frontend/assets/ApercuPro.eot": "/packs/media/frontend/assets/ApercuPro-2aa1aea747fef2f536e69752554d7325.eot",
+  "media/frontend/assets/ApercuPro.woff": "/packs/media/frontend/assets/ApercuPro-1b26b33ca164f5e948a35b1050d21e3f.woff",
+  "media/frontend/assets/ApercuPro.woff2": "/packs/media/frontend/assets/ApercuPro-eb2947fc4343484d8e56e26a1f79d19b.woff2",
+  "media/frontend/assets/images/dig_it.gif": "/packs/media/frontend/assets/images/dig_it-77eace87e9e6b5696040b944a32961c3.gif",
+  "media/frontend/assets/images/drag_button.gif": "/packs/media/frontend/assets/images/drag_button-2b91564a85b8a46220d2d413bf3753e8.gif",
+  "media/frontend/assets/images/logo.svg": "/packs/media/frontend/assets/images/logo-407d6fb97eb0d0a314327be30dd1845c.svg",
+  "media/frontend/components/ui_components/gaussian.svg": "/packs/media/frontend/components/ui_components/gaussian-a45f8dbe9b947fe1f5a58b27c3e794d8.svg"
 }

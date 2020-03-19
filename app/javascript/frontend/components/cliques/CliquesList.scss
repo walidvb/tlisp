@@ -1,0 +1,48 @@
+.wrapper{
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: .5rem;
+  border-bottom: 1px solid var(--light-grey);
+  margin-bottom: 1rem;
+}
+.wrapper.active .cliqueName{ 
+  text-decoration: underline;
+}
+
+.users{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user{
+  margin-right: 1rem;
+  margin-bottom: .5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 3rem;
+  padding-left: 7px;
+  padding-right: 2px;
+  cursor: pointer;
+}
+.user.active{
+  border-color: var(--dark-grey);
+}
+.user.noLinks{
+  pointer-events: none;
+  cursor: disabled;
+  opacity: .3;
+}
+
+.badge{
+  height: 1.2rem;
+  width: 1.2rem;
+  background: var(--light-grey);
+  border-radius: 1rem;
+  font-size: .7rem;
+  margin-left: 5px;
+  vertical-align: middle;
+  display: inline-grid;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-grey);
+}

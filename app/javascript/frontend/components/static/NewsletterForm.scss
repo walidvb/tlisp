@@ -1,0 +1,43 @@
+@import '../../_variables.scss';
+
+.container{
+    display: flex;
+    margin-top: 1rem;
+    flex-flow: row wrap;
+    padding: 0 .5rem;
+    @media #{$tablet}{
+        min-width: 50vw;
+    }
+}
+
+.hint{
+    font-size: .8rem;
+    flex-basis: 100%;
+    color: darken($primary-color, 20%);
+    transition: color .3s .1s ease-in-out;
+    &:hover{
+        transition: color .05s ease-in-out;
+        color: $primary-color;
+    }
+    margin-top: 1rem;
+    text-align: center;
+    font-style: italic;
+}
+.button{
+    display: inline-block;
+}
+
+.thanks{
+    .header{
+        text-transform: uppercase;
+        border-bottom: 1px solid $primary-color;
+        display: inline-block;
+        padding-bottom: .2rem;
+        margin-bottom: .5rem;
+
+    }
+    p{
+        margin-bottom: 1rem;
+    }
+    margin: auto;
+}

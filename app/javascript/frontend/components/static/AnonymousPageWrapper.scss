@@ -1,0 +1,52 @@
+@import '../../_variables.scss';
+
+$border-color: transparentize(#cacddc, .05);
+$border-width: 2rem;
+
+.container{
+    position: relative;
+    display: flex;
+    height: calc(100vh - #{3*$border-width});
+    overflow: auto;
+    flex-direction: column;
+    color: $primary-color;
+    justify-content: space-between;
+    align-items: center;
+    border: $border-width solid $border-color;
+    border-top: none;
+    border-bottom: none;
+    background: transparentize(#1b1e2a, .2);
+}
+
+.container_header{
+   background-color: $border-color;
+   height: 1.5*$border-width;
+   color: black;
+   text-align: center;
+   vertical-align: middle;
+   text-transform: uppercase;
+   padding-left: $border-width;
+   padding-right: $border-width;
+   line-height: 1.5*$border-width;
+   &:last-child{
+       line-height: 1.42;
+   }
+}
+
+.center{
+    flex-grow: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.slogan{
+    position: absolute;
+    padding: 5px 10px;
+    right: 0;
+    transform-origin: top right;
+    transform: rotate(90deg) translateX(100%);
+    font-size: 0.875rem;
+    color: white;
+}

@@ -1,0 +1,19 @@
+@import '../../_variables.scss';
+
+.container{
+    margin: auto;
+    @media #{$tablet}{
+        width: 50vw;
+        max-width: 400px;
+    }
+    input{
+        margin-bottom: 1rem!important;
+        width: 100%;
+    }
+}
+
+.forgot{
+    text-align: right;
+    font-size: .8rem;
+    opacity: .7;
+}

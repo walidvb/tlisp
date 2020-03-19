@@ -19,7 +19,7 @@ export default () => {
 
 
   return (<div className={styles.container}>
-    {content()}
-    <div onClick={() => openIframe(routes.links.new, { url: window.location.href })}>Dig This!</div>
+    {/* <div className={styles.section}>{content()}</div> */}
+    <div className={[styles.section, styles.pointer].join(' ')} onClick={() => openIframe(routes.links.new, { url: window.location.href })}>Dig This!</div>
   </div>)
 }

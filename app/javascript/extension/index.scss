@@ -1,8 +1,25 @@
-
+@import "../frontend/variables";
 
 .container{
   position: fixed;
-  font-size: 16px;
-  bottom: 2em;
-  left: 2em;
+  font-size: 14px;
+  bottom: 1em;
+  left: 1em;
+  background-color: $primary-color;
+  border: 1px solid $border-grey;
+  display: flex;
+  padding: 0 0;
+  border-radius: 4px;
+  color: white;
+}
+
+.section{
+  padding: 3px 5px;
+}
+.section:not(:last-child){
+  border-right: 1px solid $border-grey;
+}
+
+.pointer{
+  cursor: pointer;
 }

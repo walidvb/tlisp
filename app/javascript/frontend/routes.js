@@ -41,22 +41,23 @@ const routes = {
         }
     },
     links: {
-        new: `${baseURL}/tracks/new`,
-        me: `${baseURL}/me`,
-        explore: `${baseURL}/explore`,
+        new: `/tracks/new`,
+        me: `/me`,
+        explore: `/explore`,
     },
-    newsletter: `${baseURL}/`,
+    newsletter: `/`,
     playlists: {
-        show: `${baseURL}/playlists`,
+        show: `/playlists`,
     },
     curatedList: {
-        show: `${baseURL}/curated`,
+        show: `/curated`,
     },
     user: {
-        signup: `${baseURL}/cliques/:clique_slug/join`,
-        signin: `${baseURL}/login`,
-        forgotPassword: `${baseURL}/forgot-password`,
+        signup: `/cliques/:clique_slug/join`,
+        signin: `/login`,
+        forgotPassword: `/forgot-password`,
     },
+    baseURL,
 }
 
 export default routes;

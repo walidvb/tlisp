@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormField} from 'react-form';
-
 import Select from 'react-select';
+import Creatable from 'react-select/creatable';
+
 import styles from './DDSelect.scss';
 const propTypes = {
     optionName: PropTypes.string.isRequired,
@@ -35,7 +36,7 @@ function DDSelect(props) {
     const opts = {
         name:"form-field-name",
         value: getValue(),
-        multi: props.multiple,
+        isMulti: props.multiple,
         onChange: onChange,
         options: options,
         ...rest,
@@ -60,7 +61,7 @@ function DDSelect(props) {
     function renderAsSelect(){
         return (
             <div>
-                {creatable ? <Select.Creatable {...opts} promptTextCreator={() => `${props.optionName}...`} /> : <Select {...opts} />}
+                {creatable ? <Creatable {...opts} isMulti promptTextCreator={() => `${props.optionName}...`} /> : <Select {...opts} />}
             </div>
         )
     }

@@ -1,46 +1,26 @@
 {
-  "application.js": "/packs/js/application-9be61d912eaead823288.js",
-  "application.js.map": "/packs/js/application-9be61d912eaead823288.js.map",
+  "application.js": "/packs/js/application-a3bd43b77d76ce03bf92.js",
+  "application.js.map": "/packs/js/application-a3bd43b77d76ce03bf92.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-9be61d912eaead823288.js"
+        "/packs/js/application-a3bd43b77d76ce03bf92.js"
       ],
       "js.map": [
-        "/packs/js/application-9be61d912eaead823288.js.map"
+        "/packs/js/application-a3bd43b77d76ce03bf92.js.map"
       ]
     },
     "extension": {
       "js": [
-        "/packs/js/extension-28e89f673bb6ada4ef77.js"
+        "/packs/js/extension-d28505a95d553555fa6f.js"
       ],
       "js.map": [
-        "/packs/js/extension-28e89f673bb6ada4ef77.js.map"
-      ]
-    },
-    "extension/index": {
-      "js": [
-        "/packs/js/extension/index-f06aae509f49e2a3e71b.js"
-      ],
-      "js.map": [
-        "/packs/js/extension/index-f06aae509f49e2a3e71b.js.map"
-      ]
-    },
-    "extension/Like": {
-      "js": [
-        "/packs/js/extension/Like-65f67a576f7789959398.js"
-      ],
-      "js.map": [
-        "/packs/js/extension/Like-65f67a576f7789959398.js.map"
+        "/packs/js/extension-d28505a95d553555fa6f.js.map"
       ]
     }
   },
-  "extension.js": "/packs/js/extension-28e89f673bb6ada4ef77.js",
-  "extension.js.map": "/packs/js/extension-28e89f673bb6ada4ef77.js.map",
-  "extension/Like.js": "/packs/js/extension/Like-65f67a576f7789959398.js",
-  "extension/Like.js.map": "/packs/js/extension/Like-65f67a576f7789959398.js.map",
-  "extension/index.js": "/packs/js/extension/index-f06aae509f49e2a3e71b.js",
-  "extension/index.js.map": "/packs/js/extension/index-f06aae509f49e2a3e71b.js.map",
+  "extension.js": "/packs/js/extension-d28505a95d553555fa6f.js",
+  "extension.js.map": "/packs/js/extension-d28505a95d553555fa6f.js.map",
   "media/frontend/assets/ApercuPro-Italic.eot": "/packs/media/frontend/assets/ApercuPro-Italic-91eed330d3a50d34263b43ac435fff8b.eot",
   "media/frontend/assets/ApercuPro-Italic.woff": "/packs/media/frontend/assets/ApercuPro-Italic-181ca832fc29e8ad08c8343b31ac2d7c.woff",
   "media/frontend/assets/ApercuPro-Italic.woff2": "/packs/media/frontend/assets/ApercuPro-Italic-68aa6fd197b8263261b192ae8300c8af.woff2",

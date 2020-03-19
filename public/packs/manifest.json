@@ -1,34 +1,48 @@
 {
-  "App.js": "/packs/js/App-923eb09756d30c866e89.js",
-  "App.js.map": "/packs/js/App-923eb09756d30c866e89.js.map",
-  "application.js": "/packs/js/application-e32984c2bc15e1cb7a8f.js",
-  "application.js.map": "/packs/js/application-e32984c2bc15e1cb7a8f.js.map",
-  "components/Like.js": "/packs/js/components/Like-00834d21fad8c3d5e0f7.js",
-  "components/Like.js.map": "/packs/js/components/Like-00834d21fad8c3d5e0f7.js.map",
+  "application.js": "/packs/js/application-680726c1c5655dff1551.js",
+  "application.js.map": "/packs/js/application-680726c1c5655dff1551.js.map",
+  "components/Like.js": "/packs/js/components/Like-9c5ab054caa76ee5105c.js",
+  "components/Like.js.map": "/packs/js/components/Like-9c5ab054caa76ee5105c.js.map",
   "entrypoints": {
-    "App": {
-      "js": [
-        "/packs/js/App-923eb09756d30c866e89.js"
-      ],
-      "js.map": [
-        "/packs/js/App-923eb09756d30c866e89.js.map"
-      ]
-    },
     "application": {
       "js": [
-        "/packs/js/application-e32984c2bc15e1cb7a8f.js"
+        "/packs/js/application-680726c1c5655dff1551.js"
       ],
       "js.map": [
-        "/packs/js/application-e32984c2bc15e1cb7a8f.js.map"
+        "/packs/js/application-680726c1c5655dff1551.js.map"
       ]
     },
     "components/Like": {
       "js": [
-        "/packs/js/components/Like-00834d21fad8c3d5e0f7.js"
+        "/packs/js/components/Like-9c5ab054caa76ee5105c.js"
       ],
       "js.map": [
-        "/packs/js/components/Like-00834d21fad8c3d5e0f7.js.map"
+        "/packs/js/components/Like-9c5ab054caa76ee5105c.js.map"
+      ]
+    },
+    "extension": {
+      "js": [
+        "/packs/js/extension-e1131f40ae971a3a5f87.js"
+      ],
+      "js.map": [
+        "/packs/js/extension-e1131f40ae971a3a5f87.js.map"
+      ]
+    },
+    "extension/index": {
+      "js": [
+        "/packs/js/extension/index-fbd3000eea1aaff8be6c.js"
+      ],
+      "js.map": [
+        "/packs/js/extension/index-fbd3000eea1aaff8be6c.js.map"
       ]
     }
-  }
+  },
+  "extension.js": "/packs/js/extension-e1131f40ae971a3a5f87.js",
+  "extension.js.map": "/packs/js/extension-e1131f40ae971a3a5f87.js.map",
+  "extension/index.js": "/packs/js/extension/index-fbd3000eea1aaff8be6c.js",
+  "extension/index.js.map": "/packs/js/extension/index-fbd3000eea1aaff8be6c.js.map",
+  "media/frontend/assets/images/dig_it.gif": "/packs/media/frontend/assets/images/dig_it-98b3133f4ac8ae747bc6f4ea5ee4e8f7.gif",
+  "media/frontend/assets/images/drag_button.gif": "/packs/media/frontend/assets/images/drag_button-46c6fb8e6cdcaf66cd866147da1660f9.gif",
+  "media/frontend/assets/images/logo.svg": "/packs/media/frontend/assets/images/logo-d396f12fae7c345342e3e6fd23345a7b.svg",
+  "media/frontend/components/ui_components/gaussian.svg": "/packs/media/frontend/components/ui_components/gaussian-b643de40055b735ea610e3bb1dd80552.svg"
 }

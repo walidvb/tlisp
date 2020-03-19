@@ -15,31 +15,6 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import withTracker from '../../../client/src/utils/withTracker';
-import '../../../client/src/index.css';
+import init from '../frontend';
 
-import App from './App';
-// import { Provider } from 'react-redux';
-// import configureStore from '../../../client/src/store/configureStore';
-
-// const store = configureStore();
-
-const render = (Component) => {
-  return ReactDOM.render(
-    // <Provider store={store}>
-        <Component />,
-    // </Provider>,
-    document.body.appendChild(document.createElement('div'))
-  );
-};
-
-render(App);
-
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default;
-    render(NextApp);
-  });
-}
+init();

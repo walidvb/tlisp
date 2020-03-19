@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormField} from 'react-form';
 
-import Select from 'react-select/dist/react-select';
+import Select from 'react-select';
 import styles from './DDSelect.scss';
-/* eslint-disable */
-import '!style-loader!css-loader!sass-loader!react-select/dist/react-select.css';
 const propTypes = {
     optionName: PropTypes.string.isRequired,
 }

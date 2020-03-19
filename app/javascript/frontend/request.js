@@ -10,7 +10,7 @@ export function request(url, options = {}){
     return new Promise((resolve, reject) => {
         fetch(`${url}${qs}`, {
             ...options,
-            credentials: 'same-origin',
+            credentials: 'include',
             headers: { "Content-Type": "application/json", accept: 'application/json', }
         })
         .then(response => {

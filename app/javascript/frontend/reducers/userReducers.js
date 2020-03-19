@@ -1,6 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
+    loaded: false,
 }
 
 export default (state = initialState, action) => {
@@ -8,6 +9,7 @@ export default (state = initialState, action) => {
         case `${types.GET_USER_DETAILS}_REJECTED`:
         return {
             ...initialState,
+            loaded: true,
             authenticated: false,
         }
         case `${types.GET_USER_DETAILS}_FULFILLED`:
@@ -17,6 +19,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ...user,
+                loaded: true,
                 authenticated: true,
             }
         default:

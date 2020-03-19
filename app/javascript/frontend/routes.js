@@ -1,54 +1,61 @@
+// const baseURL = 'https://diggersdelights.herokuapp.com'
+const baseURL = 'http://localhost:3000'
 const routes = {
+    web: {
+        user: {
+            signin: `${baseURL}/users/sign_in`,
+        },
+    },
     api: {
         curatedPlaylists: {
-            index: '/api/curated_lists',
-            show: '/api/curated_lists',
+            index: `${baseURL}/api/curated_lists`,
+            show: `${baseURL}/api/curated_lists`,
         },
-        cliques: '/api/cliques',
-        covers: '/api/covers',
+        cliques: `${baseURL}/api/cliques`,
+        covers: `${baseURL}/api/covers`,
         links: {
-            explore: '/api/links.json',
-            myLinks: '/api/links/my_links.json',
-            filters: '/api/filters.json',
+            explore: `${baseURL}/api/links.json`,
+            myLinks: `${baseURL}/api/links/my_links.json`,
+            filters: `${baseURL}/api/filters.json`,
             formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
-            create: '/api/links.json',
+            create: `${baseURL}/api/links.json`,
             play: (id) => `/api/links/${id}/plays`
         },
         newsletter: {
-            create: '/api/newsletters',
+            create: `${baseURL}/api/newsletters`,
         },
         playlists: {
-            index: '/api/playlists.json',
+            index: `${baseURL}/api/playlists.json`,
         },
         users: {
-            index: '/api/users.json',
-            me: '/api/me.json',
-            signIn: '/users/sign_in',
-            signUp: '/users',
-            update: '/users',
-            forgotPassword: '/users/password.json',
+            index: `${baseURL}/api/users.json`,
+            me: `${baseURL}/api/me.json`,
+            signIn: `${baseURL}/users/sign_in`,
+            signUp: `${baseURL}/users`,
+            update: `${baseURL}/users`,
+            forgotPassword: `${baseURL}/users/password.json`,
         },
         notifications: {
-            index: '/api/notifications.json',
+            index: `${baseURL}/api/notifications.json`,
             open: (id) => `/api/notifications/${id}/open.json`,
         }
     },
     links: {
-        new: '/tracks/new',
-        me: '/me',
-        explore: '/explore'
+        new: `${baseURL}/tracks/new`,
+        me: `${baseURL}/me`,
+        explore: `${baseURL}/explore`,
     },
-    newsletter: '/',
+    newsletter: `${baseURL}/`,
     playlists: {
-        show: '/playlists',
+        show: `${baseURL}/playlists`,
     },
     curatedList: {
-        show: '/curated',
+        show: `${baseURL}/curated`,
     },
     user: {
-        signup: '/cliques/:clique_slug/join',
-        signin: '/login',
-        forgotPassword: '/forgot-password',
+        signup: `${baseURL}/cliques/:clique_slug/join`,
+        signin: `${baseURL}/login`,
+        forgotPassword: `${baseURL}/forgot-password`,
     },
 }
 

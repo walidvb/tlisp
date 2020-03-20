@@ -1,5 +1,5 @@
-// const baseURL = 'https://diggersdelights.herokuapp.com'
-const baseURL = 'http://localhost:3000'
+const baseURL = 'https://diggersdelights.herokuapp.com'
+// const baseURL = 'http://localhost:3000'
 const routes = {
     web: {
         user: {
@@ -19,7 +19,8 @@ const routes = {
             filters: `${baseURL}/api/filters.json`,
             formDetails: url => `/api/link_form_details.json?url=${encodeURIComponent(url)}`,
             create: `${baseURL}/api/links.json`,
-            play: (id) => `/api/links/${id}/plays`
+            play: (id) => `${baseURL}/api/links/${id}/plays`,
+            like: (url) => `${baseURL}/api/links/like/toggle?url=${encodeURIComponent(url)}`
         },
         newsletter: {
             create: `${baseURL}/api/newsletters`,

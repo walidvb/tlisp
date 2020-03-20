@@ -1,4 +1,4 @@
-const baseURL = 'https://diggersdelights.herokuapp.com'
+const baseURL = 'https://diggersdelights.net'
 // const baseURL = 'http://localhost:3000'
 const routes = {
     web: {

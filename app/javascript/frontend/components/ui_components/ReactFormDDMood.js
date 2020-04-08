@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormField} from 'react-form';
+import { FormField } from 'react-form';
 
 import DDMood from './DDMood';
 
 const propTypes = {
-    optionName: PropTypes.string.isRequired,
+    optionName: PropTypes.string,
 }
 
 

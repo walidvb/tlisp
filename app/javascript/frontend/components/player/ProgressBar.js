@@ -1,12 +1,13 @@
 import React from 'react'
 import { bindActionCreators } from 'redux';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 
 import * as playerActions from '../../actions/playerActions';
 import { ProgressBar } from 'react-player-controls'
 
 import styles from './Controls.scss';
 const ProgressBar_ = (props) => {
+    return null
     return (
         <ProgressBar
             className={[styles.progress, "ProgressBar"].join(' ')}

@@ -80,10 +80,11 @@ class App extends Component {
     return (
     <AnonymousPageWrapper>
       <Switch>
-        <Route exact path={'/'} component={NewsletterPage} />
         <Route path={'/cliques/:name/join'} component={CliqueJoin} />
         <Route path={routes.user.forgotPassword} render={() => <ForgotPassword />} />
         <Route path={'/login'} render={() => <LoginForm isSignUp={false} />} />
+        <Route path={'/tracks/new'} render={() => <LoginForm isSignUp={false} />} />
+        <Route path={'/'} component={NewsletterPage} />
       </Switch>
     </AnonymousPageWrapper>)
   }

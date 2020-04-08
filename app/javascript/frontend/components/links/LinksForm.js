@@ -17,7 +17,6 @@ import { submitLink } from '../../actions/linkActions';
 const qs = require('qs');
 
 function LinkFormDetails(props) {
-
     return (
         <NestedForm field="link">
             <Form getApi={props.getApi}>
@@ -155,9 +154,9 @@ class LinksForm extends Component {
         this.linkFormApi.setAllValues({
             url,
             description: description,
-            is_a_set: "0",
+            is_a_set: "1",
             published: true,
-            clique_ids: [],
+            // clique_ids: [],
             //clique_ids: mapCliquesToOptions(cliques).filter(c => c.value != 1)
         });
     }

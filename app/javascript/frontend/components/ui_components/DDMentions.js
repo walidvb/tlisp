@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { MentionsInput, Mention } from 'react-mentions'
-import { FormField } from 'react-form';
 import fuzzysearch from 'fuzzysearch';
 import styles from './DDMentions.scss';
 
@@ -11,64 +10,48 @@ const propTypes = {
     
 }
 
-function DDMention(props) {
-    const {
-        fieldApi,
-        formApi,
-      } = props;
-
-    const {
-        getValue,
-        setValue,
-      } = fieldApi;
-    
+const parse = (string_, type) => {
     const generateRegexp = (type) => `\\[([\\d\\w ?]+)\\]\\(${type}:([\\d\\w ?]+)\\)`
-
-    const parseMentions = (string_, type) => {
-        let result;
-        const regexp = new RegExp(generateRegexp(type), 'gmi');
-        const matches = []
-        result = regexp.exec(string_)
-        while ( result != null){
-            matches.push({
-                display: result[1],
-                value: result[2],
-            })
-            result = regexp.exec(string_);
-        }
-        return matches;
-        
+    let result;
+    const regexp = new RegExp(generateRegexp(type), 'gmi');
+    const matches = []
+    result = regexp.exec(string_)
+    while ( result != null){
+        matches.push({
+            display: result[1],
+            value: result[2],
+        })
+        result = regexp.exec(string_);
     }
-    const handleMentionChange = (evt) => {
-        // set the description field
-        let str = evt.target.value;
-        
-        // add tags to the form
-        const detectedTags = parseMentions(str, 'tag');
-        formApi.setValue("tag_list", [...new Set(detectedTags)]);
-        const detectedUsers = parseMentions(str, 'users');
-        detectedUsers.forEach(u => formApi.addValue("mentions", u));
+    console.log(string_)
+    return matches;
+}
 
-        str = str.replace(/@\[[\w ]+\]\(users:\d+\)/g, '')
-        setValue(str);
-    }
+function DDMention({ value, setValue, addMentions, setTags, mentions, tags }) {
+    
+    useEffect(() => {
+      const users = parse(value, 'users')
+      users.length && addMentions(users)
+      const tags = parse(value, 'tags')
+      tags.length && setTags(tags)
+      setValue(value.replace(/@\[[\w ]+\]\(users:\d+\)/g, ''));
+    }, [value])
 
     const getUsersSuggestions = (s, cb) => {
-        const mentions = formApi.values.mentions || [];
-        request(routes.api.users.index).then(({ users }) => {
-            cb(
-                users.map(u => ({
-                    id: u.id,
-                    display: u.name || u.initials || "N/A",
-                }))
-                .filter(u => fuzzysearch(s.toLowerCase(), u.display.toLowerCase()))
-                .filter(u => mentions.map( u => parseInt(u.value, 10) ).indexOf(u.id) < 0)
-            )
-        })
+      request(routes.api.users.index).then(({ users }) => {
+        cb(
+          users.map(u => ({
+            id: u.id,
+            display: u.name || u.initials || "N/A",
+          }))
+          .filter(u => fuzzysearch(s.toLowerCase(), u.display.toLowerCase()))
+          .filter(u => mentions.map( u => parseInt(u.value, 10) ).indexOf(u.id) < 0)
+        )
+      })
     }
 
     const getTagsSuggestions = (s, cb) => {
-        let existing = props.tags.map(t => ({
+        let existing = tags.map(t => ({
             id: t,
             display: t,
         })).filter(t => fuzzysearch(s,t.display));
@@ -85,23 +68,23 @@ function DDMention(props) {
     return (
         <div style={{color: "black"}}>
             <MentionsInput 
-                value={getValue() || ''} 
+                value={value || ''} 
                 className={styles.container}
-                onChange={handleMentionChange}
+                onChange={({target: { value }}) => setValue(value)}
                 style={defaultStyles()}
                 markup="@[__display__](__type__:__id__)"
                 allowSpaceInQuery={true}
                 placeholder="Write a few words about the track, send it to a @friend, tag the #artist and #genre..."
                 >
                 <Mention 
-                    type='users'
+                    markup='@[__display__](users:__id__)'
                     trigger="@"
                     data={getUsersSuggestions}
                     style={{ backgroundColor: '#FECE08', color: 'transparent'}}
                     appendSpaceOnAdd={false}
-                />
+                    />
                 <Mention
-                    type='tag'
+                    markup='@[__display__](tags:__id__)'
                     trigger="#"
                     data={getTagsSuggestions}
                     style={{ backgroundColor: '#FFBF3B', color: 'transparent' }}
@@ -114,7 +97,7 @@ function DDMention(props) {
 
 DDMention.propTypes = propTypes
 
-export default FormField(DDMention)
+export default DDMention
 
 
 

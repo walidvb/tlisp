@@ -40,7 +40,7 @@
     "react-dev-utils": "^10.2.0",
     "react-dom": "^16.13.0",
     "react-draggable": "^4.2.0",
-    "react-form": "^2.16.3",
+    "react-form": "^4.0.1",
     "react-ga": "^2.7.0",
     "react-mentions": "^3.3.1",
     "react-player": "^1.15.2",

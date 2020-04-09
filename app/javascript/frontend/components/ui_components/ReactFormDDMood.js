@@ -5,7 +5,7 @@ import { FormField } from 'react-form';
 import DDMood from './DDMood';
 
 const propTypes = {
-    value: PropTypes.number.isRequired,
+    value: PropTypes.number,
 }
 
 

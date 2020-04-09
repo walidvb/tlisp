@@ -24,6 +24,7 @@ const LinksForm = ({ location }) => {
   const [heardAt, setHeardAt] = useState()
   const [mood, setMood] = useState()
   const [published, setPublished] = useState()
+  const [isSet, setIsSet] = useState('1')
 
   const addMentions = (user) => setMentions([...mentions, user])
   useEffect(() => {
@@ -107,6 +108,12 @@ const LinksForm = ({ location }) => {
           <div className="fa fa-info" />
           {published ? "This link will be available to your friends" : "This link will only be visible to you"}
         </span>
+      </div>
+      <div style={{ marginTop: '1rem' }}>
+        <label htmlFor="mix" className="">Mix</label>
+        <input type={"radio"} onChange={({ target: { value }}) => setIsSet(value)} checked={isSet === "0"} value="0" name="is_a_set" className="" style={{ marginLeft: '.5rem', marginRight: '1rem' }} />
+        <input type={"radio"} onChange={({ target: { value }}) => setIsSet(value)} checked={isSet === "1"} value="1" name="is_a_set" className="" />
+        <label htmlFor="track" className="">Track</label>
       </div>
       {/* <RadioGroup field="is_a_set" style={{ marginTop: '1rem' }}>
         {group => (

@@ -23,6 +23,7 @@ const LinksForm = ({ location }) => {
   const [playedBy, setPlayedBy] = useState()
   const [heardAt, setHeardAt] = useState()
   const [mood, setMood] = useState()
+  const [published, setPublished] = useState()
 
   const addMentions = (user) => setMentions([...mentions, user])
   useEffect(() => {
@@ -90,18 +91,24 @@ const LinksForm = ({ location }) => {
       <label htmlFor={`mood`}>Energy Level</label>
       <ReactFormDDMood onChange={setMood} value={mood} id='mood' />
     </div>
-    {/* <div>
+    <div>
       <div className="form-check">
         <label htmlFor="published" className="form-check-label">
-          <Checkbox field="published" id="published" className="form-check-input" />
-                                        Public
-                                    </label>
+          <input 
+            type={'checkbox'} 
+            checked={published} 
+            id="published" 
+            className="form-check-input" 
+            onChange={console.log}
+          />
+          Public
+        </label>
         <span className={"hint"}>
           <div className="fa fa-info" />
-          {formApi.values.published ? "This link will be available to your friends" : "This link will only be visible to you"}
+          {published ? "This link will be available to your friends" : "This link will only be visible to you"}
         </span>
       </div>
-      <RadioGroup field="is_a_set" style={{ marginTop: '1rem' }}>
+      {/* <RadioGroup field="is_a_set" style={{ marginTop: '1rem' }}>
         {group => (
           <div>
             <label htmlFor="mix" className="">Mix</label>
@@ -110,8 +117,8 @@ const LinksForm = ({ location }) => {
             <label htmlFor="track" className="">Track</label>
           </div>
         )}
-      </RadioGroup>
-    </div> */}
+      </RadioGroup> */}
+    </div>
   </div>
   const renderForm = () => <form className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} onSubmit={submit} id="form2">
     {renderDescription()}

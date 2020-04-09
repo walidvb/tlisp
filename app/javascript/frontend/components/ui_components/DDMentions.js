@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { MentionsInput, Mention } from 'react-mentions'
 import fuzzysearch from 'fuzzysearch';
 import styles from './DDMentions.scss';
 
 import { request, routes } from '../../request';
 
-const propTypes = {
-    
-}
 
 const parse = (string_, type) => {
     const generateRegexp = (type) => `\\[([\\d\\w ?]+)\\]\\(${type}:([\\d\\w ?]+)\\)`

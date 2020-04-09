@@ -1,5 +1,7 @@
-const baseURL = /diggersdelights\.net/.test(window.location.href) ? '' : 'https://diggersdelights.herokuapp.com'
-// const baseURL = 'http://localhost:3000'
+let baseURL = /diggersdelights\.net/.test(window.location.href) ? '' : 'https://diggersdelights.herokuapp.com'
+baseURL = 'http://localhost:3000'
+baseURL = ''
+
 const routes = {
     web: {
         user: {

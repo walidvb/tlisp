@@ -5,44 +5,20 @@ import { FormField } from 'react-form';
 import DDMood from './DDMood';
 
 const propTypes = {
-    optionName: PropTypes.string,
+    value: PropTypes.isRequired,
 }
 
 
-function ReactFormDDMood(props) {
-    const {
-        fieldApi,
-        onInput,
-        ...rest
-      } = props;
+function ReactFormDDMood({ value, onChange }) {
 
-    const {
-        getValue,
-        getError,
-        getWarning,
-        getSuccess,
-        setValue,
-        setTouched,
-        addOption,
-      } = fieldApi;
-    
-    const { creatable, options } = props;
-    const onChange = ({ target: { value } }) => {
-        setValue(value);
-        if(onInput){
-            onInput(value)
-        }
-    }
-    const opts = {
-        name:"form-field-name",
-        value: getValue(),
-        ...rest,
+    const onChange_ = ({ target: { value } }) => {
+        onChange(parseInt(value));
     }
     return (
-        <DDMood value={opts.value} onChange={onChange} />
+        <DDMood value={value} onChange={onChange_} />
     )
 }
 
 ReactFormDDMood.propTypes = propTypes
 
-export default FormField(ReactFormDDMood);
+export default ReactFormDDMood;

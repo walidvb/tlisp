@@ -99,7 +99,7 @@ const LinksForm = ({ location }) => {
             checked={published} 
             id="published" 
             className="form-check-input" 
-            onChange={console.log}
+            onChange={({target: { checked }}) => setPublished(checked)}
           />
           Public
         </label>

@@ -149,6 +149,7 @@ const LinksForm = ({ location }) => {
   const renderForm = () => <form 
     onSubmit={submit} 
     id="form2"
+    className={styles.form_container}
   >
     {renderDescription()}
     {renderPlayedAt()}

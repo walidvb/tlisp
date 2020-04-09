@@ -91,7 +91,6 @@ function DDMention({ value, setValue, addMentions, setTags, mentions, tags }) {
     )
 }
 
-DDMention.propTypes = propTypes
 
 export default DDMention
 

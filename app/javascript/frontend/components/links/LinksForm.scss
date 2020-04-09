@@ -17,13 +17,15 @@
     flex-grow: 1;
     overflow: auto;
     padding-top: 1rem;
-    transform: translateY(-100%);
-    &.loaded{
-        transition: transform .15s ease-in-out;
-        transform: translateY(0);
-    }
+    padding-left: 15px;
+    padding-right: 15px;
+    animation: fade-up .3s ease-out;
 }
 
+@keyframes fade-up{
+    from{ opacity: 0; transform: translateY(10px);}
+    to{ opacity: 1; transform: translateY(0px);}
+}
 .form_container, .header{
     padding: 5px;
 }

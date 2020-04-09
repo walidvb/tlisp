@@ -14,7 +14,7 @@ function DDMood(props) {
     return (
         <div className={[styles.container, props.className, styles[props.size]].join(' ')}>
             {/* HACK: value is empty on form initialization */}
-            <Gaussian  styles={styles} style={{left: `${props.value || 50}%`}} />
+            <Gaussian  styles={styles} style={{left: `${props.value !== 'undefined' ?  props.value :  50}%`}} />
             <input className={styles.input} type="range" min={0} max={100} value={props.value} onChange={props.onChange}/>
             <div className={["hint", styles.hint].join(' ')}>
                 <span style={{float: "left"}}>soft</span>

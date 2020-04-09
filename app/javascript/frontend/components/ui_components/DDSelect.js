@@ -5,17 +5,16 @@ import Creatable from 'react-select/creatable';
 
 import styles from './DDSelect.scss';
 const propTypes = {
-    optionName: PropTypes.string.isRequired,
+    optionName: PropTypes.string,
 }
 
 function DDSelect({ value, creatable, options, optionName, multiple, ...restProps }) {
-
     const opts = {
+        ...restProps,
         name:"form-field-name",
         value,
         isMulti: multiple,
         options: options,
-        ...restProps,
     }
     function renderAsCheckBoxes(){
         const valueIds = opts.value ? opts.value.map(v => v.value) : [];

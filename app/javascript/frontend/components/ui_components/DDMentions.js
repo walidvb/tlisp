@@ -23,7 +23,6 @@ const parse = (string_, type) => {
         })
         result = regexp.exec(string_);
     }
-    console.log(string_)
     return matches;
 }
 

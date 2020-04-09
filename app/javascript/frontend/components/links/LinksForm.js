@@ -15,7 +15,7 @@ const qs = require('qs');
 
 const LinksForm = ({ location }) => {
   const [loaded, setLoaded] = useState(false)
-  const [link, setLink] = useState({})
+  const [oembed, setOembed] = useState({})
   const [selectOptions, setSelectOptions] = useState({})
   const [url, setURL] = useState('')
   
@@ -31,15 +31,15 @@ const LinksForm = ({ location }) => {
   const [cliques, setCliques] = useState([])
   const [playlists, setPlaylists] = useState([])
 
-  const addMentions = (user) => setMentions([...mentions, user])
+  const addMentions = (user) => setMentions([...mentions, ...user])
 
   useEffect(() => {
     const { url: url_ } = qs.parse(location.search, { ignoreQueryPrefix: true });
     const fetchDetails = async () => {
       try{
-        const { link, ...selectOptions_ } = await request(routes.api.links.formDetails(url_))
+        const { link: { oembed }, ...selectOptions_ } = await request(routes.api.links.formDetails(url_))
         setSelectOptions(selectOptions_)
-        setLink(link)
+        setOembed(oembed)
       } catch(err){
         console.error(err)
       }
@@ -51,33 +51,49 @@ const LinksForm = ({ location }) => {
     }
   }, [])
   
-  const renderHeader = () => <LinksFormHeader {...{url, oembed: link.oembed, styles, loaded}}/>
+  const renderHeader = () => <LinksFormHeader {...{url, oembed, styles, loaded}}/>
 
-  const submit = console.log
+  const submit = async (evt) => {
+    evt.preventDefault()
+    const link = {
+      description,
+      tag_ids: tags.map(p=>p.value),
+      clique_ids: cliques.map(p=>p.value),
+      playlist_ids: playlists.map(p=>p.value),
+      mentions: mentions.map(p=>p.value),
+      played_by: playedBy,
+      heard_at: heardAt,
+      mood: mood
+    }
+    try{
+      const res = await request(routes.api.links.create, { method: 'POST', body: { link } })
+    }catch(err){
+      console.error(err)
+      alert("Oops, an error happened. I'm already looking into it!")
+    }
+  }
   
   const renderDescription = () => <div className="form-group">
     <label htmlFor="description">Description</label>
     <DDMentions value={description} setValue={setDescription} tags={selectOptions.tags} cliques={selectOptions.cliques} setTags={setTags} addMentions={addMentions} mentions={mentions} />
-    <DDMentionUsers tags={tags} mentions={mentions} />
+    <DDMentionUsers tags={tags} mentions={mentions} setMentions={setMentions} />
   </div>;
 
   const renderPlayedAt = () => <div className="form-group flex">
-    <div>
+    <div style={{flexGrow: 1}} >
       <label htmlFor="played_by">Played by</label>
       <div>
         <DDSelect 
           placeholder="Select who played this gem" 
           creatable={true} 
           optionName="Enter new" 
-          options={[]} 
           onChange={({ value }) => setPlayedBy(value)}
           id={`played_by`}
-          value={playedBy}
+          value={playedBy && [{ label: playedBy }]}
           />
-        {/* <Text className="form-control" field="played_by"  /> */}
       </div>
     </div>
-    <div style={{ marginLeft: ".5rem" }}>
+    <div style={{ flexGrow: 1, marginLeft: ".5rem" }}>
       <label htmlFor="heard_at">Heard at</label>
       <div>
         <DDSelect 
@@ -87,7 +103,7 @@ const LinksForm = ({ location }) => {
           options={[]} 
           onChange={({ value }) => setHeardAt(value)}
           id={`heard_at`}
-          value={heardAt}
+          value={heardAt && [{ label: heardAt }]}
         />
       </div>
     </div>
@@ -123,7 +139,12 @@ const LinksForm = ({ location }) => {
       </div>
     </div>
   </div>
-  const renderForm = () => <form className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} onSubmit={submit} id="form2">
+
+  const renderForm = () => <form 
+    className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} 
+    onSubmit={submit} 
+    id="form2"
+  >
     {renderDescription()}
     {renderPlayedAt()}
     {renderMeta()}
@@ -140,7 +161,7 @@ const LinksForm = ({ location }) => {
       onChange={setPlaylists}
       value={playlists}
     />
-    <button className="button" type="submit" onClick={submit}>Submit</button>
+    <button className="button" type="submit" >Submit</button>
   </form>
   if(!loaded){ return renderHeader() }
   return <div>

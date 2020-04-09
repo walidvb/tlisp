@@ -10,12 +10,15 @@ import DDSelect from '../ui_components/DDSelect';
 import ReactFormDDMood from '../ui_components/ReactFormDDMood';
 import CliqueSelect from './LinksForm/CliqueSelect';
 import PlaylistSelect from './LinksForm/PlaylistSelect';
+import LinkDetails from './LinkDetails';
 
 const qs = require('qs');
 
 const LinksForm = ({ location }) => {
   const [loaded, setLoaded] = useState(false)
-  const [oembed, setOembed] = useState({})
+  const [submitted, setSubmitted] = useState(false)
+
+  const [link, setlink] = useState({})
   const [selectOptions, setSelectOptions] = useState({})
   const [url, setURL] = useState('')
   
@@ -25,7 +28,7 @@ const LinksForm = ({ location }) => {
   const [playedBy, setPlayedBy] = useState()
   const [heardAt, setHeardAt] = useState()
   const [mood, setMood] = useState()
-  const [published, setPublished] = useState()
+  const [published, setPublished] = useState(true)
   const [isSet, setIsSet] = useState('1')
 
   const [cliques, setCliques] = useState([])
@@ -37,9 +40,9 @@ const LinksForm = ({ location }) => {
     const { url: url_ } = qs.parse(location.search, { ignoreQueryPrefix: true });
     const fetchDetails = async () => {
       try{
-        const { link: { oembed }, ...selectOptions_ } = await request(routes.api.links.formDetails(url_))
+        const { link, ...selectOptions_ } = await request(routes.api.links.formDetails(url_))
         setSelectOptions(selectOptions_)
-        setOembed(oembed)
+        setlink(link)
       } catch(err){
         console.error(err)
       }
@@ -51,13 +54,14 @@ const LinksForm = ({ location }) => {
     }
   }, [])
   
-  const renderHeader = () => <LinksFormHeader {...{url, oembed, styles, loaded}}/>
+  const renderHeader = () => <LinksFormHeader {...{url, styles, loaded}} oembed={link.oembed}/>
 
   const submit = async (evt) => {
     evt.preventDefault()
     const link = {
+      url,
       description,
-      tag_ids: tags.map(p=>p.value),
+      tag_list: tags.map(p=>p.value),
       clique_ids: cliques.map(p=>p.value),
       playlist_ids: playlists.map(p=>p.value),
       mentions: mentions.map(p=>p.value),
@@ -67,6 +71,8 @@ const LinksForm = ({ location }) => {
     }
     try{
       const res = await request(routes.api.links.create, { method: 'POST', body: { link } })
+      setSubmitted(true)
+      setlink(res)
     }catch(err){
       console.error(err)
       alert("Oops, an error happened. I'm already looking into it!")
@@ -141,7 +147,6 @@ const LinksForm = ({ location }) => {
   </div>
 
   const renderForm = () => <form 
-    className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} 
     onSubmit={submit} 
     id="form2"
   >
@@ -163,10 +168,9 @@ const LinksForm = ({ location }) => {
     />
     <button className="button" type="submit" >Submit</button>
   </form>
-  if(!loaded){ return renderHeader() }
-  return <div>
+  return <div className={[styles.container, loaded ? styles.loading : ''].join(' ')}>
     {renderHeader()}
-    {renderForm()}
+    {!loaded ? null :  (submitted ? <LinkDetails link={link} /> : renderForm())}
   </div>
 }
 

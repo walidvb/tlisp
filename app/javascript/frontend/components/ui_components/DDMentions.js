@@ -74,6 +74,7 @@ function DDMention({ value, setValue, addMentions, setTags, mentions, tags }) {
                 markup="@[__display__](__type__:__id__)"
                 allowSpaceInQuery={true}
                 placeholder="Write a few words about the track, send it to a @friend, tag the #artist and #genre..."
+                autoFocus
                 >
                 <Mention 
                     markup='@[__display__](users:__id__)'

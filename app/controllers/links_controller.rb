@@ -132,27 +132,29 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    # TODO: handle tag by user or clique. htf? dynamic scopes by clique maybe?
-    # TODO: move this to a LinkCreatorService
-    # remove all associations
-    _link_params = link_params
-    clique_ids = _link_params.delete(:clique_ids)
-    playlist_ids = _link_params.delete(:playlist_ids) || []
-    played_by = _link_params.delete(:played_by)
-    heard_at = _link_params.delete(:heard_at)
-    # find or create link
-    @link = Link.find_by_url(_link_params[:url]) || Link.new(_link_params)
-    # add associations
-    @link.playlist_ids += playlist_ids
-    @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published], played_by: played_by, heard_at: heard_at)
-    respond_to do |format|
-      if @link.save
-        @link.notify :users
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
-        format.json { render :show, status: :created, location: @link }
-      else
-        format.html { render :new }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do 
+      # TODO: handle tag by user or clique. htf? dynamic scopes by clique maybe?
+      # TODO: move this to a LinkCreatorService
+      # remove all associations
+      _link_params = link_params
+      clique_ids = _link_params.delete(:clique_ids)
+      playlist_ids = _link_params.delete(:playlist_ids) || []
+      played_by = _link_params.delete(:played_by)
+      heard_at = _link_params.delete(:heard_at)
+      # find or create link
+      @link = Link.find_by_url(_link_params[:url]) || Link.new(_link_params)
+      # add associations
+      @link.playlist_ids = playlist_ids.concat(@link.playlist_ids).uniq
+      @link.assign_to(users: [current_user], cliques: clique_ids, visible: _link_params[:published], played_by: played_by, heard_at: heard_at)
+      respond_to do |format|
+        if @link.save
+          @link.notify :users
+          format.html { redirect_to @link, notice: 'Link was successfully created.' }
+          format.json { render :show, status: :created, location: @link }
+        else
+          format.html { render :new }
+          format.json { render json: @link.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

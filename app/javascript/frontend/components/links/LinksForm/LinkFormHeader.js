@@ -6,7 +6,7 @@ const LinksFormHeader = ({ loaded, styles, url, oembed}) => {
     return (<div className={styles.header}>
       <div className="fa fa-cog fa-spin" style={{ padding: "0 1.5rem", fontSize: '1.5rem' }} />
       <div>
-        <h3>Fetching details...</h3>
+        <h3>Fetching details for {url}...</h3>
       </div>
     </div>)
   }

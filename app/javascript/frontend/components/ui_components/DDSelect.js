@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormField} from 'react-form';
 import Select from 'react-select';
 import Creatable from 'react-select/creatable';
 
@@ -9,37 +8,14 @@ const propTypes = {
     optionName: PropTypes.string.isRequired,
 }
 
-function DDSelect(props) {
-    const {
-        fieldApi,
-        onInput,
-        ...rest
-      } = props;
+function DDSelect({ value, creatable, options, optionName, multiple, ...restProps }) {
 
-    const {
-        getValue,
-        getError,
-        getWarning,
-        getSuccess,
-        setValue,
-        setTouched,
-        addOption,
-      } = fieldApi;
-    
-    const { creatable, options } = props;
-    const onChange = (e) => {
-        setValue(e);
-        if(onInput){
-            onInput(e)
-        }
-    }
     const opts = {
         name:"form-field-name",
-        value: getValue(),
-        isMulti: props.multiple,
-        onChange: onChange,
+        value,
+        isMulti: multiple,
         options: options,
-        ...rest,
+        ...restProps,
     }
     function renderAsCheckBoxes(){
         const valueIds = opts.value ? opts.value.map(v => v.value) : [];
@@ -61,7 +37,10 @@ function DDSelect(props) {
     function renderAsSelect(){
         return (
             <div>
-                {creatable ? <Creatable {...opts} isMulti promptTextCreator={() => `${props.optionName}...`} /> : <Select {...opts} />}
+                {creatable ? 
+                    <Creatable {...opts} promptTextCreator={() => `${optionName}...`} /> : 
+                    <Select {...opts} />
+                }
             </div>
         )
     }
@@ -71,4 +50,4 @@ function DDSelect(props) {
 
 DDSelect.propTypes = propTypes
 
-export default FormField(DDSelect);
+export default DDSelect;

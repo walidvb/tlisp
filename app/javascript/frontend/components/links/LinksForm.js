@@ -8,6 +8,8 @@ import DDMentionUsers from '../ui_components/DDMentionUsers';
 import DDMentions from '../ui_components/DDMentions';
 import DDSelect from '../ui_components/DDSelect';
 import ReactFormDDMood from '../ui_components/ReactFormDDMood';
+import CliqueSelect from './LinksForm/CliqueSelect';
+import PlaylistSelect from './LinksForm/PlaylistSelect';
 
 const qs = require('qs');
 
@@ -26,7 +28,11 @@ const LinksForm = ({ location }) => {
   const [published, setPublished] = useState()
   const [isSet, setIsSet] = useState('1')
 
+  const [cliques, setCliques] = useState([])
+  const [playlists, setPlaylists] = useState([])
+
   const addMentions = (user) => setMentions([...mentions, user])
+
   useEffect(() => {
     const { url: url_ } = qs.parse(location.search, { ignoreQueryPrefix: true });
     const fetchDetails = async () => {
@@ -115,23 +121,26 @@ const LinksForm = ({ location }) => {
         <input type={"radio"} onChange={({ target: { value }}) => setIsSet(value)} checked={isSet === "1"} value="1" name="is_a_set" className="" />
         <label htmlFor="track" className="">Track</label>
       </div>
-      {/* <RadioGroup field="is_a_set" style={{ marginTop: '1rem' }}>
-        {group => (
-          <div>
-            <label htmlFor="mix" className="">Mix</label>
-            <Radio group={group} value="0" id="mix" className="" style={{ marginLeft: '.5rem', marginRight: '1rem' }} />
-            <Radio group={group} value="1" id="track" className="" />
-            <label htmlFor="track" className="">Track</label>
-          </div>
-        )}
-      </RadioGroup> */}
     </div>
   </div>
   const renderForm = () => <form className={[styles.form_container, loaded ? styles.loaded : ''].join(' ')} onSubmit={submit} id="form2">
     {renderDescription()}
     {renderPlayedAt()}
     {renderMeta()}
-    <button className="button" type="submit">Submit</button>
+    <CliqueSelect 
+      className="form-control" 
+      cliques={selectOptions.cliques} 
+      canSelectCliques={selectOptions.canSelectCliques} 
+      value={cliques}
+      onChange={setCliques}
+    />
+    <PlaylistSelect
+      className="form-control" 
+      playlists={selectOptions.playlists}
+      onChange={setPlaylists}
+      value={playlists}
+    />
+    <button className="button" type="submit" onClick={submit}>Submit</button>
   </form>
   if(!loaded){ return renderHeader() }
   return <div>

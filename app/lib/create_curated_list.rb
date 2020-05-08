@@ -21,12 +21,12 @@ class CreateCuratedList
 
 
   def self.manually url, sources, private: false
-    scraped = CuratedListScraper.new(url, private: private);
+    scraped = CuratedListScraper.new(url)
     curated_list = CuratedList.create(
       {
         url: scraped.canonical,
         host: scraped.site_name,
-
+        private: private,
       }.merge(scraped.get_infos)
     );
     CreateCuratedList.new(curated_list, sources).add_sources(notify: true);

@@ -9,7 +9,7 @@ class CuratedListsController < ApplicationController
   end
 
   def index
-    @curated_lists = CuratedList.order('created_at DESC').first(20).public_
+    @curated_lists = CuratedList.order('created_at DESC').public_.first(20)
     render json: {
       curated_lists: @curated_lists
     }

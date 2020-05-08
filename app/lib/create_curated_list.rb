@@ -20,8 +20,8 @@ class CreateCuratedList
   handle_asynchronously :add_sources, priority: 100
 
 
-  def self.manually url, sources
-    scraped = CuratedListScraper.new(url);
+  def self.manually url, sources, private: false
+    scraped = CuratedListScraper.new(url, private: private);
     curated_list = CuratedList.create(
       {
         url: scraped.canonical,

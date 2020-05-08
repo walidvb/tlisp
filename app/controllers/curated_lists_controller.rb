@@ -9,7 +9,7 @@ class CuratedListsController < ApplicationController
   end
 
   def index
-    @curated_lists = CuratedList.order('created_at DESC').first(20)
+    @curated_lists = CuratedList.order('created_at DESC').first(20).public
     render json: {
       curated_lists: @curated_lists
     }
@@ -17,6 +17,10 @@ class CuratedListsController < ApplicationController
 
   def show
     @curated_list = CuratedList.find(params[:id])
+    if @curated_list.private? && !user_signed_in?
+      head :not_fount
+      return
+    end
     render json: {
       curated_list: @curated_list,
       links: @curated_list.links.order("curated_list_links.position ASC").oembeddable.map(&:as_json)

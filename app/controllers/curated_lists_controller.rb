@@ -18,7 +18,7 @@ class CuratedListsController < ApplicationController
   def show
     @curated_list = CuratedList.find(params[:id])
     if @curated_list.private? && !user_signed_in?
-      head :not_fount
+      head :unauthorized
       return
     end
     render json: {

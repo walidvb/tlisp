@@ -145,6 +145,7 @@ class Link < ActiveRecord::Base
             published: published,
             oembed: oembed,
             url: url,
+            html: html,
         }
     end
 

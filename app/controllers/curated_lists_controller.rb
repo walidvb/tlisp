@@ -6,6 +6,10 @@ class CuratedListsController < ApplicationController
   def create
     sources = params[:sources]
     create_or_show sources
+    render json: {
+      curated_list: @curated_list,
+      links: @curated_list.links.map(&:as_json)
+    }
   end
 
   def index
@@ -30,12 +34,20 @@ class CuratedListsController < ApplicationController
   def by_url
     sources = JSON.parse(params[:sources])
     create_or_show sources
+    if @error
+      redirect_to "/curated/#{@curated_list.id}"
+    else
+      render plain: 'error', content_type: 'text/plain'
+    end
+      
   end
   
   def create_or_show sources = nil
+    @error = true
     ActiveRecord::Base.transaction do
       url = params[:url]
-      scraped = CuratedListScraper.new(url)
+      title = params[:title]
+      scraped = CuratedListScraper.new(url, title: title)
       iframes_count = scraped.get_iframes.count
       if iframes_count < 3 && (sources.nil? || sources.count < 3)
         count = iframes_count || (!sources.nil? && sources.count < 3)
@@ -45,7 +57,7 @@ class CuratedListsController < ApplicationController
 
       if @curated_list = CuratedList.find_by_url(scraped.canonical)
         # try to add the sources again, in case it had not worked the first time
-        CreateCuratedList.new(@curated_list, sources).add_sources(notify: true)
+        CreateCuratedList.new(@curated_list, sources: sources, title: title).add_sources(notify: true)
       else
         @curated_list = CuratedList.create(
           {
@@ -54,12 +66,9 @@ class CuratedListsController < ApplicationController
           }.merge(scraped.get_infos)
         )
         Slack.log text: "New Curated List for #{scraped.canonical}! 🔥"
-        CreateCuratedList.new(@curated_list, sources).add_sources(notify: true)
+        CreateCuratedList.new(@curated_list, sources: sources, title: title).add_sources(notify: true)
       end
-      render json: {
-        curated_list: @curated_list,
-        links: @curated_list.links.map(&:as_json)
-      }
+      @error = false
     end
   end
 

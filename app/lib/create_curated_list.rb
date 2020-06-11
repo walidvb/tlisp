@@ -1,6 +1,6 @@
 class CreateCuratedList
 
-  def initialize curated_list, sources = nil
+  def initialize curated_list, sources: nil, title: nil
     @curated_list = curated_list
     @sources = sources
     return self
@@ -29,7 +29,7 @@ class CreateCuratedList
         private: private,
       }.merge(scraped.get_infos)
     );
-    CreateCuratedList.new(curated_list, sources).add_sources(notify: true);
+    CreateCuratedList.new(curated_list, sources: sources).add_sources(notify: true);
   end
   
   private

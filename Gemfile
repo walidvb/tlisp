@@ -49,6 +49,7 @@ group :development, :test do
   gem 'foreman'
   gem 'spring', '1.3.6'
   gem 'fabrication'
+  gem 'binding_of_caller'
   # gem 'jazz_hands2'
   # gem 'figaro'# , '0.7.0'     # env variables
 end

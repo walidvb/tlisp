@@ -7,12 +7,9 @@ Rails.application.routes.draw do
   match "links" => "links#index", via: [:options]
 
   get 'extension.js' => 'extension#show'
+  get '/curated-by-url' => 'curated_lists#by_url'
   scope :api do
-    resources :curated_lists, only: [:create, :show, :index] do 
-      collection do 
-        get '/by-url' => 'curated_lists#by_url'
-      end
-    end
+    resources :curated_lists, only: [:create, :show, :index]
 
     resources :playlists
     resources :cliques do 

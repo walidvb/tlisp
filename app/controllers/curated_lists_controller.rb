@@ -28,7 +28,8 @@ class CuratedListsController < ApplicationController
   end
 
   def by_url
-    create_or_show
+    sources = JSON.parse(params[:sources])
+    create_or_show sources
   end
   
   def create_or_show sources = nil
@@ -44,7 +45,7 @@ class CuratedListsController < ApplicationController
 
       if @curated_list = CuratedList.find_by_url(scraped.canonical)
         # try to add the sources again, in case it had not worked the first time
-        CreateCuratedList.new(@curated_list, sources).add_sources
+        CreateCuratedList.new(@curated_list, sources).add_sources(notify: true)
       else
         @curated_list = CuratedList.create(
           {

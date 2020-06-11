@@ -32,7 +32,7 @@ class CuratedListsController < ApplicationController
   end
 
   def by_url
-    sources = JSON.parse(params[:sources])
+    sources = params[:sources]
     create_or_show sources
     if @error
       redirect_to "/curated/#{@curated_list.id}"

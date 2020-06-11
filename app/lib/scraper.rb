@@ -31,7 +31,6 @@ class Scraper
     def get_page
         open(@url) do |resp|
             @was_redirect = @url != resp.base_uri.to_s
-            puts "#{@was_redirect}: #{@url} #{resp.base_uri.to_s}"
             Nokogiri::HTML(resp)
         end
     end
@@ -41,6 +40,7 @@ class Scraper
     end
 
     def canonical
+        return @url if @was_redirect
         begin
             @page.search('link[rel="canonical"]').first.attributes['href'].value
         rescue

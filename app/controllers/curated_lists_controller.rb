@@ -54,7 +54,6 @@ class CuratedListsController < ApplicationController
         render json: { error: "This page only contains #{count} player#{count == 1 ? '' : 's'}, are we really that lazy?"}, status: :bad_request
         return
       end
-
       if @curated_list = CuratedList.find_by_url(scraped.canonical)
         # try to add the sources again, in case it had not worked the first time
         CreateCuratedList.new(@curated_list, sources: sources, title: title).add_sources(notify: true)

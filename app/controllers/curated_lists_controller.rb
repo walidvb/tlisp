@@ -35,9 +35,9 @@ class CuratedListsController < ApplicationController
     sources = params[:sources]
     create_or_show sources
     if @error
-      redirect_to "/curated/#{@curated_list.id}"
-    else
       render plain: 'error', content_type: 'text/plain'
+    else
+      redirect_to "/curated/#{@curated_list.id}"
     end
       
   end

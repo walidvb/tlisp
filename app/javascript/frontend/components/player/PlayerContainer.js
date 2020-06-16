@@ -65,7 +65,7 @@ class PlayerContainer extends Component {
         }
 
         return <div style={{flex: 2}}>
-            <div className={"sticky top-0 mr-2"}>
+            <div className={"sticky top-0 py-2 mr-2"}>
                 <Embed />
             </div>
         </div>

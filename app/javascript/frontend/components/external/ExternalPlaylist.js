@@ -46,7 +46,7 @@ function ExternalPlaylist({ playTrack, setTracklist, addToTracklist, location: {
           <span className="text-sm text-gray-600">PS: try the <a href="https://chrome.google.com/webstore/detail/diggersdelights/mfpedieakkfpjgaahkjiicmgnmhpbpop" rel="noopener noreferrer" target="_blank">extension</a> if this page doesn't work</span>
         </div>
         <CuratedListIndex />
-        <div className="text-2xl underline mt-10 mb-4">CREATE YOURS</div>
+        <div className="text-2xl underline mt-10 mb-4">CREATE YOUR OWN</div>
         <CuratedListForm />
         <div className={styles.triggerWrapper}>
           <DDTooltip trigger={<div className={[styles.trigger, "fa fa-question"].join(' ')} />}>

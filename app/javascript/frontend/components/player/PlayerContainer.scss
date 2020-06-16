@@ -1,13 +1,14 @@
 .container{
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: relative;
     min-width: 100%;
     max-width: 100%;
 }
 .currentlyPlaying{
-    height: 300px;
-    display: block;
+    position: sticky;
+    top: 0;
+    
 }
 .title__playing{
     padding: 5px;

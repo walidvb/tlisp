@@ -39,6 +39,7 @@ class AppWrapper extends Component {
             <Bookmarklet />
           </DDTooltip>
         </div>
+        <IFrameAbsolute />
       </div>
     )
   }
@@ -70,7 +71,6 @@ class App extends Component {
     return <div style={{display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center'}}><Title /></div>
   }
   renderAuthenticatedRoutes(){
-    console.log(routes.links.new)
     return <Switch>
       <Route path={routes.links.new} component={LinksForm} />
       <Route path={"/:mainPath?"} component={AppWrapper} />
@@ -93,7 +93,6 @@ class App extends Component {
     return (
       <div className={[styles.app, styles.appear].join(' ')} >
         { loading ? this.renderLoading() : this.renderAll() }
-        <IFrameAbsolute />
       </div>
     );
   }

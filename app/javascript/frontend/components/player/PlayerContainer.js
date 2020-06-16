@@ -9,6 +9,7 @@ import IFramePlaceholder from './IFramePlaceholder';
 import trackPlay from '../../analytics/trackPlay';
 import * as playerActions from '../../actions/playerActions';
 import styles from './PlayerContainer.scss';
+import Embed from './Embed';
 
 class PlayerContainer extends Component {
     static propTypes = {
@@ -52,23 +53,33 @@ class PlayerContainer extends Component {
         }
         const { title, url } = this.props.currentlyPlaying;
         const canPlay = ReactPlayer.canPlay(url);
-        return (
-            <div>
-                <div className={styles.currentlyPlaying}>
-                    <IFramePlaceholder />
+        if(this.props.floatingPlayer){
+            return (
+                <div style={{flexGrow: 2}}>
+                    <div className={[styles.currentlyPlaying, 'flex-grow'].join(' ')}>
+                        <IFramePlaceholder />
+                    </div>
+                    <h2 className={styles.title__playing}>{canPlay ? null : <span className="fa fa-warning" />} &nbsp;{title}</h2>
                 </div>
-                <h2 className={styles.title__playing}>{canPlay ? null : <span className="fa fa-warning" />} &nbsp;{title}</h2>
+            )
+        }
+
+        return <div style={{flex: 2}}>
+            <div className={"sticky top-0 mr-2"}>
+                <Embed />
             </div>
-        )
+        </div>
     }
     render() {
         const { tracklist, placement, displayType } = this.props;
         return (
-            <div className={styles.container}>
+            <div className={[styles.container, 'flex'].join(' ')}>
                 { this.renderCurrentlyPlaying() }
-                <div className={styles.tracklist} >NEXT UP:</div>
-                <div className={[styles.tracklist, styles[`${placement}`], styles[displayType]].join(' ')}>
-                    {tracklist.map(this.renderTrack.bind(this)).reverse()}
+                <div className="flex-shrink">
+                    <div className={styles.tracklist} >NEXT UP:</div>
+                    <div className={[styles.tracklist, styles[`${placement}`], styles[displayType]].join(' ')}>
+                        {tracklist.map(this.renderTrack.bind(this)).reverse()}
+                    </div>
                 </div>
             </div>
         )

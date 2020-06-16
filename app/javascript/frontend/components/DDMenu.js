@@ -42,7 +42,7 @@ class DDMenu extends Component {
                             <LinkUI />
                         </TabPanel>
                         <TabPanel><PlaylistList /></TabPanel>
-                        <TabPanel><PlayerContainer /></TabPanel>
+                        <TabPanel><PlayerContainer floatingPlayer /></TabPanel>
                     </div>
                 </Tabs>
             </div>

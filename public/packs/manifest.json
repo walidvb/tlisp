@@ -1,0 +1,37 @@
+{
+  "application.js": "/packs/js/application-e440a526cbb7ed0b441d.js",
+  "application.js.map": "/packs/js/application-e440a526cbb7ed0b441d.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-e440a526cbb7ed0b441d.js"
+      ],
+      "js.map": [
+        "/packs/js/application-e440a526cbb7ed0b441d.js.map"
+      ]
+    },
+    "extension": {
+      "js": [
+        "/packs/js/extension-bc36e53a8e13310cf62e.js"
+      ],
+      "js.map": [
+        "/packs/js/extension-bc36e53a8e13310cf62e.js.map"
+      ]
+    }
+  },
+  "extension.js": "/packs/js/extension-bc36e53a8e13310cf62e.js",
+  "extension.js.map": "/packs/js/extension-bc36e53a8e13310cf62e.js.map",
+  "media/frontend/assets/ApercuPro-Italic.eot": "/packs/media/frontend/assets/ApercuPro-Italic-91eed330d3a50d34263b43ac435fff8b.eot",
+  "media/frontend/assets/ApercuPro-Italic.woff": "/packs/media/frontend/assets/ApercuPro-Italic-181ca832fc29e8ad08c8343b31ac2d7c.woff",
+  "media/frontend/assets/ApercuPro-Italic.woff2": "/packs/media/frontend/assets/ApercuPro-Italic-68aa6fd197b8263261b192ae8300c8af.woff2",
+  "media/frontend/assets/ApercuPro-Medium.eot": "/packs/media/frontend/assets/ApercuPro-Medium-d5ec197f2ae550b24ad1fbfe32f29a81.eot",
+  "media/frontend/assets/ApercuPro-Medium.woff": "/packs/media/frontend/assets/ApercuPro-Medium-7794ae580c5bcbb5951d7f04fb566993.woff",
+  "media/frontend/assets/ApercuPro-Medium.woff2": "/packs/media/frontend/assets/ApercuPro-Medium-cf1891d78ea41d6967178deb060c8767.woff2",
+  "media/frontend/assets/ApercuPro.eot": "/packs/media/frontend/assets/ApercuPro-2aa1aea747fef2f536e69752554d7325.eot",
+  "media/frontend/assets/ApercuPro.woff": "/packs/media/frontend/assets/ApercuPro-1b26b33ca164f5e948a35b1050d21e3f.woff",
+  "media/frontend/assets/ApercuPro.woff2": "/packs/media/frontend/assets/ApercuPro-eb2947fc4343484d8e56e26a1f79d19b.woff2",
+  "media/frontend/assets/images/dig_it.gif": "/packs/media/frontend/assets/images/dig_it-77eace87e9e6b5696040b944a32961c3.gif",
+  "media/frontend/assets/images/drag_button.gif": "/packs/media/frontend/assets/images/drag_button-2b91564a85b8a46220d2d413bf3753e8.gif",
+  "media/frontend/assets/images/logo.svg": "/packs/media/frontend/assets/images/logo-407d6fb97eb0d0a314327be30dd1845c.svg",
+  "media/frontend/components/ui_components/gaussian.svg": "/packs/media/frontend/components/ui_components/gaussian-a45f8dbe9b947fe1f5a58b27c3e794d8.svg"
+}

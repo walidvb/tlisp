@@ -1,0 +1,42 @@
+// media queries
+$mobile                 : "(max-width: 767px)";
+$portrait               : "(orientation: portrait)";
+$landscape              : "(orientation: landscape)";
+$xs                     : $mobile;
+$tablet                 : "(min-width: 767px)";
+$sm                     : $tablet;
+$md                     : "(min-width: 991px)";
+$lg                     : "(min-width: 1200px)";
+$xlg                     : "(min-width: 1500px)";
+
+// sizes
+
+$footer-height: 192px;
+$footer-height-sm: 175px;
+$footer-height-md: 186px;
+$footer-height-lg: 206px;
+$footer-height-xlg: 206px;
+
+$padding-body-xs: 5px;
+$padding-body: 15px;
+
+$font-title: Montserrat, sans-serif;
+
+// colors
+// if you change colors here, change variables.scss and styles.js as well
+
+$black: #111;
+$white: white;
+$background-grey: #EEEFF0;
+$light-grey: #BBBBBB;
+$dark-grey: rgba(102, 102, 102, 1);
+$border-grey: rgba(102, 102, 102, 1);
+$brand-color: #FECE08;
+$primary-color: #20c997;
+$secondary-color: #ffbf3b;
+
+$color-success: #25B871;
+
+
+// theme
+$border-radius: 1.5rem;

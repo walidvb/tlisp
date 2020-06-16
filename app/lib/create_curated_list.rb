@@ -1,6 +1,6 @@
 class CreateCuratedList
 
-  def initialize curated_list, sources = nil
+  def initialize curated_list, sources: nil, title: nil
     @curated_list = curated_list
     @sources = sources
     return self
@@ -20,16 +20,16 @@ class CreateCuratedList
   handle_asynchronously :add_sources, priority: 100
 
 
-  def self.manually url, sources
-    scraped = CuratedListScraper.new(url);
+  def self.manually url, sources, private: false
+    scraped = CuratedListScraper.new(url)
     curated_list = CuratedList.create(
       {
         url: scraped.canonical,
         host: scraped.site_name,
-
+        private: private,
       }.merge(scraped.get_infos)
     );
-    CreateCuratedList.new(curated_list, sources).add_sources(notify: true);
+    CreateCuratedList.new(curated_list, sources: sources).add_sources(notify: true);
   end
   
   private

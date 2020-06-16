@@ -1,0 +1,71 @@
+@import "../../_variables.scss";
+
+.container{
+    background-color: lighten($primary-color, 5%);
+    margin: auto;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    label{
+        padding-left: .5rem;
+        font-family: $font-title;
+    }
+}
+.form_container{
+    flex-grow: 1;
+    overflow: auto;
+    padding-top: 1rem;
+    padding-left: 15px;
+    padding-right: 15px;
+    animation: fade-up .3s ease-out;
+}
+
+@keyframes fade-up{
+    from{ opacity: 0; transform: translateY(10px);}
+    to{ opacity: 1; transform: translateY(0px);}
+}
+.form_container, .header{
+    padding: 5px;
+}
+
+.header{
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    background-color: $primary-color;
+    color: $white;
+    padding-right: 40px;
+    border-bottom: 1px solid;
+    z-index: 1;
+    min-height: 75px;
+}
+.title{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: larger;
+}
+.url{
+    color: lighten($primary-color, 40%);
+    font-size: smaller;
+    font-style: italic;
+}
+.thumbnail{
+    max-height: 3rem;
+    margin-right: 1rem;
+}
+
+
+.help_text{
+    font-style: italic;
+    margin-left: .5rem;
+    color: lighten($primary-color, 40%);
+}
+
+.state_info{
+    color: lighten($primary-color, 40%);
+    font-style: italic;
+    display: inline-block;
+    margin-left: .5rem;
+}

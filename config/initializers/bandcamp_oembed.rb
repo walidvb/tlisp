@@ -39,6 +39,6 @@ class BandcampOembed < Scraper
             p "Failed to get album_id for #{url}"
             return
         end
-        "<iframe style='border: 0; width: 350px; height: 522px;' src='//bandcamp.com/EmbeddedPlayer/v=2/#{id_er}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/' seamless></iframe>"
+        "<iframe style='border: 0; width: 400px; height: 307px;' src='//bandcamp.com/EmbeddedPlayer/v=2/#{id_er}/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/artwork=small' seamless></iframe>"
     end
 end

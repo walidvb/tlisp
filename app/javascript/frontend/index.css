@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* required to override dropdowns in link form */
+#playlists, #cliques{
+  color: black;
+}

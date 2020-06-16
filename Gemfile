@@ -17,6 +17,7 @@ gem 'haml-rails'
 # version blocked because of https://github.com/rails/rails/issues/31673
 gem 'pg'#, '~> 0.21'
 gem 'puma'
+gem 'webpacker', '~> 4.x'
 
 gem 'font-awesome-sass'
 gem 'bootstrap-sass'
@@ -48,6 +49,7 @@ group :development, :test do
   gem 'foreman'
   gem 'spring', '1.3.6'
   gem 'fabrication'
+  gem 'binding_of_caller'
   # gem 'jazz_hands2'
   # gem 'figaro'# , '0.7.0'     # env variables
 end

@@ -1,17 +1,18 @@
 require 'open-uri'
 
 class Scraper
-    def initialize url
+    def initialize url, title: nil
         @url = url
         @page = get_page
+        @title = title
     end
 
     def get_infos
         {
-            "title" => get_title,
+            "title" => @was_redirect ? @title : get_title,
             "description" => get_meta('og:description'),
             "image_url" => get_meta('og:image'),
-            "url"  => canonical,
+            "url"  => @was_redirect ? @url : canonical,
             "site_name" => site_name,
             "twitter_handle" => get_meta('twitter:site'),
         }
@@ -28,7 +29,10 @@ class Scraper
     end
 
     def get_page
-        Nokogiri::HTML(open(@url))   
+        open(@url) do |resp|
+            @was_redirect = @url != resp.base_uri.to_s
+            Nokogiri::HTML(resp)
+        end
     end
 
     def site_name
@@ -36,6 +40,7 @@ class Scraper
     end
 
     def canonical
+        return @url if @was_redirect
         begin
             @page.search('link[rel="canonical"]').first.attributes['href'].value
         rescue

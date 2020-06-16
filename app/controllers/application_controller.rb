@@ -6,10 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :allow_cors
 
   def allow_cors
-   headers["Access-Control-Allow-Origin"] = "*"
+   headers["Access-Control-Allow-Origin"] = request.env['HTTP_ORIGIN'] || '*'
+   headers["Access-Control-Allow-Credentials"] = 'true'
+   headers['Access-Control-Request-Method'] = 'GET, DELETE, POST, PUT, OPTIONS'
   end
 
-  def authenticate_user_from_token!
+  def authenticate_user_from_tokren!
     token = params[:auth_token].presence
     if !user_signed_in?
       if token && user = User.find_by_auth_token(token.to_s)
@@ -31,7 +33,7 @@ class ApplicationController < ActionController::Base
       headers['X-Frame-Options'] = "ALLOWALL"
     end
     
-    render :file => 'public/index.html', layout: false
+    render :react_wrapper, layout: false
   end
 
   # Redirects on successful sign in

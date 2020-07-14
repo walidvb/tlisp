@@ -1,26 +1,26 @@
 {
-  "application.js": "/packs/js/application-b9698c7e372c93d7daa9.js",
-  "application.js.map": "/packs/js/application-b9698c7e372c93d7daa9.js.map",
+  "application.js": "/packs/js/application-be5f826309b64dd72a00.js",
+  "application.js.map": "/packs/js/application-be5f826309b64dd72a00.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-b9698c7e372c93d7daa9.js"
+        "/packs/js/application-be5f826309b64dd72a00.js"
       ],
       "js.map": [
-        "/packs/js/application-b9698c7e372c93d7daa9.js.map"
+        "/packs/js/application-be5f826309b64dd72a00.js.map"
       ]
     },
     "extension": {
       "js": [
-        "/packs/js/extension-c234624aeb6e2d82664f.js"
+        "/packs/js/extension-4a91f753dbbd007415f0.js"
       ],
       "js.map": [
-        "/packs/js/extension-c234624aeb6e2d82664f.js.map"
+        "/packs/js/extension-4a91f753dbbd007415f0.js.map"
       ]
     }
   },
-  "extension.js": "/packs/js/extension-c234624aeb6e2d82664f.js",
-  "extension.js.map": "/packs/js/extension-c234624aeb6e2d82664f.js.map",
+  "extension.js": "/packs/js/extension-4a91f753dbbd007415f0.js",
+  "extension.js.map": "/packs/js/extension-4a91f753dbbd007415f0.js.map",
   "media/frontend/assets/ApercuPro-Italic.eot": "/packs/media/frontend/assets/ApercuPro-Italic-91eed330d3a50d34263b43ac435fff8b.eot",
   "media/frontend/assets/ApercuPro-Italic.woff": "/packs/media/frontend/assets/ApercuPro-Italic-181ca832fc29e8ad08c8343b31ac2d7c.woff",
   "media/frontend/assets/ApercuPro-Italic.woff2": "/packs/media/frontend/assets/ApercuPro-Italic-68aa6fd197b8263261b192ae8300c8af.woff2",

@@ -58,7 +58,8 @@ class LinksController < ApplicationController
       .order("created_at DESC")
       .visible
       .oembedable
-      .where(clique: current_user.clique_ids)
+      # return all cliques for now
+      # .where(clique: current_user.clique_ids)
 
     base_query = @link_assignments
     if params[:users].blank? || params[:users].empty?

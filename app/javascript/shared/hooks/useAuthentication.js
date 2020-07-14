@@ -15,7 +15,6 @@ const useAuthentication = () => {
     }
     (async () => {
       const { data } = await axios.get(routes.api.users.me)
-      console.log(data)
     })()
   }, [])
 

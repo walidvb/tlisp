@@ -56,7 +56,8 @@ class CuratedListsController < ApplicationController
       end
       if @curated_list = CuratedList.find_by_url(scraped.canonical)
         # try to add the sources again, in case it had not worked the first time
-        CreateCuratedList.new(@curated_list, sources: sources, title: title).add_sources(notify: true)
+        # and reverse them i think
+        CreateCuratedList.new(@curated_list, sources: sources.reverse, title: title).add_sources(notify: true)
       else
         @curated_list = CuratedList.create(
           {

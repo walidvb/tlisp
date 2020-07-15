@@ -43,7 +43,10 @@ class CreateCuratedList
       canonical_url = get_canonical ? Scraper.new(url).canonical : url
       link = Link.find_or_initialize_by(url: canonical_url)
       @curated_list.links << link
-      link.save
+      # very ugly way to push links to the top
+      if !link.persisted?
+        link.curated_list_links.where(curated_list: @curated_list).first.move_to_top
+      end
       if link.oembeddable?
         CuratedListChannel.broadcast_to @curated_list, link.as_json
       end

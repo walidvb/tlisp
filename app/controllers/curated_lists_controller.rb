@@ -35,7 +35,6 @@ class CuratedListsController < ApplicationController
     sources = params[:sources]
     create_or_show sources
     if @error
-      render plain: 'error', content_type: 'text/plain'
     else
       redirect_to "/curated/#{@curated_list.id}"
     end
@@ -86,8 +85,8 @@ class CuratedListsController < ApplicationController
       headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
       headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version, Token'
       headers['Access-Control-Max-Age'] = '1728000'
-
-      render :text => '', :content_type => 'text/plain'
+      puts "cors_preflight_check"
+      head :ok
     end
   end
 end

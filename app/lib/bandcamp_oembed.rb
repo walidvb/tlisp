@@ -13,7 +13,6 @@ class BandcampOembed < Scraper
     end
 
     def build_oembed
-        binding.pry
         video_url = get_meta 'og:video'
         embed = build_iframe(video_url)
         description = @page.search('#trackInfo .bd').text()

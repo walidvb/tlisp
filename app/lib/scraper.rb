@@ -53,6 +53,6 @@ class Scraper
     end
 
     def is_bandcamp?
-        /bandcamp/.match(get_meta("twitter:site"))
+        /bandcamp/.match(@url) || /bandcamp/.match(get_meta("twitter:site"))
     end
 end

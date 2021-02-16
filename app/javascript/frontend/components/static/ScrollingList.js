@@ -48,7 +48,7 @@ export default class ScrollingList extends Component {
                     <div key={i} className={[listStyles.item__grid, listStyles.no__spacing, styles.thumb].join(' ')} style={{animationDelay: `${animationDelay(i)}ms`}}>
                         <div>
                         <img alt="just an pic..." src={thumbnail_url} /> 
-                            <div className={[`fa fa-${provider.toLowerCase()}`, styles.provider].join(' ')}/>
+                            <div className={[`fa fa-${provider && provider.toLowerCase()}`, styles.provider].join(' ')}/>
                         </div>
                     </div>))}
             </div>
